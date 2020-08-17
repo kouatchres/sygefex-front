@@ -1,25 +1,32 @@
-import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo';
-import Form from '../styles/Form';
+import React, { useState, useEffect } from 'react';
 import { StyledPage } from '../styles/StyledPage';
 import Error from '../ErrorMessage.js';
-import { format } from 'date-fns';
+import { StyledButton, StyledForm, ButtonStyled, SygefexSelect, SygexInput } from '../utils/FormInputs'
 import styled from 'styled-components';
-import { updateCandidateMutation } from '../queries&Mutations&Functions/Mutations';
-import { singleCandidateQuery, getAllGendersQuery } from '../queries&Mutations&Functions/Queries';
+import { Formik, Form } from 'formik'
+import *  as Yup from 'yup'
+import useForm from '../utils/useForm'
+import { updateExaminerMutation } from '../queries&Mutations&Functions/Mutations';
+import { removeTypename } from '../queries&Mutations&Functions/Functions';
+import { singleExaminerQuery, getAllGendersQuery } from '../queries&Mutations&Functions/Queries';
+import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
 
-const CreateCandForm = styled.div`
+const ExaminerForm = styled.div`
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	grid-gap: 10px;
+	grid-gap: 1rem;
 `;
 const PicFrame = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 1rem;
+`;
+
+const ExaminerPic = styled.div`
+		margin: 1rem auto;
+
 	img {
-		margin-top: 1rem;
-		margin-left: 5rem;
+		/* margin-top: 1rem; */
 		height: 15rem;
 		width: 15rem;
 		border-radius: 15px;
@@ -27,6 +34,7 @@ const PicFrame = styled.div`
 		background-position: center;
 	}
 `;
+
 const DataFrame = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -36,30 +44,24 @@ const FirstDataFrame = styled.div`
 	flex-direction: column;
 `;
 
-class UpdateCandidate extends Component {
-	state = { genderID: '' };
+const UpdateExaminer = (props) => {
+	const client = useApolloClient()
+	const [photo, setPhoto] = useState({ examinerImage: "" })
+	const [state, setState] = useForm({
+		examiner1stName: '',
+		examiner2ndName: '',
+		examinerOtherNames: '',
+		examinerEmail: '',
+		examinerPhone: '',
+		examinerImage: '',
+		examinerCNI: '',
+		examinerCode: '',
+		examinerMatricule: '',
+		gender: "",
 
-	handleChange = (e) => {
-		const { name, value, type } = e.target;
-		const val = type === 'number' ? parseFloat(value) : value;
-		this.setState({ [name]: val });
-	};
+	})
 
-	updateSingleCandidate = async (e, updateMutation) => {
-		e.preventDefault();
-		console.log('Updating Candidate!!');
-		const res = await updateMutation({
-			variables: {
-				id: this.props.id,
-				gender: this.getSelectedGender(gender.id),
-				...this.state
-			}
-		});
-		console.log('Candidate Updated!!');
-		console.log(res);
-	};
-
-	uploadFile = async (e) => {
+	const uploadFileToCloud = async (e) => {
 		const files = e.target.files;
 		const data = new FormData();
 		data.append('file', files[0]);
@@ -70,245 +72,247 @@ class UpdateCandidate extends Component {
 		});
 		const file = await res.json();
 		console.log(file);
-		this.setState({
-			image: file.secure_url
-			// biggerPhoto: file.eager[0].secure_url
-		});
-		{
-			// this.state.image && <img src={this.state.image} alt="Upload image" />;
-		}
+		setPhoto({ examinerImage: file.secure_url });
 	};
 
-	getSelectedGender = (dataSource) => {
+
+	const validationSchema = Yup.object().shape({
+		examiner1stName: Yup
+			.string()
+			.required("Nom obligatoire"),
+		examiner2ndName: Yup
+			.string()
+			.required("Prénom obligatoire"),
+		examinerOtherNames: Yup
+			.string(),
+		examinerMatricule: Yup
+			.string()
+			.required("No de Matricule obligatoire"),
+		examinerCNI: Yup
+			.string()
+			.required("Numero de la CNI obligatoire"),
+		examinerPhone: Yup
+			.number()
+			.required("Numero de portable obligatoire"),
+		gender: Yup
+			.string()
+			.required("Choix de votre sexe obligatoire"),
+
+	});
+
+
+
+	const getSelectedGender = (dataSource) => {
 		// 1 copy the data source
 		// if (dataSource.length > 0) {
 		const tempGender = [...dataSource];
 		// get the region object
-		const selectedGender = tempGender.find((item) => item.id === this.state.genderID);
+		const selectedGender = tempGender.find((item) => item.id === state.genderID);
 		console.log('getting selected gender');
 		console.log(selectedGender);
 		return selectedGender;
 		// }
 	};
 
-	render() {
-		return (
-			<Query query={getAllGendersQuery}>
-				{({ data, loading, error }) => {
-					{
-						loading && <p>Loading...</p>;
-					}
-					{
-						error && <Error error={error} />;
-					}
-					console.log(data);
-					const { genders } = data;
+	const loadExaminerData = async () => {
 
-					const genderOptions =
-						genders &&
-						genders.map((item) => (
-							<option key={item.id} value={item.id}>
-								{item.genderName}
-							</option>
-						));
+		const { data, error } = await client.query({
+			query: singleExaminerQuery,
+			variables: { id: props.id }
+		})
+		const dataExaminer = data.examiner
+		const {
+			examiner1stName,
+			examiner2ndName,
+			examinerOtherNames,
+			examinerEmail,
+			examinerPhone,
+			examinerImage,
+			examinerCNI,
+			examinerCode,
+			examinerMatricule,
+			gender,
+		} = dataExaminer
+		setState({
+			examiner1stName: examiner1stName,
+			examiner2ndName: examiner2ndName,
+			examinerOtherNames: examinerOtherNames,
+			examinerEmail: examinerEmail,
+			examinerPhone: examinerPhone,
+			examinerImage: examinerImage,
+			examinerCNI: examinerCNI,
+			examinerCode: examinerCode,
+			examinerMatricule: examinerMatricule,
+			gender: gender.genderName,
 
-					return (
-						<Query query={singleCandidateQuery} variables={{ id: this.props.id }}>
-							{({ data, loading, error }) => {
-								{
-									loading && <p>Loading...</p>;
-								}
-								const { candidate } = data;
-
-								{
-									!candidate && <p>Pas de candidat avec le ID {this.props.id}</p>;
-								}
-								const {
-									dateOfBirth,
-									birthCertNumber,
-									cand1stName,
-									cand2ndName,
-									cand3rdName,
-									email,
-									image,
-									phoneNumb,
-									placeOfBirth,
-									gender,
-									momName,
-									dadName
-								} = candidate;
-
-								return (
-									<Mutation mutation={updateCandidateMutation} variables={{ id: this.props.id }}>
-										{(updateCandidate, { loading, error }) => (
-											<StyledPage>
-												<Form
-													onSubmit={async (e) => {
-														e.preventDefault();
-														console.log('Updating Candidate!!');
-														const res = await updateCandidate({
-															variables: {
-																id: this.props.id,
-																gender: this.getSelectedGender(gender.id),
-																...this.state
-															}
-														});
-														console.log('Candidate Updated!!');
-														console.log(res);
-													}}
-												>
-													<h4>Correction d'Info Candidat</h4>
-													<Error error={error} />
-													<fieldset disabled={loading} aria-busy={loading}>
-														<CreateCandForm>
-															<PicFrame>
-																<input
-																	type="file"
-																	id="file"
-																	name="file"
-																	placeholder="Your picture"
-																	onChange={this.uploadFile}
-																	required
-																/>
-																<div>
-																	{this.state.image ? (
-																		<img
-																			src={this.state.image}
-																			alt="Upload image"
-																		/>
-																	) : (
-																			<img src={image} alt="Upload image" />
-																		)}
-																</div>
-																<FirstDataFrame>
-																	<input
-																		type="text"
-																		id="cand1stName"
-																		name="cand1stName"
-																		placeholder="Nom"
-																		defaultValue={cand1stName}
-																		onChange={this.handleChange}
-																		required
-																	/>
-																	<input
-																		type="text"
-																		id="cand2ndName"
-																		name="cand2ndName"
-																		placeholder="Prenoms"
-																		defaultValue={cand2ndName}
-																		onChange={this.handleChange}
-																		required
-																	/>
-																	<input
-																		type="text"
-																		id="cand3rdName"
-																		name="cand3rdName"
-																		placeholder="Autres noms"
-																		defaultValue={cand3rdName}
-																		onChange={this.handleChange}
-																		required
-																	/>
-																</FirstDataFrame>
-															</PicFrame>
-															<DataFrame>
-																<select
-																	type="select"
-																	id="genderID"
-																	name="genderID"
-																	defaultValue={gender.id}
-																	onChange={this.handleChange}
-																	required
-																>
-																	<option>Sexe du candidat</option>
-																	{genderOptions}
-																</select>
-																<input
-																	type="email"
-																	id="email"
-																	name="email"
-																	placeholder="Email"
-																	defaultValue={email}
-																	onChange={this.handleChange}
-																	required
-																/>
-																<input
-																	type="number"
-																	id="phoneNumb"
-																	name="phoneNumb"
-																	placeholder="No Tel"
-																	defaultValue={phoneNumb}
-																	onChange={this.handleChange}
-																	required
-																/>
-																<input
-																	type="text"
-																	id="placeOfBirth"
-																	name="placeOfBirth"
-																	placeholder="Lieu de Naissance"
-																	defaultValue={placeOfBirth}
-																	onChange={this.handleChange}
-																	required
-																/>
-
-																<input
-																	type="text"
-																	id="birhtCertNumber"
-																	name="birhtCertNumber"
-																	placeholder="No Acte de Naissance"
-																	defaultValue={birthCertNumber}
-																	onChange={this.handleChange}
-																	required
-																/>
-
-																<input
-																	type="Date"
-																	id="dateOfBirth"
-																	name="dateOfBirth"
-																	placeholder="Date de Naissance"
-																	defaultValue={format(dateOfBirth, 'd MMMM YYYY')}
-																	onChange={this.handleChange}
-																	required
-																/>
-
-																<input
-																	type="text"
-																	id="dadName"
-																	name="dadName"
-																	placeholder="Noms du Père"
-																	defaultValue={dadName}
-																	onChange={this.handleChange}
-																	required
-																/>
-																<input
-																	type="text"
-																	id="momName"
-																	name="momName"
-																	placeholder="Noms de la Mère"
-																	defaultValue={momName}
-																	onChange={this.handleChange}
-																	required
-																/>
-
-																<div className="submitButton">
-																	<button type="submit">
-																		Valid{loading ? 'ation en cours' : 'er'}
-																	</button>
-																</div>
-															</DataFrame>
-														</CreateCandForm>
-													</fieldset>
-												</Form>
-											</StyledPage>
-										)}
-									</Mutation>
-								);
-							}}
-						</Query>
-					);
-				}}
-			</Query>
-		);
+		})
 	}
+
+	useEffect(() => {
+		loadExaminerData()
+	}, [])
+
+	const { data: dataGender, loading: loadingGender, error: errorGender } = useQuery(getAllGendersQuery)
+
+	{ loadingGender && <p>Loading...</p>; }
+	{ errorGender && <Error error={errorGender} />; }
+	const getGenders = dataGender && dataGender.genders
+	const refinedGenders = getGenders && removeTypename(getGenders)
+
+	const getGenderOptions = refinedGenders && refinedGenders.map((item) => ({ value: item.id, label: item.genderName }))
+
+
+	const initialValues = {
+		examiner1stName: '',
+		examiner2ndName: '',
+		examinerOtherNames: '',
+		examinerEmail: '',
+		examinerPhone: '',
+		examinerImage: '',
+		examinerCNI: '',
+		examinerCode: '',
+		examinerMatricule: '',
+		gender: "",
+
+	};
+
+	const [updateExaminer] = useMutation(updateExaminerMutation, {
+		variables: { id: props.id }
+	})
+
+	return (
+		<Formik
+			method="POST"
+			initialValues={state || initialValues}
+			enableReinitialize={true}
+			validationSchema={validationSchema}
+			onSubmit={async (values, { resetForm, setSubmitting }) => {
+				const res = await updateExaminer({
+					variables: {
+						...values,
+						examinerImage: photo.examinerImage,
+						id: props.id
+					},
+				});
+				Router.push({
+					pathname: '/show/singleExaminer',
+					query: { id }
+				});
+				setTimeout(() => {
+					console.log(JSON.stringify(values, null, 2));
+					console.log(res);
+					resetForm(true);
+					setSubmitting(false);
+				}, 200);
+			}}
+		>
+
+			{({ isSubmitting, setFieldValue }) => (
+
+				<StyledPage>
+					<h4>Correction d'Info Examinateur</h4>
+					<Error error={errorGender} />
+					<StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
+						<Form>
+							<ExaminerForm>
+								<PicFrame>
+									<SygexInput
+										type="file"
+										id="file"
+										name="file"
+										label="Your picture"
+										disabled={isSubmitting}
+										onChange={uploadFileToCloud}
+									/>
+
+									<FirstDataFrame>
+										<SygexInput
+											type="text"
+											id="examiner1stName"
+											name="examiner1stName"
+											label="Nom"
+											disabled={isSubmitting}
+										/>
+										<SygexInput
+											type="text"
+											id="examiner2ndName"
+											name="examiner2ndName"
+											label="Prenom"
+											disabled={isSubmitting}
+										/>
+										<SygexInput
+											type="text"
+											id="examinerOtherName"
+											name="examinerOtherName"
+											label="Autres noms"
+											disabled={isSubmitting}
+										/>
+									</FirstDataFrame>
+									<ExaminerPic>
+										<img src={photo.examinerImage ? photo.examinerImage : examinerImage} alt={examiner2ndName} />
+									</ExaminerPic>
+								</PicFrame>
+								<DataFrame>
+									<SygefexSelect
+										type="select"
+										id="gender"
+										name="gender"
+										onChange={(value) => (setFieldValue('gender', value))}
+										options={getGenderOptions}
+									/>
+
+									<SygexInput
+										type="email"
+										id="examinerEmail"
+										name="examinerEmail"
+										label="Email"
+										disabled={isSubmitting}
+									/>
+									<SygexInput
+										type="number"
+										id="examinerPhone"
+										name="examinerPhone"
+										label="No Tel"
+										disabled={isSubmitting}
+									/>
+									<SygexInput
+										type="text"
+										id="examinerCode"
+										name="examinerCode"
+										label="Ccode examinateur"
+										disabled={isSubmitting}
+									/>
+
+									<SygexInput
+										type="text"
+										id="examinerCNI"
+										name="examinerCNI"
+										label="No Acte de Naissance"
+										disabled={isSubmitting}
+									/>
+
+
+									<SygexInput
+										type="text"
+										id="examinerMatricule"
+										name="examinerMatricule"
+										label="Noms du Père"
+										disabled={isSubmitting}
+									/>
+									<ButtonStyled >
+										<StyledButton type="submit">
+											Valid{isSubmitting ? 'ation en cours' : 'er'}
+										</StyledButton>
+									</ButtonStyled>
+								</DataFrame>
+							</ExaminerForm>
+						</Form>
+					</StyledForm>
+				</StyledPage>
+			)}
+		</Formik>
+
+	);
 }
 
-export default UpdateCandidate;
+export default UpdateExaminer;

@@ -1,105 +1,112 @@
-import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo';
-import Form from '../styles/Form';
-import { StyledPage } from '../styles/StyledPage';
+import React, { useEffect } from 'react';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
+
+import { MiniStyledPage } from '../styles/StyledPage';
 import Error from '../ErrorMessage.js';
-import { singleSubjectTypeQuery } from '../queries&Mutations&Functions/Queries';
+import { SygexInput, StyledForm, ButtonStyled, StyledButton } from '../utils/FormInputs'
 import { updateSubjectTypeMutation } from '../queries&Mutations&Functions/Mutations';
+import { singleSubjectTypeQuery } from '../queries&Mutations&Functions/Queries';
+import useForm from '../utils/useForm';
+import styled from 'styled-components'
 
-class UpdateSubjectType extends Component {
-	state = {};
 
-	handleChange = (e) => {
-		const { name, value, type } = e.target;
-		const val = type === 'number' ? parseFloat(value) : value;
-		this.setState({ [name]: val });
-	};
+const Controls = styled.div`
+padding:0 2rem;
+`;
+const UpdateSubjectType = ({ id }) => {
+	const [state, setState] = useForm({ subjectTypeCode: '', subjectTypeName: '' })
+	const client = useApolloClient()
 
-	resetForm() {
-		this.setState({ subjectTypeName: '', subjectTypeCode: '' });
+
+	const loadSubjTypeData = async () => {
+		const { data } = await client.query({
+			query: singleSubjectTypeQuery,
+			variables: { id }
+
+		})
+		const getSubjTypeData = data.subjectType
+		console.log(getSubjTypeData)
+		const {
+			subjectTypeName,
+			subjectTypeCode,
+		} = getSubjTypeData
+
+		setState({ subjectTypeCode: subjectTypeCode, subjectTypeName: subjectTypeName })
 	}
+	useEffect(() => {
+		loadSubjTypeData()
+	}, [])
 
-	updateSingleSubjectType = async (e, updateMutation) => {
-		e.preventDefault();
-		console.log('Updating SubjectType!!');
-		const res = await updateMutation({
-			variables: {
-				id: this.props.id,
-				...this.state
-			}
-		});
-		console.log('SubjectType Updated!!');
-	};
 
-	render() {
-		return (
-			<Query
-				query={singleSubjectTypeQuery}
-				variables={{
-					id: this.props.id
-				}}
-			>
-				{({ data, loading, error }) => {
-					console.log(data);
-					const { subjectType } = data;
-					const { subjectTypeName, subjectTypeCode } = subjectType;
-					{
-						loading && <p>Loading...</p>;
-					}
-					{
-						error && <Error error={error} />;
-					}
-					{
-						!subjectType && <p>No SubjectType Found for ID {this.props.id}</p>;
-					}
+	const validationSchema = Yup.object().shape({
+		subjectTypeName: Yup.string().required("Nom de type de matière obligatoire"),
+		subjectTypeCode: Yup.string().required("Code de type de matière  obligatoire"),
+	})
+	const [updateSubjectType] = useMutation(updateSubjectTypeMutation, {
+		variables: { id },
+		refetchQueries: ["singleSubjectTypeQuery"]
+	})
 
-					return (
-						<Mutation mutation={updateSubjectTypeMutation} variables={{ id: this.props.id }}>
-							{(updateSubjectType, { loading, error }) => (
-								<StyledPage>
-									<Form
-										onSubmit={async (e) => {
-											e.preventDefault();
-											await this.updateSingleSubjectType(e, updateSubjectType);
-											this.resetForm();
-										}}
-									>
-										<h4>Modification de Type de Matiere</h4>
-										<Error error={error} />
-										<fieldset disabled={loading} aria-busy={loading}>
-											<input
-												type="text"
-												id="subjectTypeName"
-												name="subjectTypeName"
-												placeholder="Nom Matiere"
-												defaultValue={subjectTypeName}
-												onChange={this.handleChange}
-												required
-											/>
-											<input
-												type="text"
-												id="subjectTypeCode"
-												name="subjectTypeCode"
-												placeholder="Code Matiere"
-												defaultValue={subjectTypeCode}
-												onChange={this.handleChange}
-												required
-											/>
-											<div className="submitButton">
-												<button type="submit">
-													Modifi{loading ? 'cation en cours' : 'er'}
-												</button>
-											</div>
-										</fieldset>
-									</Form>
-								</StyledPage>
-							)}
-						</Mutation>
-					);
-				}}
-			</Query>
-		);
-	}
+	return (
+		<Formik
+			method="POST"
+			initialValues={state || initialValues}
+			enableReinitialize={true}
+			validationSchema={validationSchema}
+			onSubmit={async (values, { resetForm, setSubmitting }) => {
+				const res = await updateSubjectType({
+					variables: {
+						...values,
+						id: id
+					},
+				});
+				// Router.push({
+				// 	pathname: '/show/singleExam',
+				// 	query: { id }
+				// });
+				setTimeout(() => {
+					console.log(JSON.stringify(values, null, 2));
+					console.log(res);
+					resetForm(true);
+					setSubmitting(false);
+				}, 200);
+			}}
+		>
+			{({ values, isSubmitting }) => (
+
+				<MiniStyledPage>
+					<h4>Modification d'info Type de matière </h4>
+					<StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
+						<Form>
+							<Controls>
+								<SygexInput
+									type="text"
+									id="subjectTypeName"
+									name="subjectTypeName"
+									label="Nom  type de matière"
+									disabled={isSubmitting}
+								/>
+								<SygexInput
+									type="text"
+									id="subjectTypeCode"
+									name="subjectTypeCode"
+									label="Code type de matière"
+									disabled={isSubmitting}
+								/>
+								<ButtonStyled className="submitButton">
+									<StyledButton type="submit">
+										valid{isSubmitting ? 'ation en cours' : 'er'}
+									</StyledButton>
+								</ButtonStyled>
+							</Controls>
+						</Form>
+					</StyledForm>
+				</MiniStyledPage>
+			)}
+		</Formik>
+	);
 }
 
 export default UpdateSubjectType;

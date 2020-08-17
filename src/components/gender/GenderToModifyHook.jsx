@@ -2,15 +2,13 @@ import React from "react";
 import { MinimStyledPage } from "../styles/StyledPage";
 import { useQuery } from '@apollo/react-hooks'
 import Link from "next/link";
-import { StyledForm, customStyle, ButtonStyled, StyledButton } from '../utils/FormInputs'
+import { SygefexSelect, StyledForm, ButtonStyled, StyledButton } from '../utils/FormInputs'
 import Error from "../ErrorMessage";
 import { Formik, Form } from 'formik';
 import styled from "styled-components";
-import Select from 'react-select'
 import useForm from '../utils/useForm'
 import DeleteRegion from "../region/DeleteRegion";
 import { getAllGendersQuery } from "../queries&Mutations&Functions/Queries";
-import { removeTypename } from '../queries&Mutations&Functions/Functions'
 
 
 
@@ -79,7 +77,7 @@ const GenderToModifyHook = () => {
                                 <TwoGroups>
 
                                     <InputGroup>
-                                        <Select name="genderID" onChange={handleReactSelectChange} options={genderOptions} styles={customStyle} placeholder={"Le Sexe"} />
+                                        <SygefexSelect name="genderID" onChange={handleReactSelectChange} options={genderOptions} placeholder="Le Sexe" />
                                     </InputGroup>
                                     <Buttons>
                                         <ButtonStyled>

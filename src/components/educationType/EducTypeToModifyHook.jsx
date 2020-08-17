@@ -9,7 +9,6 @@ import styled from "styled-components";
 import useForm from '../utils/useForm'
 import DeleteRegion from "../region/DeleteRegion";
 import { getAllEducationTypesQuery } from "../queries&Mutations&Functions/Queries";
-import { removeTypename } from '../queries&Mutations&Functions/Functions'
 
 
 

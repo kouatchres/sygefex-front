@@ -125,6 +125,30 @@ const uploadFile = async (e) => {
   setState({ image: file.secure_url })
 }
 
+// const updateCacheForDelete = (cache, { data }, queryToUpdate) => {
+//   // manually update the cache so that the data are all the same
+//   // 1. read the cache for the data we want
+//   const { regions, deleteRegion } = data
+//   const data = cache.readQuery({ query: queryToUpdate });
+//   // selects all the other regions leaving out the deleted one
+//   regions = regions.filter(region => region.id !== deleteRegion.id);
+//   //  3. write the new data back to the cache
+//   console.log("getting payload");
+//   console.log(payload);
+//   cache.writeQuery({ query: queryToUpdate, data });
+// };
+
+const updateCache = (cache, payload) => {
+  // manually update the cache so that the data are all the same
+  // 1. read the cache for the data we want
+  const data = cache.readQuery({ query: getAllRegionsQuery });
+  // the deletedselect all the other regions except the deleted one from the cache
+  data.regions = data.regions.filter(region => region.id !== payload.data.deleteRegion.id);
+  //  3. write the new data back to the cache
+  console.log("getting payload");
+  console.log(payload);
+  cache.writeQuery({ query: getAllRegionsQuery, data });
+};
 export {
   candExamSessionCode,
   roundFloatNumber,
@@ -132,12 +156,10 @@ export {
   calcCandTotalCoeff,
   calcCandAve,
   objectFromCode,
-  updateItemMutation,
   uniqueCodeGen,
   getSelectedObject,
   getObjectFromID,
   removeTypename,
   uploadFile,
-  registrationSerialNumber,
   centerExamSessionObjectFromCode,
 }

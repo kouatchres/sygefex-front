@@ -1,103 +1,112 @@
-import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo';
-import Form from '../styles/Form';
-import { StyledPage } from '../styles/StyledPage';
+import React, { useEffect } from 'react';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
+
+import { MiniStyledPage } from '../styles/StyledPage';
 import Error from '../ErrorMessage.js';
-import { updateRegionMutation, updateItemMutation } from '../queries&Mutations&Functions/Mutations';
-import { getSingleRegionQuery } from '../queries&Mutations&Functions/Queries';
+import { SygexInput, StyledForm, ButtonStyled, StyledButton } from '../utils/FormInputs'
+import { updatePhaseMutation } from '../queries&Mutations&Functions/Mutations';
+import { singlePhaseQuery } from '../queries&Mutations&Functions/Queries';
+import useForm from '../utils/useForm';
 
-class UpdateRegion extends Component {
-	state = {};
+import styled from 'styled-components'
 
-	handleChange = (e) => {
-		const { name, value, type } = e.target;
-		const val = type === 'number' ? parseFloat(value) : value;
-		this.setState({ [name]: val });
-	};
 
-	updateItemMutation = async (e, updateMutation) => {
-		e.preventDefault();
-		console.log('Updating Region!!');
-		const res = await updateMutation({
-			variables: {
-				id: this.props.id,
-				...this.state
-			}
-		});
-		console.log('Region Updated!!');
-	};
+const Controls = styled.div`
+padding:0 2rem;
+`;
+const UpdatePhaseHooks = ({ id }) => {
+	const [state, setState] = useForm({ phaseCode: '', phaseName: '' })
+	const client = useApolloClient()
 
-	resetForm() {
-		this.setState({ regName: '', regCode: '' });
+
+	const loadPhaseData = async () => {
+		const { data } = await client.query({
+			query: singlePhaseQuery,
+			variables: { id }
+
+		})
+		const getPhaseData = data.phase
+		console.log(getPhaseData)
+		const {
+			phaseName,
+			phaseCode,
+		} = getPhaseData
+
+		setState({ phaseCode: phaseCode, phaseName: phaseName })
 	}
+	useEffect(() => {
+		loadPhaseData()
+	}, [])
 
-	render() {
-		return (
-			<Query
-				query={getSingleRegionQuery}
-				variables={{
-					id: this.props.id
-				}}
-			>
-				{({ data, loading, error }) => {
-					console.log(data);
-					const { regName, regCode } = data.region;
-					{
-						loading && <p>Loading...</p>;
-					}
-					{
-						error && <Error error={error} />;
-					}
-					{
-						!data.region && <p>Pas de Région avec ID: {this.props.id}</p>;
-					}
 
-					return (
-						<Mutation mutation={updateRegionMutation} variables={{ id: this.props.id }}>
-							{(updateRegion, { loading, error }) => (
-								<StyledPage>
-									<Form
-										onSubmit={async (e) => {
-											e.preventDefault();
-											await this.updateItemMutation(e, updateRegion);
-											this.resetForm();
-										}}
-									>
-										<h4>Modification de Région</h4>
-										<Error error={error} />
-										<fieldset disabled={loading} aria-busy={loading}>
-											<input
-												type="text"
-												id="regName"
-												name="regName"
-												placeholder="Nom Région"
-												defaultValue={regName}
-												onChange={this.handleChange}
-												required
-											/>
-											<input
-												type="text"
-												id="regCode"
-												name="regCode"
-												placeholder="Code Région"
-												defaultValue={regCode}
-												onChange={this.handleChange}
-												required
-											/>
-											<div className="submitButton">
-												<button type="submit">Modifi{loading ? 'cation' : 'er'}</button>
-											</div>
-										</fieldset>
-									</Form>
-								</StyledPage>
-							)}
-						</Mutation>
-					);
-				}}
-			</Query>
-		);
-	}
+	const validationSchema = Yup.object().shape({
+		phaseName: Yup.string().required("Nom de la phase de l'examen obligatoire"),
+		phaseCode: Yup.string().required("Code de la phase de l'examen obligatoire"),
+	})
+	const [updatePhase] = useMutation(updatePhaseMutation, {
+		variables: { id }
+	})
+
+	return (
+		<Formik
+			method="POST"
+			initialValues={state || initialValues}
+			enableReinitialize={true}
+			validationSchema={validationSchema}
+			onSubmit={async (values, { resetForm, setSubmitting }) => {
+				const res = await updatePhase({
+					variables: {
+						...values,
+						id: id
+					},
+				});
+				// Router.push({
+				// 	pathname: '/show/singleExam',
+				// 	query: { id }
+				// });
+				setTimeout(() => {
+					console.log(JSON.stringify(values, null, 2));
+					console.log(res);
+					resetForm(true);
+					setSubmitting(false);
+				}, 200);
+			}}
+		>
+			{({ values, isSubmitting }) => (
+
+				<MiniStyledPage>
+					<h4>Modification d'info de phase d'examen</h4>
+					<StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
+						<Form>
+							<Controls>
+								<SygexInput
+									type="text"
+									id="phaseName"
+									name="phaseName"
+									label="Nom de la phase"
+									disabled={isSubmitting}
+								/>
+								<SygexInput
+									type="text"
+									id="phaseCode"
+									name="phaseCode"
+									label="Code de la phase"
+									disabled={isSubmitting}
+								/>
+								<ButtonStyled className="submitButton">
+									<StyledButton type="submit">
+										valid{isSubmitting ? 'ation en cours' : 'er'}
+									</StyledButton>
+								</ButtonStyled>
+							</Controls>
+						</Form>
+					</StyledForm>
+				</MiniStyledPage>
+			)}
+		</Formik>
+	);
 }
 
-export default UpdateRegion;
-export { UPDATE_REGION_MUTATION };
+export default UpdatePhaseHooks;

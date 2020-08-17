@@ -2,7 +2,7 @@ import React from "react";
 import { MinimStyledPage } from "../styles/StyledPage";
 import { useQuery } from '@apollo/react-hooks'
 import Link from "next/link";
-import {SygefexSelect, StyledForm, customStyle, ButtonStyled, StyledButton } from '../utils/FormInputs'
+import {SygefexSelect, StyledForm, ButtonStyled, StyledButton } from '../utils/FormInputs'
 import Error from "../ErrorMessage";
 import { Formik, Form } from 'formik';
 import styled from "styled-components";
@@ -72,7 +72,7 @@ const SubjectTypeToModifyHook = () => {
                 <MinimStyledPage>
                     <h4>Correction Info Type de Matière</h4>
                     <Error error={errorSubjectType} />
-                    <StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
+                    <StyledForm disabled={isSubmitting  || loadingSubjectType} aria-busy={isSubmitting  || loadingSubjectType} >
                         <Form>
                             <AllControls>
                                 <TwoGroups>

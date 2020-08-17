@@ -1,11 +1,13 @@
 import React from "react";
 import NewCenterHooks from "../../src/components/center/NewCenterHooks";
-// import div from '../../src/components/styles/div';
+import GatedSignin from "../../src/components/user/GatedSignin";
 
-const newCenter = props => {
+const newCenter = (props) => {
   return (
     <div>
-      <NewCenterHooks />
+      <GatedSignin>
+        <NewCenterHooks />
+      </GatedSignin>
     </div>
   );
 };

@@ -1,95 +1,97 @@
-import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo';
-import Error from '../ErrorMessage.js';
-import Form from '../styles/Form';
-import { StyledPage } from '../styles/StyledPage';
-import { singleSubDivisionQuery } from '../queries&Mutations&Functions/Queries';
-import { updateSubDivisionMutation } from '../queries&Mutations&Functions/Mutations';
+import React, { useEffect } from "react";
+import Error from "../ErrorMessage.js";
+import useForm from "../utils/useForm";
+import { Formik, Form } from "formik";
+import { StyledPage } from "../styles/StyledPage";
+import { singleSubDivisionQuery } from "../queries&Mutations&Functions/Queries";
+import { updateSubDivisionMutation } from "../queries&Mutations&Functions/Mutations";
+import * as Yup from "yup";
+import { useMutation, useApolloClient } from "@apollo/react-hooks";
+import {
+  StyledButton,
+  ButtonStyled,
+  StyledForm,
+  SygexInput,
+} from "../utils/FormInputs";
 
-class UpdateSubDivision extends Component {
-	state = {};
+const validationSchema = Yup.object().shape({
+  subDivName: Yup.string().required("Nom du arrondissement Obligatoire"),
+  subDivCode: Yup.string().required("Code du arrondissement Obligatoire"),
+});
 
-	handleChange = (e) => {
-		const { name, value, type } = e.target;
-		const val = type === 'number' ? parseFloat(value) : value;
-		this.setState({ [name]: val });
-	};
+const UpdateSubDivision = (props) => {
+  const [state, setState] = useForm({ subDivName: "", subDivCode: "" });
+  const client = useApolloClient();
 
-	updateItemMutation = async (e, updateMutation) => {
-		e.preventDefault();
-		console.log('Updating Region!!');
-		const res = await updateMutation({
-			variables: {
-				id: this.props.id,
-				...this.state
-			}
-		});
-		console.log('Region Updated!!');
-	};
+  const loadSubDivData = async () => {
+    const { data, error } = await client.query({
+      query: singleSubDivisionQuery,
+      variables: { id: props.id },
+    });
 
-	render() {
-		return (
-			<Query
-				query={singleSubDivisionQuery}
-				variables={{
-					id: this.props.id
-				}}
-			>
-				{({ data, loading, error }) => {
-					console.log(data);
-					const { subDivision } = data;
-					const { subDivName, subDivCode } = subDivision;
-					{
-						loading && <p>Loading...</p>;
-					}
-					{
-						error && <Error error={error} />;
-					}
-					{
-						!data.subDivision && <p>No Sub division Found for ID {this.props.id}</p>;
-					}
+    const getSubDivData = data.subDivision;
+    const { subDivName, subDivCode } = getSubDivData;
+    setState({ subDivName: subDivName, subDivCode: subDivCode });
+    return getSubDivData;
+  };
 
-					return (
-						<Mutation mutation={updateSubDivisionMutation} variables={{ id: this.props.id }}>
-							{(updateSubDivision, { loading, error }) => (
-								<StyledPage>
-									<Form onSubmit={(e) => this.updateItemMutation(e, updateSubDivision)}>
-										<h4>Modification d'un Arrondissement</h4>
-										<Error error={error} />
-										<fieldset disabled={loading} aria-busy={loading}>
-											<input
-												type="text"
-												id="subDivName"
-												name="subDivName"
-												placeholder="Nom Arrondissement"
-												defaultValue={subDivName}
-												onChange={this.handleChange}
-												required
-											/>
-											<input
-												type="text"
-												id="subDivCode"
-												name="subDivCode"
-												placeholder="Code Arrondissement"
-												defaultValue={subDivCode}
-												onChange={this.handleChange}
-												required
-											/>
-											<div className="submitButton">
-												<button type="submit">
-													Modifi{loading ? 'cation en cours' : 'er'}
-												</button>
-											</div>
-										</fieldset>
-									</Form>
-								</StyledPage>
-							)}
-						</Mutation>
-					);
-				}}
-			</Query>
-		);
-	}
-}
+  useEffect(() => {
+    loadSubDivData();
+  }, []);
+  console.log(state);
+  const [updateSubDivision] = useMutation(updateSubDivisionMutation, {
+    variables: { id: props.id },
+  });
+
+  return (
+    <Formik
+      initialValues={state || initialValues}
+      validationSchema={validationSchema}
+      enableReinitialize={true}
+      onSubmit={async (values, { setSubmitting, resetForm }) => {
+        const res = await updateSubDivision({
+          variables: { ...values },
+        });
+        setTimeout(() => {
+          console.log(JSON.stringify(values, null, 2));
+          console.log(res);
+          resetForm(true);
+          setSubmitting(false);
+        }, 200);
+      }}
+    >
+      {({ values, isSubmitting }) => (
+        <StyledPage>
+          <h4>Modification d'Info Arrondissement</h4>
+          <StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
+            <Form>
+              <SygexInput
+                type="text"
+                id="subDivName"
+                name="subDivName"
+                label="Nom Arrondissement"
+                required
+                disabled={isSubmitting}
+              />
+              <SygexInput
+                type="text"
+                id="subDivCode"
+                name="subDivCode"
+                label="Code Arrondissement"
+                required
+                disabled={isSubmitting}
+              />
+              <ButtonStyled>
+                <StyledButton type="submit">
+                  Valid{isSubmitting ? "ation en cours" : "er"}
+                </StyledButton>
+              </ButtonStyled>
+            </Form>
+          </StyledForm>
+        </StyledPage>
+      )}
+    </Formik>
+  );
+};
 
 export default UpdateSubDivision;

@@ -9,7 +9,6 @@ import styled from "styled-components";
 import useForm from '../utils/useForm'
 import DeleteRegion from "../region/DeleteRegion";
 import { getAllPhasesQuery } from "../queries&Mutations&Functions/Queries";
-import { removeTypename } from '../queries&Mutations&Functions/Functions'
 
 
 
@@ -50,11 +49,6 @@ min-width:15rem;
 const PhaseToModifyHook = () => {
     const [state, setState, handleReactSelectChange] = useForm({ phaseID: "" });
 
-    const handleChange = e => {
-        const { name, value, type } = e.target;
-        const val = type === "number" ? parseInt(value) : value;
-        setState({ [name]: val });
-    };
 
     const { data: dataPhase, loading: loadingPhase, error: errorPhase } = useQuery(getAllPhasesQuery)
     { loadingPhase && <p>Loading Phase from DB...</p> }

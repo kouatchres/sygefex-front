@@ -1,20 +1,20 @@
 import Link from "next/link";
 import MegaMenu from "./mega-menu/MegaMenu";
 import Burger from "./mega-menu/Burger";
-import styled from 'styled-components'
-import NProgress from 'nprogress';
-import Router from 'next/router'
-import User from '../components/User'
-
+import styled from "styled-components";
+import NProgress from "nprogress";
+import Router from "next/router";
+import User from "./user/User";
+import Login from "./user/Login";
 
 Router.onRouteChangeStart = () => {
-    NProgress.start();
+  NProgress.start();
 };
 Router.onRouteChangeComplete = () => {
-    NProgress.done();
+  NProgress.done();
 };
 Router.onRouteChangeError = () => {
-    NProgress.done();
+  NProgress.done();
 };
 const StyledHeader = styled.div`
 
@@ -42,13 +42,13 @@ const StyledHeader = styled.div`
     font-weight: bold;
     font-family: "Roboto Slab";
     letter-spacing: 0.3rem;
-    background: ${ props => props.theme.pureWhite};
+    background: ${(props) => props.theme.pureWhite};
     a {
     align-items:center;
-        color: ${ props => props.theme.blues[2]};
+        color: ${(props) => props.theme.blues[2]};
     padding-bottom:2rem;
     padding:0 2rem;
-        /* background: ${ props => props.theme.pureWhite}; */
+        /* background: ${(props) => props.theme.pureWhite}; */
         text-transform: uppercase;
         text-decoration: none;
     }
@@ -64,8 +64,8 @@ const StyledHeader = styled.div`
     align-items: center;
     text-align: center;
     letter-spacing: 0.15rem;
-    color: ${ props => props.theme.pureWhite};
-    background: ${ props => props.theme.blues[2]};
+    color: ${(props) => props.theme.pureWhite};
+    background: ${(props) => props.theme.blues[2]};
         padding:0  2rem;
     }
 
@@ -103,38 +103,40 @@ const StyledHeader = styled.div`
   }
    `;
 
-
+const MeMenu = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 2rem;
+`;
 const Header = () => (
-    <StyledHeader>
+  <User>
+    {({ data: { me } }) => (
+      <StyledHeader>
         <div className="navigation">
-            <div className="subBar">
-                <div className="logo">
-                    <Link href="/login/login">
-                        <a>SYGEFEX</a>
-                    </Link>
-                </div>
-                <div className="burger">
-                    <Burger />
-                </div>
-                <div className="meMenu">
-                    <User >
-                        {({ data }) => {
-                            const currentUser = data && data.me
-                            if (currentUser) {
-                                return currentUser.name
-                            }
-                            return null
-                        }}
-                    </User>
-                </div>
-
+          <div className="subBar">
+            <div className="logo">
+              <Link href="/creates/login">
+                <a>SYGEFEX</a>
+              </Link>
             </div>
+
+            <div className="burger">
+              <Burger />
+            </div>
+          </div>
+          {me && (
             <div className="megaMenu">
+              <MeMenu>
+                <p>{me.name}</p>
                 <MegaMenu />
+              </MeMenu>
             </div>
-
+          )}
+          {!me}
         </div>
-    </StyledHeader>
+      </StyledHeader>
+    )}
+  </User>
 );
 
 export default Header;

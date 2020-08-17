@@ -1,93 +1,123 @@
-import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo';
-import Form from '../styles/Form';
+import React, { useEffect } from 'react';
 import { StyledPage } from '../styles/StyledPage';
 import Error from '../ErrorMessage.js';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { SygexInput, StyledForm, ButtonStyled, StyledButton } from '../utils/FormInputs'
 import { singleEducationTypeQuery } from '../queries&Mutations&Functions/Queries';
 import { updateEducationTypeMutation } from '../queries&Mutations&Functions/Mutations';
+import useForm from '../utils/useForm';
+import { useApolloClient, useMutation } from '@apollo/react-hooks'
 
-class UpdateEducationType extends Component {
-	state = {};
+import styled from 'styled-components'
 
-	handleChange = (e) => {
-		const { name, value, type } = e.target;
-		const val = type === 'number' ? parseFloat(value) : value;
-		this.setState({ [name]: val });
-	};
 
-	singleEducationTypeQuery = async (e, updateMutation) => {
-		e.preventDefault();
-		const res = await updateMutation({
-			variables: {
-				...this.state,
-				id: this.props.id
-			}
-		});
-	};
+const Controls = styled.div`
+padding:0 2rem;
+`;
 
-	render() {
-		return (
-			<Query
-				query={singleEducationTypeQuery}
-				variables={{
-					id: this.props.id
-				}}
-			>
-				{({ data, loading, error }) => {
-					console.log(data);
-					const { educationType } = data;
-					const { educationTypeName, educationTypeCode } = educationType;
-					{
-						loading && <p>Loading...</p>;
-					}
-					{
-						error && <Error error={error} />;
-					}
-					{
-						!data.educationType && <p>Pas de departement pout le ID {this.props.id}</p>;
-					}
+const UpdateEducationType = ({ id }) => {
+	const [state, setState] = useForm({
+		educationTypeCode: "",
+		educationTypeName: "",
+	})
 
-					return (
-						<Mutation mutation={updateEducationTypeMutation} variables={{ id: this.props.id }}>
-							{(updateEducationType, { loading, error }) => (
-								<StyledPage>
-									<Form onSubmit={(e) => this.singleEducationTypeQuery(e, updateEducationType)}>
-										<h4>Modification du type d'enseignement</h4>
-										<Error error={error} />
-										<fieldset disabled={loading} aria-busy={loading}>
-											<input
-												type="text"
-												id="educationTypeName"
-												name="educationTypeName"
-												placeholder="Nom du type D'Enseignement"
-												defaultValue={educationTypeName}
-												onChange={this.handleChange}
-												required
-											/>
-											<input
-												type="text"
-												id="educationTypeCode"
-												name="educationTypeCode"
-												placeholder="Code du type D'Enseignement"
-												defaultValue={educationTypeCode}
-												onChange={this.handleChange}
-												required
-											/>
-											<div className="submitButton">
-												<button type="submit">
-													Modifi{loading ? 'cation en cours' : 'er'}
-												</button>
-											</div>
-										</fieldset>
-									</Form>
-								</StyledPage>
-							)}
-						</Mutation>
-					);
-				}}
-			</Query>
-		);
+	const client = useApolloClient()
+
+	const loadEducTypeData = async () => {
+		const { error, data } = await client.query({
+			query: singleEducationTypeQuery,
+			variables: { id }
+		})
+		const getEducType = data.educationType
+
+		console.log(getEducType)
+		const {
+			educationTypeCode,
+			educationTypeName,
+		} = getEducType
+		setState({
+			educationTypeCode: educationTypeCode,
+			educationTypeName: educationTypeName,
+		})
 	}
+
+	useEffect(() => {
+		loadEducTypeData()
+	}, [])
+
+	const initialValues = {
+		educationTypeCode: "",
+		educationTypeName: "",
+	}
+
+	const validationSchema = Yup.object().shape({
+		educationTypeName: Yup.string().required("Nom type d'enseignement obligatoire"),
+		educationTypeCode: Yup.string().required("Code type d'enseignement  obligatoire"),
+	});
+
+	const [updateEducationType] = useMutation(updateEducationTypeMutation, {
+		variables: { id }
+	})
+	return (
+
+		<Formik
+			method="POST"
+			initialValues={state || initialValues}
+			enableReinitialize={true}
+			validationSchema={validationSchema}
+			onSubmit={async (values, { resetForm, setSubmitting }) => {
+				const res = await updateEducationType({
+					variables: {
+						...values,
+						id: id
+					},
+				});
+				// Router.push({
+				// 	pathname: '/show/singleEducType',
+				// 	query: { id }
+				// });
+				setTimeout(() => {
+					console.log(JSON.stringify(values, null, 2));
+					console.log(res);
+					resetForm(true);
+					setSubmitting(false);
+				}, 200);
+			}}
+		>
+			{({ values, isSubmitting }) => (
+
+				<StyledPage>
+					<h4>Modification Type d'enseignement</h4>
+					<StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
+						<Form>
+							<Controls>
+								<SygexInput
+									type="text"
+									id="educationTypeName"
+									name="educationTypeName"
+									label="Nom du type D'Enseignement"
+									disabled={isSubmitting}
+								/>
+								<SygexInput
+									type="text"
+									id="educationTypeCode"
+									name="educationTypeCode"
+									label="Code du type D'Enseignement"
+									disabled={isSubmitting}
+								/>
+								<ButtonStyled className="submitButton">
+									<StyledButton type="submit">
+										valid{isSubmitting ? 'ation en cours' : 'er'}
+									</StyledButton>
+								</ButtonStyled>
+							</Controls>
+						</Form>
+					</StyledForm>
+				</StyledPage>
+			)}
+		</Formik>
+	);
 }
 
 export default UpdateEducationType;

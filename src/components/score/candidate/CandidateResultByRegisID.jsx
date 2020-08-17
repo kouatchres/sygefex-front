@@ -1,28 +1,28 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Query } from "react-apollo";
-import Form from "../../styles/Form";
+import React, { useEffect } from "react";
+import { Formik, Form } from "formik";
+import { StyledForm } from "../../utils/FormInputs";
 import { StyledPage } from "../../styles/StyledPage";
 import Error from "../../ErrorMessage";
 import styled from "styled-components";
+import useForm from "../../utils/useForm";
 import { format } from "date-fns";
-import RegistrationDetails from './RegistrationDetails'
+import RegistrationDetails from "./RegistrationDetails";
 import { getAllCandidateRegistrationIDsQuery } from "../../queries&Mutations&Functions/Queries";
-
+import { useApolloClient } from "@apollo/react-hooks";
 
 const SubjectTitles = styled.div`
   display: grid;
-  grid-template-columns:4fr 1fr 1fr 1fr;
+  grid-template-columns: 4fr 1fr 1fr 1fr;
   color: white;
   font-size: 1.5rem;
   justify-content: center;
-  background: ${props => props.theme.googleBlue};
+  background: ${(props) => props.theme.blues[2]};
 `;
-
 
 const CandPic = styled.div`
   margin-top: 1rem;
   display: block;
+  padding: 0 1rem;
   flex-direction: column;
 
   img {
@@ -38,151 +38,192 @@ const TitleItem = styled.div`
   text-align: left;
 `;
 
+const CandInfo = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-gap: 1rem;
+  justify-items: left;
+`;
+
 const ResultsHeader = styled.div`
   display: grid;
-  grid-template-columns: 0.5fr 18fr ;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  justify-items: left;
+  grid-gap: 1rem;
   align-items: center;
 `;
 
-const FirstInfo = styled.div`
-text-align:left;
-  display: block;
-  flex-direction: column;
-  font-size:1.5rem;
-  line-height:0.3rem;
+const StyledContainer = styled.div`
+  padding: 1rem;
 `;
 
+const FirstInfo = styled.div`
+  text-align: left;
+  display: block;
+  flex-direction: column;
+  font-size: 1.5rem;
+  line-height: 0.3rem;
+`;
 
-class CandidateResultsByRegisID extends Component {
+const CandidateResultsByRegisID = ({ id }) => {
+  const [state, setState] = useForm({});
+  const client = useApolloClient();
 
-  makeCandVariableObject = (candIDValue) => {
-    const storedCandidate = {
-      candidate: `id : ${candIDValue}`
-    };
-    return storedCandidate;
+  // static propTypes = { id: PropTypes.string.isRequired };
+
+  const loadCandResultsData = async () => {
+    const { error, data } = await client.query({
+      query: getAllCandidateRegistrationIDsQuery,
+      variables: { id },
+    });
+    console.log(data);
+    setState(data.candidate);
   };
-  static propTypes = { id: PropTypes.string.isRequired };
-  render() {
-    return (
-      <Query query={getAllCandidateRegistrationIDsQuery} variables={{ id: this.props.id }}>
-        {({ data, error, loading }) => {
-          { loading && <p>...Loading</p> }
-          { error && <Error error={error} /> }
-          console.log(data)
-          const { candidate } = { ...data }
-          console.log(candidate)
-          return (
-            <StyledPage>
-              <Form
-                onSubmit={e => {
-                  e.preventDefault();
-                }}
-              >
-                <h4>
-                  Les Resultats de:{candidate.cand1stName} {candidate.cand2ndName} {candidate.cand3rdName}
-                </h4>
-                <Error error={error} />
-                <fieldset disabled={loading} aria-busy={loading}>
+
+  useEffect(() => {
+    loadCandResultsData();
+  }, []);
+  console.log(state);
+  const {
+    image,
+    cand1stName,
+    cand2ndName,
+    cand3rdName,
+    email,
+    placeOfBirth,
+    dateOfBirth,
+    dadName,
+    momName,
+    gender,
+    registration,
+  } = { ...state };
+  const { genderName } = { ...gender };
+
+  const initialValues = {
+    candCode: "",
+    image: "",
+    cand1stName: "",
+    cand2ndName: "",
+    cand3rdName: "",
+    email: "",
+    gender: "",
+    placeOfBirth: "",
+    dateOfBirth: "",
+    candExamSecretCode: "",
+  };
+
+  return (
+    <Formik initialValues={initialValues}>
+      {({ isSubmitting }) => (
+        <StyledPage>
+          <h4>
+            Les Resultats de:{cand1stName} {cand2ndName} {cand3rdName}
+          </h4>
+          <StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
+            <Form>
+              <StyledContainer>
+                <CandInfo>
                   <ResultsHeader>
                     <CandPic>
-                      <img src={candidate.image} alt={candidate.cand1stName} />
+                      <img src={image} alt={cand1stName} />
                     </CandPic>
                     <FirstInfo>
                       <p>
                         <span>
-                          <strong> Nom: </strong> {candidate.cand1stName}
+                          <strong> Nom: </strong> {cand1stName}
                         </span>
                       </p>
 
                       <p>
                         <span>
-                          <strong> Prenom: </strong> {candidate.cand2ndName}
+                          <strong> Prenom: </strong> {cand2ndName}
                         </span>
                       </p>
 
                       <p>
                         <span>
                           <strong> Autres Noms: </strong>
-                          {candidate.cand3rdName}
+                          {cand3rdName}
                         </span>
                       </p>
                       <p>
                         <span>
                           <strong>Naissance: </strong>
-                          <hr />
                         </span>
                       </p>
+                      <hr />
                       <p>
                         <span>
-                          <strong> Lieu: </strong> {candidate.placeOfBirth}
+                          <strong> Lieu: </strong> {placeOfBirth}
                         </span>
                       </p>
-
 
                       <p>
                         <span>
                           <strong> Date: </strong>
-                          {format(candidate.dateOfBirth, "d MMM, YYYY ")}
+                          {format(dateOfBirth, "d MMM, YYYY ")}
                         </span>
                       </p>
                       <p>
                         <span>
-                          <strong> Sexe: </strong> {candidate.gender.genderName}
+                          <strong> Sexe: </strong> {genderName}
                         </span>
                       </p>
 
                       <p>
                         <span>
                           <strong> Email: </strong>
-                          {candidate.email}
+                          {email}
                         </span>
                       </p>
 
                       <p>
                         <span>
                           <strong> Noms des parents: </strong>
-                          <hr />
+                        </span>
+                      </p>
+                      <hr />
+                      <p>
+                        <span>
+                          <strong>Père: </strong> {dadName}
                         </span>
                       </p>
                       <p>
                         <span>
-                          <strong>Père: </strong> {candidate.dadName}
+                          <strong>Mère: </strong> {momName}
                         </span>
                       </p>
-                      <p>
-                        <span>
-                          <strong>Mère: </strong> {candidate.momName}
-                        </span>
-                      </p>
-
                     </FirstInfo>
                   </ResultsHeader>
-                  <SubjectTitles>
-                    <TitleItem>
-                      <span>Centre</span>
-                    </TitleItem>
-                    <TitleItem>
-                      <span>Session </span>
-                    </TitleItem>
-                    <TitleItem>
-                      <span>Examen </span>
-                    </TitleItem>
-                    <TitleItem>
-                      <span>Resultats</span>
-                    </TitleItem>
-                  </SubjectTitles>
-                  {candidate.registration.map(oneRegistration => (
-                    <RegistrationDetails key={oneRegistration.id} registrationInfo={oneRegistration} />
+                </CandInfo>
+                <SubjectTitles>
+                  <TitleItem>
+                    <span>Centre</span>
+                  </TitleItem>
+                  <TitleItem>
+                    <span>Session </span>
+                  </TitleItem>
+                  <TitleItem>
+                    <span>Examen </span>
+                  </TitleItem>
+                  <TitleItem>
+                    <span>Resultats</span>
+                  </TitleItem>
+                </SubjectTitles>
+                {registration &&
+                  registration.map((item) => (
+                    <RegistrationDetails
+                      key={item.id}
+                      registrationInfo={item}
+                    />
                   ))}
-                </fieldset>
-              </Form>
-            </StyledPage>
-          );
-        }}
-      </Query>
-    );
-  }
-}
+              </StyledContainer>
+            </Form>
+          </StyledForm>
+        </StyledPage>
+      )}
+    </Formik>
+  );
+};
 
 export default CandidateResultsByRegisID;

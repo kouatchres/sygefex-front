@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Form from '../styles/Form';
 import { MiniStyledPage } from '../styles/StyledPage';
 import Error from '../ErrorMessage';
+import useForm from '../utils/useForm'
 import styled from 'styled-components';
 import Router from 'next/router'
 import debounce from 'lodash.debounce'
 import { ApolloConsumer } from 'react-apollo'
-import { getCandidateIDQuery } from '../queries&Mutations&Functions/Queries';
+import { getExaminerIDQuery } from '../queries&Mutations&Functions/Queries';
 
 const StyledDivision = styled.div`
 	display: grid;
@@ -21,84 +22,72 @@ const CenterSelect = styled.div`
 	margin: 0 auto;
 `;
 
-class NewCandidateToModify extends Component {
-    state = {
+const ExaminerToModify = (props) => {
+
+    const [state, setState] = useForm({
         id: "",
         loading: "false"
-    };
+    })
 
-    handleChange = (e) => {
-        this.setState({ loading: true })
-        const { name, value, type } = e.target;
-        const val = type === 'number'
-            ? parseInt(value)
-            : value;
-        this.setState({ [name]: val });
-    };
-
-    resetForm = () => {
-        this.setState({ candCode: '' });
-    };
-
-    makeCandVariableObject = (candCodeValue) => {
+    const makeCandVariableObject = (examinerCodeValue) => {
         const storedCandidate = {
-            candCode: `${candCodeValue}`
+            examinerCode: `${examinerCodeValue}`
         };
         return storedCandidate;
     };
-    onChange = debounce(async (e, client) => {
+    const onChange = debounce(async (e, client) => {
         console.log('seaching')
         const res = await client.query({
-            query: getCandidateIDQuery,
-            variables: { candCode: e.target.value }
+            query: getExaminerIDQuery,
+            variables: { examinerCode: e.target.value }
         })
-        this.setState({
-            id: res.data.candidateCode.id,
+        setState({
+            id: res.data.examinerByCode.id,
             loading: false,
         })
-    }, 400)
-    render() {
-        const { id } = this.state;
+    }, 200)
 
-        id && Router.push({
-            pathname: '/updates/updateCand',
-            query: { id }
-        });
-        return (
-            <MiniStyledPage >
-                <Form
-                    onSubmit={async (e) => {
-                        e.preventDefault();
-                        this.resetForm();
-                    }}>
-                    <h4 >
-                        Modification d'Info Candidat
+
+
+    state.id && Router.push({
+        pathname: '/updates/updateExaminer',
+        query: { id: state.id }
+    });
+    return (
+        <MiniStyledPage >
+            <Form
+                onSubmit={async (e) => {
+                    e.preventDefault();
+                    resetForm();
+                }}>
+                <h4 >
+                    Modification d'Info Examinateur
                     </h4>
-                    <fieldset >
-                        <StyledDivision >
-                            <CenterSelect>
-                                <ApolloConsumer>
-                                    {(client) => (
+                <fieldset >
+                    <StyledDivision >
+                        <CenterSelect>
+                            <ApolloConsumer>
+                                {(client) => (
 
-                                        <input
-                                            type="search"
-                                            placeholder="Code Candidat"
-                                            onChange={(e) => {
-                                                e.persist()
-                                                this.onChange(e, client)
-                                            }}
-                                        />
-                                    )}
-                                </ApolloConsumer>
-                            </CenterSelect>
-                        </StyledDivision>
-                    </fieldset>
-                </Form>
-            </MiniStyledPage>
+                                    <input
+                                        type="search"
+                                        name="search"
+                                        label="Code Examinateur"
+                                        onChange={(e) => {
+                                            e.persist()
+                                            onChange(e, client)
+                                        }}
+                                    />
+                                )}
+                            </ApolloConsumer>
+                        </CenterSelect>
+                    </StyledDivision>
+                </fieldset>
+            </Form>
+        </MiniStyledPage>
 
-        );
-    }
+    );
 }
 
-export default NewCandidateToModify;
+export default ExaminerToModify;
 

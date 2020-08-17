@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Form from '../styles/Form';
-import { MiniStyledPage } from '../styles/StyledPage';
-import Error from '../ErrorMessage';
+import { MinimStyledPage } from '../styles/StyledPage';
 import styled from 'styled-components';
 import Router from 'next/router'
+import useForm from '../utils/useForm'
 import debounce from 'lodash.debounce'
 import { ApolloConsumer } from 'react-apollo'
 import { getCandidateIDQuery } from '../queries&Mutations&Functions/Queries';
@@ -21,86 +21,62 @@ const CenterSelect = styled.div`
 	margin: 0 auto;
 `;
 
-class NewCandidateToModify extends Component {
-    state = {
+const NewCandidateToModify = () => {
+    const [state, setState] = useForm({
         id: "",
-        loading: "false"
-    };
+        loading: "true"
+    });
 
-    handleChange = (e) => {
-        this.setState({ loading: true })
-        const { name, value, type } = e.target;
-        const val = type === 'number'
-            ? parseInt(value)
-            : value;
-        this.setState({ [name]: val });
-    };
 
-    resetForm = () => {
-        this.setState({ candCode: '' });
-    };
-
-    makeCandVariableObject = (candCodeValue) => {
-        const storedCandidate = {
-            candCode: `${candCodeValue}`
-        };
-        return storedCandidate;
-    };
-    onChange = debounce(async (e, client) => {
+    const onChange = debounce(async (e, client) => {
         console.log('seaching')
         const res = await client.query({
             query: getCandidateIDQuery,
             variables: { candCode: e.target.value }
         })
-        this.setState({
+        setState({
             id: res.data.candidateCode.id,
             loading: false,
         })
-    }, 400)
-    render() {
-        const { id } = this.state;
+    }, 200)
+    console.log(state.id)
 
-        id && Router.push({
-            pathname: '/updates/updateCand',
-            query: { id }
-        });
-        return (
-            <MiniStyledPage >
-                <Form
-                    onSubmit={async (e) => {
-                        e.preventDefault();
-                        this.resetForm();
-                    }}>
-                    <h4 >
-                        Modification d'Info Candidat
-                    </h4>
-                    <fieldset >
-                        <StyledDivision >
-                            <CenterSelect>
-                                <ApolloConsumer>
-                                candidates of the last world.
-                                Why not bring home all the boys
-                                enlarging the graph for those to not take serious in our lives
-                                    {(client) => (
+    state.id && Router.push({
+        pathname: '/updates/updateCand',
+        query: { id: state.id }
+    });
+    return (
+        <MinimStyledPage >
+            <Form
+                onSubmit={async (e) => {
+                    e.preventDefault();
+                    resetForm();
+                }}>
+                <h4> Modification d'Info Candidat</h4>
+                <fieldset >
+                    <StyledDivision >
+                        <CenterSelect>
+                            <ApolloConsumer>
 
-                                        <input
-                                            type="search"
-                                            placeholder="Code Candidat"
-                                            onChange={(e) => {
-                                                e.persist()
-                                                this.onChange(e, client)
-                                            }}
-                                        />
-                                    )}
-                                </ApolloConsumer>
-                            </CenterSelect>
-                        </StyledDivision>
-                    </fieldset>
-                </Form>
-            </MiniStyledPage>
+                                {(client) => (
 
-        );
-    }
+                                    <input
+                                        type="search"
+                                        placeholder="Code Candidat"
+                                        onChange={(e) => {
+                                            e.persist()
+                                            onChange(e, client)
+                                        }}
+                                    />
+                                )}
+                            </ApolloConsumer>
+                        </CenterSelect>
+                    </StyledDivision>
+                </fieldset>
+            </Form>
+        </MinimStyledPage>
+
+    );
 }
 
 export default NewCandidateToModify;

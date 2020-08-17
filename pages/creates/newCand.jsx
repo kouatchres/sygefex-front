@@ -1,12 +1,12 @@
-import React from 'react';
-import CreateNewCandidate from '../../src/components/candidate/CreateNewCandidate';
-
+import React from "react";
+import CreateNewCandidate from "../../src/components/candidate/CreateNewCandidate";
+import GatedSignin from "../../src/components/user/GatedSignin";
 
 const newCand = () => {
-	return (
-		<div>
-			<CreateNewCandidate />
-		</div>
-	);
+  return (
+    <GatedSignin>
+      <CreateNewCandidate />
+    </GatedSignin>
+  );
 };
 export default newCand;

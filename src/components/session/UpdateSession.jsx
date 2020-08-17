@@ -1,96 +1,112 @@
-import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo';
-import Form from '../styles/Form';
-import { StyledPage } from '../styles/StyledPage';
+import React, { useEffect } from 'react';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
+
+import { MiniStyledPage } from '../styles/StyledPage';
 import Error from '../ErrorMessage.js';
-import { singleSessionQuery } from '../queries&Mutations&Functions/Queries';
+import { SygexInput, StyledForm, ButtonStyled, StyledButton } from '../utils/FormInputs'
 import { updateSessionMutation } from '../queries&Mutations&Functions/Mutations';
+import { singleSessionQuery } from '../queries&Mutations&Functions/Queries';
+import useForm from '../utils/useForm';
 
-class UpdateSession extends Component {
-	state = {};
+import styled from 'styled-components'
 
-	handleChange = (e) => {
-		const { name, value, type } = e.target;
-		const val = type === 'number' ? parseFloat(value) : value;
-		this.setState({ [name]: val });
-	};
 
-	updatSingleSession = async (e, UpdateMutation) => {
-		e.preventDefault();
-		console.log('Updating Session!!');
-		const res = await UpdateMutation({
-			variables: {
-				...this.state,
-				id: this.props.id
-			}
-		});
-		console.log('Session Updated!!');
-	};
+const Controls = styled.div`
+padding:0 2rem;
+`;
+const UpdateSession = ({ id }) => {
+	const [state, setState] = useForm({ sessionName: '', sessionCode: '' })
+	const client = useApolloClient()
 
-	render() {
-		return (
-			<Query
-				query={singleSessionQuery}
-				variables={{
-					id: this.props.id
-				}}
-			>
-				{({ data, loading, error }) => {
-					const { session } = data;
 
-					const { sessionName, sessionCode } = session;
+	const loadSessionData = async () => {
+		const { data } = await client.query({
+			query: singleSessionQuery,
+			variables: { id }
 
-					{
-						loading && <p>Loading...</p>;
-					}
-					{
-						error && <Error error={error} />;
-					}
-					{
-						!session && <p>No session Found for ID {this.props.id}</p>;
-					}
-					console.log(this.state)
-					return (
-						<Mutation mutation={updateSessionMutation} variables={{ id: this.props.id }}>
-							{(updateSession, { loading, error }) => (
-								<StyledPage>
-									<Form onSubmit={(e) => this.updatSingleSession(e, updateSession)}>
-										<h4>Modification de Session</h4>
-										<Error error={error} />
-										<fieldset disabled={loading} aria-busy={loading}>
-											<input
-												type="text"
-												id="sessionName"
-												name="sessionName"
-												placeholder="Nom session"
-												defaultValue={sessionName}
-												onChange={this.handleChange}
-												required
-											/>
-											<input
-												type="text"
-												id="sessionCode"
-												name="sessionCode"
-												placeholder="Code session"
-												defaultValue={sessionCode}
-												onChange={this.handleChange}
-												required
-											/>
-											<div className="submitButton">
-												<button type="submit">
-													Modifi{loading ? 'cation en cours' : 'er'}
-												</button>
-											</div>
-										</fieldset>
-									</Form>
-								</StyledPage>
-							)}
-						</Mutation>
-					);
-				}}
-			</Query>
-		);
+		})
+		const getSessionData = data.session
+		console.log(getSessionData)
+		const {
+			sessionCode,
+			sessionName,
+		} = getSessionData
+
+		setState({ sessionName: sessionName, sessionCode: sessionCode })
 	}
+	useEffect(() => {
+		loadSessionData()
+	}, [])
+
+
+	const validationSchema = Yup.object().shape({
+		sessionCode: Yup.string().required("Nom de la session obligatoire"),
+		sessionName: Yup.string().required("Code de la session  obligatoire"),
+	})
+	const [updateSession] = useMutation(updateSessionMutation, {
+		variables: { id }
+	})
+
+	return (
+		<Formik
+			method="POST"
+			initialValues={state || initialValues}
+			enableReinitialize={true}
+			validationSchema={validationSchema}
+			onSubmit={async (values, { resetForm, setSubmitting }) => {
+				const res = await updateSession({
+					variables: {
+						...values,
+						id: id
+					},
+				});
+				// Router.push({
+				// 	pathname: '/show/singleExam',
+				// 	query: { id }
+				// });
+				setTimeout(() => {
+					console.log(JSON.stringify(values, null, 2));
+					console.log(res);
+					resetForm(true);
+					setSubmitting(false);
+				}, 200);
+			}}
+		>
+			{({ values, isSubmitting }) => (
+
+				<MiniStyledPage>
+					<h4>Modification d'info examen</h4>
+					<StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
+						<Form>
+							<Controls>
+								<SygexInput
+									type="text"
+									id="sessionCode"
+									name="sessionCode"
+									label="Nom de la session"
+									disabled={isSubmitting}
+								/>
+								<SygexInput
+									type="text"
+									id="sessionName"
+									name="sessionName"
+									label="Code de la session"
+									disabled={isSubmitting}
+								/>
+								<ButtonStyled className="submitButton">
+									<StyledButton type="submit">
+										valid{isSubmitting ? 'ation en cours' : 'er'}
+									</StyledButton>
+								</ButtonStyled>
+							</Controls>
+						</Form>
+					</StyledForm>
+				</MiniStyledPage>
+			)}
+		</Formik>
+	);
 }
 
 export default UpdateSession;

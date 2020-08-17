@@ -8,15 +8,17 @@ const ErrorStyles = styled.div`
   background: ${props => props.theme.grey[2]};
   margin:0 1.1rem ;
   border-radius: 0.5rem;
-  border: 0.01rem solid rgba(0, 0, 0, 0.05);
+  border: 0.04rem solid rgba(0, 0, 0, 0.05);
   /* border-right: 0.08rem solid red; */
   border-left: 0.05rem solid red;
   p {
     margin: 0;
     font-size:1.2rem;
-    font-weight: bold;
+    font-weight: normal;
   }
   strong {
+    font-size:1.6rem;
+    font-weight: normal;
     margin-right: 0.15rem;
   }
 `;
@@ -27,8 +29,8 @@ const DisplayError = ({ error }) => {
     return error.networkError.result.errors.map((error, i) => (
       <ErrorStyles key={i}>
         <p data-test="graphql-error">
-          <strong>Probleme Reseaux!</strong>
-          {error.message.replace("GraphQL error: ", "")}
+          <strong>Probleme de reseaux!</strong>
+          {error.message.replace("Graphql error: ", "")}
         </p>
       </ErrorStyles>
     ));
@@ -36,8 +38,9 @@ const DisplayError = ({ error }) => {
   return (
     <ErrorStyles >
       <p data-test="graphql-error">
-        <strong>Erreure!</strong>
-        {error.message.replace("GraphQL error: ", "")}
+        <strong>Erreure !</strong>
+        {error.message.replace("Graphql error: ", "")}
+
       </p>
     </ErrorStyles>
   );

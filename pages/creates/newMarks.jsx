@@ -1,12 +1,14 @@
-import React from 'react';
-import EnterNewMarksHook from '../../src/components/score/EnterNewMarksHook';
-
+import React from "react";
+import EnterMarksHook from "../../src/components/score/EnterMarksHook";
+import GatedSignin from "../../src/components/user/GatedSignin";
 
 const newMarks = () => {
-	return (
-		<div>
-			<EnterNewMarksHook />
-		</div>
-	);
+  return (
+    <div>
+      <GatedSignin>
+        <EnterMarksHook />
+      </GatedSignin>
+    </div>
+  );
 };
 export default newMarks;

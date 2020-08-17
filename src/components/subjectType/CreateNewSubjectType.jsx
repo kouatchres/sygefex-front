@@ -60,7 +60,7 @@ const CreateNewSubjectType = () => {
                     <MinimStyledPage>
                         <h4>Crée Type de Matière</h4>
                         <Error error={error} />
-                        <StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
+                        <StyledForm disabled={isSubmitting  || loading} aria-busy={isSubmitting  || loading} >
                             <Form>
                                 <AllControls>
                                     <InputGroup>

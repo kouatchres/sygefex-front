@@ -1,10 +1,10 @@
 import React from "react";
-import CandDetailedResults from "../../../src/components/results/candidate/CandDetailedResults"
+import CandDetailedResultsHook from "../../../src/components/results/candidate/CandDetailedResultsHook";
 
 function candResults({ query }) {
   return (
     <div>
-      <CandDetailedResults id={query.id} />
+      <CandDetailedResultsHook id={query.id} />
     </div>
   );
 }

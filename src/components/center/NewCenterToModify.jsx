@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Form from '../styles/Form';
 import { MinimStyledPage } from '../styles/StyledPage';
-import Error from '../ErrorMessage';
+import useForm from '../utils/useForm'
 import styled from 'styled-components';
 import Router from 'next/router'
 import debounce from 'lodash.debounce'
@@ -21,84 +21,64 @@ const CenterSelect = styled.div`
 	margin: 0 auto;
 `;
 
-class NewCenterToModify extends Component {
-    state = {
+const NewCenterToModify = () => {
+    const [state, setState] = useForm({
         id: "",
         loading: "false"
-    };
+    })
 
-    handleChange = (e) => {
-        this.setState({ loading: true })
-        const { name, value, type } = e.target;
-        const val = type === 'number'
-            ? parseInt(value)
-            : value;
-        this.setState({ [name]: val });
-    };
 
-    resetForm = () => {
-        this.setState({ candCode: '' });
-    };
-
-    makeCandVariableObject = (centerCodeValue) => {
-        const storedCenter = {
-            centerCode: `${centerCodeValue}`
-        };
-        return storedCenter;
-    };
-    onChange = debounce(async (e, client) => {
+    const onChange = debounce(async (e, client) => {
         console.log('seaching')
         const res = await client.query({
             query: getCenterIDFromCenterCodeQuery,
-            variables: { centerCode: e.target.value }
+            variables: { centerSecretCode: e.target.value }
         })
-        this.setState({
-            id: res.data.centerCode.id,
+        setState({
+            id: res.data.getCenterByCode.id,
             loading: false,
         })
-    }, 400)
-    render() {
-        const { id } = this.state;
+    }, 200)
 
-        id && Router.push({
-            pathname: '/updates/updateCenter',
-            query: { id }
-        });
-        return (
-            <MinimStyledPage>
+    const { id } = state;
 
-                <Form
-                    onSubmit={async (e) => {
-                        e.preventDefault();
-                        this.resetForm();
-                    }}>
-                    <h4 >
-                        Correction Info Centre
-                    </h4>
-                    <fieldset >
-                        <StyledDivision >
-                            <CenterSelect>
-                                <ApolloConsumer>
-                                    {(client) => (
+    id && Router.push({
+        pathname: '/updates/updateCenter',
+        query: { id }
+    });
 
-                                        <input
-                                            type="search"
-                                            placeholder="Code Centre"
-                                            onChange={(e) => {
-                                                e.persist()
-                                                this.onChange(e, client)
-                                            }}
-                                        />
-                                    )}
-                                </ApolloConsumer>
-                            </CenterSelect>
-                        </StyledDivision>
-                    </fieldset>
-                </Form>
-            </MinimStyledPage>
+    return (
 
-        );
-    }
+        <MinimStyledPage>
+
+            <Form
+                onSubmit={async (e) => {
+                    e.preventDefault();
+                    resetForm();
+                }}>
+                <h4 > Correction Info Centre</h4>
+                <fieldset >
+                    <StyledDivision >
+                        <CenterSelect>
+                            <ApolloConsumer>
+                                {(client) => (
+
+                                    <input
+                                        type="search"
+                                        placeholder="Code Centre"
+                                        onChange={(e) => {
+                                            e.persist()
+                                            onChange(e, client)
+                                        }}
+                                    />
+                                )}
+                            </ApolloConsumer>
+                        </CenterSelect>
+                    </StyledDivision>
+                </fieldset>
+            </Form>
+        </MinimStyledPage>
+    );
 }
 
 export default NewCenterToModify;

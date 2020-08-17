@@ -1,12 +1,12 @@
 import React from "react";
-import UpdateRegion from "../../src/components/region/UpdateRegion";
-import styled from "styled-components";
+import NewUpdateRegionHook from "../../src/components/region/NewUpdateRegionHook";
 
 const updateRegion = ({ query }) => {
   return (
     <div>
-      <UpdateRegion id={query.id} />
+      <NewUpdateRegionHook id={query.id} />
     </div>
   );
 };
 export default updateRegion;
+  

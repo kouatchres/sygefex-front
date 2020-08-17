@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from "graphql-tag";
 
 //************create mutations  */
 const signInCandidate = gql`
@@ -8,8 +8,23 @@ const signInCandidate = gql`
       cand1stName
     }
   }
-`
+`;
 //
+const signoutMutation = gql`
+  mutation signoutMutation {
+    signout {
+      message
+    }
+  }
+`;
+
+const deleteReportMutation = gql`
+  mutation deleteReportMutation($id: ID!) {
+    deleteReport(id: $id) {
+      id
+    }
+  }
+`;
 
 const updateSessionMutation = gql`
   mutation updateSessionMutation(
@@ -27,7 +42,7 @@ const updateSessionMutation = gql`
       id
     }
   }
-`
+`;
 
 const updateEducationTypeMutation = gql`
   mutation updateEducationTypeMutation(
@@ -45,7 +60,7 @@ const updateEducationTypeMutation = gql`
       educationTypeCode
     }
   }
-`
+`;
 const updateSubjectTypeMutation = gql`
   mutation updateSubjectTypeMutation(
     $id: ID!
@@ -62,7 +77,7 @@ const updateSubjectTypeMutation = gql`
       subjectTypeCode
     }
   }
-`
+`;
 
 const updateSubjectMutation = gql`
   mutation updateSubjectMutation(
@@ -80,7 +95,25 @@ const updateSubjectMutation = gql`
       id
     }
   }
-`
+`;
+
+const updateSubjectGroupMutation = gql`
+  mutation updateSubjectGroupMutation(
+    $id: ID!
+    $subjectGroupName: String
+    $subjectGroupCode: String
+  ) {
+    updateSubjectGroup(
+      id: $id
+      subjectGroupName: $subjectGroupName
+      subjectGroupCode: $subjectGroupCode
+    ) {
+      subjectGroupName
+      subjectGroupCode
+      id
+    }
+  }
+`;
 
 const updateRankMutation = gql`
   mutation updateRankMutation($id: ID!, $rankName: String, $rankCode: String) {
@@ -90,21 +123,25 @@ const updateRankMutation = gql`
       rankCode
     }
   }
-`
+`;
 
-const updateSeriesMutation = gql`
-  mutation updateSeriesMutation(
+const updateSpecialtyMutation = gql`
+  mutation updateSpecialtyMutation(
     $id: ID!
-    $seriesName: String
-    $seriesCode: String
+    $specialtyName: String
+    $specialtyCode: String
   ) {
-    updateSeries(id: $id, seriesName: $seriesName, seriesCode: $seriesCode) {
-      seriesName
-      seriesCode
+    updateSpecialty(
+      id: $id
+      specialtyName: $specialtyName
+      specialtyCode: $specialtyCode
+    ) {
+      specialtyName
+      specialtyCode
       id
     }
   }
-`
+`;
 
 const updateDivisionMutation = gql`
   mutation updateDivisionMutation(
@@ -118,7 +155,7 @@ const updateDivisionMutation = gql`
       divCode
     }
   }
-`
+`;
 
 const updateRegionMutation = gql`
   mutation updateRegionMutation($id: ID!, $regName: String, $regCode: String) {
@@ -128,14 +165,13 @@ const updateRegionMutation = gql`
       regCode
     }
   }
-`
+`;
 
 const createNewReportMutation = gql`
   mutation createNewReportMutation(
     $reportImage: String!
     $reportName: String!
     $centerExamSessionExaminer: CenterExamSessionExaminerWhereUniqueInput!
-
   ) {
     createReport(
       reportImage: $reportImage
@@ -147,7 +183,7 @@ const createNewReportMutation = gql`
       reportImage
     }
   }
-`
+`;
 
 const createNewGenderMutation = gql`
   mutation createNewGenderMutation($genderName: String!, $genderCode: String!) {
@@ -157,7 +193,7 @@ const createNewGenderMutation = gql`
       genderName
     }
   }
-`
+`;
 
 const createRegistrationMutation = gql`
   mutation createRegistrationMutation(
@@ -166,8 +202,9 @@ const createRegistrationMutation = gql`
     $candExamSession: String!
     $candRegistrationNumber: String!
     $centerExamSession: CenterExamSessionWhereUniqueInput!
-    $centerExamSessionSeries: CenterExamSessionSeriesWhereUniqueInput!
-    $series: SeriesWhereUniqueInput!
+    $centerExamSessionSpecialty: CenterExamSessionSpecialtyWhereUniqueInput!
+    $specialty: SpecialtyWhereUniqueInput!
+    $aptitude: AptitudeWhereUniqueInput!
   ) {
     createRegistration(
       candidate: $candidate
@@ -175,8 +212,9 @@ const createRegistrationMutation = gql`
       candExamSession: $candExamSession
       candRegistrationNumber: $candRegistrationNumber
       centerExamSession: $centerExamSession
-      centerExamSessionSeries: $centerExamSessionSeries
-      series: $series
+      centerExamSessionSpecialty: $centerExamSessionSpecialty
+      specialty: $specialty
+      aptitude: $aptitude
     ) {
       id
       centerExamSession {
@@ -192,7 +230,7 @@ const createRegistrationMutation = gql`
       }
     }
   }
-`
+`;
 
 const createCenterExamSessionMutation = gql`
   mutation createCenterExamSessionMutation(
@@ -203,50 +241,49 @@ const createCenterExamSessionMutation = gql`
       id
     }
   }
-`
+`;
 
 const createPhaseRankMutation = gql`
   mutation createPhaseRankMutation(
     $phase: PhaseWhereUniqueInput!
-    $rankName:  String!                                                                                                                                                                    
-    $rankCode:  String!                                                                                                                                                                   
+    $rankName: String!
+    $rankCode: String!
   ) {
-    createPhaseRank(phase: $phase, rankName : $rankName, rankCode: $rankCode ){                                                                                                                                                                      
+    createPhaseRank(phase: $phase, rankName: $rankName, rankCode: $rankCode) {
       id
     }
   }
-`
+`;
 
 const createCenterExamSessionExaminerMutation = gql`
   mutation createCenterExamSessionExaminerMutation(
     $centerExamSession: CenterExamSessionWhereUniqueInput!
-    $examiner:  ExaminerWhereUniqueInput! 
-    $phaseRank:  PhaseRankWhereUniqueInput! 
+    $examiner: ExaminerWhereUniqueInput!
+    $phaseRank: PhaseRankWhereUniqueInput!
   ) {
     createCenterExamSessionExaminer(
-    phaseRank: $phaseRank,
-    centerExamSession: $centerExamSession,
-    examiner: $examiner
-    ){                                                                                                                                                                      
+      phaseRank: $phaseRank
+      centerExamSession: $centerExamSession
+      examiner: $examiner
+    ) {
       id
     }
   }
-`
+`;
 
-const createCenterExamSessionSeriesMutation = gql`
-  mutation createCenterExamSessionSeriesMutation(
-    $series: SeriesWhereUniqueInput!
+const createCenterExamSessionSpecialtyMutation = gql`
+  mutation createCenterExamSessionSpecialtyMutation(
+    $specialty: SpecialtyWhereUniqueInput!
     $centerExamSession: CenterExamSessionWhereUniqueInput!
   ) {
-    createCenterExamSessionSeries(
-      series: $series
+    createCenterExamSessionSpecialty(
+      specialty: $specialty
       centerExamSession: $centerExamSession
     ) {
       id
     }
   }
-`
-
+`;
 
 // const createCenterExamSessionexaminerorityMutation = gql`
 //   mutation createCenterExamSessionexaminerorityMutation(
@@ -285,7 +322,7 @@ const createDivisionMutation = gql`
       divName
     }
   }
-`
+`;
 
 const createCenterMutation = gql`
   mutation createCenterMutation(
@@ -311,24 +348,24 @@ const createCenterMutation = gql`
       }
     }
   }
-`
+`;
 
-const createSeriesMutation = gql`
-  mutation createSeriesMutation(
-    $seriesName: String!
-    $seriesCode: String!
+const createSpecialtyMutation = gql`
+  mutation createSpecialtyMutation(
+    $specialtyName: String!
+    $specialtyCode: String!
     $educationType: EducationTypeWhereUniqueInput!
   ) {
-    createSeries(
-      seriesName: $seriesName
-      seriesCode: $seriesCode
+    createSpecialty(
+      specialtyName: $specialtyName
+      specialtyCode: $specialtyCode
       educationType: $educationType
     ) {
       id
-      seriesName
+      specialtyName
     }
   }
-`
+`;
 const createEducationTypeMutation = gql`
   mutation createEducationTypeMutation(
     $educationTypeName: String!
@@ -342,7 +379,7 @@ const createEducationTypeMutation = gql`
       educationTypeName
     }
   }
-`
+`;
 
 const createTownMutation = gql`
   mutation createTownMutation(
@@ -359,7 +396,7 @@ const createTownMutation = gql`
       }
     }
   }
-`
+`;
 
 const createNewSubjectTypeMutation = gql`
   mutation createNewSubjectTypeMutation(
@@ -374,7 +411,7 @@ const createNewSubjectTypeMutation = gql`
       subjectTypeName
     }
   }
-`
+`;
 
 const createNewSubjectMutation = gql`
   mutation createNewSubjectMutation(
@@ -393,7 +430,22 @@ const createNewSubjectMutation = gql`
       subjectName
     }
   }
-`
+`;
+
+const createNewSubjectGroupMutation = gql`
+  mutation createNewSubjectGroupMutation(
+    $subjectGroupName: String!
+    $subjectGroupCode: String!
+  ) {
+    createSubjectGroup(
+      subjectGroupName: $subjectGroupName
+      subjectGroupCode: $subjectGroupCode
+    ) {
+      subjectGroupCode
+      subjectGroupName
+    }
+  }
+`;
 
 const createSubDivisionMutation = gql`
   mutation createSubDivisionMutation(
@@ -414,7 +466,7 @@ const createSubDivisionMutation = gql`
       }
     }
   }
-`
+`;
 
 const createNewSessionMutation = gql`
   mutation createNewSessionMutation(
@@ -426,7 +478,7 @@ const createNewSessionMutation = gql`
       sessionName
     }
   }
-`
+`;
 
 const createNewRankMutation = gql`
   mutation createNewRankMutation($rankName: String!, $rankCode: String!) {
@@ -438,73 +490,69 @@ const createNewRankMutation = gql`
 `;
 
 const createNewRegionMutation = gql`
-  mutation createNewRegionMutation(
-    $regName: String!
-     $regCode: String!
-      $country: CountryWhereUniqueInput!
-      ) {
-    createRegion(
-       country: $country 
-        regName: $regName
-         regCode: $regCode
-         ) {
+  mutation createNewRegionMutation($regName: String!, $regCode: String!) {
+    createRegion(regName: $regName, regCode: $regCode) {
       id
       regName
     }
   }
-`
+`;
 
 const signupUserMutation = gql`
   mutation signupUserMutation(
     $name: String!
-     $email: String!
-      $password: String!
-      ) {
-  createUser(
-       password: $password 
-        name: $name
-         email: $email
-         ) {
+    $email: String!
+    $password: String!
+  ) {
+    signup(password: $password, name: $name, email: $email) {
       id
       name
       email
     }
   }
-`
+`;
 
 const loginUserMutation = gql`
-  mutation loginUserMutation(
-     $email: String!
-      $password: String!
-      ) {
-    login(
-       password: $password 
-         email: $email
-         ) {
+  mutation loginUserMutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
       id
+      name
       email
+      password
+      permissions
     }
   }
-`
+`;
+
+const requestResetMutation = gql`
+  mutation requestResetMutation($email: String!) {
+    requestReset(email: $email) {
+      message
+    }
+  }
+`;
 
 const createNewCountryMutation = gql`
-  mutation createNewCountryMutation($countryName: String!, $countryCode: String!) {
+  mutation createNewCountryMutation(
+    $countryName: String!
+    $countryCode: String!
+  ) {
     createCountry(countryName: $countryName, countryCode: $countryCode) {
       id
       countryName
       countryCode
     }
   }
-`
+`;
 
 const createPhaseMutation = gql`
-  mutation createPhaseMutation($phaseName: String!, $phaseCode: String!){
+  mutation createPhaseMutation($phaseName: String!, $phaseCode: String!) {
     createPhase(phaseName: $phaseName, phaseCode: $phaseCode) {
       id
       phaseName
     }
   }
-`
+`;
 
 const createExamMutation = gql`
   mutation createExamMutation($examName: String!, $examCode: String!) {
@@ -513,20 +561,36 @@ const createExamMutation = gql`
       examName
     }
   }
-`
+`;
 
-const registerSubjectSeriesMutation = gql`
-  mutation registerSubjectSeriesMutation(
+const createAptitudeMutation = gql`
+  mutation createAptitudeMutation(
+    $aptitudeName: String!
+    $aptitudeCode: String!
+  ) {
+    createAptitude(aptitudeName: $aptitudeName, aptitudeCode: $aptitudeCode) {
+      id
+      aptitudeName
+    }
+  }
+`;
+
+const registerSubjectSpecialtyMutation = gql`
+  mutation registerSubjectSpecialtyMutation(
     $subject: SubjectWhereUniqueInput!
-    $series: SeriesWhereUniqueInput!
+    $specialty: SpecialtyWhereUniqueInput!
     $coeff: Int!
   ) {
-    createSubjectSeries(subject: $subject, series: $series, coeff: $coeff) {
+    createSubjectSpecialty(
+      subject: $subject
+      specialty: $specialty
+      coeff: $coeff
+    ) {
       id
-      series {
+      specialty {
         id
-        seriesName
-        subjectSeries {
+        specialtyName
+        subjectSpecialty {
           id
           subject {
             id
@@ -536,34 +600,27 @@ const registerSubjectSeriesMutation = gql`
       }
     }
   }
-`
+`;
 
-const registerNewSubjectSeriesMutation = gql`
-  mutation registerNewSubjectSeriesMutation(
-    $series: SeriesWhereUniqueInput!
+const registerNewSubjectSpecialtyMutation = gql`
+  mutation registerNewSubjectSpecialtyMutation(
+    $specialty: SpecialtyWhereUniqueInput!
+    $subject: SubjectWhereUniqueInput!
     $coeff: Int!
-    $subjectName: String!
-    $subjectCode: String!
   ) {
-    createSubjectSeries(
-      subjectCode: $subjectCode
-      subjectName: $subjectName
-      series: $series
+    createSubjectSpecialty(
+      specialty: $specialty
+      subject: $subject
       coeff: $coeff
     ) {
       id
-      series {
+      specialty {
         id
-        seriesName
-        subjectSeries {
-          id
-          subjectName
-          subjectCode
-        }
+        specialtyName
       }
     }
   }
-`
+`;
 
 const createCandidateMutation = gql`
   mutation createCandidateMutation(
@@ -608,7 +665,52 @@ const createCandidateMutation = gql`
       image
     }
   }
-`
+`;
+
+const createMultipleCandidatesMutation = gql`
+  mutation createMultipleCandidatesMutation(
+    $cand1stName: String!
+    $cand2ndName: String
+    $cand3rdName: String
+    $dadName: String
+    $momName: String
+    $candCode: String
+    $email: String!
+    $image: String!
+    $phoneNumb: Int
+    $dateOfBirth: DateTime
+    $birthCertNumber: String
+    $placeOfBirth: String
+    $gender: GenderWhereUniqueInput!
+  ) {
+    createMultipleCandidates(
+      cand1stName: $cand1stName
+      cand2ndName: $cand2ndName
+      dadName: $dadName
+      momName: $momName
+      cand3rdName: $cand3rdName
+      candCode: $candCode
+      email: $email
+      image: $image
+      phoneNumb: $phoneNumb
+      dateOfBirth: $dateOfBirth
+      birthCertNumber: $birthCertNumber
+      placeOfBirth: $placeOfBirth
+      gender: $gender
+    ) {
+      id
+      cand1stName
+      cand2ndName
+      cand3rdName
+      momName
+      dadName
+      candCode
+      birthCertNumber
+      dateOfBirth
+      image
+    }
+  }
+`;
 
 const createExaminerMutation = gql`
   mutation createExaminerMutation(
@@ -645,7 +747,7 @@ const createExaminerMutation = gql`
       examinerPhone
     }
   }
-`
+`;
 
 //************create mutations  */
 
@@ -667,7 +769,7 @@ const updateSubDivisionMutation = gql`
       id
     }
   }
-`
+`;
 
 const updateCenterMutation = gql`
   mutation updateCenterMutation(
@@ -688,7 +790,7 @@ const updateCenterMutation = gql`
       centerCode
     }
   }
-`
+`;
 
 const updateTownMutation = gql`
   mutation updateTownMutation($id: ID!, $townName: String, $townCode: String) {
@@ -698,7 +800,7 @@ const updateTownMutation = gql`
       id
     }
   }
-`
+`;
 
 const updateExamMutation = gql`
   mutation updateExamMutation($id: ID!, $examName: String, $examCode: String) {
@@ -708,30 +810,51 @@ const updateExamMutation = gql`
       id
     }
   }
-`
+`;
 
 const updateScoreMutation = gql`
   mutation updateScoreMutation(
-    $subjectSeries: SubjectSeriesWhereUniqueInput!
+    $subjectSpecialty: SubjectSpecialtyWhereUniqueInput!
     $subjectAve: Float!
     $candExamSecretCode: String!
   ) {
     updateScore(
-      subjectSeries: $subjectSeries
+      subjectSpecialty: $subjectSpecialty
       subjectAve: $subjectAve
       candExamSecretCode: $candExamSecretCode
     ) {
       subjectAve
       coeff
       id
-      subjectSeries {
+      subjectSpecialty {
         id
         subjectCode
         subjectName
       }
     }
   }
-`
+`;
+
+const enterMarksMutation = gql`
+  mutation enterMarksMutation(
+    $subjectSpecialty: SubjectSpecialtyWhereUniqueInput!
+    $subjectAve: Float!
+    $candExamSecretCode: String!
+  ) {
+    enterMarks(
+      subjectSpecialty: $subjectSpecialty
+      subjectAve: $subjectAve
+      candExamSecretCode: $candExamSecretCode
+    ) {
+      subjectAve
+      coeff
+      id
+      subjectSpecialty {
+        id
+      }
+    }
+  }
+`;
 
 // const createUserMutation = gql`
 //   mutation createUserMutation(
@@ -739,7 +862,7 @@ const updateScoreMutation = gql`
 //     $name: String!
 //     $password: String!
 //     ) {
-//     createUser( 
+//     createUser(
 //                email: $email!
 //                name: $name!
 //                password: $password!
@@ -800,7 +923,51 @@ const updateCandidateMutation = gql`
       }
     }
   }
-`
+`;
+
+const updateExaminerMutation = gql`
+  mutation updateExaminerMutation(
+    $id: ID!
+    $examiner1stName: String
+    $examiner2ndName: String
+    $examinerOtherNames: String
+    $examinerCNI: String
+    $examinerPhone: Int
+    $examinerEmail: String
+    $examinerImage: String
+    $examinerMatricule: String
+    $examinerCode: String
+    $gender: GenderWhereUniqueInput
+  ) {
+    updateExaminer(
+      id: $id
+      examiner1stName: $examiner1stName
+      examiner2ndName: $examiner2ndName
+      examinerOtherNames: $examinerOtherNames
+      examinerCNI: $examinerCNI
+      examinerPhone: $examinerPhone
+      examinerEmail: $examinerEmail
+      examinerMatricule: $examinerMatricule
+      examinerCode: $examinerCode
+      examinerImage: $examinerImage
+      gender: $gender
+    ) {
+      id
+      examiner1stName
+      examiner2ndName
+      examinerOtherNames
+      examinerCNI
+      examinerPhone
+      examinerEmail
+      examinerMatricule
+      examinerCode
+      examinerImage
+      gender {
+        id
+      }
+    }
+  }
+`;
 
 const updateGenderMutation = gql`
   mutation updateGenderMutation(
@@ -814,7 +981,7 @@ const updateGenderMutation = gql`
       genderCode
     }
   }
-`
+`;
 
 const signUpMutation = gql`
   mutation signUpMutation($email: String!, $name: String!, $password: String!) {
@@ -825,21 +992,54 @@ const signUpMutation = gql`
       password
     }
   }
-`
+`;
+
+const updateSignUpMutation = gql`
+  mutation updateSignUpMutation(
+    $email: String!
+    $name: String!
+    $password: String!
+  ) {
+    updateUser(email: $email, name: $name, password: $password) {
+      id
+      email
+      name
+      password
+    }
+  }
+`;
 
 const updateItemMutation = async (e, updateMutation) => {
-  e.preventDefault()
-  console.log('Updating Region!!')
+  e.preventDefault();
+  console.log("Updating Region!!");
   const res = await updateMutation({
     variables: {
       id: this.props.id,
       ...this.state,
     },
-  })
-  console.log('Region Updated!!')
-}
+  });
+  console.log("Region Updated!!");
+};
 
 ////**************Update mutations */
+
+/////*****************Delete Mutations */
+
+const deleteRegionMutation = gql`
+  mutation deleteRegionMutation($id: ID!) {
+    deleteRegion(id: $id) {
+      id
+    }
+  }
+`;
+
+const deleteCenterMutation = gql`
+  mutation deleteCenterMutation($id: ID!) {
+    deleteCenter(id: $id) {
+      id
+    }
+  }
+`;
 
 export {
   createCandidateMutation,
@@ -851,7 +1051,7 @@ export {
   createRegistrationMutation,
   createCenterMutation,
   createEducationTypeMutation,
-  createSeriesMutation,
+  createSpecialtyMutation,
   createSubDivisionMutation,
   createNewSessionMutation,
   createNewRankMutation,
@@ -859,8 +1059,8 @@ export {
   createNewRegionMutation,
   createNewGenderMutation,
   createExamMutation,
-  registerSubjectSeriesMutation,
-  registerNewSubjectSeriesMutation,
+  registerSubjectSpecialtyMutation,
+  registerNewSubjectSpecialtyMutation,
   updateCenterMutation,
   updateTownMutation,
   updateSessionMutation,
@@ -874,17 +1074,29 @@ export {
   updateItemMutation,
   createExaminerMutation,
   createPhaseMutation,
-  createCenterExamSessionSeriesMutation,
-  updateSeriesMutation,
+  createCenterExamSessionSpecialtyMutation,
+  updateSpecialtyMutation,
   updateRankMutation,
   createPhaseRankMutation,
   createNewCountryMutation,
   signUpMutation,
+  createMultipleCandidatesMutation,
   updateSubjectMutation,
+  updateExaminerMutation,
   updateSubjectTypeMutation,
   createCenterExamSessionMutation,
   updateEducationTypeMutation,
   signInCandidate,
   loginUserMutation,
+  updateSignUpMutation,
   signupUserMutation,
-}
+  deleteRegionMutation,
+  updateSubjectGroupMutation,
+  deleteCenterMutation,
+  createNewSubjectGroupMutation,
+  signoutMutation,
+  createAptitudeMutation,
+  enterMarksMutation,
+  deleteReportMutation,
+  requestResetMutation,
+};

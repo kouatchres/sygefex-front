@@ -1,13 +1,14 @@
-import React from 'react';
-import CreateNewExamHook from '../../src/components/exam/CreateNewExamHook';
-import styled from 'styled-components';
-
+import React from "react";
+import CreateNewExamHook from "../../src/components/exam/CreateNewExamHook";
+import GatedSignin from "../../src/components/user/GatedSignin";
 
 const NewExam = () => {
-	return (
-		<div>
-			<CreateNewExamHook />
-		</div>
-	);
+  return (
+    <div>
+      <GatedSignin>
+        <CreateNewExamHook />
+      </GatedSignin>
+    </div>
+  );
 };
 export default NewExam;

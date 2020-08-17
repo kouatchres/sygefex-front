@@ -1,15 +1,16 @@
 import React from "react";
-import { MinimStyledPage } from "../styles/StyledPage";
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import Link from "next/link";
-import { StyledForm, SygefexSelect, ButtonStyled, StyledButton } from '../utils/FormInputs'
-import Error from "../ErrorMessage";
 import { Formik, Form } from 'formik';
 import styled from "styled-components";
+import DeleteRegion from './DeleteRegion'
+import Error from "../ErrorMessage";
 import useForm from '../utils/useForm'
-import DeleteRegion from "../region/DeleteRegion";
 import { getAllRegionsOfACountryQuery, getAllCountrysQuery } from "../queries&Mutations&Functions/Queries";
+import { MinimStyledPage } from "../styles/StyledPage";
 import { removeTypename } from '../queries&Mutations&Functions/Functions'
+import { deleteRegionMutation } from '../queries&Mutations&Functions/Mutations'
+import { StyledForm, SygefexSelect, ButtonStyled, StyledButton } from '../utils/FormInputs'
 
 
 
@@ -38,12 +39,14 @@ min-width:15rem;
 
 
 const Buttons = styled.div`
-
+a{text-decoration:none;}
 display: grid;
-grid-template-columns:1fr;
-grid-auto-flow:column;
-grid-gap:2rem;
+grid-template-columns: 1fr 1fr;
+grid-gap:1rem;
 margin:0 auto;
+padding-left:1rem;
+align-items:center;
+justify-content:center;
 
 `;
 
@@ -82,6 +85,11 @@ const RegionToModifyHook = () => {
     value: item.id, label: item.regName
   }))
   state.regionID && console.log(state.regionID);
+
+  const [deleteRegion] = useMutation(deleteRegionMutation, {
+    variables: { id: state.regionID },
+  })
+
   return (
     <Formik method="POST"    >
       {({ values, isSubmitting }) => (
@@ -98,8 +106,7 @@ const RegionToModifyHook = () => {
                   </InputGroup>
                   <Buttons>
                     <ButtonStyled>
-
-                      <StyledButton type="submit" id={id}>Supprimer</StyledButton>
+                      <DeleteRegion id={state.regionID}>Supprimer</DeleteRegion>
                     </ButtonStyled>
                     <ButtonStyled>
                       <StyledButton type="submit">
@@ -112,13 +119,12 @@ const RegionToModifyHook = () => {
                         </Link>
                       </StyledButton>
                     </ButtonStyled>
-
                   </Buttons>
                 </TwoGroups>
               </AllControls>
             </Form>
           </StyledForm>
-        </MinimStyledPage>
+        </MinimStyledPage >
       )
       }
     </Formik>

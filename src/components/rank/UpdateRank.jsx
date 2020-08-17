@@ -1,94 +1,112 @@
-import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo';
-import Form from '../styles/Form';
-import { StyledPage } from '../styles/StyledPage';
+import React, { useEffect } from 'react';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
+
+import { MiniStyledPage } from '../styles/StyledPage';
 import Error from '../ErrorMessage.js';
-import { singleRankQuery } from '../queries&Mutations&Functions/Queries';
+import { SygexInput, StyledForm, ButtonStyled, StyledButton } from '../utils/FormInputs'
 import { updateRankMutation } from '../queries&Mutations&Functions/Mutations';
+import { singleRankQuery } from '../queries&Mutations&Functions/Queries';
+import useForm from '../utils/useForm';
 
-class UpdateRank extends Component {
-	state = {};
+import styled from 'styled-components'
 
-	handleChange = (e) => {
-		const { name, value, type } = e.target;
-		const val = type === 'number' ? parseFloat(value) : value;
-		this.setState({ [name]: val });
-	};
 
-	updateSingleRank = async (e, updateMutation) => {
-		e.preventDefault();
-		console.log('Updating Rank!!');
-		const res = await updateMutation({
-			variables: {
-				id: this.props.id,
-				...this.state
-			}
-		});
-		console.log('Rank Updated!!');
-	};
+const Controls = styled.div`
+padding:0 2rem;
+`;
+const UpdateGenderHooks = ({ id }) => {
+	const [state, setState] = useForm({ rankCode: '', rankName: '' })
+	const client = useApolloClient()
 
-	render() {
-		return (
-			<Query
-				query={singleRankQuery}
-				variables={{
-					id: this.props.id
-				}}
-			>
-				{({ data, loading, error }) => {
-					const { rank } = data;
-					const { rankName, rankCode } = rank;
-					{
-						loading && <p>Loading...</p>;
-					}
-					{
-						error && <Error error={error} />;
-					}
-					{
-						!rank && <p>No Rank Found for ID {this.props.id}</p>;
-					}
 
-					return (
-						<Mutation mutation={updateRankMutation} variables={{ id: this.props.id }}>
-							{(updateRank, { loading, error }) => (
-								<StyledPage>
-									<Form onSubmit={(e) => this.updateSingleRank(e, updateRank)}>
-										<h4>Modification De Poste</h4>
-										<Error error={error} />
-										<fieldset disabled={loading} aria-busy={loading}>
-											<input
-												type="text"
-												id="rankName"
-												name="rankName"
-												placeholder="Nom Poste"
-												defaultValue={rankName}
-												onChange={this.handleChange}
-												required
-											/>
-											<input
-												type="text"
-												id="rankCode"
-												name="rankCode"
-												placeholder="Code Post"
-												defaultValue={rankCode}
-												onChange={this.handleChange}
-												required
-											/>
-											<div className="submitButton">
-												<button type="submit">
-													Modifi{loading ? 'cation en cours' : 'er'}
-												</button>
-											</div>
-										</fieldset>
-									</Form>
-								</StyledPage>
-							)}
-						</Mutation>
-					);
-				}}
-			</Query>
-		);
+	const loadRankData = async () => {
+		const { data } = await client.query({
+			query: singleRankQuery,
+			variables: { id }
+
+		})
+		const getRankData = data.rank
+		console.log(getRankData)
+		const {
+			rankName,
+			rankCode,
+		} = getRankData
+
+		setState({ rankCode: rankCode, rankName: rankName })
 	}
+	useEffect(() => {
+		loadRankData()
+	}, [])
+
+
+	const validationSchema = Yup.object().shape({
+		rankName: Yup.string().required("Nom du sexe obligatoire"),
+		rankCode: Yup.string().required("Code du sexe  obligatoire"),
+	})
+	const [updateRank] = useMutation(updateRankMutation, {
+		variables: { id }
+	})
+
+	return (
+		<Formik
+			method="POST"
+			initialValues={state || initialValues}
+			enableReinitialize={true}
+			validationSchema={validationSchema}
+			onSubmit={async (values, { resetForm, setSubmitting }) => {
+				const res = await updateRank({
+					variables: {
+						...values,
+						id: id
+					},
+				});
+				// Router.push({
+				// 	pathname: '/show/singleExam',
+				// 	query: { id }
+				// });
+				setTimeout(() => {
+					console.log(JSON.stringify(values, null, 2));
+					console.log(res);
+					resetForm(true);
+					setSubmitting(false);
+				}, 200);
+			}}
+		>
+			{({ values, isSubmitting }) => (
+
+				<MiniStyledPage>
+					<h4>Modification d'info poste d'examinateur</h4>
+					<StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
+						<Form>
+							<Controls>
+								<SygexInput
+									type="text"
+									id="rankName"
+									name="rankName"
+									label="Nom du poste"
+									disabled={isSubmitting}
+								/>
+								<SygexInput
+									type="text"
+									id="rankCode"
+									name="rankCode"
+									label="Code du poste"
+									disabled={isSubmitting}
+								/>
+								<ButtonStyled className="submitButton">
+									<StyledButton type="submit">
+										valid{isSubmitting ? 'ation en cours' : 'er'}
+									</StyledButton>
+								</ButtonStyled>
+							</Controls>
+						</Form>
+					</StyledForm>
+				</MiniStyledPage>
+			)}
+		</Formik>
+	);
 }
 
-export default UpdateRank;
+export default UpdateGenderHooks;

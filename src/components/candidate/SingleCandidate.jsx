@@ -3,26 +3,19 @@ import { Query } from 'react-apollo';
 import Error from '../ErrorMessage';
 import Link from 'next/link';
 import Form from '../styles/Form';
+import { StyledButton, ButtonStyled } from '../utils/FormInputs'
 import { format } from 'date-fns';
 import { MiniStyledPage } from '../styles/StyledPage';
 import styled from 'styled-components';
 import { singleCandidateQuery } from '../queries&Mutations&Functions/Queries';
 
-const UpdateBtn = styled.button`
-	background-color: #379;
-	border-radius: 10px;
-	font-size: .3rem;
-	border: none;
-	outline: none;
-	a {
-		color: white;
-	}
-`;
-
 const DivBtn = styled.div`
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
 	grid-gap: 1rem;
+	/* a{
+	text-decoration:none;	
+	} */
 `;
 
 const ImageInfo = styled.div`
@@ -32,12 +25,7 @@ const ImageInfo = styled.div`
     grid-gap: 1rem;
    
 `;
-// 
-const AllInfo = styled.div`
-	 
-	 display: flex;
-flex-direction:column;   
-`;
+
 
 // 
 const BottomInfo = styled.div`
@@ -50,7 +38,6 @@ const BottomInfo = styled.div`
 `;
 
 const CandImg = styled.div`
-	/* padding-left: 3.5rem; */
 	display: flex;
 	flex-direction: column;
 	margin-bottom: .5rem;
@@ -142,8 +129,8 @@ class SingleCandidate extends Component {
 
 											<p>
 												<strong>Acte Naissance:</strong>
-												<hr />
 											</p>
+											<hr />
 											<p>
 												<strong>No:</strong>
 												<span> {birthCertNumber}</span>
@@ -167,25 +154,32 @@ class SingleCandidate extends Component {
 										</BottomInfo>
 									</ImageInfo>
 									<DivBtn>
-										<UpdateBtn>
-											<Link
-												href={{
-													pathname: '../updates/updateCand',
-													query: { id: this.props.id }
-												}}
-											>
-												<a target="_blank"  >Modifier </a>
-											</Link>
-										</UpdateBtn>
-										<UpdateBtn>
-											<Link
-												href={{
-													pathname: '../creates/newCand'
-												}}
-											>
-												<a target="_blank"  >Candidat Suivant</a>
-											</Link>
-										</UpdateBtn>
+
+
+										<ButtonStyled>
+											<StyledButton>
+												<Link
+													href={{
+														pathname: '../updates/updateCand',
+														query: { id: this.props.id }
+													}}
+												>
+													<a target="_blank"  >Modifier </a>
+												</Link>
+											</StyledButton>
+										</ButtonStyled>
+										<ButtonStyled>
+
+											<StyledButton>
+												<Link
+													href={{
+														pathname: '../creates/newCand'
+													}}
+												>
+													<a target="_blank"  >Candidat Suivant</a>
+												</Link>
+											</StyledButton>
+										</ButtonStyled>
 									</DivBtn>
 
 								</fieldset>

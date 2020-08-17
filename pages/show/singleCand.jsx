@@ -1,10 +1,13 @@
 import React from "react";
-import SingleCandidate from "../../src/components/candidate/SingleCandidate";
+import SingleCandidateHooks from "../../src/components/candidate/SingleCandidateHooks";
+import GatedSignin from "../../src/components/user/GatedSignin";
 
 function singleCand({ query }) {
   return (
     <div>
-      <SingleCandidate id={query.id} />
+      <GatedSignin>
+        <SingleCandidateHooks id={query.id} />
+      </GatedSignin>
     </div>
   );
 }

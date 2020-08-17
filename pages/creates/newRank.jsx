@@ -1,11 +1,14 @@
-import React from 'react';
-import CreateNewRankHook from '../../src/components/rank/CreateNewRankHook';
+import React from "react";
+import CreateNewRankHook from "../../src/components/rank/CreateNewRankHook";
+import GatedSignin from "../../src/components/user/GatedSignin";
 
 const newRank = () => {
-	return (
-		<div>
-			<CreateNewRankHook />
-		</div>
-	);
+  return (
+    <div>
+      <GatedSignin>
+        <CreateNewRankHook />
+      </GatedSignin>
+    </div>
+  );
 };
 export default newRank;

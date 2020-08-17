@@ -1,89 +1,104 @@
-import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo';
-import Form from '../styles/Form';
-import { StyledPage } from '../styles/StyledPage';
+import React, { useEffect } from 'react';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
+
+import { MiniStyledPage } from '../styles/StyledPage';
 import Error from '../ErrorMessage.js';
-import { singleTownQuery } from '../queries&Mutations&Functions/Queries';
+import { SygexInput, StyledForm, ButtonStyled, StyledButton } from '../utils/FormInputs'
 import { updateTownMutation } from '../queries&Mutations&Functions/Mutations';
+import { singleTownQuery } from '../queries&Mutations&Functions/Queries';
+import useForm from '../utils/useForm';
 
-class UpdateTown extends Component {
-	state = {};
+const UpdateTown = ({ id }) => {
+	const [state, setState] = useForm({ townCode: '', townName: '' })
+	const client = useApolloClient()
 
-	handleChange = (e) => {
-		const { name, value, type } = e.target;
-		const val = type === 'number' ? parseFloat(value) : value;
-		this.setState({ [name]: val });
-	};
-	updateItemMutation = async (e, updateMutation) => {
-		e.preventDefault();
-		console.log('Updating Region!!');
-		const res = await updateMutation({
-			variables: {
-				id: this.props.id,
-				...this.state
-			}
-		});
-		console.log('Region Updated!!');
-	};
 
-	render() {
-		return (
-			<Query query={singleTownQuery} variables={{ id: this.props.id }}>
-				{({ data, loading, error }) => {
-					console.log(data);
-					const { town } = data;
-					const { townName, townCode } = town;
-					{
-						loading && <p>Loading...</p>;
-					}
-					{
-						error && <Error error={error} />;
-					}
-					{
-						!data.town && <p>No Town of ID {this.props.id}</p>;
-					}
+	const loadTownData = async () => {
+		const { data } = await client.query({
+			query: singleTownQuery,
+			variables: { id }
 
-					return (
-						<Mutation mutation={updateTownMutation} variables={{ id: this.props.id }}>
-							{(updateTown, { loading, error }) => (
-								<StyledPage>
-									<Form onSubmit={(e) => this.updateItemMutation(e, updateTown)}>
-										<h4>Modification Info d'une Ville</h4>
-										<Error error={error} />
-										<fieldset disabled={loading} aria-busy={loading}>
-											<input
-												type="text"
-												id="townName"
-												name="townName"
-												placeholder="Nom Ville"
-												defaultValue={townName}
-												onChange={this.handleChange}
-												required
-											/>
-											<input
-												type="text"
-												id="townCode"
-												name="townCode"
-												placeholder="Code Ville"
-												defaultValue={townCode}
-												onChange={this.handleChange}
-												required
-											/>
-											<div className="submitButton">
-												<button type="submit">
-													Modifi{loading ? 'cation en cours' : 'er'}
-												</button>
-											</div>
-										</fieldset>
-									</Form>
-								</StyledPage>
-							)}
-						</Mutation>
-					);
-				}}
-			</Query>
-		);
+		})
+		const getTownData = data.town
+		console.log(getTownData)
+		const {
+			townName,
+			townCode,
+		} = getTownData
+
+		setState({ townCode: townCode, townName: townName })
 	}
+	useEffect(() => {
+		loadTownData()
+	}, [])
+
+
+	const validationSchema = Yup.object().shape({
+		townName: Yup.string().required("Nom de la ville obligatoire"),
+		townCode: Yup.string().required("Code de la ville  obligatoire"),
+	})
+	const [updateTown] = useMutation(updateTownMutation, {
+		variables: { id }
+	})
+
+	return (
+		<Formik
+			method="POST"
+			initialValues={state || initialValues}
+			enableReinitialize={true}
+			validationSchema={validationSchema}
+			onSubmit={async (values, { resetForm, setSubmitting }) => {
+				const res = await updateTown({
+					variables: {
+						...values,
+						id: id
+					},
+				});
+				// Router.push({
+				// 	pathname: '/show/singleExam',
+				// 	query: { id }
+				// });
+				setTimeout(() => {
+					console.log(JSON.stringify(values, null, 2));
+					console.log(res);
+					resetForm(true);
+					setSubmitting(false);
+				}, 200);
+			}}
+		>
+			{({ values, isSubmitting }) => (
+
+				<MiniStyledPage>
+					<h4>Modification d'info de ville</h4>
+					<StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
+						<Form>
+							<SygexInput
+								type="text"
+								id="townName"
+								name="townName"
+								label="Nom de la ville"
+								disabled={isSubmitting}
+							/>
+							<SygexInput
+								type="text"
+								id="townCode"
+								name="townCode"
+								label="Code de la ville"
+								disabled={isSubmitting}
+							/>
+							<ButtonStyled className="submitButton">
+								<StyledButton type="submit">
+									valid{isSubmitting ? 'ation en cours' : 'er'}
+								</StyledButton>
+							</ButtonStyled>
+						</Form>
+					</StyledForm>
+				</MiniStyledPage>
+			)}
+		</Formik>
+	);
 }
 
 export default UpdateTown;

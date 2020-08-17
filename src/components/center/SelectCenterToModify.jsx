@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Query } from 'react-apollo';
 import Form from '../styles/Form';
-import { StyledPage } from '../styles/StyledPage';
+import { MiniStyledPage } from '../styles/StyledPage';
 import Link from 'next/link';
+import { Formik, Form } from 'formik'
+import { StyledButton, ButtonStyled } from '../utils/FormInputs'
 import Error from '../ErrorMessage';
 import styled from 'styled-components';
 import DeleteCenter from './DeleteCenter';
@@ -11,7 +13,7 @@ import { getSingleCenterQuery } from '../queries&Mutations&Functions/Queries';
 const ButtonBlock = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 6fr;
-	grid-gap: 2rem;
+	grid-gap: 1rem;
 `;
 const DeleteBlock = styled.div`align-content: left;`;
 const UpdateBlock = styled.button`
@@ -32,7 +34,7 @@ const UpdateBlock = styled.button`
 	}
 `;
 
-class SelectCenterToModify extends Component {
+const SelectCenterToModify = () => {
 	state = {
 		regionID: '125',
 		divisionID: '125',
@@ -48,65 +50,59 @@ class SelectCenterToModify extends Component {
 		this.setState({ [name]: val });
 	};
 
-	render() {
-		// make theses variables available in the render method
-		const { id } = this.state;
+	// make theses variables available in the render method
+	const { id } = this.state;
 
-		return (
-			<Query query={getSingleCenterQuery}
-				variables={{ centerNumber: centerNumber, }}>
-				{({ data, error, loading }) => {
-					{ loading && <p>...Loading</p> }
-					{ error && <Error error={error} /> }
-					const { centerByNumber } = { ...data }
-					centerByNumber && delete centerByNumber.__typename
-					console.log(centerByNumber)
+	return (
+		<Query query={getSingleCenterQuery}
+			variables={{ centerNumber: centerNumber, }}>
+			{({ data, error, loading }) => {
+				{ loading && <p>...Loading</p> }
+				{ error && <Error error={error} /> }
+				const { centerByNumber } = { ...data }
+				centerByNumber && delete centerByNumber.__typename
+				console.log(centerByNumber)
 
-					return (
-						<StyledPage>
-							<Form
-								onSubmit={async (e) => {
-									e.preventDefault();
-									const res = await updateCenter();
-									console.log(res);
+				return (
+					<MiniStyledPage>
+						<Form
+							onSubmit={async (e) => {
+								e.preventDefault();
+								const res = await updateCenter();
+								console.log(res);
 
-								}}
+							}}
+						>
+							<h4>Modification d'un Centre D'Examen</h4>
+							<Error error={error} />
+							<fieldset
+								disabled={loading}
+								aria-busy={loading}
 							>
-								<h4>
-									Modification d'un Centre D'Examen
-																				</h4>
-								<Error error={error} />
-								<fieldset
-									disabled={loading}
-									aria-busy={loading}
-								>
-									<ButtonBlock>
-										<UpdateBlock>
-											<Link
-												href={{
-													pathname: '../updates/updateCenter',
-													query: { id }
-												}}
-											>
-												<a>Valider</a>
-											</Link>
-										</UpdateBlock>
-										<DeleteBlock>
-											<DeleteCenter
-												id={this.state.id}
-											>
-												Delete
+								<ButtonBlock>
+									<UpdateBlock>
+										<Link
+											href={{
+												pathname: '../updates/updateCenter',
+												query: { id: state.id }
+											}}
+										>
+											<a>Valider</a>
+										</Link>
+									</UpdateBlock>
+									<DeleteBlock>
+										<DeleteCenter id={state.id} >
+											Delete
                                        </DeleteCenter>
-										</DeleteBlock>
-									</ButtonBlock>
-								</fieldset>
-							</Form>
-						</StyledPage>
-					);
-				}}
-			</Query>
+									</DeleteBlock>
+								</ButtonBlock>
+							</fieldset>
+						</Form>
+					</MiniStyledPage>
+				);
+			}}
+		</Query>
 
-		);
-	}
+	);
 }
 export default SelectCenterToModify;

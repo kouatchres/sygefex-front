@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import { Query } from 'react-apollo';
+import React, { useState, useEffect } from 'react';
 import Error from '../ErrorMessage';
 import Link from 'next/link';
+import { StyledButton, ButtonStyled } from '../utils/FormInputs'
+import useForm from '../utils/useForm  '
 import Form from '../styles/Form';
 import { MiniStyledPage } from '../styles/StyledPage';
 import styled from 'styled-components';
 import { singleExaminerQuery } from '../queries&Mutations&Functions/Queries';
+import { useApolloClient } from '@apollo/react-hooks';
 
 const UpdateBtn = styled.button`
 
@@ -45,15 +47,10 @@ display:grid;
 grid-template-columns: repeat(auto-fit, minmax(13rem,1fr));
 grid-gap	:0.6rem;
 	text-align:left;
-	/* padding: .5px;
-	margin: .5rem auto;
-    font-size: 1.6rem;
-    line-height: 0.3rem; */
-  
+
 `;
 
 const ExaminerImg = styled.div`
-	/* padding-left: 3.5rem; */
 	display: flex;
 	flex-direction: column;
 	margin-bottom: .5rem;
@@ -68,104 +65,135 @@ const ExaminerImg = styled.div`
 	}
 `;
 
-class SingleExaminer extends Component {
-	render() {
-		return (
-			<Query query={singleExaminerQuery} variables={{ id: this.props.id }}>
-				{({ data, loading, error }) => {
-					const { examiner } = data;
-					const {
-						examiner1stName,
-						examiner2ndName,
-						examinerOtherNames,
-						examinerCode,
-						examinerEmail,
-						examinerCNI,
-						examinerImage,
-						examinerPhone,
-						examinerMatricule
-					} = examiner;
-					{
-						loading && <p>Loading...</p>;
-					}
-					{
-						error && <Error error={error} />;
-					}
-					return (
-						<MiniStyledPage>
-							<Form>
-								<h4>Info Examinateur</h4>
-								<fieldset>
-									<BottomInfo>
-										<ExaminerInfo>
-											<GenInfo>
-												<p>
-													<strong>Nom:</strong> <span>{examiner1stName}</span>
-												</p>
-												<p>
-													<strong>Prenoms: </strong>
-													<span> {examiner2ndName}</span>
-												</p>
-												<p>
-													<strong>Autres Noms:</strong>
-													<span> {examinerOtherNames}</span>
-												</p>
-												<p>
-													<strong>Matricule:</strong>
-													<span> {examinerMatricule}</span>
-												</p>
+const SingleExaminer = (props) => {
+	const [state, setState] = useForm({})
+	const client = useApolloClient()
 
-												<p>
-													<strong>Tel: </strong> <span>{examinerPhone}</span>
-												</p>
+	const loadingExaminerData = async () => {
+		const { data, error, loading } = await client.query({
+			query: singleExaminerQuery,
+			variables: { id: props.id }
+		})
 
-												<p>
-													<strong>Email:</strong>
-													<span> {examinerEmail}</span>
-												</p>
-												<p>
-													<strong>CNI:</strong>
-													<span> {examinerCNI}</span>
-												</p>
-
-												<p>
-													<strong>Code:</strong> <span> {examinerCode}</span>
-												</p>
-											</GenInfo>
-											<ExaminerImg>
-												<div>{examinerImage && <img src={examinerImage} alt={examinerEmail} />}</div>
-											</ExaminerImg>
-										</ExaminerInfo>
-										<DivBtn>
-											<UpdateBtn>
-												<Link
-													href={{
-														pathname: '../updates/updateExaminer',
-														query: { id: this.props.id }
-													}}
-												>
-													<a target="_blank" >Modifier </a>
-												</Link>
-											</UpdateBtn>
-											<UpdateBtn>
-												<Link
-													href={{
-														pathname: '../creates/newExaminer'
-													}}
-												>
-													<a target="_blank" >Nouveau Examinateur</a>
-												</Link>
-											</UpdateBtn>
-										</DivBtn>
-									</BottomInfo>
-								</fieldset>
-							</Form>
-						</MiniStyledPage>
-					);
-				}}
-			</Query>
-		);
+		const { examiner } = data;
+		const {
+			examiner1stName,
+			examiner2ndName,
+			examinerOtherNames,
+			examinerCode,
+			examinerEmail,
+			examinerCNI,
+			examinerImage,
+			examinerPhone,
+			examinerMatricule,
+			gender,
+		} = examiner;
+		setState({
+			examiner1stName: examiner1stName,
+			examiner2ndName: examiner2ndName,
+			examinerOtherNames: examinerOtherNames,
+			examinerCode: examinerCode,
+			examinerEmail: examinerEmail,
+			examinerCNI: examinerCNI,
+			examinerImage: examinerImage,
+			examinerPhone: examinerPhone,
+			examinerMatricule: examinerMatricule,
+			gender: gender,
+		})
 	}
+
+	useEffect(() => {
+		loadingExaminerData()
+	}, [])
+
+	const {
+		examiner1stName,
+		examiner2ndName,
+		examinerOtherNames,
+		examinerCode,
+		examinerEmail,
+		examinerCNI,
+		examinerImage,
+		examinerPhone,
+		examinerMatricule,
+		gender,
+	} = state
+	return (
+		<MiniStyledPage >
+			<Form>
+				<h4>Info Examinateur</h4>
+				<fieldset>
+					<BottomInfo>
+						<ExaminerInfo>
+							<GenInfo>
+								<p>
+									<strong>Nom:</strong> <span>{examiner1stName}</span>
+								</p>
+								<p>
+									<strong>Prenoms: </strong>
+									<span> {examiner2ndName}</span>
+								</p>
+								<p>
+									<strong>Autres Noms:</strong>
+									<span> {examinerOtherNames}</span>
+								</p>
+								<p>
+									<strong>Matricule:</strong>
+									<span> {examinerMatricule}</span>
+								</p>
+
+								<p>
+									<strong>Tel: </strong> <span>{examinerPhone}</span>
+								</p>
+
+								<p>
+									<strong>Email:</strong>
+									<span> {examinerEmail}</span>
+								</p>
+								<p>
+									<strong>CNI:</strong>
+									<span> {examinerCNI}</span>
+								</p>
+
+								<p>
+									<strong>Code:</strong> <span> {examinerCode}</span>
+								</p>
+							</GenInfo>
+							<ExaminerImg>
+								<div>{examinerImage && <img src={examinerImage} alt={examinerEmail} />}</div>
+							</ExaminerImg>
+						</ExaminerInfo>
+						<DivBtn>
+							<ButtonStyled>
+								<StyledButton>
+									<Link
+										href={{
+											pathname: '../updates/updateExaminer',
+											query: { id: props.id }
+										}}
+									>
+										<a target="_blank" >Modifier </a>
+									</Link>
+								</StyledButton>
+							</ButtonStyled>
+							<ButtonStyled>
+								<StyledButton>
+									<Link
+										href={{
+											pathname: '../creates/newExaminer'
+										}}
+									>
+										<a target="_blank" >Nouveau Examinateur</a>
+									</Link>
+								</StyledButton>
+							</ButtonStyled>
+						</DivBtn>
+					</BottomInfo>
+				</fieldset>
+			</Form>
+		</MiniStyledPage >
+
+	);
 }
 
 export default SingleExaminer;
