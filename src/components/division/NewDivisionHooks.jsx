@@ -82,7 +82,10 @@ const NewDivisionHooks = () => {
           <MinimStyledPage>
             <h4>Nouveau Département</h4>
             <Error error={error} />
-            <StyledForm disabled={loading} aria-busy={loading}>
+            <StyledForm
+              disabled={loading || loadingReg}
+              aria-busy={loading || loadingReg}
+            >
               <Form>
                 <AllControls>
                   <InputGroup>

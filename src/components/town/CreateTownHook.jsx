@@ -1,5 +1,5 @@
-import { Formik, Form } from "formik";
 import React from "react";
+import { Formik, Form } from "formik";
 import styled from "styled-components";
 import * as Yup from "yup";
 import { getObjectFromID } from "../queries&Mutations&Functions/Functions";
@@ -16,6 +16,7 @@ import {
   StyledForm,
   ButtonStyled,
   StyledButton,
+  SygefexRadio,
 } from "../utils/FormInputs";
 import useForm from "../utils/useForm";
 import Error from "../ErrorMessage.js";
@@ -43,6 +44,7 @@ const CreateTownHook = () => {
     townName: "",
     townCode: "",
     subDiv: "",
+    choiceOption: "",
   };
   const [state, setState, handleReactSelectChange] = useForm({
     regionID: "",
@@ -114,6 +116,13 @@ const CreateTownHook = () => {
   const [createTown, { loading, error }] = useMutation(createTownMutation, {
     refetchQueries: ["getAllTownsQuery"],
   });
+
+  const makeChoice = [
+    { key: "Group 1", value: "group1" },
+    { key: "Group 2", value: "group2" },
+    { key: "Group 3", value: "group3" },
+  ];
+
   return (
     <Formik
       method="POST"
@@ -140,12 +149,8 @@ const CreateTownHook = () => {
             <h4>Nouvelle Ville</h4>
             <Error error={error} />
             <StyledForm
-              disabled={
-                isSubmitting || loadingRegion || loading || loadingSubDiv
-              }
-              aria-busy={
-                isSubmitting || loadingRegion || loading || loadingSubDiv
-              }
+              disabled={isSubmitting || loadingReg || loading || loadingSubDiv}
+              aria-busy={isSubmitting || loadingReg || loading || loadingSubDiv}
             >
               <Form>
                 <AllControls>

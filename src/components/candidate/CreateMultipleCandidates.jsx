@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import React from "react";
+import { useMutation } from "@apollo/react-hooks";
 import { MiniStyledPage } from "../styles/StyledPage";
 import Error from "../ErrorMessage.js";
 import { Formik, Form } from "formik";
@@ -7,32 +7,58 @@ import Router from "next/router";
 import useForm from "../utils/useForm";
 import styled from "styled-components";
 import * as Yup from "yup";
-import { getAllGendersQuery } from "../queries&Mutations&Functions/Queries";
 import { createMultipleCandidatesMutation } from "../queries&Mutations&Functions/Mutations";
 import {
-  SygefexSelect,
   SygexInput,
   StyledForm,
   ButtonStyled,
   StyledButton,
 } from "../utils/FormInputs";
+import { uniqueCodeGen } from "../queries&Mutations&Functions/Functions";
 import {
-  uniqueCodeGen,
-  getObjectFromID,
-} from "../queries&Mutations&Functions/Functions";
+  FormikTextField,
+  FormikDatepicker,
+  FormikSelect,
+  FormikRadio,
+} from "@dccs/react-formik-mui";
+import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 const PicFrame = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
   img {
+    margin: 1rem auto;
     margin-top: 1rem;
-    margin-left: 5rem;
     height: 15rem;
     width: 15rem;
     border-radius: 15px;
     background-size: contain;
     background-position: center;
+  }
+`;
+
+const RadioButtons = styled.div`
+  display: flex;
+  padding: 0 0.5rem;
+  label {
+    font-size: 1.3rem;
+  }
+
+  flex-direction: row;
+  align-items: center;
+  .RadioSet {
+    FormikRadio {
+      font-size: 1.5rem;
+    }
+    padding: 0 1rem;
+
+    display: flex;
+    flex-direction: row;
+    label {
+      font-size: 1.3rem;
+    }
   }
 `;
 
@@ -48,6 +74,7 @@ const TwoGroups = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
 `;
 const AllControls = styled.div`
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   min-width: 15rem;
@@ -117,25 +144,6 @@ const CreateMultipleCandidates = () => {
     setPhoto({ image: file.secure_url });
   };
 
-  const getGenderObject = (genderID) => {
-    const genderObj = {
-      id: genderID,
-    };
-    return genderObj;
-  };
-
-  const { data, loading, error: errGender } = useQuery(getAllGendersQuery);
-  {
-    loading && <p>Loading...</p>;
-  }
-  {
-    errGender && <Error error={errGender} />;
-  }
-  const getGenders = data && data.genders;
-  console.log(getGenders);
-  const getGenderOptions =
-    getGenders &&
-    getGenders.map((item) => ({ value: item.id, label: item.genderName }));
   console.log(photo.image);
   const [createMultipleCandidates, { error }] = useMutation(
     createMultipleCandidatesMutation
@@ -151,7 +159,6 @@ const CreateMultipleCandidates = () => {
           variables: {
             ...values,
             image: photo.image,
-            gender: getObjectFromID(values.gender.value),
             candCode: uniqueCodeGen(12),
           },
         });
@@ -173,7 +180,10 @@ const CreateMultipleCandidates = () => {
         <MiniStyledPage>
           <h4>Renseignement info Candidat</h4>
           <Error error={error} />
-          <StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
+          <StyledForm
+            disabled={isSubmitting}
+            aria-busy={isSubmitting || uploadFile}
+          >
             <Form>
               <AllControls>
                 <TwoGroups>
@@ -184,14 +194,7 @@ const CreateMultipleCandidates = () => {
                       onChange={uploadFile}
                       disabled={isSubmitting}
                     />
-                    <SygefexSelect
-                      name="gender"
-                      onChange={(value) => setFieldValue("gender", value)}
-                      disabled={isSubmitting}
-                      options={getGenderOptions}
-                      disabled={isSubmitting}
-                      placeholder="Sexe du candidat"
-                    />
+
                     <SygexInput
                       name="cand1stName"
                       type="text"
@@ -228,11 +231,9 @@ const CreateMultipleCandidates = () => {
                       label="Noms de la mere"
                       disabled={isSubmitting}
                     />
-                  </InputGroup>
-                  <InputGroup>
                     <SygexInput
                       name="dateOfBirth"
-                      format="d MMM yyyy"
+                      format="d MMMM, YYYY"
                       type="date"
                       label="Date de Naissance"
                       disabled={isSubmitting}
@@ -243,6 +244,8 @@ const CreateMultipleCandidates = () => {
                       label="Numéro acte de Naissance"
                       disabled={isSubmitting}
                     />
+                  </InputGroup>
+                  <InputGroup>
                     <SygexInput
                       name="phoneNumb"
                       type="number"
@@ -255,6 +258,18 @@ const CreateMultipleCandidates = () => {
                       label="Email"
                       disabled={isSubmitting}
                     />
+                    <RadioButtons>
+                      <FormLabel>Sexe</FormLabel>
+                      <RadioGroup name="gender" className="RadioSet">
+                        <FormikRadio
+                          label="Femele"
+                          name="gender"
+                          value="Femele"
+                          defaultChecked
+                        />
+                        <FormikRadio label="Male" name="gender" value="Male" />
+                      </RadioGroup>
+                    </RadioButtons>
                     <PicFrame>
                       {photo.image && (
                         <img

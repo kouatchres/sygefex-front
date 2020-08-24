@@ -202,16 +202,7 @@ const MegaMenu = () => (
                     <a>Modifier Region</a>
                   </Link>
                 </ul>
-                <ul>
-                  <h3 className="menu-category">Aptitude Sportive</h3>
-                  <hr />
-                  <Link href="/creates/newAptitude">
-                    <a>Nouvelle Aptitude</a>
-                  </Link>
-                  <Link href="/modify/modifyAptitude">
-                    <a>Modifier Aptitude</a>
-                  </Link>
-                </ul>
+
                 <ul>
                   <h3 className="menu-category">Departement</h3>
                   <hr />
@@ -243,25 +234,16 @@ const MegaMenu = () => (
                   </Link>
                 </ul>
                 <ul>
-                  <h3 className="menu-category">Nouvelle Spécialité</h3>
+                  <h3 className="menu-category">Nouveau Centre</h3>
                   <hr />
-                  <Link href="/creates/newSpecialty">
-                    <a>Inscrire Spécialité</a>
+                  <Link href="/creates/newCenter">
+                    <a>Inscrire Centre D'examen'</a>
                   </Link>
-                  <Link href="/modify/modifySpecialty">
-                    <a>Modifier Spécialité</a>
+                  <Link href="/modify/modifyCenter">
+                    <a>Modifier Centre</a>
                   </Link>
                 </ul>
-                <ul>
-                  <h3 className="menu-category">Groupe des matieres</h3>
-                  <hr />
-                  <Link href="/creates/newSubjectGroup">
-                    <a>Nouveau Groupe</a>
-                  </Link>
-                  <Link href="/modify/modifySubjectGroup">
-                    <a>Modifier Groupe</a>
-                  </Link>
-                </ul>
+
                 <ul>
                   <h3 className="menu-category">Notes</h3>
                   <hr />
@@ -272,29 +254,9 @@ const MegaMenu = () => (
                     <a>Modifier Notes</a>
                   </Link>
                 </ul>
-                <ul>
-                  <h3 className="menu-category">Formik Forms</h3>
-                  <hr />
-                  <Link href="/show/formikForms/showFormikForms">
-                    <a>New Registration</a>
-                  </Link>
-                  <Link href="/modify/modifySubjectType">
-                    <a>Modifier Type Matière</a>
-                  </Link>
-                </ul>
               </div>
 
               <div className="menu-col-2">
-                <ul>
-                  <h3 className="menu-category">Type De Matière</h3>
-                  <hr />
-                  <Link href="/creates/newSubjectType">
-                    <a> Nouveau Type Matière</a>
-                  </Link>
-                  <Link href="/modify/modifySubjectType">
-                    <a>Modifier Type Matière</a>
-                  </Link>
-                </ul>
                 <ul>
                   <h3 className="menu-category">Spécialité par Matière</h3>
                   <hr />
@@ -359,12 +321,7 @@ const MegaMenu = () => (
                   <Link href="/show/lists/subjPerSpecialty">
                     <a>Matieres par Spécialité</a>
                   </Link>
-                  <Link href="/show/lists/subjPerSpecialty">
-                    <a>Matieres par Spécialité</a>
-                  </Link>
-                  <Link href="/show/lists/subjPerSpecialty">
-                    <a>Matieres par Spécialité</a>
-                  </Link>
+
                   <hr />
                 </ul>
               </div>
@@ -372,23 +329,14 @@ const MegaMenu = () => (
                 <ul>
                   <h3 className="menu-category">Utilisateur</h3>
                   <hr />
-                  <Link href="/creates/newUser">
+                  <Link href="/creates/signup">
                     <a>Nouveau Utilisateur</a>
                   </Link>
                   <Link href="/modify/modifyUser">
                     <a>Modifier Utilisateur</a>
                   </Link>
                 </ul>
-                <ul>
-                  <h3 className="menu-category">Centre</h3>
-                  <hr />
-                  <Link href="/creates/newCenter">
-                    <a>Nouveau Centre</a>
-                  </Link>
-                  <Link href="/modify/modifyCenter">
-                    <a>Modifier Centre</a>
-                  </Link>
-                </ul>
+
                 <ul>
                   <h3 className="menu-category">Session</h3>
                   <hr />
@@ -399,16 +347,7 @@ const MegaMenu = () => (
                     <a>Modifier Session</a>
                   </Link>
                 </ul>
-                <ul>
-                  <h3 className="menu-category">Spécialité</h3>
-                  <hr />
-                  <Link href="/creates/newSpecialty">
-                    <a>Nouvelle Spécialité</a>
-                  </Link>
-                  <Link href="/modify/modifySpecialty">
-                    <a>Modifier Spécialité</a>
-                  </Link>
-                </ul>
+
                 <ul>
                   <h3 className="menu-category">Rapports</h3>
                   <hr />
@@ -433,32 +372,12 @@ const MegaMenu = () => (
                     <a>Resultats Du Candidat</a>
                   </Link>
                 </ul>
-                <ul>
-                  <h3 className="menu-category">Pays</h3>
-                  <hr />
-                  <Link href="/creates/newCountry">
-                    <a>Nouveau pays</a>
-                  </Link>
-                  <Link href="/show/results">
-                    <a>Modify counr</a>
-                  </Link>
-                </ul>
               </div>
               <div className="menu-col-4">
                 <ul>
-                  <h3 className="menu-category">Sexe</h3>
-                  <hr />
-                  <Link href="/creates/newGender">
-                    <a>nouveau Sexe</a>
-                  </Link>
-                  <Link href="/modify/modifyGender">
-                    <a>Modifier Sexe</a>
-                  </Link>
-                </ul>
-                <ul>
                   <h3 className="menu-category">Candidat</h3>
                   <hr />
-                  <Link href="/creates/newCand">
+                  <Link href="/creates/newGroupCand">
                     <a>nouveau Candidat</a>
                   </Link>
                   <Link href="/show/candidatePage">
@@ -505,6 +424,10 @@ const MegaMenu = () => (
                   <h3 className="menu-category">Phase de l'Examen</h3>
                   <hr />
                   <Link href="/creates/newPhase">
+                    <a>Nouvelle Phase de l'Examen </a>
+                  </Link>
+                  <hr />
+                  <Link href="/modify/modifyPhase">
                     <a>Nouvelle Phase de l'Examen </a>
                   </Link>
                 </ul>
@@ -576,7 +499,7 @@ const MegaMenu = () => (
                 <ul>
                   <h3 className="menu-category">Utilisateur</h3>
                   <hr />
-                  <Link href="/creates/newUser">
+                  <Link href="/creates/signup">
                     <a>Nouveau Utilisateur</a>
                   </Link>
                   <Link href="/modify/modifyUser">
@@ -600,7 +523,7 @@ const MegaMenu = () => (
                 <ul>
                   <h3 className="menu-category">Candidat</h3>
                   <hr />
-                  <Link href="/creates/newCand">
+                  <Link href="/creates/newGroupCand">
                     <a>nouveau Candidat</a>
                   </Link>
                   <Link href="/show/candidatePage">
@@ -712,12 +635,7 @@ const MegaMenu = () => (
                   <Link href="/show/lists/subjPerSpecialty">
                     <a>Matieres par Spécialité</a>
                   </Link>
-                  <Link href="/show/lists/subjPerSpecialty">
-                    <a>Matieres par Spécialité</a>
-                  </Link>
-                  <Link href="/show/lists/subjPerSpecialty">
-                    <a>Matieres par Spécialité</a>
-                  </Link>
+
                   <hr />
                 </ul>
               </div>
@@ -725,7 +643,7 @@ const MegaMenu = () => (
                 <ul>
                   <h3 className="menu-category">Utilisateur</h3>
                   <hr />
-                  <Link href="/creates/newUser">
+                  <Link href="/creates/signup">
                     <a>Nouveau Utilisateur</a>
                   </Link>
                   <Link href="/modify/modifyUser">
@@ -748,7 +666,7 @@ const MegaMenu = () => (
                 </ul>
 
                 <ul>
-                  <h3 className="menu-category">Candidat</h3>
+                  <h3 className="menu-category">Candidat Solo</h3>
                   <hr />
                   <Link href="/creates/newCand">
                     <a>Nouveau Candidat</a>

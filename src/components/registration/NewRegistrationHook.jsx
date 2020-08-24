@@ -24,12 +24,20 @@ import { createRegistrationMutation } from "../queries&Mutations&Functions/Mutat
 import {
   getExamSessionQuery,
   getAllExamsQuery,
-  getAllAptitudesQuery,
   getAllSessionsQuery,
   getSingleCenterExamSessionQuery,
   getAllSpecialtiesOfACenterExamSessionQuery,
   getSingleCenterQuery,
 } from "../queries&Mutations&Functions/Queries";
+import {
+  FormikTextField,
+  FormikDatepicker,
+  FormikSelect,
+  FormikRadio,
+} from "@dccs/react-formik-mui";
+import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
 
 const InputGroup = styled.div`
   display: flex;
@@ -43,9 +51,33 @@ const AllControls = styled.div`
   /* min-width: 17rem; */
 `;
 
+const RadioButtons = styled.div`
+  display: flex;
+  label {
+    font-size: 1.3rem;
+  }
+ 
+  flex-direction: row;
+  align-items: center;
+  /* background: ${(props) => props.theme.blues[3]}; */
+  .RadioSet {
+    FormikRadio{
+        font-size:1.5rem
+    }
+    padding: 0 1rem;
+
+    display: flex;
+    flex-direction: row;
+    label {
+    font-size: 1.3rem;
+  }
+  }
+`;
+
 const validationSchema = Yup.object().shape({
   // specialty: Yup.string().required("Choix de la Séries Obligatoire"),
   candCode: Yup.string().required("Choix De l'examen Obligatoire"),
+  aptitude: Yup.string().required("Choix du l'aptitude a l'EPS Obligatoire"),
   // centerNumber: Yup.number().required("Numéro du centre obligatoire"),
 });
 
@@ -59,6 +91,8 @@ const NewRegistrationHook = () => {
     centerNumber: "",
     examID: "",
     sessionID: "",
+    group1: [],
+    group2: [],
   });
 
   const handleChange = (e) => {
@@ -104,29 +138,6 @@ const NewRegistrationHook = () => {
     getExams &&
     getExams.map((item) => ({ value: item.id, label: item.examName }));
   console.log(getExamName);
-
-  const {
-    data: dataAptitudes,
-    loading: loadingAptitudes,
-    error: errAptitudes,
-  } = useQuery(getAllAptitudesQuery);
-  {
-    loadingAptitudes && <p>loading...</p>;
-  }
-  {
-    errAptitudes && <Error error={errAptitudes} />;
-  }
-  const getAptitudes = dataAptitudes && dataAptitudes.aptitudes;
-  // const removeAptitudeName =
-  //   getAptitudes && getAptitudes.map(({ examName, ...others }) => others);
-  // const refinedAptitudes = getAptitudes && removeTypename(removeAptitudeName);
-
-  // const getAptitudeName = refinedAptitudes && {
-  //   ...getSelectedObject(refinedAptitudes, state.examID),
-  // };
-  const getAptitiudesOptions =
-    getAptitudes &&
-    getAptitudes.map((item) => ({ value: item.id, label: item.aptitudeName }));
 
   const {
     data: dataSession,
@@ -258,6 +269,11 @@ const NewRegistrationHook = () => {
   const [createRegistration, { loading, error }] = useMutation(
     createRegistrationMutation
   );
+  const AptitudeChoice = [
+    { value: "A", key: "Apte" },
+    { value: "I", key: "Inapte" },
+  ];
+  const { group1, group2 } = state;
   return (
     <Formik
       method="POST"
@@ -275,6 +291,7 @@ const NewRegistrationHook = () => {
             centerExamSessionSpecialty: {
               id: values.centerExamSessionSpecialty.value,
             },
+            optionalSubjects: [...state.group1, ...state.group2],
             candExamSession: candExamSessionCode(
               values.candCode,
               state.examID,
@@ -307,7 +324,17 @@ const NewRegistrationHook = () => {
         return (
           <MinimStyledPage>
             <h4>Inscription à un Examen</h4>
-            <Error error={error} />
+            <Error
+              error={
+                error ||
+                errCenter ||
+                errExam ||
+                errSession ||
+                errExamSession ||
+                errSpecialtyCES
+              }
+            />
+
             <StyledForm
               disabled={
                 isSubmitting ||
@@ -316,8 +343,7 @@ const NewRegistrationHook = () => {
                 loadingCES ||
                 loadingExamSession ||
                 loading ||
-                loadingSpecialtyCES ||
-                loadingAptitudes
+                loadingSpecialtyCES
               }
               aria-busy={
                 isSubmitting ||
@@ -326,8 +352,7 @@ const NewRegistrationHook = () => {
                 loadingCES ||
                 loadingExamSession ||
                 loading ||
-                loadingSpecialtyCES ||
-                loadingAptitudes
+                loadingSpecialtyCES
               }
             >
               <Form>
@@ -371,11 +396,23 @@ const NewRegistrationHook = () => {
                       placeholder={"La Spécialité"}
                       disabled={isSubmitting}
                     />
+                    <RadioButtons>
+                      <FormLabel>Aptitude</FormLabel>
+                      <RadioGroup name="aptitude" className="RadioSet">
+                        <FormikRadio label="Apte" name="aptitude" value="A" />
+                        <FormikRadio label="Inapte" name="aptitude" value="I" />
+                      </RadioGroup>
+                    </RadioButtons>
                     <SygefexSelect
-                      onChange={(value) => setFieldValue("aptitude", value)}
-                      name="aptitude"
-                      options={getAptitiudesOptions}
-                      placeholder={"Aptitude a l'EPS"}
+                      onChange={handleReactSelectChange}
+                      name="group1"
+                      placeholder="Matières fac 1er groupe"
+                      disabled={isSubmitting}
+                    />
+                    <SygefexSelect
+                      onChange={handleReactSelectChange}
+                      name="group2"
+                      placeholder="Matières fac 2ème groupe"
                       disabled={isSubmitting}
                     />
 

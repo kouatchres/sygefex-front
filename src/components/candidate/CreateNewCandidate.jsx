@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import React from "react";
+import { useMutation } from "@apollo/react-hooks";
 import { MiniStyledPage } from "../styles/StyledPage";
 import Error from "../ErrorMessage.js";
 import { Formik, Form } from "formik";
@@ -7,19 +7,22 @@ import Router from "next/router";
 import useForm from "../utils/useForm";
 import styled from "styled-components";
 import * as Yup from "yup";
-import { getAllGendersQuery } from "../queries&Mutations&Functions/Queries";
 import { createCandidateMutation } from "../queries&Mutations&Functions/Mutations";
 import {
-  SygefexSelect,
   SygexInput,
   StyledForm,
   ButtonStyled,
   StyledButton,
 } from "../utils/FormInputs";
+import { uniqueCodeGen } from "../queries&Mutations&Functions/Functions";
 import {
-  uniqueCodeGen,
-  getObjectFromID,
-} from "../queries&Mutations&Functions/Functions";
+  FormikTextField,
+  FormikDatepicker,
+  FormikSelect,
+  FormikRadio,
+} from "@dccs/react-formik-mui";
+import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 const PicFrame = styled.div`
   display: flex;
@@ -43,17 +46,41 @@ const InputGroup = styled.div`
   padding-left: 1rem;
 `;
 
+const RadioButtons = styled.div`
+  display: flex;
+  padding: 0 0.5rem;
+  label {
+    font-size: 1.3rem;
+  }
+
+  flex-direction: row;
+  align-items: center;
+  .RadioSet {
+    FormikRadio {
+      font-size: 1.5rem;
+    }
+    padding: 0 1rem;
+
+    display: flex;
+    flex-direction: row;
+    label {
+      font-size: 1.3rem;
+    }
+  }
+`;
+
 const TwoGroups = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
 `;
 const AllControls = styled.div`
+  margin: 1rem 0;
   display: flex;
   flex-direction: column;
   min-width: 15rem;
   img {
     margin-top: 0.15rem;
-    /* margin-left: 0.5rem; */
+    margin-top: 1rem;
     height: 13rem;
     width: 13rem;
     justify-content: center;
@@ -123,19 +150,6 @@ const CreateNewCandidate = () => {
     };
     return genderObj;
   };
-
-  const { data, loading, error: errGender } = useQuery(getAllGendersQuery);
-  {
-    loading && <p>Loading...</p>;
-  }
-  {
-    errGender && <Error error={errGender} />;
-  }
-  const getGenders = data && data.genders;
-  console.log(getGenders);
-  const getGenderOptions =
-    getGenders &&
-    getGenders.map((item) => ({ value: item.id, label: item.genderName }));
   console.log(photo.image);
   const [createCandidate, { error }] = useMutation(createCandidateMutation);
 
@@ -149,7 +163,6 @@ const CreateNewCandidate = () => {
           variables: {
             ...values,
             image: photo.image,
-            gender: getObjectFromID(values.gender.value),
             candCode: uniqueCodeGen(12),
           },
         });
@@ -182,14 +195,7 @@ const CreateNewCandidate = () => {
                       onChange={uploadFile}
                       disabled={isSubmitting}
                     />
-                    <SygefexSelect
-                      name="gender"
-                      onChange={(value) => setFieldValue("gender", value)}
-                      disabled={isSubmitting}
-                      options={getGenderOptions}
-                      disabled={isSubmitting}
-                      placeholder="Votre Sexe"
-                    />
+
                     <SygexInput
                       name="cand1stName"
                       type="text"
@@ -226,8 +232,6 @@ const CreateNewCandidate = () => {
                       label="Noms de la mere"
                       disabled={isSubmitting}
                     />
-                  </InputGroup>
-                  <InputGroup>
                     <SygexInput
                       name="dateOfBirth"
                       format="d MMM yyyy"
@@ -241,6 +245,8 @@ const CreateNewCandidate = () => {
                       label="Numéro acte de Naissance"
                       disabled={isSubmitting}
                     />
+                  </InputGroup>
+                  <InputGroup>
                     <SygexInput
                       name="phoneNumb"
                       type="number"
@@ -253,6 +259,18 @@ const CreateNewCandidate = () => {
                       label="Email"
                       disabled={isSubmitting}
                     />
+                    <RadioButtons>
+                      <FormLabel>Sexe</FormLabel>
+                      <RadioGroup name="gender" className="RadioSet">
+                        <FormikRadio
+                          label="Femele"
+                          name="gender"
+                          value="Femele"
+                          defaultChecked
+                        />
+                        <FormikRadio label="Male" name="gender" value="Male" />
+                      </RadioGroup>
+                    </RadioButtons>
                     <PicFrame>
                       {photo.image && (
                         <img

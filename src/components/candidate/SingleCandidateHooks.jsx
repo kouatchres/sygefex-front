@@ -13,9 +13,6 @@ const DivBtn = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   grid-gap: 1rem;
-  /* a{
-	text-decoration:none;	
-	} */
 `;
 
 const ImageInfo = styled.div`
@@ -65,12 +62,8 @@ const SingleCandidateHooks = ({ id }) => {
     loadCandData();
   }, []);
 
-  // const { candidate } = state.candidate;
   console.log(state.candidate);
-  const { gender } = { ...state.candidate };
-  const { genderName } = { ...gender };
-  console.log(gender);
-  console.log(genderName);
+
   const {
     momName,
     dadName,
@@ -80,6 +73,7 @@ const SingleCandidateHooks = ({ id }) => {
     cand2ndName,
     cand3rdName,
     email,
+    gender,
     phoneNumb,
     placeOfBirth,
     dateOfBirth,
@@ -125,11 +119,11 @@ const SingleCandidateHooks = ({ id }) => {
                   <strong>Naissance:</strong>
                   <hr />
                   <p>
-                    <strong>Sexe:</strong> <span>{genderName}</span>
+                    <strong>Sexe:</strong> <span>{gender}</span>
                   </p>
                   <p>
-                    <strong>Date:</strong>
-                    <span> {format(dateOfBirth, "d MMMM, YYYY")}</span>
+                    <strong>Date : </strong>
+                    <span>{format(dateOfBirth, " DD, MMM, YYYY ")}</span>
                   </p>
                   <p>
                     <strong>Lieu:</strong> <span>{placeOfBirth}</span>
@@ -151,6 +145,7 @@ const SingleCandidateHooks = ({ id }) => {
                     <strong>Acte Naissance:</strong>
                   </p>
                   <hr />
+
                   <p>
                     <strong>No:</strong>
                     <span> {birthCertNumber}</span>
@@ -190,7 +185,7 @@ const SingleCandidateHooks = ({ id }) => {
                   <StyledButton>
                     <Link
                       href={{
-                        pathname: "../creates/newCand",
+                        pathname: "../creates/newGroupCand",
                       }}
                     >
                       <a target="_blank">Candidat Suivant</a>
@@ -207,3 +202,5 @@ const SingleCandidateHooks = ({ id }) => {
 };
 
 export default SingleCandidateHooks;
+
+//

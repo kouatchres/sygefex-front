@@ -11,11 +11,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/creates/newAptitude": [
+    "/show/singleCand": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/creates/newRegion": [
+    "/creates/newSubject": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

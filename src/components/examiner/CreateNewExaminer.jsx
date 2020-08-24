@@ -7,7 +7,6 @@ import Router from "next/router";
 import styled from "styled-components";
 import * as Yup from "yup";
 import useForm from "../utils/useForm";
-import { getAllGendersQuery } from "../queries&Mutations&Functions/Queries";
 import { createExaminerMutation } from "../queries&Mutations&Functions/Mutations";
 import {
   SygefexSelect,
@@ -27,6 +26,10 @@ const InputGroup = styled.div`
   flex-direction: column;
   margin: 0 1rem;
   min-width: 12rem;
+  .RadioSet {
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
 const PicFrame = styled.div`
@@ -105,25 +108,6 @@ const CreateNewExaminer = () => {
     setState({ examinerImage: file.secure_url });
   };
 
-  const {
-    data: dataGender,
-    loading: loadingGender,
-    error: errorGender,
-  } = useQuery(getAllGendersQuery);
-
-  {
-    loadingGender && <p>Loading...</p>;
-  }
-  {
-    errorGender && <Error error={errorGender} />;
-  }
-  const getGenders = dataGender && dataGender.genders;
-  const refinedGenders = getGenders && removeTypename(getGenders);
-
-  const getGenderOptions =
-    refinedGenders &&
-    refinedGenders.map((item) => ({ value: item.id, label: item.genderName }));
-
   const [createExaminer, { loading, error }] = useMutation(
     createExaminerMutation
   );
@@ -137,7 +121,6 @@ const CreateNewExaminer = () => {
           variables: {
             ...values,
             examinerImage: state.examinerImage,
-            gender: getObjectFromID(values.gender.value),
             examinerCode: uniqueCodeGen(12),
           },
         });
@@ -173,13 +156,11 @@ const CreateNewExaminer = () => {
                       onChange={uploadFile}
                       disabled={isSubmitting}
                     />
-                    <SygefexSelect
-                      name="gender"
-                      onChange={(value) => setFieldValue("gender", value)}
-                      disabled={isSubmitting}
-                      placeholder={"Votre Sexe"}
-                      options={getGenderOptions}
-                    />
+                    <FormLabel>Gender</FormLabel>
+                    <RadioGroup name="Gender" className="RadioSet">
+                      <FormikRadio label="Female" name="gender" value="F" />
+                      <FormikRadio label="Male" name="gender" value="M" />
+                    </RadioGroup>
 
                     <SygexInput
                       name="examiner1stName"

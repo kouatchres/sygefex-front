@@ -1,40 +1,71 @@
 import React, { useState, useEffect } from "react";
-import { useMutation, useQuery, useApolloClient } from "@apollo/react-hooks";
+import { useMutation, useApolloClient } from "@apollo/react-hooks";
 import { MiniStyledPage } from "../styles/StyledPage";
 import Error from "../ErrorMessage.js";
 import { Formik, Form } from "formik";
 import useForm from "../utils/useForm";
-import { format } from "date-fns";
+import format from "date-fns";
 import Router from "next/router";
 import styled from "styled-components";
 import * as Yup from "yup";
 import { updateCandidateMutation } from "../queries&Mutations&Functions/Mutations";
 import {
-  SygefexSelect,
   SygexInput,
   StyledForm,
   ButtonStyled,
   StyledButton,
 } from "../utils/FormInputs";
+import { singleCandidateQuery } from "../queries&Mutations&Functions/Queries";
 import {
-  singleCandidateQuery,
-  getAllGendersQuery,
-} from "../queries&Mutations&Functions/Queries";
+  FormikTextField,
+  FormikDatepicker,
+  FormikSelect,
+  FormikRadio,
+} from "@dccs/react-formik-mui";
+import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
 
 const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 1rem;
   min-width: 12rem;
+  .RadioSet {
+    display: flex;
+    flex-direction: row;
+  }
+`;
+
+const RadioButtons = styled.div`
+  display: flex;
+  padding: 0 0.5rem;
+  label {
+    font-size: 1.3rem;
+  }
+
+  flex-direction: row;
+  align-items: center;
+  .RadioSet {
+    FormikRadio {
+      font-size: 1.5rem;
+    }
+    padding: 0 1rem;
+
+    display: flex;
+    flex-direction: row;
+    label {
+      font-size: 1.3rem;
+    }
+  }
 `;
 
 const TwoGroups = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  grid-gap: 0.09rem;
+  /* grid-gap: 0.09rem; */
 `;
 
 const AllControls = styled.div`
+  margin: 1rem 0;
   display: flex;
   flex-direction: column;
   min-width: 15rem;
@@ -45,7 +76,8 @@ const PicFrame = styled.div`
   flex-direction: column;
   img {
     margin: 1rem auto;
-    height: 15rem;
+    margin-top: 1rem;
+    height: 18rem;
     width: 15rem;
     border-radius: 0.5rem;
     background-size: contain;
@@ -53,7 +85,7 @@ const PicFrame = styled.div`
   }
 `;
 
-const NewUpdateCandidate = (props) => {
+const NewUpdateCandidate = ({ id }) => {
   const client = useApolloClient();
   const [state, setState] = useForm({
     cand1stName: "",
@@ -87,20 +119,6 @@ const NewUpdateCandidate = (props) => {
     setPhoto({ image: file.secure_url });
   };
 
-  const { data: dataGender, loading: loadingGen, error: errorGen } = useQuery(
-    getAllGendersQuery
-  );
-  {
-    loadingGen && <p>Loading...</p>;
-  }
-  {
-    errorGen && <Error error={errorGen} />;
-  }
-  const getGenders = dataGender && dataGender.genders;
-  const getGenderOptions =
-    getGenders &&
-    getGenders.map((item) => ({ value: item.id, label: item.genderName }));
-
   const getObjectFromID = (suppliedID) => {
     const theObject = { id: `${suppliedID}` };
     return theObject;
@@ -109,7 +127,7 @@ const NewUpdateCandidate = (props) => {
   const loadCandidateData = async () => {
     const { error, data } = await client.query({
       query: singleCandidateQuery,
-      variables: { id: props.id },
+      variables: { id },
     });
     const candData = { ...data.candidate };
 
@@ -187,7 +205,9 @@ const NewUpdateCandidate = (props) => {
   });
 
   // const Create
-  const [updateCandidate, { errorMut }] = useMutation(updateCandidateMutation);
+  const [updateCandidate, { errorMut, loadingMut }] = useMutation(
+    updateCandidateMutation
+  );
   return (
     <Formik
       method="POST"
@@ -199,13 +219,12 @@ const NewUpdateCandidate = (props) => {
           variables: {
             ...values,
             image: getImage,
-            gender: getObjectFromID(values.gender.value),
             id,
           },
         });
         Router.push({
           pathname: "/show/singleCand",
-          query: { id: props.id },
+          query: { id },
         });
         setTimeout(() => {
           console.log(JSON.stringify(values, null, 2));
@@ -219,19 +238,21 @@ const NewUpdateCandidate = (props) => {
         <MiniStyledPage>
           <h4>Correction Info Candidat</h4>
           <Error error={errorMut} />
-          <StyledForm disabled={loadingGen} aria-busy={loadingGen}>
+          <StyledForm
+            disabled={loadingMut || isSubmitting}
+            aria-busy={loadingMut || isSubmitting}
+          >
             <Form>
               <AllControls>
                 <TwoGroups>
                   <InputGroup>
-                    <SygexInput name="file" type="file" onChange={uploadFile} />
-                    <SygefexSelect
-                      onChange={(value) => setFieldValue("gender", value)}
-                      options={getGenderOptions}
-                      name="gender"
+                    <SygexInput
                       disabled={isSubmitting}
-                      placeholder={"Votre Sexe"}
+                      name="file"
+                      type="file"
+                      onChange={uploadFile}
                     />
+
                     <SygexInput
                       id="cand1stName"
                       name="cand1stName"
@@ -274,14 +295,11 @@ const NewUpdateCandidate = (props) => {
                       label="Noms de la mere"
                       disabled={isSubmitting}
                     />
-                  </InputGroup>
-                  <InputGroup>
                     <SygexInput
                       name="dateOfBirth"
                       id="dateOfBirth"
-                      format="d MMM yyyy"
-                      defaultValue={format(values.dateOfBirth, "dd MMMM YYY")}
                       type="date"
+                      format="d MMMM, YYYY"
                       label="Date de Naissance"
                       disabled={isSubmitting}
                     />
@@ -292,6 +310,8 @@ const NewUpdateCandidate = (props) => {
                       label="Numéro l'Acte de Naissance"
                       disabled={isSubmitting}
                     />
+                  </InputGroup>
+                  <InputGroup>
                     <SygexInput
                       name="phoneNumb"
                       id="phoneNumb"
@@ -306,7 +326,17 @@ const NewUpdateCandidate = (props) => {
                       label="Email"
                       disabled={isSubmitting}
                     />
-
+                    <RadioButtons>
+                      <FormLabel>Sexe</FormLabel>
+                      <RadioGroup name="Sexe" className="RadioSet">
+                        <FormikRadio
+                          label="Female"
+                          name="gender"
+                          value="Femele"
+                        />
+                        <FormikRadio label="Male" name="gender" value="Male" />
+                      </RadioGroup>
+                    </RadioButtons>
                     <PicFrame>
                       <img
                         src={getImage ? getImage : state.image}
@@ -329,3 +359,5 @@ const NewUpdateCandidate = (props) => {
   );
 };
 export default NewUpdateCandidate;
+
+//

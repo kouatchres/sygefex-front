@@ -34,16 +34,6 @@ const getCESExaminerQuery = gql`
   }
 `;
 
-const singleSubjectTypeQuery = gql`
-  query singleSubjectTypeQuery($id: ID!) {
-    subjectType(id: $id) {
-      subjectTypeName
-      subjectTypeCode
-      id
-    }
-  }
-`;
-
 const getAllEducationTypesQuery = gql`
   query getAllEducationTypesQuery {
     educationTypes(orderBy: educationTypeName_ASC) {
@@ -97,9 +87,7 @@ const getCenterResultsQuery = gql`
         user {
           id
         }
-        gender {
-          genderName
-        }
+        gender
       }
       exam {
         examName
@@ -145,9 +133,7 @@ const getCandidateResultsQuery = gql`
           id
         }
         dateOfBirth
-        gender {
-          genderName
-        }
+        gender
       }
       centerExamSessionSpecialty {
         centerExamSession {
@@ -202,9 +188,7 @@ const getExaminerRegistrationQuery = gql`
         examinerCNI
         examinerImage
         examinerEmail
-        gender {
-          genderName
-        }
+        gender
       }
       centerExamSession {
         id
@@ -281,9 +265,7 @@ const getEachCandidateResultsQuery = gql`
         user {
           id
         }
-        gender {
-          genderName
-        }
+        gender
       }
       exam {
         examName
@@ -318,9 +300,7 @@ const getCandidateRegistrationInfoQuery = gql`
         candCode
         dateOfBirth
         placeOfBirth
-        gender {
-          genderName
-        }
+        gender
       }
       centerExamSessionSpecialty {
         id
@@ -396,10 +376,7 @@ const getAllCandidateRegistrationIDsQuery = gql`
       user {
         id
       }
-      gender {
-        id
-        genderName
-      }
+      gender
       registration {
         id
 
@@ -474,10 +451,7 @@ const getRegistrationIDFromRegNumberQuery = gql`
         user {
           id
         }
-        gender {
-          id
-          genderName
-        }
+        gender
         registration {
           id
 
@@ -597,10 +571,7 @@ const centerExamSessionForResultsQuery = gql`
           user {
             id
           }
-          gender {
-            id
-            genderName
-          }
+          gender
         }
         specialty {
           id
@@ -660,10 +631,7 @@ const centerExamSessionSpecialtyResultsQuery = gql`
           user {
             id
           }
-          gender {
-            id
-            genderName
-          }
+          gender
         }
         scores {
           id
@@ -725,16 +693,6 @@ const getAllSubjectGroupsQuery = gql`
       subjectGroupName
       subjectGroupCode
       id
-    }
-  }
-`;
-
-const getAllGendersQuery = gql`
-  query getAllGendersQuery {
-    genders(orderBy: genderName_ASC) {
-      id
-      genderName
-      genderCode
     }
   }
 `;
@@ -817,11 +775,23 @@ const getAllExamsQuery = gql`
   }
 `;
 
-const getAllAptitudesQuery = gql`
-  query getAllAptitudesQuery {
-    aptitudes(orderBy: aptitudeName_ASC) {
-      aptitudeName
-      aptitudeCode
+const getAllGroup2Query = gql`
+  query getAllGroup2Query {
+    group2Subjects(orderBy: subjectName_ASC) {
+      subjectName
+      subjectCode
+      subjectGroup
+      id
+    }
+  }
+`;
+
+const getAllGroup1Query = gql`
+  query getAllGroup1Query {
+    group1Subjects(orderBy: subjectName_ASC) {
+      subjectName
+      subjectCode
+      subjectGroup
       id
     }
   }
@@ -836,8 +806,19 @@ const getAllSessionsQuery = gql`
     }
   }
 `;
+
 const getAllDivisionsQuery = gql`
   query getAllDivisionsQuery {
+    divisions(orderBy: divName_ASC) {
+      divName
+      divCode
+      id
+    }
+  }
+`;
+
+const getAllRegionsAndDivisionsQuery = gql`
+  query getAllRegionsAndDivisionsQuery {
     divisions(orderBy: divName_ASC) {
       divName
       divCode
@@ -937,15 +918,6 @@ const centersPerTownQuery = gql`
   }
 `;
 
-const getAllSubjectTypesQuery = gql`
-  query getAllSubjectTypesQuery {
-    subjectTypes(orderBy: subjectTypeName_DESC) {
-      id
-      subjectTypeName
-      subjectTypeCode
-    }
-  }
-`;
 const getAllCentersQuery = gql`
   query getAllCentersQuery {
     centers(orderBy: centerName_ASC) {
@@ -1156,10 +1128,7 @@ const singleCandidateQuery = gql`
       user {
         id
       }
-      gender {
-        id
-        genderName
-      }
+      gender
     }
   }
 `;
@@ -1200,10 +1169,7 @@ const viewSingleCandidateQuery = gql`
       user {
         id
       }
-      gender {
-        id
-        genderName
-      }
+      gender
     }
   }
 `;
@@ -1246,16 +1212,6 @@ const getSingleRegionQuery = gql`
     region(id: $id) {
       regName
       regCode
-      id
-    }
-  }
-`;
-
-const singleGenderQuery = gql`
-  query singleGenderQuery($id: ID!) {
-    gender(id: $id) {
-      genderName
-      genderCode
       id
     }
   }
@@ -1344,8 +1300,6 @@ const singleSessionQuery = gql`
 
 export {
   getAllSubjectSpecialtiesOfASpecialtyQuery,
-  getAllSubjectTypesQuery,
-  getAllGendersQuery,
   getAllSpecialtiesOfAnEducationTypeQuery,
   getAllExamsQuery,
   getAllSessionsQuery,
@@ -1377,13 +1331,11 @@ export {
   singleSessionQuery,
   singleDivisionQuery,
   singleSubDivisionQuery,
-  singleSubjectTypeQuery,
   singleEducationTypeQuery,
   singleRankQuery,
   centerExamSessionSpecialtyForResultsQuery,
   getAllCandidateRegistrationIDsQuery,
   getCenterExamSessionSpecialtyQuery,
-  singleGenderQuery,
   getExamSessionQuery,
   getAllSpecialtiesOfACenterExamSessionQuery,
   getCenterResultsQuery,
@@ -1415,8 +1367,10 @@ export {
   getSpecialtyFromCESSQuery,
   getExaminerRegistrationQuery,
   getSingleProfQuery,
+  getAllGroup1Query,
+  getAllGroup2Query,
   singleSubjectGroupQuery,
-  getAllAptitudesQuery,
+  getAllRegionsAndDivisionsQuery,
   getAllSubjectGroupsQuery,
   getAllRanksOfAnExamPhaseQuery,
   currentUserQuery,

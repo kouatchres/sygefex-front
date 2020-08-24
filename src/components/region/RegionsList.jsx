@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo } from "react";
 import TableContainer from "./TableContainer";
 import useForm from "../utils/useForm";
-import { miniStyledPage } from "../styles/StyledPage";
+import { Formik, Form } from "formik";
+import { MinimStyledPage } from "../styles/StyledPage";
 import { StyledForm } from "../utils/FormInputs";
 import { useApolloClient } from "@apollo/react-hooks";
 import { SelectColumnFilter } from "./Filters";
@@ -23,7 +24,6 @@ const RegionsList = () => {
   useEffect(() => {
     loadRegionsData();
   }, []);
-
   console.log(data);
   const initialValues = {
     HeaderNames: "",
@@ -54,7 +54,21 @@ const RegionsList = () => {
     []
   );
 
-  return <TableContainer columns={columns} data={data} />;
+  return (
+    <Formik initialValues={initialValues}>
+      {({ isSubmitting, values }) => (
+        <MinimStyledPage>
+          <h4>Liste des Regions</h4>
+
+          <StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
+            <Form>
+              <TableContainer columns={columns} data={data} />;
+            </Form>
+          </StyledForm>
+        </MinimStyledPage>
+      )}
+    </Formik>
+  );
 };
 
 export default RegionsList;

@@ -6,7 +6,7 @@ import { TableStyledPage } from "../../styles/StyledPage";
 import { StyledForm } from "../../utils/FormInputs";
 import Moment from "moment";
 import { useApolloClient } from "@apollo/react-hooks";
-import { SelectColumnFilter } from "../../customTable/Filters";
+import { SelectColumnFilter } from "../../utils/Filters";
 import { centerExamSessionForResultsQuery } from "../../queries&Mutations&Functions/Queries";
 
 const CenterCompleteResultsList = ({ id }) => {

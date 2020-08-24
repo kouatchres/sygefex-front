@@ -61,24 +61,6 @@ const updateEducationTypeMutation = gql`
     }
   }
 `;
-const updateSubjectTypeMutation = gql`
-  mutation updateSubjectTypeMutation(
-    $id: ID!
-    $subjectTypeName: String
-    $subjectTypeCode: String
-  ) {
-    updateSubjectType(
-      id: $id
-      subjectTypeName: $subjectTypeName
-      subjectTypeCode: $subjectTypeCode
-    ) {
-      id
-      subjectTypeName
-      subjectTypeCode
-    }
-  }
-`;
-
 const updateSubjectMutation = gql`
   mutation updateSubjectMutation(
     $id: ID!
@@ -92,24 +74,6 @@ const updateSubjectMutation = gql`
     ) {
       subjectName
       subjectCode
-      id
-    }
-  }
-`;
-
-const updateSubjectGroupMutation = gql`
-  mutation updateSubjectGroupMutation(
-    $id: ID!
-    $subjectGroupName: String
-    $subjectGroupCode: String
-  ) {
-    updateSubjectGroup(
-      id: $id
-      subjectGroupName: $subjectGroupName
-      subjectGroupCode: $subjectGroupCode
-    ) {
-      subjectGroupName
-      subjectGroupCode
       id
     }
   }
@@ -185,16 +149,6 @@ const createNewReportMutation = gql`
   }
 `;
 
-const createNewGenderMutation = gql`
-  mutation createNewGenderMutation($genderName: String!, $genderCode: String!) {
-    createGender(genderName: $genderName, genderCode: $genderCode) {
-      id
-      genderCode
-      genderName
-    }
-  }
-`;
-
 const createRegistrationMutation = gql`
   mutation createRegistrationMutation(
     $candidate: CandidateWhereUniqueInput!
@@ -204,7 +158,7 @@ const createRegistrationMutation = gql`
     $centerExamSession: CenterExamSessionWhereUniqueInput!
     $centerExamSessionSpecialty: CenterExamSessionSpecialtyWhereUniqueInput!
     $specialty: SpecialtyWhereUniqueInput!
-    $aptitude: AptitudeWhereUniqueInput!
+    $aptitude: String!
   ) {
     createRegistration(
       candidate: $candidate
@@ -398,26 +352,12 @@ const createTownMutation = gql`
   }
 `;
 
-const createNewSubjectTypeMutation = gql`
-  mutation createNewSubjectTypeMutation(
-    $subjectTypeName: String!
-    $subjectTypeCode: String!
-  ) {
-    createSubjectType(
-      subjectTypeName: $subjectTypeName
-      subjectTypeCode: $subjectTypeCode
-    ) {
-      id
-      subjectTypeName
-    }
-  }
-`;
-
 const createNewSubjectMutation = gql`
   mutation createNewSubjectMutation(
     $subjectName: String!
     $subjectCode: String!
-    $subjectType: SubjectTypeWhereUniqueInput!
+    $subjectType: String!
+    $subjectGroup: String!
     $educType: EducationTypeWhereUniqueInput!
   ) {
     createSubject(
@@ -425,24 +365,12 @@ const createNewSubjectMutation = gql`
       educType: $educType
       subjectCode: $subjectCode
       subjectType: $subjectType
+      subjectGroup: $subjectGroup
     ) {
       subjectCode
       subjectName
-    }
-  }
-`;
-
-const createNewSubjectGroupMutation = gql`
-  mutation createNewSubjectGroupMutation(
-    $subjectGroupName: String!
-    $subjectGroupCode: String!
-  ) {
-    createSubjectGroup(
-      subjectGroupName: $subjectGroupName
-      subjectGroupCode: $subjectGroupCode
-    ) {
-      subjectGroupCode
-      subjectGroupName
+      subjectType
+      subjectGroup
     }
   }
 `;
@@ -563,18 +491,6 @@ const createExamMutation = gql`
   }
 `;
 
-const createAptitudeMutation = gql`
-  mutation createAptitudeMutation(
-    $aptitudeName: String!
-    $aptitudeCode: String!
-  ) {
-    createAptitude(aptitudeName: $aptitudeName, aptitudeCode: $aptitudeCode) {
-      id
-      aptitudeName
-    }
-  }
-`;
-
 const registerSubjectSpecialtyMutation = gql`
   mutation registerSubjectSpecialtyMutation(
     $subject: SubjectWhereUniqueInput!
@@ -636,7 +552,7 @@ const createCandidateMutation = gql`
     $dateOfBirth: DateTime
     $birthCertNumber: String
     $placeOfBirth: String
-    $gender: GenderWhereUniqueInput!
+    $gender: String!
   ) {
     createCandidate(
       cand1stName: $cand1stName
@@ -681,7 +597,7 @@ const createMultipleCandidatesMutation = gql`
     $dateOfBirth: DateTime
     $birthCertNumber: String
     $placeOfBirth: String
-    $gender: GenderWhereUniqueInput!
+    $gender: String!
   ) {
     createMultipleCandidates(
       cand1stName: $cand1stName
@@ -705,6 +621,7 @@ const createMultipleCandidatesMutation = gql`
       momName
       dadName
       candCode
+      gender
       birthCertNumber
       dateOfBirth
       image
@@ -723,7 +640,7 @@ const createExaminerMutation = gql`
     $examinerMatricule: String!
     $examinerImage: String!
     $examinerPhone: Int!
-    $gender: GenderWhereUniqueInput!
+    $gender: String!
   ) {
     createExaminer(
       examiner1stName: $examiner1stName
@@ -889,7 +806,7 @@ const updateCandidateMutation = gql`
     $placeOfBirth: String
     $dateOfBirth: DateTime
     $birthCertNumber: String
-    $gender: GenderWhereUniqueInput
+    $gender: String
   ) {
     updateCandidate(
       id: $id
@@ -918,9 +835,7 @@ const updateCandidateMutation = gql`
       placeOfBirth
       dateOfBirth
       birthCertNumber
-      gender {
-        id
-      }
+      gender
     }
   }
 `;
@@ -937,7 +852,7 @@ const updateExaminerMutation = gql`
     $examinerImage: String
     $examinerMatricule: String
     $examinerCode: String
-    $gender: GenderWhereUniqueInput
+    $gender: String
   ) {
     updateExaminer(
       id: $id
@@ -962,23 +877,7 @@ const updateExaminerMutation = gql`
       examinerMatricule
       examinerCode
       examinerImage
-      gender {
-        id
-      }
-    }
-  }
-`;
-
-const updateGenderMutation = gql`
-  mutation updateGenderMutation(
-    $id: ID!
-    $genderName: String
-    $genderCode: String
-  ) {
-    updateGender(id: $id, genderName: $genderName, genderCode: $genderCode) {
-      id
-      genderName
-      genderCode
+      gender
     }
   }
 `;
@@ -1044,7 +943,6 @@ const deleteCenterMutation = gql`
 export {
   createCandidateMutation,
   createNewSubjectMutation,
-  createNewSubjectTypeMutation,
   createTownMutation,
   createCenterExamSessionExaminerMutation,
   createDivisionMutation,
@@ -1057,7 +955,6 @@ export {
   createNewRankMutation,
   createNewReportMutation,
   createNewRegionMutation,
-  createNewGenderMutation,
   createExamMutation,
   registerSubjectSpecialtyMutation,
   registerNewSubjectSpecialtyMutation,
@@ -1067,7 +964,6 @@ export {
   updateRegionMutation,
   updateExamMutation,
   updateSubDivisionMutation,
-  updateGenderMutation,
   updateCandidateMutation,
   updateScoreMutation,
   updateDivisionMutation,
@@ -1083,7 +979,6 @@ export {
   createMultipleCandidatesMutation,
   updateSubjectMutation,
   updateExaminerMutation,
-  updateSubjectTypeMutation,
   createCenterExamSessionMutation,
   updateEducationTypeMutation,
   signInCandidate,
@@ -1091,11 +986,8 @@ export {
   updateSignUpMutation,
   signupUserMutation,
   deleteRegionMutation,
-  updateSubjectGroupMutation,
   deleteCenterMutation,
-  createNewSubjectGroupMutation,
   signoutMutation,
-  createAptitudeMutation,
   enterMarksMutation,
   deleteReportMutation,
   requestResetMutation,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Select from "react-select";
 import { useField, Field } from "formik";
 
@@ -79,6 +79,16 @@ const InputGroup = styled.div`
   position: relative;
 `;
 
+const AllRadios = styled.div`
+  position: relative;
+  margin: 0.5rem;
+  label {
+    border: 0;
+    width: 2rem;
+    height: 2rem;
+  }
+`;
+
 const StyledLabel = styled.label`
   font-size: 1.5rem;
   border-style: none;
@@ -120,6 +130,25 @@ const StyledErrorMessage = styled.div`
   font-size: 1.2rem;
   color: ${(props) => props.theme.britishRed};
   /* padding-left: 0.5rem; */
+`;
+
+const RadioStyled = styled.div`
+  display: inline-block;
+  input,
+  label :hover {
+    cursor: pointer;
+    background: ${(props) => props.theme.lightBlues[2]};
+  }
+
+  input[type="radio"] {
+    margin-top: 0.5rem;
+    border: 0;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 0.7rem;
+
+    background: ${(props) => props.theme.lightBlues[2]};
+  }
 `;
 
 const StyledButton = styled.button`
@@ -216,24 +245,42 @@ const SygefexSelect = ({ theme, ...props }) => {
   );
 };
 
-// const SygexSelect = ({ label, ...props }) => {
-//   const [field, meta] = useField(props)
-//   return (
-//     <>
-//       {/* <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel> */}
-//       <StyledSelect {...field} {...props} />
-//       {meta.touched && meta.error ? (
-//         <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-//       ) : null}
-//     </>
-//   )
-// }
+const SygefexRadio = ({ label, options, ...props }) => {
+  const [field, meta] = useField(props);
+  return (
+    <AllRadios>
+      <label>{label}</label>
+      <Field label={label} {...field} {...props}>
+        {({ field }) => {
+          return options.map((item) => (
+            <RadioStyled>
+              <input
+                {...field}
+                type="radio"
+                id={item.value}
+                value={item.value}
+                checked={field.value === item.value}
+              />
+              <label htmlFor={props.id || item.value}>{item.key}</label>
+            </RadioStyled>
+          ));
+        }}
+      </Field>
+      {meta.touched && meta.error ? (
+        <StyledErrorMessage>{meta.error}</StyledErrorMessage>
+      ) : null}
+    </AllRadios>
+  );
+};
 
 export {
   SygefexSelect,
+  SygefexRadio,
   StyledLabel,
   StyledButton,
   ButtonStyled,
   SygexInput,
   StyledForm,
 };
+
+// <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
