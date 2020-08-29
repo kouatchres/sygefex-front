@@ -90,6 +90,7 @@ const theme = {
     "#bde4e9",
     "#cce7e8",
   ],
+  fingers: ["#bcddfe", "#6581d4", "#f9f9f9", "#195e83", "#678197"],
 
   lightBlues: [
     "#c8e4f3",
@@ -107,7 +108,7 @@ const theme = {
   formBS3: " inset 0.7rem 0.7rem 0.5rem  rgba(0,0,0,0.9)",
   formBS4: " inset 0.08rem 1rem 1rem 0.03rem rgba(0,0.3,0,0.2)",
 
-  formBS: " inset 0.1rem .05rem 0.5rem rgba(0,0,0.8,0.5)",
+  formBS: "  0.1rem .05rem 0.5rem rgba(0,0,0.8,0.5)",
   formBS2: " 0.15rem 0.15rem 1rem 0.05rem rgba(0,0,0,0.4);",
   formBS1: " 0.15rem 0.15rem 0.15rem 0.15rem rgba(0,0,0.4,0.1)",
 };

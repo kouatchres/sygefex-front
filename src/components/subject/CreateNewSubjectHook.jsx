@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { MiniStyledPage } from "../styles/StyledPage";
 import Error from "../ErrorMessage.js";
@@ -31,6 +31,12 @@ const InputGroup = styled.div`
   flex-direction: column;
   margin: 0 1rem;
 `;
+
+const InputRadioGroup = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-gap: 1rem;
+`;
 const AllControls = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,23 +48,18 @@ const SubjTypeRadioButtons = styled.div`
   label {
     font-size: 1.3rem;
   }
-  /* input[type="checkbox"] {
-    font-size: 12rem;
-    width: 2rem;
-  } */
-  flex-direction: row;
-  align-items: center;
+
+  flex-direction: column;
+  justify-content: center;
   .RadioSet {
     FormikCheckbox {
       font-size: 1.5rem;
     }
-    padding: 0 3rem;
+    padding: 0 0.5rem;
 
+    justify-content: center;
     display: flex;
     flex-direction: row;
-    label {
-      font-size: 1.3rem;
-    }
   }
 `;
 
@@ -70,15 +71,17 @@ const SubjectGroupRadioButtons = styled.div`
   }
 
   flex-direction: row;
-  align-items: center;
+  justify-content: center;
   .RadioSet {
     FormikRadio {
       font-size: 1.5rem;
     }
-    padding: 0 1rem;
+    padding: 0.5rem auto;
+    margin: 0.5rem auto;
 
     display: flex;
     flex-direction: row;
+    justify-content: center;
     label {
       font-size: 1.3rem;
     }
@@ -98,18 +101,21 @@ const CreateNewSubject = () => {
     subjectName: "",
     subjectCode: "",
     educType: "",
-    subjectType: "Oblig",
+    subjectType: "autre",
     subjectGroup: "G3",
   };
 
   const facObligCheck = () => {
     if (document.getElementById("facChoice").checked) {
       document.getElementById("groupButtons").style.display = "block";
-    } else if (document.getElementById("obligChoice").checked) {
+    } else if (document.getElementById("autres").checked) {
       document.getElementById("groupButtons").style.display = "none";
     }
   };
 
+  useEffect(() => {
+    document.getElementById("groupButtons").style.display = "none";
+  }, []);
   const {
     data: dataEducType,
     loading: loadingEducType,
@@ -188,44 +194,43 @@ const CreateNewSubject = () => {
                       label="Code de la Matière"
                       disabled={isSubmitting}
                     />
+                  </InputGroup>
+                  <InputRadioGroup>
                     <SubjTypeRadioButtons>
-                      <FormLabel>Type de la Matière</FormLabel>
+                      <FormLabel>Type Matière</FormLabel>
                       <RadioGroup className="RadioSet">
+                        <FormikRadio
+                          id="autres"
+                          label="Autres"
+                          name="subjectType"
+                          value="compulsory"
+                          onClick={facObligCheck}
+                        />
                         <FormikRadio
                           label="Facultative"
                           name="subjectType"
-                          value="Fac"
+                          value="optional"
                           id="facChoice"
-                          onclick={facObligCheck}
-                        />
-                        <FormikRadio
-                          id="obligChoice"
-                          label="Obligatoire"
-                          name="subjectType"
-                          value="Oblig"
-                          onclick={facObligCheck}
+                          onClick={facObligCheck}
                         />
                       </RadioGroup>
                     </SubjTypeRadioButtons>
                     <SubjectGroupRadioButtons id="groupButtons">
-                      <FormLabel className="RadioSet">
-                        Groupe de la Matière
-                      </FormLabel>
-                      <RadioGroup name="SubjectGroup" className="RadioSet">
+                      <FormLabel>Groupe Epreuve</FormLabel>
+                      <RadioGroup className="RadioSet">
                         <FormikRadio
-                          label="Groupe 1"
+                          label="EPF 1"
                           name="subjectGroup"
-                          value="G1"
+                          value="EPF1"
                         />
                         <FormikRadio
-                          label="Groupe 2"
+                          label="EPF 2"
                           name="subjectGroup"
-                          value="G2"
-                          defaultChecked
+                          value="EPF2"
                         />
                       </RadioGroup>
                     </SubjectGroupRadioButtons>
-                  </InputGroup>
+                  </InputRadioGroup>
                   <ButtonStyled>
                     <StyledButton type="submit">
                       Valid{isSubmitting ? "ation en cours" : "er"}

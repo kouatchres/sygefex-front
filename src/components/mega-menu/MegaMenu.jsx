@@ -127,7 +127,7 @@ nav li:hover .menu-sub-user {
   .menu-category {
   font-size: 1rem;
   margin-top: 0;
-  color: ${(props) => props.theme.britishBlue}
+  color: ${(props) => props.theme.blues[2]};
   margin-bottom: 0.5rem;
   text-align: left;
   text-transform: uppercase;
@@ -257,6 +257,16 @@ const MegaMenu = () => (
               </div>
 
               <div className="menu-col-2">
+                <ul>
+                  <h3 className="menu-category">Nouvelle Spécialité </h3>
+                  <hr />
+                  <Link href="/creates/newSpecialty">
+                    <a>nouvelle Spécialité</a>
+                  </Link>
+                  <Link href="/modify/modifySpecialty">
+                    <a>Modifier Spécialité</a>
+                  </Link>
+                </ul>
                 <ul>
                   <h3 className="menu-category">Spécialité par Matière</h3>
                   <hr />

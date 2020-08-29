@@ -22,7 +22,6 @@ import {
   FormikRadio,
 } from "@dccs/react-formik-mui";
 import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 const PicFrame = styled.div`
   display: flex;

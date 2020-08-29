@@ -776,8 +776,8 @@ const getAllExamsQuery = gql`
 `;
 
 const getAllGroup2Query = gql`
-  query getAllGroup2Query {
-    group2Subjects(orderBy: subjectName_ASC) {
+  query getAllGroup2Query($educType: EducationTypeWhereUniqueInput!) {
+    group2Subjects(educType: $educType, orderBy: subjectName_ASC) {
       subjectName
       subjectCode
       subjectGroup
@@ -787,8 +787,8 @@ const getAllGroup2Query = gql`
 `;
 
 const getAllGroup1Query = gql`
-  query getAllGroup1Query {
-    group1Subjects(orderBy: subjectName_ASC) {
+  query getAllGroup1Query($educType: EducationTypeWhereUniqueInput!) {
+    group1Subjects(educType: $educType, orderBy: subjectName_ASC) {
       subjectName
       subjectCode
       subjectGroup

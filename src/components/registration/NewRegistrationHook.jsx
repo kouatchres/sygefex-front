@@ -1,11 +1,12 @@
-import React from "react";
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import { MinimStyledPage } from "../styles/StyledPage";
+import React, { useEffect, useState, useReducer } from "react";
+import { useMutation, useQuery, useApolloClient } from "@apollo/react-hooks";
+import { MiniStyledPage } from "../styles/StyledPage";
 import Error from "../ErrorMessage.js";
 import Router from "next/router";
 import styled from "styled-components";
 import useForm from "../utils/useForm";
 import * as Yup from "yup";
+
 import { Formik, Form, ErrorMessage } from "formik";
 import {
   SygefexSelect,
@@ -24,6 +25,9 @@ import { createRegistrationMutation } from "../queries&Mutations&Functions/Mutat
 import {
   getExamSessionQuery,
   getAllExamsQuery,
+  getAllGroup1Query,
+  getAllGroup2Query,
+  getAllEducationTypesQuery,
   getAllSessionsQuery,
   getSingleCenterExamSessionQuery,
   getAllSpecialtiesOfACenterExamSessionQuery,
@@ -36,8 +40,6 @@ import {
   FormikRadio,
 } from "@dccs/react-formik-mui";
 import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
 
 const InputGroup = styled.div`
   display: flex;
@@ -45,7 +47,14 @@ const InputGroup = styled.div`
   min-width: 13rem;
   margin: 0 1rem;
 `;
+
 const AllControls = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* min-width: 17rem; */
+`;
+
+const RadioControls = styled.div`
   display: flex;
   flex-direction: column;
   /* min-width: 17rem; */
@@ -53,6 +62,7 @@ const AllControls = styled.div`
 
 const RadioButtons = styled.div`
   display: flex;
+  padding-left: 1rem;
   label {
     font-size: 1.3rem;
   }
@@ -83,32 +93,47 @@ const validationSchema = Yup.object().shape({
 
 const NewRegistrationHook = () => {
   const initialValues = {
-    candCode: "",
-    // specialty: "",
+    centerNumber: "100000",
   };
+  const client = useApolloClient();
   const [state, setState, handleReactSelectChange] = useForm({
     centerExamSessionSpecialtyID: "",
-    centerNumber: "",
+    centerNumber: "100000",
     examID: "",
     sessionID: "",
-    group1: [],
-    group2: [],
+    educTypeID: "",
   });
+  const [group1, setGroup1] = useState([]);
+  const [group2, setGroup2] = useState([]);
+  const [g1Options, setG1Options] = useState([]);
+  const [g2Options, setG2Options] = useState([]);
 
-  const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    const newVal = type === "number" ? parseInt(value) : value;
-    setState({ [name]: newVal });
-  };
-
-  const candRegistrationNumber = (centerCode, exam, session) => {
-    return `${centerCode + exam + session}`;
-  };
-  const makeCandVariableObject = (candCodeValue) => {
-    const storedCandidate = {
-      candCode: `${candCodeValue}`,
-    };
-    return storedCandidate;
+  const facObligCheck = () => {
+    if (document.getElementById("EPF1").checked && g2Options.length <= 1) {
+      document.getElementById("selectEPF1").style.display = "block";
+      document.getElementById("selectEPF2").style.display = "none";
+    } else if (
+      document.getElementById("EPF1").checked &&
+      g2Options.length > 1
+    ) {
+      document.getElementById("selectEPF1").style.display = "none";
+      document.getElementById("selectEPF2").style.display = "block";
+    } else if (
+      document.getElementById("EPF2").checked &&
+      g1Options.length <= 1
+    ) {
+      document.getElementById("selectEPF2").style.display = "block";
+      document.getElementById("selectEPF1").style.display = "none";
+    } else if (
+      document.getElementById("EPF2").checked &&
+      g1Options.length > 1
+    ) {
+      document.getElementById("selectEPF2").style.display = "none";
+      document.getElementById("selectEPF1").style.display = "block";
+    } else if (document.getElementById("aucun").checked) {
+      document.getElementById("selectEPF2").style.display = "none";
+      document.getElementById("selectEPF1").style.display = "none";
+    }
   };
   const makeCESSObject = (candCodeValue) => {
     const objCESS = {
@@ -116,16 +141,123 @@ const NewRegistrationHook = () => {
     };
     return objCESS;
   };
+  const { educTypeID } = state;
+
+  const loadG1SubjData = async () => {
+    const { error, data } = await client.query({
+      skip: !educTypeID,
+      query: getAllGroup1Query,
+      variables: { educType: makeCESSObject(educTypeID) },
+    });
+    const { group1Subjects } = { ...data };
+    console.log(group1Subjects);
+    setGroup1(group1Subjects);
+  };
+
+  const loadG2SubjData = async () => {
+    const { error, data } = await client.query({
+      skip: !educTypeID,
+      query: getAllGroup2Query,
+      variables: { educType: makeCESSObject(educTypeID) },
+    });
+    const { group2Subjects } = { ...data };
+    console.log(group2Subjects);
+    setGroup2(group2Subjects);
+  };
+  console.log({ state });
+  useEffect(() => {
+    loadG1SubjData();
+    loadG2SubjData();
+    document.getElementById("selectEPF1").style.display = "none";
+    document.getElementById("selectEPF2").style.display = "none";
+  }, [educTypeID]);
+
+  const EPF1Options =
+    group1 &&
+    group1.map((item) => ({
+      value: item.id,
+      label: item.subjectName,
+    }));
+
+  const EPF2Options =
+    group2 &&
+    group2.map((item) => ({
+      value: item.id,
+      label: item.subjectName,
+    }));
+
+  const handleG1MultiSelectChange = (e) => {
+    if (g1Options.length < 3) {
+      setG1Options(
+        Array.isArray(e)
+          ? e.map((item) => ({
+              id: item.value,
+              subjectName: item.label,
+            }))
+          : []
+      );
+    }
+  };
+
+  const handleG2MultiSelectChange = (e) => {
+    if (g2Options.length < 3) {
+      setG2Options(
+        Array.isArray(e)
+          ? e.map((item) => ({
+              id: item.value,
+              subjectName: item.label,
+            }))
+          : []
+      );
+    }
+  };
+  const getAllOptions = () => {
+    if (g1Options.length === 1 && g2Options.length === 1) {
+      return [...g1Options, ...g2Options];
+    } else if (g1Options.length === 0 && g2Options.length > 1) {
+      return [g2Options[0], g2Options[1]];
+    } else if (g2Options.length === 0 && g1Options.length > 1) {
+      return [g1Options[0], g1Options[1]];
+    } else if (g1Options.length > 1 && g2Options.length === 1) {
+      return [g1Options[0], g2Options[0]];
+    } else if (g2Options.length > 1 && g1Options.length > 1) {
+      return [g1Options[0], g2Options[0]];
+    } else if (g2Options.length > 1 && g1Options.length === 0) {
+      return [...g2Options];
+    } else if (g2Options.length > 1 && g1Options.length === 1) {
+      return [g2Options[0], g1Options[0]];
+    } else if (g2Options.length === 1 && g1Options.length === 0) {
+      return [...g2Options];
+    } else if (g1Options.length === 1 && g2Options.length === 0) {
+      return [...g1Options];
+    } else return null;
+  };
+  const handleChange = (e) => {
+    const { name, value, type } = e.target;
+    const val = type === "number" ? parseInt(value) : value;
+    setState({ [name]: val });
+  };
+
+  const {
+    data: dataEducType,
+    loading: loadingEducType,
+    error: errEducType,
+  } = useQuery(getAllEducationTypesQuery);
+
+  const getEducationTypes = dataEducType && dataEducType.educationTypes;
+  const refinedEducTypes =
+    getEducationTypes && removeTypename(getEducationTypes);
+  const getEducTypeOptions =
+    refinedEducTypes &&
+    refinedEducTypes.map((item) => ({
+      value: item.id,
+      label: item.educationTypeName,
+    }));
 
   const { data: dataExams, loading: loadingExams, error: errExams } = useQuery(
     getAllExamsQuery
   );
-  {
-    loadingExams && <p>loading...</p>;
-  }
-  {
-    errExams && <Error error={errExams} />;
-  }
+
   const getExams = dataExams && dataExams.exams;
   const removeExamName =
     getExams && getExams.map(({ examName, ...others }) => others);
@@ -144,12 +276,7 @@ const NewRegistrationHook = () => {
     loading: loadingSession,
     error: errSession,
   } = useQuery(getAllSessionsQuery);
-  {
-    loadingSession && <p> loading...</p>;
-  }
-  {
-    errSession && <Error error={errSession} />;
-  }
+
   const getSessions = dataSession && dataSession.sessions;
 
   const refinedSessions = getSessions && removeTypename(getSessions);
@@ -176,12 +303,6 @@ const NewRegistrationHook = () => {
     },
   });
 
-  {
-    loadingExamSession && <p>...Loading</p>;
-  }
-  {
-    errExamSessions && <Error error={errExamSessions} />;
-  }
   console.log(dataExamSessions);
   const getExamSessions = dataExamSessions && dataExamSessions.examSessions;
   const refinedES = getExamSessions && removeTypename(getExamSessions);
@@ -195,12 +316,7 @@ const NewRegistrationHook = () => {
   } = useQuery(getSingleCenterQuery, {
     variables: { centerNumber: state.centerNumber },
   });
-  {
-    loadingCenter && <p>...Loading</p>;
-  }
-  {
-    errCenter && <Error error={errCenter} />;
-  }
+
   const { centerByNumber } = { ...dataCenter };
   const newCenterByNumber = removeTypename(centerByNumber);
   console.log(newCenterByNumber);
@@ -215,12 +331,7 @@ const NewRegistrationHook = () => {
       },
     }
   );
-  {
-    loadingCES && <p>...Loading</p>;
-  }
-  {
-    errCES && <Error error={errCES} />;
-  }
+
   console.log(dataCES);
   const getCenterExamSessionsByCode =
     dataCES && dataCES.centerExamSessionsByCode;
@@ -238,12 +349,7 @@ const NewRegistrationHook = () => {
   } = useQuery(getAllSpecialtiesOfACenterExamSessionQuery, {
     variables: getCESID,
   });
-  {
-    loadingSpecialtyCES && <p>...Loading</p>;
-  }
-  {
-    errSpecialtyCES && <Error error={errSpecialtyCES} />;
-  }
+
   console.log(dataSpecialtyCES);
   const getCenterExamSession =
     dataSpecialtyCES && dataSpecialtyCES.centerExamSession;
@@ -269,11 +375,6 @@ const NewRegistrationHook = () => {
   const [createRegistration, { loading, error }] = useMutation(
     createRegistrationMutation
   );
-  const AptitudeChoice = [
-    { value: "A", key: "Apte" },
-    { value: "I", key: "Inapte" },
-  ];
-  const { group1, group2 } = state;
   return (
     <Formik
       method="POST"
@@ -322,16 +423,17 @@ const NewRegistrationHook = () => {
     >
       {({ setFieldValue, isSubmitting, isValid, dirty }) => {
         return (
-          <MinimStyledPage>
+          <MiniStyledPage>
             <h4>Inscription à un Examen</h4>
             <Error
               error={
                 error ||
                 errCenter ||
-                errExam ||
+                errExams ||
                 errSession ||
-                errExamSession ||
-                errSpecialtyCES
+                errExamSessions ||
+                errSpecialtyCES ||
+                errEducType
               }
             />
 
@@ -343,7 +445,8 @@ const NewRegistrationHook = () => {
                 loadingCES ||
                 loadingExamSession ||
                 loading ||
-                loadingSpecialtyCES
+                loadingSpecialtyCES ||
+                loadingEducType
               }
               aria-busy={
                 isSubmitting ||
@@ -352,7 +455,8 @@ const NewRegistrationHook = () => {
                 loadingCES ||
                 loadingExamSession ||
                 loading ||
-                loadingSpecialtyCES
+                loadingSpecialtyCES ||
+                loadingEducType
               }
             >
               <Form>
@@ -373,6 +477,13 @@ const NewRegistrationHook = () => {
                       disabled={isSubmitting}
                     />
 
+                    <SygefexSelect
+                      onChange={handleReactSelectChange}
+                      name="educTypeID"
+                      options={getEducTypeOptions}
+                      placeholder={"Type d'enseignement"}
+                      disabled={isSubmitting}
+                    />
                     <SygefexSelect
                       onChange={handleReactSelectChange}
                       name="sessionID"
@@ -396,6 +507,16 @@ const NewRegistrationHook = () => {
                       placeholder={"La Spécialité"}
                       disabled={isSubmitting}
                     />
+                    <SygexInput
+                      name="candCode"
+                      type="text"
+                      label="Code secret candidat"
+                      disabled={isSubmitting}
+                    />
+                  </InputGroup>
+                </AllControls>
+                <AllControls>
+                  <RadioControls>
                     <RadioButtons>
                       <FormLabel>Aptitude</FormLabel>
                       <RadioGroup name="aptitude" className="RadioSet">
@@ -403,27 +524,79 @@ const NewRegistrationHook = () => {
                         <FormikRadio label="Inapte" name="aptitude" value="I" />
                       </RadioGroup>
                     </RadioButtons>
-                    <SygefexSelect
-                      onChange={handleReactSelectChange}
-                      name="group1"
-                      placeholder="Matières fac 1er groupe"
-                      disabled={isSubmitting}
-                    />
-                    <SygefexSelect
-                      onChange={handleReactSelectChange}
-                      name="group2"
-                      placeholder="Matières fac 2ème groupe"
-                      disabled={isSubmitting}
-                    />
+                    <RadioButtons>
+                      <FormLabel>Ep Facultative</FormLabel>
+                      <RadioGroup name="Ep Facultative" className="RadioSet">
+                        <FormikRadio
+                          id="EPF1"
+                          label="EPF1"
+                          name="EPF"
+                          value="EPF1"
+                          onClick={facObligCheck}
+                        />
+                        <FormikRadio
+                          id="EPF2"
+                          label="EPF2"
+                          name="EPF"
+                          value="EPF2"
+                          onClick={facObligCheck}
+                        />
 
-                    <SygexInput
-                      name="candCode"
-                      type="text"
-                      label="Code secret candidat"
-                      disabled={isSubmitting}
-                    />
-                    <ErrorMessage name="candCode" />
-                  </InputGroup>
+                        <FormikRadio
+                          id="aucun"
+                          label="Aucun"
+                          name="EPF"
+                          value="aucun"
+                          onClick={facObligCheck}
+                        />
+                      </RadioGroup>
+                    </RadioButtons>
+                  </RadioControls>
+                  <SygefexSelect
+                    id="selectEPF1"
+                    name="group1"
+                    isMulti={true}
+                    options={EPF1Options}
+                    placeholder="Matières fac groupe 1"
+                    disabled={isSubmitting}
+                    isClearable
+                    onChange={handleG1MultiSelectChange}
+                  />
+                  <SygefexSelect
+                    id="selectEPF2"
+                    name="group2"
+                    isMulti={true}
+                    options={EPF2Options}
+                    placeholder="Matières fac groupe 2"
+                    disabled={isSubmitting}
+                    isClearable
+                    onChange={handleG2MultiSelectChange}
+                  />
+                  {g1Options && (
+                    <div style={{ marginTop: 20, lineHeight: "25px" }}>
+                      <div>
+                        <b> All Options Value: </b>
+                        {JSON.stringify(g1Options, null, 2)}
+                      </div>
+                    </div>
+                  )}
+                  {g2Options && (
+                    <div style={{ marginTop: 20, lineHeight: "25px" }}>
+                      <div>
+                        <b> All Options Value: </b>
+                        {JSON.stringify(g2Options, null, 2)}
+                      </div>
+                    </div>
+                  )}
+                  {(g2Options || g1Options) && (
+                    <div style={{ marginTop: 20, lineHeight: "25px" }}>
+                      <div>
+                        <b> All Options Value: </b>
+                        {JSON.stringify(getAllOptions(), null, 2)}
+                      </div>
+                    </div>
+                  )}
+
                   <ButtonStyled>
                     <StyledButton
                       type="submit"
@@ -435,7 +608,7 @@ const NewRegistrationHook = () => {
                 </AllControls>
               </Form>
             </StyledForm>
-          </MinimStyledPage>
+          </MiniStyledPage>
         );
       }}
     </Formik>
