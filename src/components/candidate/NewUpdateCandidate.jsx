@@ -16,13 +16,16 @@ import {
   StyledButton,
 } from "../utils/FormInputs";
 import { singleCandidateQuery } from "../queries&Mutations&Functions/Queries";
+
+import { FormikDatepicker, FormikRadio } from "@dccs/react-formik-mui";
 import {
-  FormikTextField,
-  FormikDatepicker,
-  FormikSelect,
-  FormikRadio,
-} from "@dccs/react-formik-mui";
-import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
+  FormLabel,
+  RadioGroup,
+  Typography,
+  Container,
+} from "@material-ui/core";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
 
 const InputGroup = styled.div`
   display: flex;
@@ -295,14 +298,7 @@ const NewUpdateCandidate = ({ id }) => {
                       label="Noms de la mere"
                       disabled={isSubmitting}
                     />
-                    <SygexInput
-                      name="dateOfBirth"
-                      id="dateOfBirth"
-                      type="date"
-                      format="d MMMM, YYYY"
-                      label="Date de Naissance"
-                      disabled={isSubmitting}
-                    />
+
                     <SygexInput
                       name="birthCertNumber"
                       id="birthCertNumber"
@@ -310,8 +306,6 @@ const NewUpdateCandidate = ({ id }) => {
                       label="Numéro l'Acte de Naissance"
                       disabled={isSubmitting}
                     />
-                  </InputGroup>
-                  <InputGroup>
                     <SygexInput
                       name="phoneNumb"
                       id="phoneNumb"
@@ -319,6 +313,15 @@ const NewUpdateCandidate = ({ id }) => {
                       label="Numéro de portable"
                       disabled={isSubmitting}
                     />
+                  </InputGroup>
+                  <InputGroup>
+                    <MuiPickersUtilsProvider utils={MomentUtils}>
+                      <FormikDatepicker
+                        name="dateOfBirth"
+                        label="Brith Date"
+                        format="DD MMMM YYYY"
+                      ></FormikDatepicker>
+                    </MuiPickersUtilsProvider>
                     <SygexInput
                       name="email"
                       id="email"

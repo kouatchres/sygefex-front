@@ -1,11 +1,13 @@
+import React from 'react'
 import NewUpdateCandidate from '../../src/components/candidate/NewUpdateCandidate';
 
+import GatedSignin from "../../src/components/user/GatedSignin";
 
-function updateCandidate({ query }) {
+const updateCandidate=({ query }) =>{
 	return (
-		<div>
+		<GatedSignin>
 			<NewUpdateCandidate id={query.id} />
-		</div>
+      </GatedSignin>
 	);
 }
 

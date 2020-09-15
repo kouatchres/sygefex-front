@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import TableContainer from "./TableContainer";
 import useForm from "../../utils/useForm";
 import { Formik, Form } from "formik";
-import { TableStyledPage } from "../../styles/StyledPage";
-import { StyledForm } from "../../utils/FormInputs";
+import { BiggestStyledPage } from "../../styles/StyledPage";
 import Moment from "moment";
 import { useApolloClient } from "@apollo/react-hooks";
 import { SelectColumnFilter } from "../../utils/Filters";
@@ -12,6 +11,19 @@ import { centerExamSessionForResultsQuery } from "../../queries&Mutations&Functi
 const CenterCompleteResultsList = ({ id }) => {
   const [data, setData] = useForm([]);
   const client = useApolloClient();
+
+  const [title, setTitle] = useState({});
+
+  const loadTitleData = async () => {
+    const { error, data } = await client.query({
+      query: centerExamSessionForResultsQuery,
+      variables: { id },
+    });
+    console.log(data);
+    const { centerExamSession } = { ...data };
+
+    setTitle({ centerExamSession });
+  };
 
   const loadCandScoreData = async () => {
     const { error, data } = await client.query({
@@ -24,14 +36,12 @@ const CenterCompleteResultsList = ({ id }) => {
     const getCand =
       registration &&
       registration.map((item) => ({
-        centerExamSession: item.centerExamSession,
-        exam: item.centerExamSession.examSession.exam,
-        session: item.centerExamSession.examSession.session,
-        center: item.centerExamSession.center.centerName,
         candRegistrationNumber: item.candRegistrationNumber,
         specialty: item.specialty.specialtyName,
         specialtyCode: item.specialty.specialtyCode,
-        aptitude: item.aptitude.aptitudeName,
+        aptitude: item.aptitude,
+        EPF1: item.EPF1,
+        EPF2: item.EPF2,
         ...item.candidate,
       }));
     console.log({ registration });
@@ -41,6 +51,7 @@ const CenterCompleteResultsList = ({ id }) => {
 
   useEffect(() => {
     loadCandScoreData();
+    loadTitleData();
   }, []);
 
   const initialValues = {
@@ -49,7 +60,12 @@ const CenterCompleteResultsList = ({ id }) => {
   };
 
   console.log(data);
-
+  console.log(title);
+  const { center, examSession } = { ...title.centerExamSession };
+  const { exam, session } = { ...examSession };
+  const { examName } = { ...exam };
+  const { sessionName } = { ...session };
+  const { centerName } = { ...center };
   const columns = useMemo(
     () => [
       {
@@ -59,13 +75,7 @@ const CenterCompleteResultsList = ({ id }) => {
             Header: "No",
             accessor: "candRegistrationNumber",
           },
-          {
-            Header: "Nom Series",
-            accessor: "specialty",
-            disableSortBy: true,
-            Filter: SelectColumnFilter,
-            filter: "equals",
-          },
+
           {
             Header: "Code",
             accessor: "specialtyCode",
@@ -89,6 +99,25 @@ const CenterCompleteResultsList = ({ id }) => {
           {
             Header: "Autres",
             accessor: "cand3rdName",
+          },
+        ],
+      },
+      {
+        Header: "EPF",
+        columns: [
+          {
+            Header: "EPF1",
+            accessor: "EPF1",
+            disableSortBy: true,
+            Filter: SelectColumnFilter,
+            filter: "equals",
+          },
+          {
+            Header: "EPF2",
+            accessor: "EPF2",
+            disableSortBy: true,
+            Filter: SelectColumnFilter,
+            filter: "equals",
           },
         ],
       },
@@ -120,7 +149,7 @@ const CenterCompleteResultsList = ({ id }) => {
           },
           {
             Header: "Sexe",
-            accessor: "gender.genderName",
+            accessor: "gender",
             disableSortBy: true,
             Filter: SelectColumnFilter,
             filter: "equals",
@@ -134,15 +163,15 @@ const CenterCompleteResultsList = ({ id }) => {
   return (
     <Formik initialValues={initialValues}>
       {({ isSubmitting, values }) => (
-        <TableStyledPage>
-          <h4>Reçu d'inscription de:</h4>
-
-          <StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
-            <Form>
-              <TableContainer columns={columns} data={data} />;
-            </Form>
-          </StyledForm>
-        </TableStyledPage>
+        <BiggestStyledPage>
+          <h4>
+            Candidats inscrits a l'Examen: {examName}, Session:{sessionName} ,
+            Centre: {centerName}
+          </h4>
+          <Form>
+            <TableContainer columns={columns} data={data} />;
+          </Form>
+        </BiggestStyledPage>
       )}
     </Formik>
   );

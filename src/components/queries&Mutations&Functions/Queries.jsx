@@ -288,6 +288,9 @@ const getCandidateRegistrationInfoQuery = gql`
   query getCandidateRegistrationInfoQuery($id: ID!) {
     registration(id: $id) {
       id
+      aptitude
+      EPF1
+      EPF2
       candExamSecretCode
       createdAt
       candRegistrationNumber
@@ -532,9 +535,25 @@ const centerExamSessionForResultsQuery = gql`
   query centerExamSessionForResultsQuery($id: ID!) {
     centerExamSession(id: $id) {
       id
-
+      center {
+        id
+        centerName
+      }
+      examSession {
+        id
+        exam {
+          examName
+          id
+        }
+        session {
+          id
+          sessionName
+        }
+      }
       registration {
         id
+        EPF1
+        EPF2
         centerExamSession {
           id
           center {
@@ -555,10 +574,7 @@ const centerExamSessionForResultsQuery = gql`
         }
         candRegistrationNumber
         candExamSecretCode
-        aptitude {
-          id
-          aptitudeName
-        }
+        aptitude
         candidate {
           id
           cand1stName
@@ -717,6 +733,16 @@ const getAllSpecialtiesOfACenterExamSessionQuery = gql`
       id
       centerExamSessionSpecialty {
         id
+        registration {
+          candRegistrationNumber
+          id
+          candidate {
+            id
+            cand1stName
+            cand2ndName
+            cand3rdName
+          }
+        }
         specialty {
           id
           specialtyName
@@ -745,6 +771,30 @@ const getAllSubjectsOfAnEducTypeQuery = gql`
         id
         subjectName
         subjectCode
+        subjectType
+        subjectGroup
+        specialty {
+          id
+        }
+        educType {
+          id
+        }
+      }
+    }
+  }
+`;
+const getAllSubjectsWithEducTypesQuery = gql`
+  query getAllSubjectsWithEducTypesQuery {
+    subjects(orderBy: subjectName_ASC) {
+      id
+      subjectName
+      subjectCode
+      subjectType
+      subjectGroup
+      subjectSpecialty {
+        specialty {
+          specialtyName
+        }
       }
     }
   }
@@ -819,10 +869,36 @@ const getAllDivisionsQuery = gql`
 
 const getAllRegionsAndDivisionsQuery = gql`
   query getAllRegionsAndDivisionsQuery {
-    divisions(orderBy: divName_ASC) {
-      divName
-      divCode
+    regions {
       id
+      regName
+      regCode
+      division(orderBy: divName_ASC) {
+        divName
+        divCode
+        id
+      }
+    }
+  }
+`;
+
+const getAllRegionsDivisionsAndTownsQuery = gql`
+  query getAllRegionsDivisionsAndTownsQuery {
+    regions {
+      id
+      regName
+      regCode
+      division(orderBy: divName_ASC) {
+        divName
+        divCode
+        id
+        subDivision {
+          town(orderBy: townName_ASC) {
+            id
+            townName
+          }
+        }
+      }
     }
   }
 `;
@@ -896,6 +972,7 @@ const getCentersOfATownQuery = gql`
       center(orderBy: centerName_ASC) {
         centerName
         centerCode
+        centerNumber
         id
       }
     }
@@ -1036,6 +1113,25 @@ const getRegisteredCandidateCountQuery = gql`
     registrationsConnection(id: $id) {
       aggregate {
         count
+      }
+    }
+  }
+`;
+
+const getRegisteredCandidatesPerSpecialty = gql`
+  query getRegisteredCandidatesPerSpecialty($id: ID!) {
+    centerExamSessionSpecialty(id: $id) {
+      id
+      registration {
+        candRegistrationNumber
+        id
+        candExamSecretCode
+        candidate {
+          id
+          cand1stName
+          cand2ndName
+          cand3rdName
+        }
       }
     }
   }
@@ -1309,7 +1405,6 @@ export {
   getTownsOfASubDivisionQuery,
   getCentersOfATownQuery,
   getAllEducationTypesQuery,
-  getAllSubjectsQuery,
   getAllRanksQuery,
   getAllCandidatesQuery,
   getAllCentersQuery,
@@ -1322,6 +1417,7 @@ export {
   getRegistrations,
   singleSubjectQuery,
   singleCandidateQuery1,
+  getAllSubjectsWithEducTypesQuery,
   singleCandidateQuery,
   viewSingleCandidateQuery,
   singleCenterQuery,
@@ -1360,6 +1456,7 @@ export {
   getAllRegionsQuery,
   getAllUsersQuery,
   singleExaminerQuery,
+  getAllRegionsDivisionsAndTownsQuery,
   getCandidateRegistrationInfoQuery,
   getCESExaminerQuery,
   getExaminerIDQuery,
@@ -1368,9 +1465,11 @@ export {
   getExaminerRegistrationQuery,
   getSingleProfQuery,
   getAllGroup1Query,
+  getAllSubjectsQuery,
   getAllGroup2Query,
   singleSubjectGroupQuery,
   getAllRegionsAndDivisionsQuery,
+  getRegisteredCandidatesPerSpecialty,
   getAllSubjectGroupsQuery,
   getAllRanksOfAnExamPhaseQuery,
   currentUserQuery,

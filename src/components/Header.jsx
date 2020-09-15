@@ -5,7 +5,6 @@ import styled from "styled-components";
 import NProgress from "nprogress";
 import Router from "next/router";
 import User from "./user/User";
-import Login from "./user/Login";
 
 Router.onRouteChangeStart = () => {
   NProgress.start();

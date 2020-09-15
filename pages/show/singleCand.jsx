@@ -2,7 +2,7 @@ import React from "react";
 import SingleCandidateHooks from "../../src/components/candidate/SingleCandidateHooks";
 import GatedSignin from "../../src/components/user/GatedSignin";
 
-function singleCand({ query }) {
+const singleCand=({ query })=> {
   return (
     <div>
       <GatedSignin>

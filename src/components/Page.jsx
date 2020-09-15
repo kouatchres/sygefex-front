@@ -130,9 +130,6 @@ const Inner = styled.div`
   position: relative;
   margin: 0 auto;
   padding: 2rem;
-
-  border-radius: 0.5rem;
-  /* border: 0.09rem solid ${(props) => props.theme.blues[2]}; */
 `;
 
 const Containers = styled.div`

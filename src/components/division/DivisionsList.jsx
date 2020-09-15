@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
-import TableContainer from "./TableContainer";
+import TableContainer from "../utils/TableContainer";
 import useForm from "../utils/useForm";
 import { Formik, Form } from "formik";
 import { MiniStyledPage } from "../styles/StyledPage";
-import { StyledForm } from "../utils/FormInputs";
 import { useApolloClient } from "@apollo/react-hooks";
 import { SelectColumnFilter } from "../utils/Filters";
 import { getAllRegionsAndDivisionsQuery } from "../queries&Mutations&Functions/Queries";
@@ -17,17 +16,21 @@ const CenterCompleteResultsList = () => {
       query: getAllRegionsAndDivisionsQuery,
     });
     console.log(data);
-    const { divisions } = { ...data };
+    const { regions } = { ...data };
 
-    // const divisions =
-    //   divisions &&
-    //   divisions.map((item) => ({
-    //     item,
-    //   });
-    console.log({ divisions });
-    // console.log({ region });
+    const getDivisions = regions.map((item) => {
+      const divList = item.division.map((division) => ({
+        regName: item.regName,
+        regCode: item.regCode,
+        ...division,
+      }));
 
-    setData(divisions);
+      return divList;
+    });
+
+    console.log(getDivisions.flat(1));
+
+    setData(getDivisions.flat(1));
   };
 
   useEffect(() => {
@@ -47,7 +50,10 @@ const CenterCompleteResultsList = () => {
         columns: [
           {
             Header: "Nom Région",
-            accessor: "regionName",
+            accessor: "regName",
+            disableSortBy: true,
+            Filter: SelectColumnFilter,
+            filter: "equals",
           },
           {
             Header: "Code Région",
@@ -62,11 +68,11 @@ const CenterCompleteResultsList = () => {
         Header: "Département",
         columns: [
           {
-            Header: "Nom Département",
+            Header: "Nom",
             accessor: "divName",
           },
           {
-            Header: "Code Département",
+            Header: "Code",
             accessor: "divCode",
           },
         ],
@@ -81,11 +87,9 @@ const CenterCompleteResultsList = () => {
         <MiniStyledPage>
           <h4>Reçu d'inscription de:</h4>
 
-          <StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
-            <Form>
-              <TableContainer columns={columns} data={data} />;
-            </Form>
-          </StyledForm>
+          <Form>
+            <TableContainer columns={columns} data={data} />;
+          </Form>
         </MiniStyledPage>
       )}
     </Formik>

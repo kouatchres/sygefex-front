@@ -81,7 +81,10 @@ const Login = () => {
           <MinimStyledPage>
             <h4>Acceder a son compte</h4>
             <Error error={error} />
-            <StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
+            <StyledForm
+              disabled={isSubmitting || loading}
+              aria-busy={isSubmitting || loading}
+            >
               <Form>
                 <AllControls>
                   <InputGroup>
@@ -89,25 +92,28 @@ const Login = () => {
                       name="email"
                       type="email"
                       label="Email"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || loading}
                     />
                     <SygexInput
                       name="password"
                       type="password"
                       label="Mot de passe"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || loading}
                     />
                   </InputGroup>
                   <LoginStyled>
                     <ul>
-                      <h9>Pas encore de compte?</h9>
+                      <h6>Pas encore de compte?</h6>
                       <Link href="/creates/signup">
                         <a>Créez votre compte</a>
                       </Link>
                     </ul>
                   </LoginStyled>
                   <ButtonStyled>
-                    <StyledButton type="submit" disabled={isSubmitting}>
+                    <StyledButton
+                      type="submit"
+                      disabled={isSubmitting || loading}
+                    >
                       Valid{isSubmitting ? "ation en cours" : "er"}
                     </StyledButton>
                   </ButtonStyled>

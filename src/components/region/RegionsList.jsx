@@ -1,11 +1,10 @@
 import React, { useEffect, useMemo } from "react";
-import TableContainer from "./TableContainer";
+import TableContainer from "../utils/TableContainer";
 import useForm from "../utils/useForm";
 import { Formik, Form } from "formik";
 import { MinimStyledPage } from "../styles/StyledPage";
-import { StyledForm } from "../utils/FormInputs";
 import { useApolloClient } from "@apollo/react-hooks";
-import { SelectColumnFilter } from "./Filters";
+import { SelectColumnFilter } from "../utils/Filters";
 import { getAllRegionsQuery } from "../queries&Mutations&Functions/Queries";
 
 const RegionsList = () => {
@@ -35,17 +34,17 @@ const RegionsList = () => {
   const columns = useMemo(
     () => [
       {
-        Header: "Regions",
+        Header: "Régions",
         columns: [
           {
-            Header: "Nom Region",
+            Header: "Nom Région",
             accessor: "regName",
             disableSortBy: true,
             Filter: SelectColumnFilter,
             filter: "equals",
           },
           {
-            Header: "Code Region ",
+            Header: "Code Région ",
             accessor: "regCode",
           },
         ],
@@ -58,13 +57,11 @@ const RegionsList = () => {
     <Formik initialValues={initialValues}>
       {({ isSubmitting, values }) => (
         <MinimStyledPage>
-          <h4>Liste des Regions</h4>
+          <h4>Liste des Régions</h4>
 
-          <StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
-            <Form>
-              <TableContainer columns={columns} data={data} />;
-            </Form>
-          </StyledForm>
+          <Form>
+            <TableContainer columns={columns} data={data} />
+          </Form>
         </MinimStyledPage>
       )}
     </Formik>

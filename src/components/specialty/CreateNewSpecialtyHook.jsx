@@ -1,6 +1,6 @@
 import React from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { MinimStyledPage } from "../styles/StyledPage";
+import { MiniStyledPage } from "../styles/StyledPage";
 import Error from "../ErrorMessage.js";
 import { Formik, Form } from "formik";
 import {
@@ -13,10 +13,7 @@ import {
 import styled from "styled-components";
 import * as Yup from "yup";
 import { createSpecialtyMutation } from "../queries&Mutations&Functions/Mutations";
-import {
-  getAllEducationTypesQuery,
-  getAllSpecialtiesQuery,
-} from "../queries&Mutations&Functions/Queries";
+import { getAllEducationTypesQuery } from "../queries&Mutations&Functions/Queries";
 import {
   getObjectFromID,
   removeTypename,
@@ -50,13 +47,6 @@ const CreateNewSpecialtyHook = () => {
     loading: loadingEducType,
     error: errorEducType,
   } = useQuery(getAllEducationTypesQuery);
-
-  {
-    loadingEducType && <p>Loading...</p>;
-  }
-  {
-    errorEducType && <Error error={errorEducType} />;
-  }
 
   const getEducationTypes = dataEducType && dataEducType.educationTypes;
   console.log(getEducationTypes);
@@ -96,12 +86,13 @@ const CreateNewSpecialtyHook = () => {
     >
       {({ values, setFieldValue, isSubmitting }) => {
         return (
-          <MinimStyledPage>
+          <MiniStyledPage>
             <h4> Nouvelle Spécialité</h4>
             <Error error={error} />
+            <Error error={errorEducType} />
             <StyledForm
-              disabled={isSubmitting || loading}
-              aria-busy={isSubmitting || loading}
+              disabled={isSubmitting || loading || loadingEducType}
+              aria-busy={isSubmitting || loading || loadingEducType}
             >
               <Form>
                 <AllControls>
@@ -134,7 +125,7 @@ const CreateNewSpecialtyHook = () => {
                 </AllControls>
               </Form>
             </StyledForm>
-          </MinimStyledPage>
+          </MiniStyledPage>
         );
       }}
     </Formik>

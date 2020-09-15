@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useReducer } from "react";
-import { useMutation, useQuery, useApolloClient } from "@apollo/react-hooks";
+import React, { useState } from "react";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { MiniStyledPage } from "../styles/StyledPage";
 import Error from "../ErrorMessage.js";
 import Router from "next/router";
 import styled from "styled-components";
 import useForm from "../utils/useForm";
 import * as Yup from "yup";
+import { Formik, Form } from "formik";
 
-import { Formik, Form, ErrorMessage } from "formik";
 import {
   SygefexSelect,
   SygexInput,
@@ -25,35 +25,31 @@ import { createRegistrationMutation } from "../queries&Mutations&Functions/Mutat
 import {
   getExamSessionQuery,
   getAllExamsQuery,
-  getAllGroup1Query,
-  getAllGroup2Query,
   getAllEducationTypesQuery,
   getAllSessionsQuery,
   getSingleCenterExamSessionQuery,
   getAllSpecialtiesOfACenterExamSessionQuery,
   getSingleCenterQuery,
 } from "../queries&Mutations&Functions/Queries";
-import {
-  FormikTextField,
-  FormikDatepicker,
-  FormikSelect,
-  FormikRadio,
-} from "@dccs/react-formik-mui";
-import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
+import { FormikRadio } from "@dccs/react-formik-mui";
+import { FormLabel, RadioGroup } from "@material-ui/core";
 
 const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 13rem;
+  /* min-width: 13rem; */
   margin: 0 1rem;
 `;
 
-const AllControls = styled.div`
+const WholeControls = styled.div`
   display: flex;
-  flex-direction: column;
-  /* min-width: 17rem; */
+  flex-direction: Column;
 `;
 
+const TwoGroups = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+`;
 const RadioControls = styled.div`
   display: flex;
   flex-direction: column;
@@ -61,13 +57,14 @@ const RadioControls = styled.div`
 `;
 
 const RadioButtons = styled.div`
+margin-top: 2rem;
   display: flex;
+  flex-direction: column;
   padding-left: 1rem;
   label {
     font-size: 1.3rem;
   }
  
-  flex-direction: row;
   align-items: center;
   /* background: ${(props) => props.theme.blues[3]}; */
   .RadioSet {
@@ -85,17 +82,15 @@ const RadioButtons = styled.div`
 `;
 
 const validationSchema = Yup.object().shape({
-  // specialty: Yup.string().required("Choix de la Séries Obligatoire"),
+  centerExamSessionSpecialty: Yup.object().required(
+    "Choix de la Séries Obligatoire"
+  ),
   candCode: Yup.string().required("Choix De l'examen Obligatoire"),
   aptitude: Yup.string().required("Choix du l'aptitude a l'EPS Obligatoire"),
   // centerNumber: Yup.number().required("Numéro du centre obligatoire"),
 });
 
 const NewRegistrationHook = () => {
-  const initialValues = {
-    centerNumber: "100000",
-  };
-  const client = useApolloClient();
   const [state, setState, handleReactSelectChange] = useForm({
     centerExamSessionSpecialtyID: "",
     centerNumber: "100000",
@@ -103,139 +98,37 @@ const NewRegistrationHook = () => {
     sessionID: "",
     educTypeID: "",
   });
-  const [group1, setGroup1] = useState([]);
-  const [group2, setGroup2] = useState([]);
-  const [g1Options, setG1Options] = useState([]);
-  const [g2Options, setG2Options] = useState([]);
+  const [EPF1State, setEPF1State] = useState({ value: "" });
+  const [EPF2State, setEPF2State] = useState({ value: "" });
 
-  const facObligCheck = () => {
-    if (document.getElementById("EPF1").checked && g2Options.length <= 1) {
-      document.getElementById("selectEPF1").style.display = "block";
-      document.getElementById("selectEPF2").style.display = "none";
-    } else if (
-      document.getElementById("EPF1").checked &&
-      g2Options.length > 1
-    ) {
-      document.getElementById("selectEPF1").style.display = "none";
-      document.getElementById("selectEPF2").style.display = "block";
-    } else if (
-      document.getElementById("EPF2").checked &&
-      g1Options.length <= 1
-    ) {
-      document.getElementById("selectEPF2").style.display = "block";
-      document.getElementById("selectEPF1").style.display = "none";
-    } else if (
-      document.getElementById("EPF2").checked &&
-      g1Options.length > 1
-    ) {
-      document.getElementById("selectEPF2").style.display = "none";
-      document.getElementById("selectEPF1").style.display = "block";
-    } else if (document.getElementById("aucun").checked) {
-      document.getElementById("selectEPF2").style.display = "none";
-      document.getElementById("selectEPF1").style.display = "none";
-    }
+  const initialValues = {
+    centerNumber: "100000",
+    EPF1: "",
+    EPF2: "",
   };
+
   const makeCESSObject = (candCodeValue) => {
     const objCESS = {
       id: `${candCodeValue}`,
     };
     return objCESS;
   };
-  const { educTypeID } = state;
 
-  const loadG1SubjData = async () => {
-    const { error, data } = await client.query({
-      skip: !educTypeID,
-      query: getAllGroup1Query,
-      variables: { educType: makeCESSObject(educTypeID) },
-    });
-    const { group1Subjects } = { ...data };
-    console.log(group1Subjects);
-    setGroup1(group1Subjects);
+  const makeCandVariableObject = (candCodeValue) => {
+    const storedCandidate = {
+      candCode: `${candCodeValue}`,
+    };
+    return storedCandidate;
   };
 
-  const loadG2SubjData = async () => {
-    const { error, data } = await client.query({
-      skip: !educTypeID,
-      query: getAllGroup2Query,
-      variables: { educType: makeCESSObject(educTypeID) },
-    });
-    const { group2Subjects } = { ...data };
-    console.log(group2Subjects);
-    setGroup2(group2Subjects);
-  };
-  console.log({ state });
-  useEffect(() => {
-    loadG1SubjData();
-    loadG2SubjData();
-    document.getElementById("selectEPF1").style.display = "none";
-    document.getElementById("selectEPF2").style.display = "none";
-  }, [educTypeID]);
-
-  const EPF1Options =
-    group1 &&
-    group1.map((item) => ({
-      value: item.id,
-      label: item.subjectName,
-    }));
-
-  const EPF2Options =
-    group2 &&
-    group2.map((item) => ({
-      value: item.id,
-      label: item.subjectName,
-    }));
-
-  const handleG1MultiSelectChange = (e) => {
-    if (g1Options.length < 3) {
-      setG1Options(
-        Array.isArray(e)
-          ? e.map((item) => ({
-              id: item.value,
-              subjectName: item.label,
-            }))
-          : []
-      );
-    }
-  };
-
-  const handleG2MultiSelectChange = (e) => {
-    if (g2Options.length < 3) {
-      setG2Options(
-        Array.isArray(e)
-          ? e.map((item) => ({
-              id: item.value,
-              subjectName: item.label,
-            }))
-          : []
-      );
-    }
-  };
-  const getAllOptions = () => {
-    if (g1Options.length === 1 && g2Options.length === 1) {
-      return [...g1Options, ...g2Options];
-    } else if (g1Options.length === 0 && g2Options.length > 1) {
-      return [g2Options[0], g2Options[1]];
-    } else if (g2Options.length === 0 && g1Options.length > 1) {
-      return [g1Options[0], g1Options[1]];
-    } else if (g1Options.length > 1 && g2Options.length === 1) {
-      return [g1Options[0], g2Options[0]];
-    } else if (g2Options.length > 1 && g1Options.length > 1) {
-      return [g1Options[0], g2Options[0]];
-    } else if (g2Options.length > 1 && g1Options.length === 0) {
-      return [...g2Options];
-    } else if (g2Options.length > 1 && g1Options.length === 1) {
-      return [g2Options[0], g1Options[0]];
-    } else if (g2Options.length === 1 && g1Options.length === 0) {
-      return [...g2Options];
-    } else if (g1Options.length === 1 && g2Options.length === 0) {
-      return [...g1Options];
-    } else return null;
-  };
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     const val = type === "number" ? parseInt(value) : value;
     setState({ [name]: val });
+  };
+
+  const candRegistrationNumber = (centerCode, exam, session) => {
+    return `${centerCode + exam + session}`;
   };
 
   const {
@@ -388,11 +281,12 @@ const NewRegistrationHook = () => {
             candidate: makeCandVariableObject(values.candCode),
             centerExamSession: { id: getCESID.id },
             specialty: { id: values.centerExamSessionSpecialty.id },
-            aptitude: { id: values.aptitude.value },
+            aptitude: values.aptitude,
+            EPF1: values.EPF1,
+            EPF2: values.EPF2,
             centerExamSessionSpecialty: {
               id: values.centerExamSessionSpecialty.value,
             },
-            optionalSubjects: [...state.group1, ...state.group2],
             candExamSession: candExamSessionCode(
               values.candCode,
               state.examID,
@@ -460,152 +354,122 @@ const NewRegistrationHook = () => {
               }
             >
               <Form>
-                <AllControls>
-                  <InputGroup>
-                    <SygexInput
-                      value={centerByNumber && centerByNumber.centerCode}
-                      name="centerName"
-                      type="text"
-                      label=" Nom du centre"
-                    />
-                    <SygexInput
-                      onChange={handleChange}
-                      name="centerNumber"
-                      value={state.centerNumber || ""}
-                      type="number"
-                      label="Numéro du centre"
-                      disabled={isSubmitting}
-                    />
+                <WholeControls>
+                  <TwoGroups>
+                    <InputGroup>
+                      <SygexInput
+                        value={centerByNumber && centerByNumber.centerCode}
+                        name="centerName"
+                        type="text"
+                        label=" Nom du centre"
+                      />
+                      <SygexInput
+                        onChange={handleChange}
+                        name="centerNumber"
+                        value={state.centerNumber || ""}
+                        type="number"
+                        label="Numéro du centre"
+                        disabled={isSubmitting}
+                      />
 
-                    <SygefexSelect
-                      onChange={handleReactSelectChange}
-                      name="educTypeID"
-                      options={getEducTypeOptions}
-                      placeholder={"Type d'enseignement"}
-                      disabled={isSubmitting}
-                    />
-                    <SygefexSelect
-                      onChange={handleReactSelectChange}
-                      name="sessionID"
-                      options={getSessionsOptions}
-                      placeholder={"La Session"}
-                      disabled={isSubmitting}
-                    />
-                    <SygefexSelect
-                      onChange={handleReactSelectChange}
-                      name="examID"
-                      options={getExamsOptions}
-                      placeholder={"L'Examen"}
-                      disabled={isSubmitting}
-                    />
-                    <SygefexSelect
-                      onChange={(value) =>
-                        setFieldValue("centerExamSessionSpecialty", value)
-                      }
-                      name="centerExamSessionSpecialty"
-                      options={getSpecialtyOptions}
-                      placeholder={"La Spécialité"}
-                      disabled={isSubmitting}
-                    />
-                    <SygexInput
-                      name="candCode"
-                      type="text"
-                      label="Code secret candidat"
-                      disabled={isSubmitting}
-                    />
-                  </InputGroup>
-                </AllControls>
-                <AllControls>
-                  <RadioControls>
-                    <RadioButtons>
-                      <FormLabel>Aptitude</FormLabel>
-                      <RadioGroup name="aptitude" className="RadioSet">
-                        <FormikRadio label="Apte" name="aptitude" value="A" />
-                        <FormikRadio label="Inapte" name="aptitude" value="I" />
-                      </RadioGroup>
-                    </RadioButtons>
-                    <RadioButtons>
-                      <FormLabel>Ep Facultative</FormLabel>
-                      <RadioGroup name="Ep Facultative" className="RadioSet">
-                        <FormikRadio
-                          id="EPF1"
-                          label="EPF1"
-                          name="EPF"
-                          value="EPF1"
-                          onClick={facObligCheck}
-                        />
-                        <FormikRadio
-                          id="EPF2"
-                          label="EPF2"
-                          name="EPF"
-                          value="EPF2"
-                          onClick={facObligCheck}
-                        />
+                      <SygefexSelect
+                        onChange={handleReactSelectChange}
+                        name="educTypeID"
+                        options={getEducTypeOptions}
+                        placeholder={"Type d'enseignement"}
+                        disabled={isSubmitting}
+                      />
+                      <SygefexSelect
+                        onChange={handleReactSelectChange}
+                        name="sessionID"
+                        options={getSessionsOptions}
+                        placeholder={"La Session"}
+                        disabled={isSubmitting}
+                      />
+                      <SygefexSelect
+                        onChange={handleReactSelectChange}
+                        name="examID"
+                        options={getExamsOptions}
+                        placeholder={"L'Examen"}
+                        disabled={isSubmitting}
+                      />
+                      <SygefexSelect
+                        onChange={(value) =>
+                          setFieldValue("centerExamSessionSpecialty", value)
+                        }
+                        name="centerExamSessionSpecialty"
+                        options={getSpecialtyOptions}
+                        placeholder={"La Spécialité"}
+                        disabled={isSubmitting}
+                      />
+                      <SygexInput
+                        name="candCode"
+                        type="text"
+                        label="Code secret candidat"
+                        disabled={isSubmitting}
+                      />
+                    </InputGroup>
 
-                        <FormikRadio
-                          id="aucun"
-                          label="Aucun"
-                          name="EPF"
-                          value="aucun"
-                          onClick={facObligCheck}
-                        />
-                      </RadioGroup>
-                    </RadioButtons>
-                  </RadioControls>
-                  <SygefexSelect
-                    id="selectEPF1"
-                    name="group1"
-                    isMulti={true}
-                    options={EPF1Options}
-                    placeholder="Matières fac groupe 1"
-                    disabled={isSubmitting}
-                    isClearable
-                    onChange={handleG1MultiSelectChange}
-                  />
-                  <SygefexSelect
-                    id="selectEPF2"
-                    name="group2"
-                    isMulti={true}
-                    options={EPF2Options}
-                    placeholder="Matières fac groupe 2"
-                    disabled={isSubmitting}
-                    isClearable
-                    onChange={handleG2MultiSelectChange}
-                  />
-                  {g1Options && (
-                    <div style={{ marginTop: 20, lineHeight: "25px" }}>
-                      <div>
-                        <b> All Options Value: </b>
-                        {JSON.stringify(g1Options, null, 2)}
-                      </div>
-                    </div>
-                  )}
-                  {g2Options && (
-                    <div style={{ marginTop: 20, lineHeight: "25px" }}>
-                      <div>
-                        <b> All Options Value: </b>
-                        {JSON.stringify(g2Options, null, 2)}
-                      </div>
-                    </div>
-                  )}
-                  {(g2Options || g1Options) && (
-                    <div style={{ marginTop: 20, lineHeight: "25px" }}>
-                      <div>
-                        <b> All Options Value: </b>
-                        {JSON.stringify(getAllOptions(), null, 2)}
-                      </div>
-                    </div>
-                  )}
-
-                  <ButtonStyled>
-                    <StyledButton
-                      type="submit"
-                      disabled={!(dirty && isValid) || isSubmitting}
-                    >
-                      Valid{isSubmitting ? "ation en cours" : "er"}
-                    </StyledButton>
-                  </ButtonStyled>
-                </AllControls>
+                    <RadioControls>
+                      <RadioButtons>
+                        <FormLabel>Aptitude</FormLabel>
+                        <RadioGroup name="aptitude" className="RadioSet">
+                          <FormikRadio label="Apte" name="aptitude" value="A" />
+                          <FormikRadio
+                            label="Inapte"
+                            name="aptitude"
+                            value="I"
+                          />
+                        </RadioGroup>
+                      </RadioButtons>
+                      <RadioButtons>
+                        <FormLabel>EPF1 Theories</FormLabel>
+                        <RadioGroup name="EPF1" className="RadioSet">
+                          <FormikRadio label="Dessin" name="EPF1" value="D" />
+                          <FormikRadio
+                            label="Education Musicale"
+                            name="EPF1"
+                            value="M"
+                          />
+                          <FormikRadio
+                            label="Education Menagere"
+                            name="EPF1"
+                            value="E"
+                          />
+                          <FormikRadio label="Latin" name="EPF1" value="L" />
+                          <FormikRadio label="Grec" name="EPF1" value="G" />
+                        </RadioGroup>
+                      </RadioButtons>
+                      <RadioButtons>
+                        <FormLabel>EPF2 Travaux Pratiques</FormLabel>
+                        <RadioGroup name="EPF2" className="RadioSet">
+                          <FormikRadio
+                            label="TP Chimie"
+                            name="EPF2"
+                            value="C"
+                          />
+                          <FormikRadio label="TP Info" name="EPF2" value="I" />
+                          <FormikRadio
+                            label="TP Physique"
+                            name="EPF2"
+                            value="P"
+                          />
+                          <FormikRadio label="TP SVT" name="EPF2" value="S" />
+                        </RadioGroup>
+                      </RadioButtons>
+                    </RadioControls>
+                  </TwoGroups>
+                  <div>
+                    <ButtonStyled>
+                      <StyledButton
+                        type="submit"
+                        disabled={!(dirty && isValid) || isSubmitting}
+                      >
+                        Valid{isSubmitting ? "ation en cours" : "er"}
+                      </StyledButton>
+                    </ButtonStyled>
+                  </div>
+                </WholeControls>
               </Form>
             </StyledForm>
           </MiniStyledPage>

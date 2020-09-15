@@ -159,6 +159,8 @@ const createRegistrationMutation = gql`
     $centerExamSessionSpecialty: CenterExamSessionSpecialtyWhereUniqueInput!
     $specialty: SpecialtyWhereUniqueInput!
     $aptitude: String!
+    $EPF1: String!
+    $EPF2: String!
   ) {
     createRegistration(
       candidate: $candidate
@@ -168,6 +170,8 @@ const createRegistrationMutation = gql`
       centerExamSession: $centerExamSession
       centerExamSessionSpecialty: $centerExamSessionSpecialty
       specialty: $specialty
+      EPF1: $EPF1
+      EPF2: $EPF2
       aptitude: $aptitude
     ) {
       id
@@ -478,6 +482,24 @@ const createPhaseMutation = gql`
     createPhase(phaseName: $phaseName, phaseCode: $phaseCode) {
       id
       phaseName
+    }
+  }
+`;
+
+const createAttendanceMutation = gql`
+  mutation createAttendanceMutation(
+    $subjectSpecialty: SubjectSpecialtyWhereUniqueInput!
+    $collected: String!
+    $candExamSecretCode: String!
+    $handin: String!
+  ) {
+    createAttendance(
+      subjectSpecialty: $subjectSpecialty
+      collected: $collected
+      candExamSecretCode: $candExamSecretCode
+      handin: $handin
+    ) {
+      id
     }
   }
 `;
@@ -882,17 +904,6 @@ const updateExaminerMutation = gql`
   }
 `;
 
-const signUpMutation = gql`
-  mutation signUpMutation($email: String!, $name: String!, $password: String!) {
-    signUp(email: $email, name: $name, password: $password) {
-      id
-      email
-      resetToken
-      password
-    }
-  }
-`;
-
 const updateSignUpMutation = gql`
   mutation updateSignUpMutation(
     $email: String!
@@ -975,12 +986,12 @@ export {
   updateRankMutation,
   createPhaseRankMutation,
   createNewCountryMutation,
-  signUpMutation,
   createMultipleCandidatesMutation,
   updateSubjectMutation,
   updateExaminerMutation,
   createCenterExamSessionMutation,
   updateEducationTypeMutation,
+  createAttendanceMutation,
   signInCandidate,
   loginUserMutation,
   updateSignUpMutation,

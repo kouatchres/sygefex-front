@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { MinimStyledPage } from "../styles/StyledPage";
 import Error from "../ErrorMessage.js";
@@ -99,12 +99,6 @@ const NewCenterTakesSpecialty = () => {
   const { data: dataExams, loading: loadingExams, errorExams } = useQuery(
     getAllExamsQuery
   );
-  {
-    loadingExams && <p>loading...</p>;
-  }
-  {
-    errorExams && <Error error={errorExams} />;
-  }
 
   const getExams = dataExams && dataExams.exams;
   console.log(getExams);
@@ -118,12 +112,6 @@ const NewCenterTakesSpecialty = () => {
   const { data: dataSession, loading: loadingSession, errorSession } = useQuery(
     getAllSessionsQuery
   );
-  {
-    loadingSession && <p>loading...</p>;
-  }
-  {
-    errorSession && <Error error={errorSession} />;
-  }
 
   const getSessions = dataSession && dataSession.sessions;
   const refinedSessions = removeTypename(getSessions);
@@ -147,12 +135,6 @@ const NewCenterTakesSpecialty = () => {
         getSessions && getSelectedObject(refinedSessions, state.sessionID),
     },
   });
-  {
-    loadingExamSession && <p>loading...</p>;
-  }
-  {
-    errorExamSession && <Error error={errorExamSession} />;
-  }
 
   console.log(dataExamSession);
   const getExamSessions = dataExamSession && dataExamSession.examSessions;
@@ -169,18 +151,12 @@ const NewCenterTakesSpecialty = () => {
       },
     }
   );
-  {
-    loadingCenter && <p>loading...</p>;
-  }
-  {
-    errorCenter && <Error error={errorCenter} />;
-  }
 
   const getCenterByNumber = dataCenter && dataCenter.centerByNumber;
   const refinedCenter = getCenterByNumber && removeTypename(getCenterByNumber);
   console.log(getCenterByNumber);
 
-  const { data: dataCES, loading: loadingCES, errorCES } = useQuery(
+  const { data: dataCES, loading: loadingCES, error: errorCES } = useQuery(
     getSingleCenterExamSessionQuery,
     {
       skip: !reducedES || !getCenterByNumber,
@@ -190,12 +166,6 @@ const NewCenterTakesSpecialty = () => {
       },
     }
   );
-  {
-    loadingCES && <p>loading...</p>;
-  }
-  {
-    errorCES && <Error error={errorCES} />;
-  }
 
   console.log(dataCES);
   const getCenterExamSessionsByCode =
@@ -214,12 +184,6 @@ const NewCenterTakesSpecialty = () => {
     loading: loadingEducType,
     errorEducType,
   } = useQuery(getAllEducationTypesQuery);
-  {
-    loadingEducType && <p>loading...</p>;
-  }
-  {
-    errorEducType && <Error error={errorEducType} />;
-  }
 
   console.log(dataEducType);
   const getEducationTypes = dataEducType && dataEducType.educationTypes;
@@ -238,12 +202,6 @@ const NewCenterTakesSpecialty = () => {
     skip: !state.educTypeID,
     variables: { id: state.educTypeID },
   });
-  {
-    loadingSpecialty && <p>loading...</p>;
-  }
-  {
-    errorSpecialty && <Error error={errorSpecialty} />;
-  }
 
   console.log(dataSpecialty);
 
@@ -267,7 +225,7 @@ const NewCenterTakesSpecialty = () => {
       method="POST"
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={async (values, actions) => {
+      onSubmit={async (values, { resetForm, setSubmitting }) => {
         const res = await createCenterExamSessionSpecialty({
           variables: {
             specialty:
@@ -279,8 +237,8 @@ const NewCenterTakesSpecialty = () => {
         setTimeout(() => {
           console.log(JSON.stringify(values, null, 2));
           console.log(res.data.createCenterExamSessionSpecialty);
-          actions.resetForm(true);
-          actions.setSubmitting(false);
+          resetForm(true);
+          setSubmitting(false);
         }, 200);
       }}
     >
@@ -289,6 +247,13 @@ const NewCenterTakesSpecialty = () => {
           <MinimStyledPage>
             <h4>Spécialités offertes par Centre</h4>
             <Error error={error} />
+            <Error error={errorExams} />
+            <Error error={errorSession} />
+            <Error error={errorCenter} />
+            <Error error={errorCES} />
+            <Error error={errorExamSession} />
+            <Error error={errorSpecialty} />
+            <Error error={errorEducType} />
             <StyledForm
               disabled={
                 isSubmitting ||

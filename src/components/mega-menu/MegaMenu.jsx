@@ -198,6 +198,9 @@ const MegaMenu = () => (
                   <Link href="/creates/newRegion">
                     <a>Nouvelle Region</a>
                   </Link>
+                  <Link href="/lists/allRegionsList">
+                    <a>Liste Regions</a>
+                  </Link>
                   <Link href="/modify/modifyRegion">
                     <a>Modifier Region</a>
                   </Link>
@@ -208,6 +211,9 @@ const MegaMenu = () => (
                   <hr />
                   <Link href="/creates/newDivision">
                     <a>Nouveau Departement</a>
+                  </Link>
+                  <Link href="/lists/divisionList">
+                    <a>Liste Departements</a>
                   </Link>
                   <Link href="/modify/modifyDivision">
                     <a>Modifier Department</a>
@@ -229,6 +235,9 @@ const MegaMenu = () => (
                   <Link href="/creates/newTown">
                     <a>Nouvelle Ville</a>
                   </Link>
+                  <Link href="/lists/townList">
+                    <a>Liste des Villes</a>
+                  </Link>
                   <Link href="/modify/modifyTown">
                     <a>Modifier Ville</a>
                   </Link>
@@ -240,6 +249,16 @@ const MegaMenu = () => (
                     <a>Inscrire Centre D'examen'</a>
                   </Link>
                   <Link href="/modify/modifyCenter">
+                    <a>Modifier Centre</a>
+                  </Link>
+                </ul>
+                <ul>
+                  <h3 className="menu-category">Presence A l'Examen</h3>
+                  <hr />
+                  <Link href="/creates/newAttendance">
+                    <a>Prensence a l'Examen</a>
+                  </Link>
+                  <Link href="/modify/modifyAttendance">
                     <a>Modifier Centre</a>
                   </Link>
                 </ul>
@@ -281,6 +300,9 @@ const MegaMenu = () => (
                   <h3 className="menu-category">Inscription</h3>
                   <hr />
                   <Link href="/creates/newRegister">
+                    <a> Nouvelle Inscription</a>
+                  </Link>
+                  <Link href="/show/list/registration/CenterRegistrationList">
                     <a> Nouvelle Inscription</a>
                   </Link>
                   <Link href="/modify/modifyRegistration">
@@ -412,6 +434,9 @@ const MegaMenu = () => (
                   <hr />
                   <Link href="/creates/newSubject">
                     <a>Nouvelle Matière </a>
+                  </Link>
+                  <Link href="/lists/subjectList">
+                    <a>Liste des Matières </a>
                   </Link>
                   <Link href="/modify/modifySubject">
                     <a>Modifier Matière</a>
@@ -625,6 +650,9 @@ const MegaMenu = () => (
                 <ul>
                   <h3 className="menu-category">Resultats</h3>
                   <hr />
+                  <Link href="/show/registrationList">
+                    <a>Inscrit par centre </a>
+                  </Link>
                   <Link href="/show/genCenterResults">
                     <a>Resultats Centre</a>
                   </Link>
@@ -636,14 +664,14 @@ const MegaMenu = () => (
                 <ul>
                   <h3 className="menu-category">Listes</h3>
                   <hr />
-                  <Link href="/show/lists/centersPerTown">
+                  <Link href="/show/lists/center/centersPerTown">
                     <a>Centres par Ville</a>
                   </Link>
-                  <Link href="/show/lists/subjPerSpecialty">
+                  <Link href="/show/lists/subjects/subjectSeriesList">
                     <a>Matieres par Spécialité</a>
                   </Link>
-                  <Link href="/show/lists/subjPerSpecialty">
-                    <a>Matieres par Spécialité</a>
+                  <Link href="/show/lists/subjects/subjectList">
+                    <a>Toute les Matieres </a>
                   </Link>
 
                   <hr />

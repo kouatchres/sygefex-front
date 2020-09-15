@@ -191,8 +191,10 @@ const StyledForm = styled.div`
   margin: 0 3rem;
   padding: 0.6rem;
   font-size: 1.7rem;
-  border-radius: 0.5rem;
-  border: 0.09rem solid ${(props) => props.theme.blues[2]};
+  border-radius: 0.9rem;
+  border: 0.001rem solid ${(props) => props.theme.blues[2]};
+  border-top: 1rem solid ${(props) => props.theme.blues[2]};
+  border-bottom: 1rem solid ${(props) => props.theme.tableRed};
   box-shadow: ${(props) => props.theme.formBS};
 
   min-width: 20rem;

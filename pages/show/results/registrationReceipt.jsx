@@ -1,11 +1,12 @@
 import React from "react";
 import RegistrationReceipt from "../../../src/components/registration/RegistrationReceipt"
+import GatedSignin from "../../../src/components/user/GatedSignin";
 
-function candResults({ query }) {
+const candResults=({ query }) =>{
     return (
-        <div>
+        <GatedSignin>
             <RegistrationReceipt id={query.id} />
-        </div>
+        </GatedSignin>
     );
 }
 export default candResults;

@@ -16,7 +16,6 @@ import {
   StyledForm,
   ButtonStyled,
   StyledButton,
-  SygefexRadio,
 } from "../utils/FormInputs";
 import useForm from "../utils/useForm";
 import Error from "../ErrorMessage.js";
@@ -116,12 +115,6 @@ const CreateTownHook = () => {
   const [createTown, { loading, error }] = useMutation(createTownMutation, {
     refetchQueries: ["getAllTownsQuery"],
   });
-
-  const makeChoice = [
-    { key: "Group 1", value: "group1" },
-    { key: "Group 2", value: "group2" },
-    { key: "Group 3", value: "group3" },
-  ];
 
   return (
     <Formik

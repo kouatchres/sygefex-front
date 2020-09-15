@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { StyledButton, ButtonStyled, StyledForm } from "../utils/FormInputs";
+import { StyledForm } from "../utils/FormInputs";
 import { Formik, Form } from "formik";
 import useForm from "../utils/useForm";
 import { MiniStyledPage } from "../styles/StyledPage";
 import { format } from "date-fns";
 import { getCandidateRegistrationInfoQuery } from "../queries&Mutations&Functions/Queries";
-import Error from "../ErrorMessage";
 import styled from "styled-components";
 import { useApolloClient } from "@apollo/react-hooks";
 import SubjectList from "./SubjectList";
@@ -129,11 +128,13 @@ const RegistrationReceipt = ({ id }) => {
 
   useEffect(() => {
     loadRegistrationData();
-  }, []);
+  }, [id]);
 
   console.log(state.registration);
   const {
-    candExamSecretCode,
+    aptitude,
+    EPF1,
+    EPF2,
     candidate,
     centerExamSessionSpecialty,
     createdAt,
@@ -155,11 +156,10 @@ const RegistrationReceipt = ({ id }) => {
     cand2ndName,
     cand3rdName,
     email,
+    gender,
     placeOfBirth,
     dateOfBirth,
-    gender,
   } = { ...candidate };
-  const { genderName } = { ...gender };
 
   const initialValues = {
     candCode: "",
@@ -169,6 +169,8 @@ const RegistrationReceipt = ({ id }) => {
     cand3rdName: "",
     email: "",
     gender: "",
+    EPF1: "",
+    EPF2: "",
     placeOfBirth: "",
     dateOfBirth: "",
     candExamSecretCode: "",
@@ -210,15 +212,12 @@ const RegistrationReceipt = ({ id }) => {
                     <span>
                       <strong> Numero: </strong> {candRegistrationNumber}
                     </span>
+                    <strong> Date: </strong>
+                    <span>{format(createdAt, "DD  MMM, YYYY , HH:MM:SS")}</span>
                     <span>
-                      <strong> Date: </strong>
-                      {format(createdAt, "d  MMM, yyyy , HH:MM:SS")}
+                      <strong> Aptitude: </strong> {aptitude}
                     </span>
 
-                    <span>
-                      <strong> Specialization: </strong>
-                      <hr />
-                    </span>
                     <span>
                       <strong> SERIE: </strong>
                       {specialtyName}
@@ -257,19 +256,19 @@ const RegistrationReceipt = ({ id }) => {
                     </p>
                     <p>
                       <span>
+                        <strong> Date: </strong>
+                        {format(dateOfBirth, "DD MMMM, YYYY ")}
+                      </span>
+                    </p>
+                    <p>
+                      <span>
                         <strong> Lieu: </strong> {placeOfBirth}
                       </span>
                     </p>
 
                     <p>
                       <span>
-                        <strong> Date: </strong>
-                        {format(dateOfBirth, "d MMMM, YYYY ")}
-                      </span>
-                    </p>
-                    <p>
-                      <span>
-                        <strong> Sexe: </strong> {genderName}
+                        <strong> Sexe: </strong> {gender}
                       </span>
                     </p>
 
@@ -279,20 +278,27 @@ const RegistrationReceipt = ({ id }) => {
                         {email}
                       </span>
                     </p>
+                    <p>
+                      <span>
+                        <hr />
+                        <strong>Epreuves Facultatives: </strong>
+                        <hr />
+                      </span>
+                    </p>
+                    <p>
+                      <span>
+                        <strong> EPF1: </strong>
+                        {EPF1}
+                      </span>
+                    </p>
+                    <p>
+                      <span>
+                        <strong> EPF2: </strong> {EPF2}
+                      </span>
+                    </p>
                   </FirstInfo>
                 </ResultsHeader>
-                <SubjectTitles>
-                  <TitleItem>
-                    <span>Matiere</span>
-                  </TitleItem>
-                  <TitleItem>
-                    <span>Coeff </span>
-                  </TitleItem>
-                </SubjectTitles>
-                {subjectSpecialty &&
-                  subjectSpecialty.map((item) => (
-                    <SubjectList key={item.id} subjSpec={item} />
-                  ))}
+
                 <Signature>
                   <FirstInfo>Candidat:</FirstInfo>
                   <FirstInfo>Proviseur/Directeur:</FirstInfo>

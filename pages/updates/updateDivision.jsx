@@ -1,19 +1,12 @@
 import React from "react";
 import UpdateDivision from "../../src/components/division/UpdateDivision";
-import styled from "styled-components";
+import GatedSignin from "../../src/components/user/GatedSignin";
 
-const CenteredStyles = styled.div`
-  margin: 0 auto;
-  width: 40vw;
-  h5 {
-    text-align: center;
-  }
-`;
 const updateDivision = ({ query }) => {
   return (
-    <CenteredStyles>
+    <GatedSignin>
       <UpdateDivision id={query.id} />
-    </CenteredStyles>
+    </GatedSignin>
   );
 };
 export default updateDivision;

@@ -117,12 +117,6 @@ const EnterNewMarks = () => {
     variables: { id: state.specialtyID },
   });
 
-  {
-    loadingSubjSer && <p>loading...</p>;
-  }
-  {
-    errSubjSer && <Error error={errSubjSer} />;
-  }
   console.log(dataSubjSpecialty);
   const getSubjSpecialty = dataSubjSpecialty && dataSubjSpecialty.specialty;
   const { subjectSpecialty } = { ...getSubjSpecialty };

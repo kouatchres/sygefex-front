@@ -7,7 +7,7 @@ import {
   usePagination,
 } from "react-table";
 import { StyledButton, StyledForm } from "../../utils/FormInputs";
-import { Filters, DefaultColumnFilter } from "./Filters";
+import { Filters, DefaultColumnFilter } from "../../utils/Filters";
 import styled from "styled-components";
 
 const TableStyled = styled.table`
@@ -16,7 +16,7 @@ const TableStyled = styled.table`
   position: sticky;
   border-radius: 0.6rem;
   align-self: center;
-  border: 0.15rem solid ${(props) => props.theme.pureWhite};
+  border: 0.1rem solid ${(props) => props.theme.pureWhite};
   box-shadow: ${(props) => props.theme.formBS2};
 `;
 
@@ -25,7 +25,7 @@ const TableHeadStyled = styled.thead`
   background-color: ${(props) => props.theme.darkRed};
   input {
     border-radius: 0.5rem;
-    width: 11rem;
+    width: 8rem;
     background: ${(props) => props.theme.warna};
   }
   select {

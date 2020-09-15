@@ -11,11 +11,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/creates/newSpecialty": [
+    "/creates/newMarks": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/creates/newSubjectSpecialty": [
+    "/creates/newAttendance": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
