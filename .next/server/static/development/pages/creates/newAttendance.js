@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -334,12 +334,7 @@ var CreateAttendance = function CreateAttendance() {
     handin: "",
     subjectSpecialty: "",
     candExamSecretCode: ""
-  }; // const getObjectFromID = (suppliedID) => {
-  //   const theObject = {
-  //     id: `${suppliedID}`,
-  //   };
-  //   return theObject;
-  // };
+  };
 
   var handleChange = function handleChange(e) {
     var _e$target = e.target,
@@ -577,6 +572,7 @@ var CreateAttendance = function CreateAttendance() {
                 return createAttendance({
                   variables: _objectSpread({}, values, {
                     candExamSecretCode: values.candExamSecretCode.value,
+                    centerExamSessionSpecialty: Object(_queries_Mutations_Functions_Functions__WEBPACK_IMPORTED_MODULE_10__["getObjectFromID"])(getCESSSubjIDs[0]),
                     subjectSpecialty: refinedSubjectSpecialty && Object(_queries_Mutations_Functions_Functions__WEBPACK_IMPORTED_MODULE_10__["getObjectFromID"])(values.subjectSpecialty.value)
                   })
                 });
@@ -604,7 +600,7 @@ var CreateAttendance = function CreateAttendance() {
     }(),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 311
+      lineNumber: 303
     },
     __self: this
   }, function (_ref4) {
@@ -615,20 +611,20 @@ var CreateAttendance = function CreateAttendance() {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_styles_StyledPage__WEBPACK_IMPORTED_MODULE_3__["MinimStyledPage"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 336
+        lineNumber: 329
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 337
+        lineNumber: 330
       },
       __self: this
     }, "Pr\xE9sence des candidats a l'Ecrit"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_ErrorMessage_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
       error: error || errCenter || errExams || errSession || errExamSessions || errSpecialtyCES || errEducType || errSubjSpecialty || errReg,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 338
+        lineNumber: 331
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_utils_FormInputs__WEBPACK_IMPORTED_MODULE_9__["StyledForm"], {
@@ -636,25 +632,25 @@ var CreateAttendance = function CreateAttendance() {
       "aria-busy": isSubmitting || loadingExams || loadingSession || loadingCES || loadingExamSession || loading || loadingSpecialtyCES || loadingEducType || loadingSubjSpecialty || loadingCenter || loadingReg,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 352
+        lineNumber: 345
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_8__["Form"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 380
+        lineNumber: 373
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(WholeControls, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 381
+        lineNumber: 374
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(InputGroup, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 382
+        lineNumber: 375
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_utils_FormInputs__WEBPACK_IMPORTED_MODULE_9__["SygexInput"], {
@@ -664,7 +660,7 @@ var CreateAttendance = function CreateAttendance() {
       label: " Nom du centre",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 383
+        lineNumber: 376
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_utils_FormInputs__WEBPACK_IMPORTED_MODULE_9__["SygexInput"], {
@@ -676,7 +672,7 @@ var CreateAttendance = function CreateAttendance() {
       disabled: isSubmitting,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 389
+        lineNumber: 382
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_utils_FormInputs__WEBPACK_IMPORTED_MODULE_9__["SygefexSelect"], {
@@ -687,7 +683,7 @@ var CreateAttendance = function CreateAttendance() {
       disabled: isSubmitting,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 398
+        lineNumber: 391
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_utils_FormInputs__WEBPACK_IMPORTED_MODULE_9__["SygefexSelect"], {
@@ -698,7 +694,7 @@ var CreateAttendance = function CreateAttendance() {
       disabled: isSubmitting,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 405
+        lineNumber: 398
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_utils_FormInputs__WEBPACK_IMPORTED_MODULE_9__["SygefexSelect"], {
@@ -709,7 +705,7 @@ var CreateAttendance = function CreateAttendance() {
       disabled: isSubmitting,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 412
+        lineNumber: 405
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_utils_FormInputs__WEBPACK_IMPORTED_MODULE_9__["SygefexSelect"], {
@@ -720,7 +716,7 @@ var CreateAttendance = function CreateAttendance() {
       disabled: isSubmitting,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 419
+        lineNumber: 412
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_utils_FormInputs__WEBPACK_IMPORTED_MODULE_9__["SygefexSelect"], {
@@ -733,7 +729,7 @@ var CreateAttendance = function CreateAttendance() {
       disabled: isSubmitting,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 426
+        lineNumber: 419
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_utils_FormInputs__WEBPACK_IMPORTED_MODULE_9__["SygefexSelect"], {
@@ -746,25 +742,25 @@ var CreateAttendance = function CreateAttendance() {
       disabled: isSubmitting,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 435
+        lineNumber: 428
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(RadioControls, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 445
+        lineNumber: 438
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(RadioButtons, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 446
+        lineNumber: 439
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["FormLabel"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 447
+        lineNumber: 440
       },
       __self: this
     }, "Collecte Des Materiels"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["RadioGroup"], {
@@ -772,7 +768,7 @@ var CreateAttendance = function CreateAttendance() {
       className: "RadioSet",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 448
+        lineNumber: 441
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_dccs_react_formik_mui__WEBPACK_IMPORTED_MODULE_13__["FormikRadio"], {
@@ -781,7 +777,7 @@ var CreateAttendance = function CreateAttendance() {
       value: "Oui",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 449
+        lineNumber: 442
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_dccs_react_formik_mui__WEBPACK_IMPORTED_MODULE_13__["FormikRadio"], {
@@ -790,19 +786,19 @@ var CreateAttendance = function CreateAttendance() {
       value: "Non",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 454
+        lineNumber: 447
       },
       __self: this
     }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(RadioButtons, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 461
+        lineNumber: 454
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["FormLabel"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 462
+        lineNumber: 455
       },
       __self: this
     }, "Remise Des Copies"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__["RadioGroup"], {
@@ -810,7 +806,7 @@ var CreateAttendance = function CreateAttendance() {
       className: "RadioSet",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 463
+        lineNumber: 456
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_dccs_react_formik_mui__WEBPACK_IMPORTED_MODULE_13__["FormikRadio"], {
@@ -819,7 +815,7 @@ var CreateAttendance = function CreateAttendance() {
       value: "Oui",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 464
+        lineNumber: 457
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_dccs_react_formik_mui__WEBPACK_IMPORTED_MODULE_13__["FormikRadio"], {
@@ -828,19 +824,19 @@ var CreateAttendance = function CreateAttendance() {
       value: "Non",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 465
+        lineNumber: 458
       },
       __self: this
     }))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 471
+        lineNumber: 464
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_utils_FormInputs__WEBPACK_IMPORTED_MODULE_9__["ButtonStyled"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 472
+        lineNumber: 465
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_utils_FormInputs__WEBPACK_IMPORTED_MODULE_9__["StyledButton"], {
@@ -848,7 +844,7 @@ var CreateAttendance = function CreateAttendance() {
       disabled: !(dirty && isValid) || isSubmitting,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 473
+        lineNumber: 466
       },
       __self: this
     }, "Valid", isSubmitting ? "ation en cours" : "er")))))));
@@ -1357,7 +1353,7 @@ function _templateObject33() {
 }
 
 function _templateObject32() {
-  var data = _taggedTemplateLiteral(["\n  mutation createAttendanceMutation(\n    $subjectSpecialty: SubjectSpecialtyWhereUniqueInput!\n    $collected: String!\n    $candExamSecretCode: String!\n    $handin: String!\n  ) {\n    createAttendance(\n      subjectSpecialty: $subjectSpecialty\n      collected: $collected\n      candExamSecretCode: $candExamSecretCode\n      handin: $handin\n    ) {\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  mutation createAttendanceMutation(\n    $subjectSpecialty: SubjectSpecialtyWhereUniqueInput!\n    $centerExamSessionSpecialty: CenterExamSessionSpecialtyWhereUniqueInput!\n    $collected: String!\n    $candExamSecretCode: String!\n    $handin: String!\n  ) {\n    createAttendance(\n      subjectSpecialty: $subjectSpecialty\n      centerExamSessionSpecialty: $centerExamSessionSpecialty\n      collected: $collected\n      candExamSecretCode: $candExamSecretCode\n      handin: $handin\n    ) {\n      id\n    }\n  }\n"]);
 
   _templateObject32 = function _templateObject32() {
     return data;
@@ -2367,7 +2363,7 @@ function _templateObject35() {
 }
 
 function _templateObject34() {
-  var data = _taggedTemplateLiteral(["\n  query getAllSubjectSpecialtiesOfASpecialtyQuery($id: ID!) {\n    specialty(id: $id) {\n      id\n      subjectSpecialty {\n        id\n        subject {\n          id\n          subjectName\n          subjectCode\n        }\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getAllSubjectSpecialtiesOfASpecialtyQuery($id: ID!) {\n    specialty(id: $id) {\n      id\n      subjectSpecialty {\n        id\n        subject{\n          id\n          subjectName\n          subjectCode\n        }\n      }\n    }\n  }\n"]);
 
   _templateObject34 = function _templateObject34() {
     return data;
@@ -2387,7 +2383,7 @@ function _templateObject33() {
 }
 
 function _templateObject32() {
-  var data = _taggedTemplateLiteral(["\n  query getAllSubjectsOfAnEducTypeQuery($id: ID!) {\n    educationType(id: $id) {\n      id\n      educationTypeName\n      subject(orderBy: subjectName_ASC) {\n        id\n        subjectName\n        subjectCode\n        subjectType\n        subjectGroup\n        specialty {\n          id\n        }\n        educType {\n          id\n        }\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getAllSubjectsOfAnEducTypeQuery($id: ID!) {\n    educationType(id: $id) {\n      id\n      educationTypeName\n      subject(orderBy: subjectName_ASC) {\n        id\n        subjectName\n        subjectCode\n        subjectType\n        subjectGroup\n      }\n    }\n  }\n"]);
 
   _templateObject32 = function _templateObject32() {
     return data;
@@ -3606,7 +3602,7 @@ var useForm = function useForm(initialValues) {
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!***********************************************!*\
   !*** multi ./pages/creates/newAttendance.jsx ***!
   \***********************************************/

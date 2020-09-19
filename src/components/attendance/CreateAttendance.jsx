@@ -104,14 +104,6 @@ const CreateAttendance = () => {
     subjectSpecialty: "",
     candExamSecretCode: "",
   };
-
-  // const getObjectFromID = (suppliedID) => {
-  //   const theObject = {
-  //     id: `${suppliedID}`,
-  //   };
-  //   return theObject;
-  // };
-
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     const val = type === "number" ? parseInt(value) : value;
@@ -317,6 +309,7 @@ const CreateAttendance = () => {
           variables: {
             ...values,
             candExamSecretCode: values.candExamSecretCode.value,
+            centerExamSessionSpecialty:getObjectFromID(getCESSSubjIDs[0]),
             subjectSpecialty:
               refinedSubjectSpecialty &&
               getObjectFromID(values.subjectSpecialty.value),

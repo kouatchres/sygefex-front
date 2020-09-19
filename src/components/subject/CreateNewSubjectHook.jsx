@@ -19,12 +19,9 @@ import {
   removeTypename,
 } from "../queries&Mutations&Functions/Functions";
 import {
-  FormikCheckbox,
-  FormikDatepicker,
-  FormikSelect,
-  FormikRadio,
+  FormikRadio
 } from "@dccs/react-formik-mui";
-import { FormControl, FormLabel, RadioGroup } from "@material-ui/core";
+import { FormLabel, RadioGroup } from "@material-ui/core";
 
 const InputGroup = styled.div`
   display: flex;
@@ -116,18 +113,12 @@ const CreateNewSubject = () => {
   useEffect(() => {
     document.getElementById("groupButtons").style.display = "none";
   }, []);
+
   const {
     data: dataEducType,
     loading: loadingEducType,
-    error: errEducType,
+    error: errorEducType,
   } = useQuery(getAllEducationTypesQuery);
-
-  {
-    loadingEducType && <p>Loading...</p>;
-  }
-  {
-    errEducType && <Error error={errEducType} />;
-  }
 
   const getEducationTypes = dataEducType && dataEducType.educationTypes;
   const refinedEducTypes =
@@ -168,6 +159,7 @@ const CreateNewSubject = () => {
           <MiniStyledPage>
             <h4>Nouvelle Matière</h4>
             <Error error={errorSubj} />
+            <Error error={errorEducType} />
             <StyledForm
               disabled={isSubmitting || loadingEducType || loadingSubj}
               aria-busy={isSubmitting || loadingEducType || loadingSubj}
@@ -203,13 +195,14 @@ const CreateNewSubject = () => {
                           id="autres"
                           label="Autres"
                           name="subjectType"
-                          value="compulsory"
+                          value="Obligatoire"
+                          checked={true}
                           onClick={facObligCheck}
                         />
                         <FormikRadio
                           label="Facultative"
                           name="subjectType"
-                          value="optional"
+                          value="Facultative"
                           id="facChoice"
                           onClick={facObligCheck}
                         />

@@ -1,12 +1,12 @@
 import React from "react";
-import NewRegSubjectToSpecialty from "../../src/components/subjectSpecialty/NewRegSubjectToSpecialty";
+import SpecialtyTakesSubjects from "../../src/components/subjectSpecialty/SpecialtyTakesSubjects";
 import GatedSignin from "../../src/components/user/GatedSignin";
 
 const NewSubjectSpecialty = () => {
   return (
     <div>
       <GatedSignin>
-        <NewRegSubjectToSpecialty />
+        <SpecialtyTakesSubjects />
       </GatedSignin>
     </div>
   );

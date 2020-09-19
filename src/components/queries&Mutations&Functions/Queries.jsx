@@ -773,12 +773,6 @@ const getAllSubjectsOfAnEducTypeQuery = gql`
         subjectCode
         subjectType
         subjectGroup
-        specialty {
-          id
-        }
-        educType {
-          id
-        }
       }
     }
   }
@@ -805,7 +799,7 @@ const getAllSubjectSpecialtiesOfASpecialtyQuery = gql`
       id
       subjectSpecialty {
         id
-        subject {
+        subject{
           id
           subjectName
           subjectCode

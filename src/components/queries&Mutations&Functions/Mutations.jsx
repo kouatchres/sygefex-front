@@ -489,12 +489,14 @@ const createPhaseMutation = gql`
 const createAttendanceMutation = gql`
   mutation createAttendanceMutation(
     $subjectSpecialty: SubjectSpecialtyWhereUniqueInput!
+    $centerExamSessionSpecialty: CenterExamSessionSpecialtyWhereUniqueInput!
     $collected: String!
     $candExamSecretCode: String!
     $handin: String!
   ) {
     createAttendance(
       subjectSpecialty: $subjectSpecialty
+      centerExamSessionSpecialty: $centerExamSessionSpecialty
       collected: $collected
       candExamSecretCode: $candExamSecretCode
       handin: $handin
@@ -540,7 +542,7 @@ const registerSubjectSpecialtyMutation = gql`
   }
 `;
 
-const registerNewSubjectSpecialtyMutation = gql`
+const  registerNewSubjectSpecialtyMutation = gql`
   mutation registerNewSubjectSpecialtyMutation(
     $specialty: SpecialtyWhereUniqueInput!
     $subject: SubjectWhereUniqueInput!
