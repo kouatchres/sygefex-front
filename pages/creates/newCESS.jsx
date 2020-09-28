@@ -1,10 +1,10 @@
 import React from "react";
-import NewCenterTakesSpecialtyHook from "../../src/components/centerExamSessionSpecialty/NewCenterTakesSpecialtyHook";
+import CenterTakesSpecialty from "../../src/components/centerExamSessionSpecialty/CenterTakesSpecialty";
 
 const newCESS = () => {
   return (
     <div>
-      <NewCenterTakesSpecialtyHook />
+      <CenterTakesSpecialty />
     </div>
   );
 };

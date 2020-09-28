@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Query } from "react-apollo";
 import Form from "../styles/Form";
 import { MiniStyledPage } from "../styles/StyledPage";
 import { getExaminerRegistrationQuery } from "../queries&Mutations&Functions/Queries";
 import Error from "../ErrorMessage";
 import styled from "styled-components";
+import {Formik, Form} from 'formik'
+import { useApolloClient } from "@apollo/react-hooks";
 
 const ResultsHeader = styled.div`
   display: grid;
@@ -72,17 +73,29 @@ const FirstInfo = styled.div`
 `;
 
 
-class ExaminerRegistrationReceipt extends Component {
-    static propTypes = { id: PropTypes.string.isRequired };
-    render() {
-        return (
-            <Query query={getExaminerRegistrationQuery} variables={{ id: this.props.id }}>
-                {({ data, error, loading }) => {
-                    { loading && <p>...Loading</p> }
-                    { error && <Error error={error} /> }
-                    console.log(data);
+const ExaminerRegistrationReceipt =({id})=> {
+    // static propTypes = { id: PropTypes.string.isRequired };
+    const [state, setState] = useState({}) 
+    const client = useApolloClient()
+    
+    const loadingExaminerData =async(id)=>{
+
+        const { error, data}= await client.query({
+            query:getExaminerRegistrationQuery,
+            variables:{id}
+        })
+        { error && <Error error={error} /> }
+         console.log(data);
                     const { centerExamSessionExaminer } = data;
-                    const { examiner, centerExamSession, phaseRank } = { ...centerExamSessionExaminer };
+         setState(centerExamSessionExaminer)          
+
+    }
+      useEffect(() => {
+        loadingExaminerData()
+    }, [])
+    
+    
+     const { examiner, centerExamSession, phaseRank } = { ...state.centerExamSessionExaminer };
                     const { examSession, center } = { ...centerExamSession }
                     const { exam, session } = { ...examSession }
                     const { centerName } = center
@@ -98,18 +111,37 @@ class ExaminerRegistrationReceipt extends Component {
                         gender
                     } = { ...examiner }
 
-                    return (
+                     const initialValues = {
+    candCode: "",
+    image: "",
+    cand1stName: "",
+    cand2ndName: "",
+    cand3rdName: "",
+    email: "",
+    gender: "",
+    EPF1: "",
+    EPF2: "",
+    placeOfBirth: "",
+    dateOfBirth: "",
+    candExamSecretCode: "",
+  };
+
+
+  
+    return (
+        <Formik  initialValues={initialValues}>
+       
+        {({isSubmitting,values})=>(
+       
+           
                         <MiniStyledPage>
-                            <Form
-                                onSubmit={e => {
-                                    e.preventDefault();
-                                }}
-                            >
+
+                          
                                 <h4>
-                                    Confirmation de poste d'Examinateur: {examiner1stName} {examiner2ndName} {examinerOtherNames}
+                                    Confirmation de poste de l'Examinateur: {examiner1stName} {examiner2ndName} {examinerOtherNames}
                                 </h4>
-                                <Error error={error} />
-                                <FieldSetStyled disabled={loading} aria-busy={loading}>
+                                  <StyledForm disabled={isSubmitting } aria-busy={isSubmitting }>
+                                <Form>
                                     <SchoolInfoBlock>
                                         <SchoolInfo>
                                             <span>
@@ -207,15 +239,14 @@ class ExaminerRegistrationReceipt extends Component {
 
                                         </FirstInfo>
                                     </ResultsHeader>
-
-                                </FieldSetStyled>
-                            </Form>
+                                    
+                                    </Form>
+                                    </StyledForm>
                         </MiniStyledPage>
-                    );
-                }}
-            </Query>
+        )}
+        </Formik>
+                  
         );
-    }
 }
 
 export default ExaminerRegistrationReceipt;

@@ -61,12 +61,7 @@ const NewCenterHooks = () => {
   const { data: dataRegions, loading: loadingRegs, error: errRegs } = useQuery(
     getAllRegionsQuery
   );
-  {
-    loadingRegs && <p>loading...</p>;
-  }
-  {
-    errRegs && <Error error={errRegs} />;
-  }
+ 
   console.log(dataRegions);
   const getRegions = dataRegions && dataRegions.regions;
   console.log(getRegions);
@@ -83,12 +78,7 @@ const NewCenterHooks = () => {
     skip: !state.regionID,
     variables: { id: state.regionID },
   });
-  {
-    loadingRegion && <p>loading...</p>;
-  }
-  {
-    errRegion && <Error error={errRegion} />;
-  }
+  
   console.log(dataRegion);
   const getRegion = dataRegion && dataRegion.region;
   const { division } = { ...getRegion };
@@ -107,12 +97,7 @@ const NewCenterHooks = () => {
     skip: !state.divisionID,
     variables: { id: state.divisionID },
   });
-  {
-    loadingDiv && <p>loading...</p>;
-  }
-  {
-    errDivision && <Error error={errDivision} />;
-  }
+  
   console.log(dataDivision);
   const getDivision = dataDivision && dataDivision.division;
   const { subDivision } = { ...getDivision };
@@ -129,12 +114,7 @@ const NewCenterHooks = () => {
     skip: !state.subDivID,
     variables: { id: state.subDivID },
   });
-  {
-    loadingSubDiv && <p>loading...</p>;
-  }
-  {
-    errSubDivision && <Error error={errSubDivision} />;
-  }
+ 
   console.log(dataSubDivision);
   const getSubDivision = dataSubDivision && dataSubDivision.subDivision;
   const { town } = { ...getSubDivision };
@@ -170,17 +150,19 @@ const NewCenterHooks = () => {
         return (
           <MinimStyledPage>
             <h4>Nouveau Centre </h4>
-            <Error error={error} />
+            <Error error={error  ||errSubDivision ||errRegs ||errRegion||errDivision } />
             <StyledForm
               disabled={
                 isSubmitting ||
                 loadingRegion ||
+                loadingRegs ||
                 loadingDiv ||
                 loadingSubDiv 
               }
               aria-busy={
                 isSubmitting ||
                 loadingRegion ||
+                loadingRegs ||
                 loadingDiv ||
                 loadingSubDiv 
               }

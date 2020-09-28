@@ -79,12 +79,7 @@ const CreateNewCESExaminer = () => {
     setState({ [name]: val });
   };
 
-  const makeCenterVariableObject = (centerCodeValue) => {
-    const storedCenter = {
-      centerNumber: `${centerCodeValue}`,
-    };
-    return storedCenter;
-  };
+
 
   const makeExaminerObject = (profCodeValue) => {
     const storedProf = {
@@ -92,27 +87,11 @@ const CreateNewCESExaminer = () => {
     };
     return storedProf;
   };
-  const makeCESSObject = (candCodeValue) => {
-    const objCESS = {
-      id: `${candCodeValue}`,
-    };
-    return objCESS;
-  };
-  const onSelectCustomerHandler = (data, setFieldValue) => {
-    setFieldValue("customerName", data.name);
-    setFieldValue("customerId", data.id);
-  };
-
+ 
   const { data: dataExams, loading: loadingExams, errorExams } = useQuery(
     getAllExamsQuery
   );
-  {
-    loadingExams && <p>loading...</p>;
-  }
-  {
-    errorExams && <Error error={errorExams} />;
-  }
-
+  
   const getExams = dataExams && dataExams.exams;
   console.log(getExams);
   const removeExamName =
@@ -125,12 +104,7 @@ const CreateNewCESExaminer = () => {
   const { data: dataSession, loading: loadingSession, errorSession } = useQuery(
     getAllSessionsQuery
   );
-  {
-    loadingSession && <p>loading...</p>;
-  }
-  {
-    errorSession && <Error error={errorSession} />;
-  }
+  
 
   const getSessions = dataSession && dataSession.sessions;
   const refinedSessions = removeTypename(getSessions);
@@ -154,12 +128,7 @@ const CreateNewCESExaminer = () => {
         getSessions && getSelectedObject(refinedSessions, state.sessionID),
     },
   });
-  {
-    loadingExamSession && <p>loading...</p>;
-  }
-  {
-    errorExamSession && <Error error={errorExamSession} />;
-  }
+ 
 
   console.log(dataExamSession);
   const getExamSessions = dataExamSession && dataExamSession.examSessions;
@@ -176,12 +145,7 @@ const CreateNewCESExaminer = () => {
       },
     }
   );
-  {
-    loadingCenter && <p>loading...</p>;
-  }
-  {
-    errorCenter && <Error error={errorCenter} />;
-  }
+  
 
   const getCenterByNumber = dataCenter && dataCenter.centerByNumber;
   const newCenter = getCenterByNumber && removeTypename(getCenterByNumber);
@@ -197,12 +161,7 @@ const CreateNewCESExaminer = () => {
       },
     }
   );
-  {
-    loadingCES && <p>loading...</p>;
-  }
-  {
-    errorCES && <Error error={errorCES} />;
-  }
+ 
 
   console.log(dataCES);
   const getCenterExamSessionsByCode =
@@ -222,12 +181,7 @@ const CreateNewCESExaminer = () => {
     error: errorPhase,
   } = useQuery(getAllPhasesQuery);
 
-  {
-    loadingPhase && <p>loading...</p>;
-  }
-  {
-    errorPhase && <Error error={errorPhase} />;
-  }
+  
   console.log(dataPhase);
 
   const getPhases = dataPhase && dataPhase.phases;
@@ -244,21 +198,16 @@ const CreateNewCESExaminer = () => {
     }));
 
   const {
-    data: dataRankPhase,
-    loading: loadingRankPhase,
-    error: errorRankPhase,
+    data: dataPhaseRank,
+    loading: loadingPhaseRank,
+    error: errorPhaseRank,
   } = useQuery(getAllRanksOfAnExamPhaseQuery, {
     variables: { id: state.phaseID },
   });
 
-  {
-    loadingRankPhase && <p> loading... </p>;
-  }
-  {
-    errorRankPhase && <Error error={errorRankPhase} />;
-  }
-  console.log(dataRankPhase);
-  const getThePhase = dataRankPhase && dataRankPhase.phase;
+ 
+  console.log(dataPhaseRank);
+  const getThePhase = dataPhaseRank && dataPhaseRank.phase;
   const { phaseRank } = { ...getThePhase };
   const refinedPhaseRanks = phaseRank && removeTypename(phaseRank);
   const getPhaseRankOptions =
@@ -266,7 +215,7 @@ const CreateNewCESExaminer = () => {
     refinedPhaseRanks.map((item) => ({
       ...item,
       value: item.id,
-      label: item.rankName,
+      label: item.rank.rankName,
     }));
   console.log(phaseRank);
 
@@ -279,7 +228,7 @@ const CreateNewCESExaminer = () => {
       method="POST"
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={async (values, actions, setSubmitting, resetForm) => {
+      onSubmit={async (values, { setSubmitting, resetForm)} => {
         const res = await CreateCenterExamSessionExaminer({
           variables: {
             ...values,
@@ -296,15 +245,22 @@ const CreateNewCESExaminer = () => {
         setTimeout(() => {
           console.log(JSON.stringify(values, null, 2));
           console.log(res);
-          actions.resetForm(true);
-          actions.setSubmitting(false);
+          resetForm(true);
+          setSubmitting(false);
         }, 400);
       }}
     >
       {({ values, setFieldValue, isSubmitting }) => (
         <MinimStyledPage>
           <h4> Inscription d'examinateur</h4>
-          <Error error={error} />
+          <Error error={error  || 
+           errorExams ||
+              errorSession ||
+              errorExamSession ||
+              errorCenter ||
+              errorCES ||
+              errorPhase ||
+              errorPhaseRank} />
           <StyledForm
             disabled={
               isSubmitting ||
@@ -314,7 +270,8 @@ const CreateNewCESExaminer = () => {
               loadingCenter ||
               loadingCES ||
               loadingPhase ||
-              loadingRank
+              loading ||
+              loadingPhaseRank 
             }
             aria-busy={
               isSubmitting ||
@@ -324,7 +281,9 @@ const CreateNewCESExaminer = () => {
               loadingCenter ||
               loadingCES ||
               loadingPhase ||
-              loadingRank
+              loading ||
+              loadingPhaseRank 
+              
             }
           >
             <Form>

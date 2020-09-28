@@ -16,6 +16,7 @@ import * as Yup from "yup";
 import {
   getSelectedObject,
   removeTypename,
+  uniqueCodeGen,
 } from "../queries&Mutations&Functions/Functions";
 import { createCenterExamSessionMutation } from "../queries&Mutations&Functions/Mutations";
 import {
@@ -59,6 +60,7 @@ const CreateCenterExamSessionHook = () => {
   const initialValues = {
     centerNumber: "",
     centerCode: "",
+    CESCode: "",
   };
   const [state, setState, handleReactSelectChange] = useForm({
     centerNumber: "",
@@ -72,38 +74,10 @@ const CreateCenterExamSessionHook = () => {
     setState({ [name]: val });
   };
 
-  const makeCenterVariableObject = (centerCodeValue) => {
-    const storedCenter = {
-      centerNumber: `${centerCodeValue}`,
-    };
-    return storedCenter;
-  };
-
-  const candRegistrationNumber = (centerCode, exam, session) => {
-    return `${centerCode + exam + session}`;
-  };
-  const makeCandVariableObject = (candCodeValue) => {
-    const storedCandidate = {
-      candCode: `${candCodeValue}`,
-    };
-    return storedCandidate;
-  };
-  const makeCESSObject = (candCodeValue) => {
-    const objCESS = {
-      id: `${candCodeValue}`,
-    };
-    return objCESS;
-  };
-
   const { data: dataExams, loading: loadingExams, error: errExams } = useQuery(
     getAllExamsQuery
   );
-  {
-    loadingExams && <p>loading...</p>;
-  }
-  {
-    errExams && <Error error={errExams} />;
-  }
+ 
   const getExams = dataExams && dataExams.exams;
   console.log(getExams);
   const removeExamName =
@@ -119,12 +93,7 @@ const CreateCenterExamSessionHook = () => {
     loading: loadingSession,
     error: errSession,
   } = useQuery(getAllSessionsQuery);
-  {
-    loadingSession && <p> loading...</p>;
-  }
-  {
-    errSession && <Error error={errSession} />;
-  }
+ 
   const getSessions = dataSession && dataSession.sessions;
 
   const refinedSessions = getSessions && removeTypename(getSessions);
@@ -148,12 +117,7 @@ const CreateCenterExamSessionHook = () => {
         refinedSessions && getSelectedObject(refinedSessions, state.sessionID),
     },
   });
-  {
-    loadingExamSessions && <p>...Loading</p>;
-  }
-  {
-    errExamSessions && <Error error={errExamSessions} />;
-  }
+ 
 
   console.log(dataExamSessions);
   const getExamSessions = dataExamSessions && dataExamSessions.examSessions;
@@ -170,12 +134,7 @@ const CreateCenterExamSessionHook = () => {
     variables: { centerNumber: state.centerNumber },
   });
 
-  {
-    loadingCenter && <p>...Loading</p>;
-  }
-  {
-    errCenter && <Error error={errCenter} />;
-  }
+  
   const { centerByNumber } = { ...dataCenter };
   const newCenterByNumber = removeTypename(centerByNumber);
   console.log(newCenterByNumber);
@@ -193,6 +152,7 @@ const CreateCenterExamSessionHook = () => {
           variables: {
             center: newCenterByNumber && newCenterByNumber,
             examSession: reducedES && reducedES,
+            CESCode:uniqueCodeGen(12)
           },
         });
 
@@ -208,10 +168,10 @@ const CreateCenterExamSessionHook = () => {
         return (
           <MinimStyledPage>
             <h4> Inscrire un Centre à un Examen pour une session</h4>
-            <Error error={error} />
+            <Error error={error  || errExamSessions|| errCenter ||errExams || errSession} />
             <StyledForm
-              disabled={isSubmitting || loadingExamSessions}
-              aria-busy={isSubmitting || loadingExamSessions}
+              disabled={isSubmitting || loadingExamSessions  || loading || loadingCenter || loadingExams || loadingSession }
+              aria-busy={isSubmitting || loadingExamSessions  || loading || loadingCenter || loadingExams || loadingSession }
             >
               <Form>
                 <AllControls>

@@ -194,8 +194,9 @@ const createCenterExamSessionMutation = gql`
   mutation createCenterExamSessionMutation(
     $examSession: ExamSessionWhereUniqueInput!
     $center: CenterWhereUniqueInput!
+    $CESCode: String!
   ) {
-    createCenterExamSession(examSession: $examSession, center: $center) {
+    createCenterExamSession(examSession: $examSession, center: $center, CESCode: $CESCode) {
       id
     }
   }
@@ -204,10 +205,10 @@ const createCenterExamSessionMutation = gql`
 const createPhaseRankMutation = gql`
   mutation createPhaseRankMutation(
     $phase: PhaseWhereUniqueInput!
-    $rankName: String!
-    $rankCode: String!
+    $rank: RankWhereUniqueInput!
+   
   ) {
-    createPhaseRank(phase: $phase, rankName: $rankName, rankCode: $rankCode) {
+    createPhaseRank(phase: $phase, rank: $rank)  {
       id
     }
   }

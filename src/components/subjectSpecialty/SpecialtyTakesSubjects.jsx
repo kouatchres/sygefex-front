@@ -66,12 +66,7 @@ const SpecialtyTakesSubjects = () => {
     educTypeID: " ",
   });
 
-  const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    const val = type === "number" ? parseInt(value) : value;
-    setState({ [name]: val });
-  };
-
+ 
   const { data: dataEducType, loadingEducType, errorEducType } = useQuery(
     getAllEducationTypesQuery
   );
@@ -168,11 +163,13 @@ const SpecialtyTakesSubjects = () => {
       {({ values, isSubmitting, setFieldValue }) => {
         return (
           <MinimStyledPage>
-            <h4>Donner les matières aux Séries</h4>
-            <Error error={error} />
-            <Error error={errorEducType} />
-            <Error error={errorSpecialty} />
-            <Error error={errorSubj} />
+            <h4>Donner les matières aux Spécialités</h4>
+            <Error error={
+              error ||
+              errorEducType||
+errorSpecialty||
+errorSubj } />
+          
             <StyledForm
               disabled={
                 isSubmitting ||

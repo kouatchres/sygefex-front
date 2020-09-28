@@ -29,11 +29,6 @@ const WholeForm = styled.div`
   padding: 1rem;
 `;
 
-// const GenInfo = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-//   grid-gap: 1rem;
-// `;
 
 const ResultsHeader = styled.div`
   display: grid;
@@ -121,6 +116,7 @@ const RegistrationReceipt = ({ id }) => {
       query: getCandidateRegistrationInfoQuery,
       variables: { id },
     });
+    {error &&  <Error error={error}/>}
     console.log(data);
     const { registration } = data;
     setState({ registration });

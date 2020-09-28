@@ -82549,7 +82549,6 @@ var DisplayError = function DisplayError(_ref) {
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        "data-test": "graphql-error",
         __source: {
           fileName: _jsxFileName,
           lineNumber: 31
@@ -82561,7 +82560,7 @@ var DisplayError = function DisplayError(_ref) {
           lineNumber: 32
         },
         __self: this
-      }, "Probleme de reseaux!"), error.message.replace("Graphql error: ", "")));
+      }, "Erreure r\xE9seaux!"), error.message.replace("Network error: ", "")));
     });
   }
 
@@ -82572,7 +82571,6 @@ var DisplayError = function DisplayError(_ref) {
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-    "data-test": "graphql-error",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 40
@@ -82584,7 +82582,7 @@ var DisplayError = function DisplayError(_ref) {
       lineNumber: 41
     },
     __self: this
-  }, "Erreure !"), error.message.replace("Graphql error: ", "")));
+  }, "Erreure !"), error.message.replace("GraphQL error: ", "")));
 };
 
 DisplayError.defaultProps = {
@@ -83307,14 +83305,14 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 196
     },
     __self: this
-  }, "Region"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+  }, "S'enregistrer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 197
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newRegion",
+    href: "/signup",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 198
@@ -83326,916 +83324,915 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 199
     },
     __self: this
-  }, "Nouvelle Region")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/lists/allRegionsList",
+  }, "Ouverture de compte")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 201
     },
     __self: this
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 204
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "menu-category",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 205
+    },
+    __self: this
+  }, "Region"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 206
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/creates/newRegion",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 207
+    },
+    __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 202
+      lineNumber: 208
+    },
+    __self: this
+  }, "Nouvelle Region")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/lists/allRegionsList",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 210
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 211
     },
     __self: this
   }, "Liste Regions")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyRegion",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 204
+      lineNumber: 213
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 205
+      lineNumber: 214
     },
     __self: this
   }, "Modifier Region"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 209
+      lineNumber: 218
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 210
+      lineNumber: 219
     },
     __self: this
   }, "Departement"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 211
+      lineNumber: 220
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newDivision",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 212
+      lineNumber: 221
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 213
+      lineNumber: 222
     },
     __self: this
   }, "Nouveau Departement")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/lists/divisionList",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 215
+      lineNumber: 224
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 216
+      lineNumber: 225
     },
     __self: this
   }, "Liste Departements")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyDivision",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 218
+      lineNumber: 227
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 219
+      lineNumber: 228
     },
     __self: this
   }, "Modifier Department"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 222
+      lineNumber: 231
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 223
+      lineNumber: 232
     },
     __self: this
   }, "Arrondissement"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 224
+      lineNumber: 233
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newSubDivision",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 225
+      lineNumber: 234
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 226
+      lineNumber: 235
     },
     __self: this
   }, "Nouvel Arrondissement")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifySubDivision",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 228
+      lineNumber: 237
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 229
+      lineNumber: 238
     },
     __self: this
   }, "Modifier Arrondissement"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 232
+      lineNumber: 241
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 233
+      lineNumber: 242
     },
     __self: this
   }, "Ville"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 234
+      lineNumber: 243
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newTown",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 235
+      lineNumber: 244
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 236
+      lineNumber: 245
     },
     __self: this
   }, "Nouvelle Ville")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/lists/townList",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 238
+      lineNumber: 247
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 239
+      lineNumber: 248
     },
     __self: this
   }, "Liste des Villes")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyTown",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 241
+      lineNumber: 250
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 242
+      lineNumber: 251
     },
     __self: this
   }, "Modifier Ville"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 245
+      lineNumber: 254
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 246
+      lineNumber: 255
     },
     __self: this
   }, "Nouveau Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 247
+      lineNumber: 256
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newCenter",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 248
+      lineNumber: 257
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 249
+      lineNumber: 258
     },
     __self: this
   }, "Inscrire Centre D'examen'")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyCenter",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 251
+      lineNumber: 260
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 252
+      lineNumber: 261
     },
     __self: this
   }, "Modifier Centre"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 255
+      lineNumber: 264
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 256
+      lineNumber: 265
     },
     __self: this
   }, "Presence A l'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 257
+      lineNumber: 266
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newAttendance",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 258
+      lineNumber: 267
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 259
+      lineNumber: 268
     },
     __self: this
   }, "Prensence a l'Examen")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyAttendance",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 261
+      lineNumber: 270
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 262
+      lineNumber: 271
     },
     __self: this
   }, "Modifier Centre"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 266
+      lineNumber: 275
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 267
+      lineNumber: 276
     },
     __self: this
   }, "Notes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 268
+      lineNumber: 277
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newMarks",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 269
+      lineNumber: 278
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 270
+      lineNumber: 279
     },
     __self: this
   }, "Inscrire Notes")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyMarks",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 272
+      lineNumber: 281
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 273
+      lineNumber: 282
     },
     __self: this
   }, "Modifier Notes")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-col-2",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 278
+      lineNumber: 287
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 279
+      lineNumber: 288
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 280
+      lineNumber: 289
     },
     __self: this
   }, "Nouvelle Sp\xE9cialit\xE9 "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 281
+      lineNumber: 290
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newSpecialty",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 282
+      lineNumber: 291
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 283
+      lineNumber: 292
     },
     __self: this
   }, "nouvelle Sp\xE9cialit\xE9")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifySpecialty",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 285
+      lineNumber: 294
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 286
+      lineNumber: 295
     },
     __self: this
   }, "Modifier Sp\xE9cialit\xE9"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 289
+      lineNumber: 298
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 290
+      lineNumber: 299
     },
     __self: this
   }, "Sp\xE9cialit\xE9 par Mati\xE8re"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 291
+      lineNumber: 300
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newSubjectSpecialty",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 292
+      lineNumber: 301
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 293
+      lineNumber: 302
     },
     __self: this
   }, "Sp\xE9cialit\xE9s")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifySubjectSpecialty",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 295
+      lineNumber: 304
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 296
+      lineNumber: 305
     },
     __self: this
   }, "Modifier Type Mati\xE8re"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 299
+      lineNumber: 308
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 300
+      lineNumber: 309
     },
     __self: this
   }, "Inscription"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 301
+      lineNumber: 310
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newRegister",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 302
+      lineNumber: 311
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 303
+      lineNumber: 312
     },
     __self: this
   }, " Nouvelle Inscription")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/list/registration/CenterRegistrationList",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 305
+      lineNumber: 314
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 306
+      lineNumber: 315
     },
     __self: this
   }, " Nouvelle Inscription")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyRegistration",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 308
+      lineNumber: 317
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 309
+      lineNumber: 318
     },
     __self: this
   }, "Modifier Inscription"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 312
+      lineNumber: 321
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 313
+      lineNumber: 322
     },
     __self: this
   }, "Poste"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 314
+      lineNumber: 323
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newRank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 315
+      lineNumber: 324
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 316
+      lineNumber: 325
     },
     __self: this
   }, "Nouveau Poste")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyRank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 318
+      lineNumber: 327
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 319
+      lineNumber: 328
     },
     __self: this
   }, "Modifier Poste"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 323
+      lineNumber: 332
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 324
+      lineNumber: 333
     },
     __self: this
   }, "Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 325
+      lineNumber: 334
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newExam",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 326
+      lineNumber: 335
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 327
+      lineNumber: 336
     },
     __self: this
   }, "Nouvel Examen")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyExam",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 329
+      lineNumber: 338
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 330
+      lineNumber: 339
     },
     __self: this
   }, "Modifier Examen"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 333
+      lineNumber: 342
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 334
+      lineNumber: 343
     },
     __self: this
   }, "Resultats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 335
+      lineNumber: 344
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/genCenterResults",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 336
+      lineNumber: 345
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 337
+      lineNumber: 346
     },
     __self: this
   }, "Resultats Centre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/results/candCodeResults",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 339
+      lineNumber: 348
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 340
+      lineNumber: 349
     },
     __self: this
   }, "Resultat Candidat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 342
+      lineNumber: 351
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 344
+      lineNumber: 353
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 345
+      lineNumber: 354
     },
     __self: this
   }, "Listes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 346
+      lineNumber: 355
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/lists/centersPerTown",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 347
+      lineNumber: 356
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 348
+      lineNumber: 357
     },
     __self: this
   }, "Centres par Ville")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/lists/subjPerSpecialty",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 350
+      lineNumber: 359
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 351
+      lineNumber: 360
     },
     __self: this
   }, "Matieres par Sp\xE9cialit\xE9")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/lists/subjPerSpecialty",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 353
+      lineNumber: 362
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 354
+      lineNumber: 363
     },
     __self: this
   }, "Matieres par Sp\xE9cialit\xE9")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 357
+      lineNumber: 366
     },
     __self: this
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-col-3",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 360
+      lineNumber: 369
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 361
+      lineNumber: 370
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 362
+      lineNumber: 371
     },
     __self: this
   }, "Utilisateur"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 363
+      lineNumber: 372
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/signup",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 364
+      lineNumber: 373
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 365
+      lineNumber: 374
     },
     __self: this
   }, "Nouveau Utilisateur")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyUser",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 367
+      lineNumber: 376
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 368
+      lineNumber: 377
     },
     __self: this
   }, "Modifier Utilisateur"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 372
+      lineNumber: 381
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 373
+      lineNumber: 382
     },
     __self: this
   }, "Session"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 374
+      lineNumber: 383
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newSession",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 375
+      lineNumber: 384
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 376
+      lineNumber: 385
     },
     __self: this
   }, "Nouvelle Session")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifySession",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 378
+      lineNumber: 387
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 379
+      lineNumber: 388
     },
     __self: this
   }, "Modifier Session"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 383
+      lineNumber: 392
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 384
+      lineNumber: 393
     },
     __self: this
   }, "Rapports"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 385
+      lineNumber: 394
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newReport",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 386
+      lineNumber: 395
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 387
+      lineNumber: 396
     },
     __self: this
   }, "charger rapport ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyReport",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 389
+      lineNumber: 398
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 390
+      lineNumber: 399
     },
     __self: this
   }, "Modifier rapport"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 393
+      lineNumber: 402
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 394
+      lineNumber: 403
     },
     __self: this
   }, "Resultats Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 395
+      lineNumber: 404
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/results/centerResults/getCompleteCenterResults",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 396
+      lineNumber: 405
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 397
+      lineNumber: 406
     },
     __self: this
   }, "Resultats Complet du Centre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/results/centerResults/centerResultsPerSpecialty",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 399
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 400
-    },
-    __self: this
-  }, "Resultats du Centre par Sp\xE9cialit\xE9")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/show/results/candidateResults/getCandidateResultsFromRegNo",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 403
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 404
-    },
-    __self: this
-  }, "Resultats Du Candidat")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "menu-col-4",
-    __source: {
-      fileName: _jsxFileName,
       lineNumber: 408
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 409
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "menu-category",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 410
-    },
-    __self: this
-  }, "Candidat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 411
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newGroupCand",
+  }, "Resultats du Centre par Sp\xE9cialit\xE9")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/show/results/candidateResults/getCandidateResultsFromRegNo",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 412
@@ -84247,265 +84244,272 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 413
     },
     __self: this
-  }, "nouveau Candidat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/show/candidatePage",
+  }, "Resultats Du Candidat")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "menu-col-4",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 415
+      lineNumber: 417
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 418
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "menu-category",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 419
+    },
+    __self: this
+  }, "Candidat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 420
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/creates/newGroupCand",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 421
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 416
+      lineNumber: 422
+    },
+    __self: this
+  }, "nouveau Candidat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/show/candidatePage",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 424
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 425
     },
     __self: this
   }, "Liste Candidats")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyCandidate",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 418
+      lineNumber: 427
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 419
+      lineNumber: 428
     },
     __self: this
   }, "Modifier Candidat"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 422
+      lineNumber: 431
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 423
+      lineNumber: 432
     },
     __self: this
   }, "Enseignement"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 424
+      lineNumber: 433
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newEducType",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 425
+      lineNumber: 434
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 426
+      lineNumber: 435
     },
     __self: this
   }, "Nouveau Type D'enseignement")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyEducType",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 428
+      lineNumber: 437
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 429
+      lineNumber: 438
     },
     __self: this
   }, "Modifier Type D'enseignement"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 432
+      lineNumber: 441
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 433
+      lineNumber: 442
     },
     __self: this
   }, "Mati\xE8re"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 434
+      lineNumber: 443
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newSubject",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 435
+      lineNumber: 444
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 436
+      lineNumber: 445
     },
     __self: this
   }, "Nouvelle Mati\xE8re ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/lists/subjectList",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 438
+      lineNumber: 447
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 439
+      lineNumber: 448
     },
     __self: this
   }, "Liste des Mati\xE8res ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifySubject",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 441
+      lineNumber: 450
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 442
+      lineNumber: 451
     },
     __self: this
   }, "Modifier Mati\xE8re"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 445
+      lineNumber: 454
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 446
+      lineNumber: 455
     },
     __self: this
   }, "Charge de centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 447
+      lineNumber: 456
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newExaminer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 448
+      lineNumber: 457
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 449
+      lineNumber: 458
     },
     __self: this
   }, "Inscription des Charge de centre ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyExaminer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 451
+      lineNumber: 460
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 452
+      lineNumber: 461
     },
     __self: this
   }, "Modifier Charge de centre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/signInOut/signUp",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 454
+      lineNumber: 463
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 455
+      lineNumber: 464
     },
     __self: this
   }, "SignUp"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 458
+      lineNumber: 467
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 459
+      lineNumber: 468
     },
     __self: this
   }, "Phase de l'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 460
+      lineNumber: 469
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newPhase",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 461
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 462
-    },
-    __self: this
-  }, "Nouvelle Phase de l'Examen ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 464
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/modify/modifyPhase",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 465
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 466
-    },
-    __self: this
-  }, "Nouvelle Phase de l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 469
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "menu-category",
-    __source: {
-      fileName: _jsxFileName,
       lineNumber: 470
     },
     __self: this
-  }, "Inscrire Postes aux Phases de l'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 471
+    },
+    __self: this
+  }, "Nouvelle Phase de l'Examen ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 473
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newPhaseRank",
+    href: "/modify/modifyPhase",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 474
@@ -84517,7 +84521,7 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 475
     },
     __self: this
-  }, "Postes aux Phases de l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, "Nouvelle Phase de l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 478
@@ -84530,14 +84534,14 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 479
     },
     __self: this
-  }, "Inscrire Prof au centre d'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+  }, "Inscrire Postes aux Phases de l'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 482
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newCESExaminer",
+    href: "/creates/newPhaseRank",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 483
@@ -84549,7 +84553,7 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 484
     },
     __self: this
-  }, "Prof s'inscrire au centre d'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, "Postes aux Phases de l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 487
@@ -84562,14 +84566,14 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 488
     },
     __self: this
-  }, "Examen Pour Session par Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+  }, "Inscrire Prof au centre d'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 491
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newCenterExamSession",
+    href: "/creates/newCESExaminer",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 492
@@ -84581,7 +84585,7 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 493
     },
     __self: this
-  }, "Inscrire Centre a l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, "Prof s'inscrire au centre d'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 496
@@ -84594,427 +84598,427 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 497
     },
     __self: this
+  }, "Examen Pour Session par Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 500
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/creates/newCenterExamSession",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 501
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 502
+    },
+    __self: this
+  }, "Inscrire Centre a l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 505
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "menu-category",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 506
+    },
+    __self: this
   }, "Sp\xE9cialit\xE9 par Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 498
+      lineNumber: 507
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newCESS",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 499
+      lineNumber: 508
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 500
+      lineNumber: 509
     },
     __self: this
   }, "Inscrire Sp\xE9cialit\xE9 aux centres ")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 507
+      lineNumber: 516
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "/creates/newRegister",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 508
+      lineNumber: 517
     },
     __self: this
   }, "Candidate"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-sub",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 509
+      lineNumber: 518
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-col-2",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 510
+      lineNumber: 519
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 511
+      lineNumber: 520
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 512
+      lineNumber: 521
     },
     __self: this
   }, "Inscription"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 513
+      lineNumber: 522
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newRegister",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 514
+      lineNumber: 523
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 515
+      lineNumber: 524
     },
     __self: this
   }, " Nouvelle Inscription")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyRegistration",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 517
+      lineNumber: 526
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 518
+      lineNumber: 527
     },
     __self: this
   }, "Modifier Inscription"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 521
+      lineNumber: 530
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 522
+      lineNumber: 531
     },
     __self: this
   }, "Resultats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 523
+      lineNumber: 532
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/genCenterResults",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 524
+      lineNumber: 533
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 525
+      lineNumber: 534
     },
     __self: this
   }, "Resultats Centre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/results/candCodeResults",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 527
+      lineNumber: 536
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 528
+      lineNumber: 537
     },
     __self: this
   }, "Resultat Candidat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 530
+      lineNumber: 539
     },
     __self: this
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-col-3",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 533
+      lineNumber: 542
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 534
+      lineNumber: 543
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 535
+      lineNumber: 544
     },
     __self: this
   }, "Utilisateur"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 536
+      lineNumber: 545
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/signup",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 537
+      lineNumber: 546
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 538
+      lineNumber: 547
     },
     __self: this
   }, "Nouveau Utilisateur")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyUser",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 540
+      lineNumber: 549
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 541
+      lineNumber: 550
     },
     __self: this
   }, "Modifier Utilisateur"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 544
+      lineNumber: 553
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 545
+      lineNumber: 554
     },
     __self: this
   }, "Resultats Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 546
+      lineNumber: 555
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/results/centerResults/getCompleteCenterResults",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 547
+      lineNumber: 556
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 548
+      lineNumber: 557
     },
     __self: this
   }, "Resultats Complet du Centre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/results/centerResults/centerResultsPerSpecialty",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 550
+      lineNumber: 559
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 551
+      lineNumber: 560
     },
     __self: this
   }, "Resultats du Centre par Sp\xE9cialit\xE9")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/results/candidateResults/getCandidateResultsFromRegNo",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 554
+      lineNumber: 563
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 555
+      lineNumber: 564
     },
     __self: this
   }, "Resultats Du Candidat"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 558
+      lineNumber: 567
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 559
+      lineNumber: 568
     },
     __self: this
   }, "Candidat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 560
+      lineNumber: 569
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newGroupCand",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 561
+      lineNumber: 570
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 562
+      lineNumber: 571
     },
     __self: this
   }, "nouveau Candidat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/candidatePage",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 564
+      lineNumber: 573
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 565
+      lineNumber: 574
     },
     __self: this
   }, "Liste Candidats")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyCandidate",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 567
+      lineNumber: 576
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 568
+      lineNumber: 577
     },
     __self: this
   }, "Modifier Candidat"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 571
+      lineNumber: 580
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 572
+      lineNumber: 581
     },
     __self: this
   }, "Charge de centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 573
+      lineNumber: 582
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newExaminer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 574
+      lineNumber: 583
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 575
+      lineNumber: 584
     },
     __self: this
   }, "Inscription des Charge de centre ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyExaminer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 577
+      lineNumber: 586
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 578
+      lineNumber: 587
     },
     __self: this
   }, "Modifier Charge de centre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/signInOut/signUp",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 580
+      lineNumber: 589
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 581
+      lineNumber: 590
     },
     __self: this
   }, "SignUp"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 584
+      lineNumber: 593
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 585
+      lineNumber: 594
     },
     __self: this
   }, "Phase de l'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 586
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newPhase",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 587
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 588
-    },
-    __self: this
-  }, "Nouvelle Phase de l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 591
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "menu-category",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 592
-    },
-    __self: this
-  }, "Inscrire Postes aux Phases de l'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 595
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newPhaseRank",
+    href: "/creates/newPhase",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 596
@@ -85026,7 +85030,7 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 597
     },
     __self: this
-  }, "Postes aux Phases de l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, "Nouvelle Phase de l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 600
@@ -85039,14 +85043,14 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 601
     },
     __self: this
-  }, "Inscrire Prof au centre d'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+  }, "Inscrire Postes aux Phases de l'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 604
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newCESExaminer",
+    href: "/creates/newPhaseRank",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 605
@@ -85058,7 +85062,7 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 606
     },
     __self: this
-  }, "Prof s'inscrire au centre d'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, "Postes aux Phases de l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 609
@@ -85071,14 +85075,14 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 610
     },
     __self: this
-  }, "Examen Pour Session par Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+  }, "Inscrire Prof au centre d'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 613
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newCenterExamSession",
+    href: "/creates/newCESExaminer",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 614
@@ -85090,434 +85094,427 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 615
     },
     __self: this
+  }, "Prof s'inscrire au centre d'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 618
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "menu-category",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 619
+    },
+    __self: this
+  }, "Examen Pour Session par Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 622
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/creates/newCenterExamSession",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 623
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 624
+    },
+    __self: this
   }, "Inscrire Centre a l'Examen ")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 621
+      lineNumber: 630
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "/creates/newRegister",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 622
+      lineNumber: 631
     },
     __self: this
   }, "Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-sub",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 623
+      lineNumber: 632
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-col-1",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 624
+      lineNumber: 633
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 625
+      lineNumber: 634
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 626
+      lineNumber: 635
     },
     __self: this
   }, "Notes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 627
+      lineNumber: 636
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newMarks",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 628
+      lineNumber: 637
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 629
+      lineNumber: 638
     },
     __self: this
   }, "Inscrire Notes")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/updates/updateMarks",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 631
+      lineNumber: 640
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 632
+      lineNumber: 641
     },
     __self: this
   }, "Modifier Notes"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 636
+      lineNumber: 645
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 637
+      lineNumber: 646
     },
     __self: this
   }, "Inscription"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 638
+      lineNumber: 647
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newRegister",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 639
+      lineNumber: 648
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 640
+      lineNumber: 649
     },
     __self: this
   }, " Nouvelle Inscription")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newMultiRegister",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 642
+      lineNumber: 651
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 643
+      lineNumber: 652
     },
     __self: this
   }, "Inscription en Group ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyRegistration",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 645
+      lineNumber: 654
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 646
+      lineNumber: 655
     },
     __self: this
   }, "Modifier Inscription"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 650
+      lineNumber: 659
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 651
+      lineNumber: 660
     },
     __self: this
   }, "Resultats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 652
+      lineNumber: 661
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/registrationList",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 653
+      lineNumber: 662
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 654
+      lineNumber: 663
     },
     __self: this
   }, "Inscrit par centre ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/genCenterResults",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 656
+      lineNumber: 665
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 657
+      lineNumber: 666
     },
     __self: this
   }, "Resultats Centre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/results/candCodeResults",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 659
+      lineNumber: 668
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 660
+      lineNumber: 669
     },
     __self: this
   }, "Resultat Candidat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 662
+      lineNumber: 671
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 664
+      lineNumber: 673
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 665
+      lineNumber: 674
     },
     __self: this
   }, "Listes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 666
+      lineNumber: 675
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/lists/center/centersPerTown",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 667
+      lineNumber: 676
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 668
+      lineNumber: 677
     },
     __self: this
   }, "Centres par Ville")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/lists/subjects/subjectSeriesList",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 670
+      lineNumber: 679
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 671
+      lineNumber: 680
     },
     __self: this
   }, "Matieres par Sp\xE9cialit\xE9")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/lists/subjects/subjectList",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 673
+      lineNumber: 682
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 674
+      lineNumber: 683
     },
     __self: this
   }, "Toute les Matieres ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 677
+      lineNumber: 686
     },
     __self: this
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-col-2",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 680
+      lineNumber: 689
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 681
+      lineNumber: 690
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 682
+      lineNumber: 691
     },
     __self: this
   }, "Utilisateur"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 683
+      lineNumber: 692
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/signup",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 684
+      lineNumber: 693
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 685
+      lineNumber: 694
     },
     __self: this
   }, "Nouveau Utilisateur")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyUser",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 687
+      lineNumber: 696
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 688
+      lineNumber: 697
     },
     __self: this
   }, "Modifier Utilisateur"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 691
+      lineNumber: 700
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 692
+      lineNumber: 701
     },
     __self: this
   }, "Resultats Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 693
+      lineNumber: 702
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/results/centerResults/getCompleteCenterResults",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 694
+      lineNumber: 703
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 695
+      lineNumber: 704
     },
     __self: this
   }, "Resultats Complet du Centre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/results/centerResults/centerResultsPerSpecialty",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 697
+      lineNumber: 706
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 698
+      lineNumber: 707
     },
     __self: this
   }, "Resultats du Centre par Sp\xE9cialit\xE9")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/show/results/candidateResults/getCandidateResultsFromRegNo",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 701
+      lineNumber: 710
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 702
+      lineNumber: 711
     },
     __self: this
   }, "Resultats Du Candidat"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 706
+      lineNumber: 715
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 707
+      lineNumber: 716
     },
     __self: this
   }, "Candidat Solo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 708
+      lineNumber: 717
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newCand",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 709
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 710
-    },
-    __self: this
-  }, "Nouveau Candidat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newGroupCand",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 712
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 713
-    },
-    __self: this
-  }, "Plusieures Candidats")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/show/candidatePage",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 715
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 716
-    },
-    __self: this
-  }, "Liste Candidats")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/modify/modifyCandidate",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 718
@@ -85529,85 +85526,92 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 719
     },
     __self: this
-  }, "Modifier Candidat"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, "Nouveau Candidat")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/creates/newGroupCand",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 721
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 722
+    },
+    __self: this
+  }, "Plusieures Candidats")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/show/candidatePage",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 724
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 725
+    },
+    __self: this
+  }, "Liste Candidats")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/modify/modifyCandidate",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 727
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 728
+    },
+    __self: this
+  }, "Modifier Candidat"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 731
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 723
+      lineNumber: 732
     },
     __self: this
   }, "Charge de centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 724
+      lineNumber: 733
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newExaminer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 725
+      lineNumber: 734
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 726
+      lineNumber: 735
     },
     __self: this
   }, "Inscription des Charge de centre ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyExaminer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 728
+      lineNumber: 737
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 729
+      lineNumber: 738
     },
     __self: this
   }, "Modifier Charge de centre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/signInOut/signUp",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 731
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 732
-    },
-    __self: this
-  }, "SignUp"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 735
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "menu-category",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 736
-    },
-    __self: this
-  }, "Inscrire Prof au centre d'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 739
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newCESExaminer",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 740
@@ -85619,7 +85623,7 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 741
     },
     __self: this
-  }, "Prof s'inscrire au centre d'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, "SignUp"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 744
@@ -85632,14 +85636,14 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 745
     },
     __self: this
-  }, "Examen Pour Session par Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+  }, "Inscrire Prof au centre d'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 748
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newCenterExamSession",
+    href: "/creates/newCESExaminer",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 749
@@ -85651,7 +85655,7 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 750
     },
     __self: this
-  }, "Inscrire Centre a l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, "Prof s'inscrire au centre d'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 753
@@ -85664,266 +85668,266 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 754
     },
     __self: this
+  }, "Examen Pour Session par Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 757
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/creates/newCenterExamSession",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 758
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 759
+    },
+    __self: this
+  }, "Inscrire Centre a l'Examen "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 762
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "menu-category",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 763
+    },
+    __self: this
   }, "Sp\xE9cialit\xE9 par Centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 755
+      lineNumber: 764
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newCESS",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 756
+      lineNumber: 765
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 757
+      lineNumber: 766
     },
     __self: this
   }, "Inscrire Sp\xE9cialit\xE9 aux centres ")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 763
+      lineNumber: 772
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "/creates/newRegister",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 764
+      lineNumber: 773
     },
     __self: this
   }, "Examinateur"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-sub",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 765
+      lineNumber: 774
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-col-1",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 766
+      lineNumber: 775
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 767
+      lineNumber: 776
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 768
+      lineNumber: 777
     },
     __self: this
   }, "Notes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 769
+      lineNumber: 778
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newMarks",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 770
+      lineNumber: 779
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 771
+      lineNumber: 780
     },
     __self: this
   }, "Inscrire Notes")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyMarks",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 773
+      lineNumber: 782
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 774
+      lineNumber: 783
     },
     __self: this
   }, "Modifier Notes"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 777
+      lineNumber: 786
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 778
+      lineNumber: 787
     },
     __self: this
   }, "Utilisateur"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 779
+      lineNumber: 788
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newUser",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 780
+      lineNumber: 789
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 781
+      lineNumber: 790
     },
     __self: this
   }, "Nouveau Utilisateur")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyUser",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 783
+      lineNumber: 792
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 784
+      lineNumber: 793
     },
     __self: this
   }, "Modifier Utilisateur"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 787
+      lineNumber: 796
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 788
+      lineNumber: 797
     },
     __self: this
   }, "Rapports"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 789
+      lineNumber: 798
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newReport",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 790
+      lineNumber: 799
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 791
+      lineNumber: 800
     },
     __self: this
   }, "charger rapport ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyReport",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 793
+      lineNumber: 802
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 794
+      lineNumber: 803
     },
     __self: this
   }, "Modifier rapport"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 797
+      lineNumber: 806
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 798
+      lineNumber: 807
     },
     __self: this
   }, "Charge de centre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 799
+      lineNumber: 808
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/newExaminer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 800
+      lineNumber: 809
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 801
+      lineNumber: 810
     },
     __self: this
   }, "Inscription des Charge de centre ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/modify/modifyExaminer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 803
+      lineNumber: 812
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 804
+      lineNumber: 813
     },
     __self: this
   }, "Modifier Charge de centre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/signInOut/signUp",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 806
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 807
-    },
-    __self: this
-  }, "SignUp"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 810
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "menu-category",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 811
-    },
-    __self: this
-  }, "Inscrire Prof au centre d'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 814
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: "/creates/newCESExaminer",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 815
@@ -85935,127 +85939,159 @@ var MegaMenu = function MegaMenu() {
       lineNumber: 816
     },
     __self: this
-  }, "Prof s'inscrire au centre d'Examen ")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  }, "SignUp"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 822
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "/creates/newRegister",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 823
-    },
-    __self: this
-  }, "Utilisateur"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "menu-sub-user",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 824
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "menu-col-1",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 825
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 826
+      lineNumber: 819
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "menu-category",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 827
+      lineNumber: 820
+    },
+    __self: this
+  }, "Inscrire Prof au centre d'Examen"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 823
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/creates/newCESExaminer",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 824
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 825
+    },
+    __self: this
+  }, "Prof s'inscrire au centre d'Examen ")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 831
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/creates/newRegister",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 832
+    },
+    __self: this
+  }, "Utilisateur"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "menu-sub-user",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 833
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "menu-col-1",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 834
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 835
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "menu-category",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 836
     },
     __self: this
   }, "Login/Signup"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 828
+      lineNumber: 837
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/creates/reset",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 829
+      lineNumber: 838
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 830
+      lineNumber: 839
     },
     __self: this
   }, "Changer mot de passe")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: "/login",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 832
+      lineNumber: 841
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 833
-    },
-    __self: this
-  }, "Login")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 839
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "/creates/newRegister",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 840
-    },
-    __self: this
-  }, "Contact")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 842
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "/creates/newRegister",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 843
-    },
-    __self: this
-  }, "Nous")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 845
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_Signout__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 846
-    },
-    __self: this
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  }, "Login")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 848
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "/creates/signup",
+    href: "/creates/newRegister",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 849
+    },
+    __self: this
+  }, "Contact")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 851
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/creates/newRegister",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 852
+    },
+    __self: this
+  }, "Nous")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 854
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_Signout__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 855
+    },
+    __self: this
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 857
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/creates/signup",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 858
     },
     __self: this
   }, "Signup"))))));
@@ -86491,7 +86527,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  mutation createPhaseRankMutation(\n    $phase: PhaseWhereUniqueInput!\n    $rankName: String!\n    $rankCode: String!\n  ) {\n    createPhaseRank(phase: $phase, rankName: $rankName, rankCode: $rankCode) {\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  mutation createPhaseRankMutation(\n    $phase: PhaseWhereUniqueInput!\n    $rank: RankWhereUniqueInput!\n   \n  ) {\n    createPhaseRank(phase: $phase, rank: $rank)  {\n      id\n    }\n  }\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -86501,7 +86537,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  mutation createCenterExamSessionMutation(\n    $examSession: ExamSessionWhereUniqueInput!\n    $center: CenterWhereUniqueInput!\n  ) {\n    createCenterExamSession(examSession: $examSession, center: $center) {\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  mutation createCenterExamSessionMutation(\n    $examSession: ExamSessionWhereUniqueInput!\n    $center: CenterWhereUniqueInput!\n    $CESCode: String!\n  ) {\n    createCenterExamSession(examSession: $examSession, center: $center, CESCode: $CESCode) {\n      id\n    }\n  }\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -86773,7 +86809,7 @@ var deleteCenterMutation = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default()(_t
 /*!****************************************************************!*\
   !*** ./src/components/queries&Mutations&Functions/Queries.jsx ***!
   \****************************************************************/
-/*! exports provided: getAllSubjectSpecialtiesOfASpecialtyQuery, getAllSpecialtiesOfAnEducationTypeQuery, getAllExamsQuery, getAllSessionsQuery, getDivisionsOfARegionQuery, getAllDivisionsQuery, getSubDivisionsOfADivisionQuery, getTownsOfASubDivisionQuery, getCentersOfATownQuery, getAllEducationTypesQuery, getAllRanksQuery, getAllCandidatesQuery, getAllCentersQuery, getSingleRegionQuery, getAllSpecialtiesQuery, getAllSubDivisionsQuery, getAllSubjectsOfAnEducTypeQuery, getScoreID, singleSpecialtyQuery, getRegistrations, singleSubjectQuery, singleCandidateQuery1, getAllSubjectsWithEducTypesQuery, singleCandidateQuery, viewSingleCandidateQuery, singleCenterQuery, singleExamQuery, singleTownQuery, getAllCenterResultsQuery, singleSessionQuery, singleDivisionQuery, singleSubDivisionQuery, singleEducationTypeQuery, singleRankQuery, centerExamSessionSpecialtyForResultsQuery, getAllCandidateRegistrationIDsQuery, getCenterExamSessionSpecialtyQuery, getExamSessionQuery, getAllSpecialtiesOfACenterExamSessionQuery, getCenterResultsQuery, getCandidateRegistrationIDQuery, getCandidateRegistrationIDsQuery, centerExamSessionForResultsQuery, getCandidateIDQuery, getASingleCenterQuery, getRegisteredCandidateCountQuery, centersPerTownQuery, getSingleCenterQuery, getCandidateResultsQuery, getCenterRegistrationIDsQuery, getCandidateByCandCodeQuery, getSingleCenterExamSessionQuery, getEachCandidateResultsQuery, getCenterIDFromCenterCodeQuery, getRegistrationIDFromRegNumberQuery, centerExamSessionSpecialtyResultsQuery, dataForAverage, getAllPhasesQuery, getAllRegionsQuery, getAllUsersQuery, singleExaminerQuery, getAllRegionsDivisionsAndTownsQuery, getCandidateRegistrationInfoQuery, getCESExaminerQuery, getExaminerIDQuery, getAllTownsQuery, getSpecialtyFromCESSQuery, getExaminerRegistrationQuery, getSingleProfQuery, getAllGroup1Query, getAllSubjectsQuery, getAllGroup2Query, singleSubjectGroupQuery, getAllRegionsAndDivisionsQuery, getRegisteredCandidatesPerSpecialty, getAllSubjectGroupsQuery, getAllRanksOfAnExamPhaseQuery, currentUserQuery, singlePhaseQuery, getSingleCenterByCodeQuery */
+/*! exports provided: getAllSubjectSpecialtiesOfASpecialtyQuery, getAllSpecialtiesOfAnEducationTypeQuery, getAllExamsQuery, getAllSessionsQuery, getDivisionsOfARegionQuery, getAllDivisionsQuery, getSubDivisionsOfADivisionQuery, getTownsOfASubDivisionQuery, getCentersOfATownQuery, getAllEducationTypesQuery, getAllRanksQuery, getAllCandidatesQuery, getAllCentersQuery, getSingleRegionQuery, getAllSpecialtiesQuery, getAllSubDivisionsQuery, getAllSubjectsOfAnEducTypeQuery, getScoreID, singleSpecialtyQuery, getRegistrations, singleSubjectQuery, singleCandidateQuery1, getAllSubjectsWithEducTypesQuery, singleCandidateQuery, viewSingleCandidateQuery, singleCenterQuery, singleExamQuery, singleTownQuery, getAllCenterResultsQuery, singleSessionQuery, singleDivisionQuery, singleSubDivisionQuery, singleEducationTypeQuery, singleRankQuery, centerExamSessionSpecialtyForResultsQuery, getAllCandidateRegistrationIDsQuery, getCenterExamSessionSpecialtyQuery, getExamSessionQuery, getAllSpecialtiesOfACenterExamSessionQuery, getCenterResultsQuery, getCandidateRegistrationIDQuery, getCandidateRegistrationIDsQuery, centerExamSessionForResultsQuery, getCandidateIDQuery, getASingleCenterQuery, getRegisteredCandidateCountQuery, centersPerTownQuery, getSingleCenterQuery, getCandidateResultsQuery, getCenterRegistrationIDsQuery, getCandidateByCandCodeQuery, getSingleCenterExamSessionQuery, getEachCandidateResultsQuery, getCenterIDFromCenterCodeQuery, getRegistrationIDFromRegNumberQuery, centerExamSessionSpecialtyResultsQuery, dataForAverage, getAllPhasesQuery, getAllRegionsQuery, getAllUsersQuery, singleExaminerQuery, getAllRegionsDivisionsAndTownsQuery, getCandidateRegistrationInfoQuery, getCESExaminerQuery, getExaminerIDQuery, getAllTownsQuery, getSpecialtyFromCESSQuery, getExaminerRegistrationQuery, getSingleProfQuery, getAllGroup1Query, getAllSubjectsQuery, getSingleCenterFromCenterSecretCodeQuery, getSingleCenterExamSessionBySecretCodeQuery, getAllGroup2Query, singleSubjectGroupQuery, getAllRegionsAndDivisionsQuery, getRegisteredCandidatesPerSpecialty, getAllSubjectGroupsQuery, getAllRanksOfAnExamPhaseQuery, currentUserQuery, singlePhaseQuery, getSingleCenterByCodeQuery */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86849,6 +86885,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSingleProfQuery", function() { return getSingleProfQuery; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllGroup1Query", function() { return getAllGroup1Query; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllSubjectsQuery", function() { return getAllSubjectsQuery; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSingleCenterFromCenterSecretCodeQuery", function() { return getSingleCenterFromCenterSecretCodeQuery; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSingleCenterExamSessionBySecretCodeQuery", function() { return getSingleCenterExamSessionBySecretCodeQuery; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllGroup2Query", function() { return getAllGroup2Query; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "singleSubjectGroupQuery", function() { return singleSubjectGroupQuery; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllRegionsAndDivisionsQuery", function() { return getAllRegionsAndDivisionsQuery; });
@@ -86860,8 +86898,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSingleCenterByCodeQuery", function() { return getSingleCenterByCodeQuery; });
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_0__);
-function _templateObject80() {
+function _templateObject82() {
   var data = _taggedTemplateLiteral(["\n  query singleSessionQuery($id: ID!) {\n    session(id: $id) {\n      sessionName\n      sessionCode\n      id\n    }\n  }\n"]);
+
+  _templateObject82 = function _templateObject82() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject81() {
+  var data = _taggedTemplateLiteral(["\n  query singleSubjectGroupQuery($id: ID!) {\n    subjectGroup(id: $id) {\n      subjectGroupName\n      subjectGroupCode\n      id\n    }\n  }\n"]);
+
+  _templateObject81 = function _templateObject81() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject80() {
+  var data = _taggedTemplateLiteral(["\n  query singleSubjectQuery($id: ID!) {\n    subject(id: $id) {\n      subjectName\n      subjectCode\n      id\n    }\n  }\n"]);
 
   _templateObject80 = function _templateObject80() {
     return data;
@@ -86871,7 +86929,7 @@ function _templateObject80() {
 }
 
 function _templateObject79() {
-  var data = _taggedTemplateLiteral(["\n  query singleSubjectGroupQuery($id: ID!) {\n    subjectGroup(id: $id) {\n      subjectGroupName\n      subjectGroupCode\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query singleRankQuery($id: ID!) {\n    rank(id: $id) {\n      rankName\n      rankCode\n      id\n    }\n  }\n"]);
 
   _templateObject79 = function _templateObject79() {
     return data;
@@ -86881,7 +86939,7 @@ function _templateObject79() {
 }
 
 function _templateObject78() {
-  var data = _taggedTemplateLiteral(["\n  query singleSubjectQuery($id: ID!) {\n    subject(id: $id) {\n      subjectName\n      subjectCode\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query singleDivisionQuery($id: ID!) {\n    division(id: $id) {\n      divName\n      divCode\n      id\n    }\n  }\n"]);
 
   _templateObject78 = function _templateObject78() {
     return data;
@@ -86891,7 +86949,7 @@ function _templateObject78() {
 }
 
 function _templateObject77() {
-  var data = _taggedTemplateLiteral(["\n  query singleRankQuery($id: ID!) {\n    rank(id: $id) {\n      rankName\n      rankCode\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query dataForAverage($candExamSecretCode: String!) {\n    scores(candExamSecretCode: $candExamSecretCode) {\n      id\n      subjectAve\n      coeff\n    }\n  }\n"]);
 
   _templateObject77 = function _templateObject77() {
     return data;
@@ -86901,7 +86959,7 @@ function _templateObject77() {
 }
 
 function _templateObject76() {
-  var data = _taggedTemplateLiteral(["\n  query singleDivisionQuery($id: ID!) {\n    division(id: $id) {\n      divName\n      divCode\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query singleSpecialtyQuery($id: ID!) {\n    specialty(id: $id) {\n      specialtyName\n      specialtyCode\n      id\n    }\n  }\n"]);
 
   _templateObject76 = function _templateObject76() {
     return data;
@@ -86911,7 +86969,7 @@ function _templateObject76() {
 }
 
 function _templateObject75() {
-  var data = _taggedTemplateLiteral(["\n  query dataForAverage($candExamSecretCode: String!) {\n    scores(candExamSecretCode: $candExamSecretCode) {\n      id\n      subjectAve\n      coeff\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query singlePhaseQuery($id: ID!) {\n    phase(id: $id) {\n      phaseName\n      phaseCode\n      id\n    }\n  }\n"]);
 
   _templateObject75 = function _templateObject75() {
     return data;
@@ -86921,7 +86979,7 @@ function _templateObject75() {
 }
 
 function _templateObject74() {
-  var data = _taggedTemplateLiteral(["\n  query singleSpecialtyQuery($id: ID!) {\n    specialty(id: $id) {\n      specialtyName\n      specialtyCode\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getSingleRegionQuery($id: ID!) {\n    region(id: $id) {\n      regName\n      regCode\n      id\n    }\n  }\n"]);
 
   _templateObject74 = function _templateObject74() {
     return data;
@@ -86931,7 +86989,7 @@ function _templateObject74() {
 }
 
 function _templateObject73() {
-  var data = _taggedTemplateLiteral(["\n  query singlePhaseQuery($id: ID!) {\n    phase(id: $id) {\n      phaseName\n      phaseCode\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query singleSubDivisionQuery($id: ID!) {\n    subDivision(id: $id) {\n      subDivName\n      subDivCode\n      id\n    }\n  }\n"]);
 
   _templateObject73 = function _templateObject73() {
     return data;
@@ -86941,7 +86999,7 @@ function _templateObject73() {
 }
 
 function _templateObject72() {
-  var data = _taggedTemplateLiteral(["\n  query getSingleRegionQuery($id: ID!) {\n    region(id: $id) {\n      regName\n      regCode\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getRegistrations($candExamSecretCode: String!) {\n    registration(candExamSecretCode: $candExamSecretCode) {\n      id\n      scores {\n        id\n        subject(orderBy: subjectName_ASC) {\n          id\n          subjectName\n        }\n      }\n    }\n  }\n"]);
 
   _templateObject72 = function _templateObject72() {
     return data;
@@ -86951,7 +87009,7 @@ function _templateObject72() {
 }
 
 function _templateObject71() {
-  var data = _taggedTemplateLiteral(["\n  query singleSubDivisionQuery($id: ID!) {\n    subDivision(id: $id) {\n      subDivName\n      subDivCode\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getScoreID($candExamSecretCode: String!) {\n    scores(candExamSecretCode: $candExamSecretCode) {\n      id\n    }\n  }\n"]);
 
   _templateObject71 = function _templateObject71() {
     return data;
@@ -86961,7 +87019,7 @@ function _templateObject71() {
 }
 
 function _templateObject70() {
-  var data = _taggedTemplateLiteral(["\n  query getRegistrations($candExamSecretCode: String!) {\n    registration(candExamSecretCode: $candExamSecretCode) {\n      id\n      scores {\n        id\n        subject(orderBy: subjectName_ASC) {\n          id\n          subjectName\n        }\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query viewSingleCandidateQuery($candCode: String!) {\n    singleCandidate(candCode: $candCode) {\n      id\n      dateOfBirth\n      cand1stName\n      cand2ndName\n      cand3rdName\n      candCode\n      momName\n      dadName\n      email\n      image\n      phoneNumb\n      birthCertNumber\n      placeOfBirth\n      user {\n        id\n      }\n      gender\n    }\n  }\n"]);
 
   _templateObject70 = function _templateObject70() {
     return data;
@@ -86971,7 +87029,7 @@ function _templateObject70() {
 }
 
 function _templateObject69() {
-  var data = _taggedTemplateLiteral(["\n  query getScoreID($candExamSecretCode: String!) {\n    scores(candExamSecretCode: $candExamSecretCode) {\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query singleExaminerQuery($id: ID!) {\n    examiner(id: $id) {\n      id\n      examiner1stName\n      examiner2ndName\n      examinerOtherNames\n      examinerCode\n      examinerEmail\n      gender\n      examinerImage\n      examinerPhone\n      examinerMatricule\n      examinerCNI\n    }\n  }\n"]);
 
   _templateObject69 = function _templateObject69() {
     return data;
@@ -86981,7 +87039,7 @@ function _templateObject69() {
 }
 
 function _templateObject68() {
-  var data = _taggedTemplateLiteral(["\n  query viewSingleCandidateQuery($candCode: String!) {\n    singleCandidate(candCode: $candCode) {\n      id\n      dateOfBirth\n      cand1stName\n      cand2ndName\n      cand3rdName\n      candCode\n      momName\n      dadName\n      email\n      image\n      phoneNumb\n      birthCertNumber\n      placeOfBirth\n      user {\n        id\n      }\n      gender\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query singleCandidateQuery($id: ID!) {\n    candidate(id: $id) {\n      id\n      dateOfBirth\n      cand1stName\n      cand2ndName\n      cand3rdName\n      candCode\n      dadName\n      momName\n      email\n      image\n      phoneNumb\n      birthCertNumber\n      placeOfBirth\n      user {\n        id\n      }\n      gender\n    }\n  }\n"]);
 
   _templateObject68 = function _templateObject68() {
     return data;
@@ -86991,7 +87049,7 @@ function _templateObject68() {
 }
 
 function _templateObject67() {
-  var data = _taggedTemplateLiteral(["\n  query singleExaminerQuery($id: ID!) {\n    examiner(id: $id) {\n      id\n      examiner1stName\n      examiner2ndName\n      examinerOtherNames\n      examinerCode\n      examinerEmail\n      examinerImage\n      examinerPhone\n      examinerMatricule\n      examinerCNI\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query singleCandidateQuery1($id: ID!) {\n    candidate(id: $id) {\n      cand1stName\n      cand2ndName\n      cand3rdName\n      dadName\n      momName\n      candCode\n      email\n      image\n      phoneNumb\n      placeOfBirth\n      user {\n        id\n      }\n      id\n    }\n  }\n"]);
 
   _templateObject67 = function _templateObject67() {
     return data;
@@ -87001,7 +87059,7 @@ function _templateObject67() {
 }
 
 function _templateObject66() {
-  var data = _taggedTemplateLiteral(["\n  query singleCandidateQuery($id: ID!) {\n    candidate(id: $id) {\n      id\n      dateOfBirth\n      cand1stName\n      cand2ndName\n      cand3rdName\n      candCode\n      dadName\n      momName\n      email\n      image\n      phoneNumb\n      birthCertNumber\n      placeOfBirth\n      user {\n        id\n      }\n      gender\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query singleExamQuery($id: ID!) {\n    exam(id: $id) {\n      examName\n      examCode\n      id\n    }\n  }\n"]);
 
   _templateObject66 = function _templateObject66() {
     return data;
@@ -87011,7 +87069,7 @@ function _templateObject66() {
 }
 
 function _templateObject65() {
-  var data = _taggedTemplateLiteral(["\n  query singleCandidateQuery1($id: ID!) {\n    candidate(id: $id) {\n      cand1stName\n      cand2ndName\n      cand3rdName\n      dadName\n      momName\n      candCode\n      email\n      image\n      phoneNumb\n      placeOfBirth\n      user {\n        id\n      }\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getExamSessionQuery(\n    $exam: ExamWhereUniqueInput!\n    $session: SessionWhereUniqueInput!\n  ) {\n    examSessions(session: $session, exam: $exam) {\n      id\n    }\n  }\n"]);
 
   _templateObject65 = function _templateObject65() {
     return data;
@@ -87021,7 +87079,7 @@ function _templateObject65() {
 }
 
 function _templateObject64() {
-  var data = _taggedTemplateLiteral(["\n  query singleExamQuery($id: ID!) {\n    exam(id: $id) {\n      examName\n      examCode\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getSpecialtyFromCESSQuery($id: ID!) {\n    centerExamSessionSpecialty(id: $id) {\n      id\n      specialty {\n        id\n        specialtyName\n      }\n    }\n  }\n"]);
 
   _templateObject64 = function _templateObject64() {
     return data;
@@ -87031,7 +87089,7 @@ function _templateObject64() {
 }
 
 function _templateObject63() {
-  var data = _taggedTemplateLiteral(["\n  query getExamSessionQuery(\n    $exam: ExamWhereUniqueInput!\n    $session: SessionWhereUniqueInput!\n  ) {\n    examSessions(session: $session, exam: $exam) {\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getCenterExamSessionSpecialtyQuery(\n    $centerExamSession: CenterExamSessionWhereUniqueInput!\n    $specialty: SpecialtyWhereUniqueInput!\n  ) {\n    centerExamSessionSpecialties(\n      centerExamSession: $centerExamSession\n      specialty: $specialty\n    ) {\n      id\n    }\n  }\n"]);
 
   _templateObject63 = function _templateObject63() {
     return data;
@@ -87041,7 +87099,7 @@ function _templateObject63() {
 }
 
 function _templateObject62() {
-  var data = _taggedTemplateLiteral(["\n  query getSpecialtyFromCESSQuery($id: ID!) {\n    centerExamSessionSpecialty(id: $id) {\n      id\n      specialty {\n        id\n        specialtyName\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getRegisteredCandidatesPerSpecialty($id: ID!) {\n    centerExamSessionSpecialty(id: $id) {\n      id\n      registration {\n        candRegistrationNumber\n        id\n        candExamSecretCode\n        candidate {\n          id\n          cand1stName\n          cand2ndName\n          cand3rdName\n        }\n      }\n    }\n  }\n"]);
 
   _templateObject62 = function _templateObject62() {
     return data;
@@ -87051,7 +87109,7 @@ function _templateObject62() {
 }
 
 function _templateObject61() {
-  var data = _taggedTemplateLiteral(["\n  query getCenterExamSessionSpecialtyQuery(\n    $centerExamSession: CenterExamSessionWhereUniqueInput!\n    $specialty: SpecialtyWhereUniqueInput!\n  ) {\n    centerExamSessionSpecialties(\n      centerExamSession: $centerExamSession\n      specialty: $specialty\n    ) {\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getRegisteredCandidateCountQuery($id: ID!) {\n    registrationsConnection(id: $id) {\n      aggregate {\n        count\n      }\n    }\n  }\n"]);
 
   _templateObject61 = function _templateObject61() {
     return data;
@@ -87061,7 +87119,7 @@ function _templateObject61() {
 }
 
 function _templateObject60() {
-  var data = _taggedTemplateLiteral(["\n  query getRegisteredCandidatesPerSpecialty($id: ID!) {\n    centerExamSessionSpecialty(id: $id) {\n      id\n      registration {\n        candRegistrationNumber\n        id\n        candExamSecretCode\n        candidate {\n          id\n          cand1stName\n          cand2ndName\n          cand3rdName\n        }\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getAllRanksOfAnExamPhaseQuery($id: ID!) {\n    phase(id: $id) {\n      id\n      phaseRank {\n        id\n       rank{\n         id\n         rankName\n         rankCode\n       }\n       phase{\n         id\n         phaseName\n         phaseCode\n       }\n      }\n    }\n  }\n"]);
 
   _templateObject60 = function _templateObject60() {
     return data;
@@ -87071,7 +87129,7 @@ function _templateObject60() {
 }
 
 function _templateObject59() {
-  var data = _taggedTemplateLiteral(["\n  query getRegisteredCandidateCountQuery($id: ID!) {\n    registrationsConnection(id: $id) {\n      aggregate {\n        count\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getSingleCenterExamSessionBySecretCodeQuery($CESCode: String!) {\n    centerExamSessionBySecretCode(CESCode: $CESCode) {\n      id\n    }\n  }\n"]);
 
   _templateObject59 = function _templateObject59() {
     return data;
@@ -87081,7 +87139,7 @@ function _templateObject59() {
 }
 
 function _templateObject58() {
-  var data = _taggedTemplateLiteral(["\n  query getAllRanksOfAnExamPhaseQuery($id: ID!) {\n    phase(id: $id) {\n      id\n      phaseRank(orderBy: rankName_ASC) {\n        id\n        rankName\n        rankCode\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getSingleCenterExamSessionQuery(\n    $center: CenterWhereUniqueInput!\n    $examSession: ExamSessionWhereUniqueInput!\n  ) {\n    centerExamSessionsByCode(examSession: $examSession, center: $center) {\n      id\n    }\n  }\n"]);
 
   _templateObject58 = function _templateObject58() {
     return data;
@@ -87091,7 +87149,7 @@ function _templateObject58() {
 }
 
 function _templateObject57() {
-  var data = _taggedTemplateLiteral(["\n  query getSingleCenterExamSessionQuery(\n    $center: CenterWhereUniqueInput!\n    $examSession: ExamSessionWhereUniqueInput!\n  ) {\n    centerExamSessionsByCode(examSession: $examSession, center: $center) {\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query singleTownQuery($id: ID!) {\n    town(id: $id) {\n      townName\n      townCode\n      id\n    }\n  }\n"]);
 
   _templateObject57 = function _templateObject57() {
     return data;
@@ -87101,7 +87159,7 @@ function _templateObject57() {
 }
 
 function _templateObject56() {
-  var data = _taggedTemplateLiteral(["\n  query singleTownQuery($id: ID!) {\n    town(id: $id) {\n      townName\n      townCode\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getASingleCenterQuery($centerNumber: Int!) {\n    centerByNumber(centerNumber: $centerNumber) {\n      centerNumber\n      centerName\n      centerCode\n      id\n    }\n  }\n"]);
 
   _templateObject56 = function _templateObject56() {
     return data;
@@ -87111,7 +87169,7 @@ function _templateObject56() {
 }
 
 function _templateObject55() {
-  var data = _taggedTemplateLiteral(["\n  query getASingleCenterQuery($centerNumber: Int!) {\n    centerByNumber(centerNumber: $centerNumber) {\n      centerNumber\n      centerName\n      centerCode\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getSingleCenterByCodeQuery($centerSecretCode: String!) {\n    getCenterByCode(centerSecretCode: $centerSecretCode) {\n      id\n      centerCode\n    }\n  }\n"]);
 
   _templateObject55 = function _templateObject55() {
     return data;
@@ -87121,7 +87179,7 @@ function _templateObject55() {
 }
 
 function _templateObject54() {
-  var data = _taggedTemplateLiteral(["\n  query getSingleCenterByCodeQuery($centerSecretCode: String!) {\n    getCenterByCode(centerSecretCode: $centerSecretCode) {\n      id\n      centerCode\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getSingleProfQuery($authCode: String!) {\n    profByAuthCode(authCode: $authCode) {\n      authCode\n      id\n      auth1stName\n    }\n  }\n"]);
 
   _templateObject54 = function _templateObject54() {
     return data;
@@ -87131,7 +87189,7 @@ function _templateObject54() {
 }
 
 function _templateObject53() {
-  var data = _taggedTemplateLiteral(["\n  query getSingleProfQuery($authCode: String!) {\n    profByAuthCode(authCode: $authCode) {\n      authCode\n      id\n      auth1stName\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  query getSingleCenterFromCenterSecretCodeQuery($CESCode: String!) {\n    centerBySecretCode(CESCode: $CESCode) {\n      id\n      CESCode\n      centerName\n      centerCode\n    }\n  }\n"]);
 
   _templateObject53 = function _templateObject53() {
     return data;
@@ -87716,34 +87774,36 @@ var getAllCandidatesQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_
 
 var singleCenterQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject51());
 var getSingleCenterQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject52());
-var getSingleProfQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject53());
-var getSingleCenterByCodeQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject54());
-var getASingleCenterQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject55());
-var singleTownQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject56());
-var getSingleCenterExamSessionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject57());
-var getAllRanksOfAnExamPhaseQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject58());
-var getRegisteredCandidateCountQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject59());
-var getRegisteredCandidatesPerSpecialty = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject60());
-var getCenterExamSessionSpecialtyQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject61());
-var getSpecialtyFromCESSQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject62());
-var getExamSessionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject63());
-var singleExamQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject64());
-var singleCandidateQuery1 = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject65());
-var singleCandidateQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject66());
-var singleExaminerQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject67());
-var viewSingleCandidateQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject68());
-var getScoreID = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject69());
-var getRegistrations = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject70());
-var singleSubDivisionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject71());
-var getSingleRegionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject72());
-var singlePhaseQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject73());
-var singleSpecialtyQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject74());
-var dataForAverage = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject75());
-var singleDivisionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject76());
-var singleRankQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject77());
-var singleSubjectQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject78());
-var singleSubjectGroupQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject79());
-var singleSessionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject80()); ///*****************End Single object queries */
+var getSingleCenterFromCenterSecretCodeQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject53());
+var getSingleProfQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject54());
+var getSingleCenterByCodeQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject55());
+var getASingleCenterQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject56());
+var singleTownQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject57());
+var getSingleCenterExamSessionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject58());
+var getSingleCenterExamSessionBySecretCodeQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject59());
+var getAllRanksOfAnExamPhaseQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject60());
+var getRegisteredCandidateCountQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject61());
+var getRegisteredCandidatesPerSpecialty = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject62());
+var getCenterExamSessionSpecialtyQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject63());
+var getSpecialtyFromCESSQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject64());
+var getExamSessionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject65());
+var singleExamQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject66());
+var singleCandidateQuery1 = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject67());
+var singleCandidateQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject68());
+var singleExaminerQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject69());
+var viewSingleCandidateQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject70());
+var getScoreID = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject71());
+var getRegistrations = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject72());
+var singleSubDivisionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject73());
+var getSingleRegionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject74());
+var singlePhaseQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject75());
+var singleSpecialtyQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject76());
+var dataForAverage = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject77());
+var singleDivisionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject78());
+var singleRankQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject79());
+var singleSubjectQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject80());
+var singleSubjectGroupQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject81());
+var singleSessionQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject82()); ///*****************End Single object queries */
 
 
 
@@ -88152,7 +88212,7 @@ var Signup = function Signup() {
         lineNumber: 121
       },
       __self: this
-    }, "Acceder a votre un compte: "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
+    }, "Acceder a votre compte. "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
       href: "/creates/login",
       __source: {
         fileName: _jsxFileName,

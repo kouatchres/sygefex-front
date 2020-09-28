@@ -1,427 +1,268 @@
-import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo';
-import Form from '../styles/Form';
-import { MiniStyledPage } from '../styles/StyledPage';
-import Error from '../ErrorMessage';
-import styled from 'styled-components';
-import { getSelectedObject } from '../queries&Mutations&Functions/Functions';
-import { createCenterExamSessionExaminerMutation } from '../queries&Mutations&Functions/Mutations';
+import React from "react";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { MinimStyledPage } from "../styles/StyledPage";
+import Error from "../ErrorMessage.js";
+import Router from "next/router";
+import { Formik, Form } from "formik";
 import {
-    getExamSessionQuery,
-    getAllExamsQuery,
-    getAllSessionsQuery,
-    getSingleCenterExamSessionQuery,
-    getSingleCenterQuery,
-    getAllRanksQuery,
-    getAllPhasesQuery,
-    getASinglePhaseRankQuery
-} from '../queries&Mutations&Functions/Queries';
+  SygexInput,
+  SygefexSelect,
+  StyledForm,
+  ButtonStyled,
+  StyledButton,
+} from "../utils/FormInputs";
+import styled from "styled-components";
+import * as Yup from "yup";
+import useForm from "../utils/useForm";
+import {removeTypename} from "../queries&Mutations&Functions/Functions";
+import { createCenterExamSessionExaminerMutation } from "../queries&Mutations&Functions/Mutations";
+import {
+ getSingleCenterExamSessionBySecretCodeQuery,
+  getAllPhasesQuery,
+getSingleCenterFromCenterSecretCodeQuery,
+  getAllRanksOfAnExamPhaseQuery,
+} from "../queries&Mutations&Functions/Queries";
 
-const StyledDivision = styled.div`
-	display: grid;
-	grid-template-columns: 1fr;
-	text-align: center;
-	margin: 0 auto;
-    .submitButton{
-paddding-top:2rem;
-    }
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 13rem;
+  margin: 0 1rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
+`;
+const AllControls = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* min-width: 17rem; */
 `;
 
-const OtherSelect = styled.div`
-	display: block;
-	text-align: center;
-	margin: 0 auto;
-`;
+const validationSchema = Yup.object().shape({
+  CESCode: Yup
+      .string()
+      .required("Code secret du centre Obligatoire"),
+  phaseRank: Yup.string().required("Choix du poste exige"),
+  examinerCode: Yup.string().required("Code secret examinateur Obligatoire"),
+  });
 
-class CreateCESAuthority extends Component {
-    state = {
-        examID: "",
-        sessionID: "",
-        phaseID: "",
-        rankID: "",
-        centerNumber: "",
-        centerExamSession: "",
-        examinerCode: ""
+const CreateCESExaminer = () => {
+  const initialValues = {
+    phaseRank: "",
+    examinerCode: "",
+    CESCode: "",
+  };
+  const [state, setState, handleReactSelectChange] = useForm({
+    CESCode: "",
+    phaseID: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type } = e.target;
+    const val = type === "number" ? parseInt(value) : value;
+    setState({ [name]: val });
+  };
+
+
+
+  const makeExaminerObject = (profCodeValue) => {
+    const storedProf = {
+      examinerCode: `${profCodeValue}`,
     };
+    return storedProf;
+  };
+ 
 
-    handleChange = (e) => {
-        const { name, value, type } = e.target;
-        const val = type === 'number'
-            ? parseInt(value)
-            : value;
-        this.setState({ [name]: val });
-    };
-
-    resetForm = () => {
-        this.setState({ centerNumber: '' });
-    };
-
-
-    makeExaminerObject = (profCodeValue) => {
-        const storedProf = {
-            examinerCode: `${profCodeValue}`
-        };
-        return storedProf;
-    };
-
-    render() {
-        const {
-
-            examID,
-            sessionID,
-            centerNumber,
-            phaseID,
-            rankID,
-            examinerCode
-        } = this.state;
-        return (
-            <Query query={getAllExamsQuery}>
-                {({ data, loading, error }) => {
-                    {
-                        loading && <p>loading...</p>;
-                    }
-                    {
-                        error && <Error error={error} />;
-                    }
-
-                    const { exams } = data;
-                    console.log(exams);
-
-                    const refinedExams = exams && exams.map(({
-                        __typename,
-                        examName,
-                        ...others
-                    }) => others);
-
-                    return (
-                        <Query query={getAllSessionsQuery}>
-                            {({ data, loading, error }) => {
-                                {
-                                    loading && (
-                                        <p >
-                                            loading...
-                                        </p>
-                                    );
-                                }
-                                {
-                                    error && (<Error error={error} />);
-                                }
-
-                                const { sessions } = data;
-                                console.log(sessions);
-                                const refinedSessions = sessions && sessions.map(({
-                                    __typename,
-                                    sessionName,
-                                    ...others
-                                }) => others);
-
-                                return (
-
-                                    <Query
-                                        query={getExamSessionQuery}
-                                        variables={{
-                                            exam: refinedExams && getSelectedObject(refinedExams, examID),
-                                            session: refinedSessions && getSelectedObject(refinedSessions, sessionID)
-                                        }}>
-                                        {({ data, error, loading }) => {
-                                            {
-                                                loading && <p>...Loading</p>
-                                            }
-                                            {
-                                                error && <Error error={error} />
-                                            }
-                                            console.log(data)
-                                            const { examSessions } = {
-                                                ...data
-                                            }
-                                            const refinedES = examSessions && examSessions.map(({
-                                                __typename,
-                                                ...others
-                                            }) => others)
-                                            const reducedES = refinedES && refinedES.reduce((item) => item)
-                                            console.log(reducedES)
-
-                                            return (
-                                                <Query
-                                                    query={getSingleCenterQuery}
-                                                    variables={{
-                                                        centerNumber: centerNumber
-                                                    }}>
-                                                    {({ data, error, loading }) => {
-                                                        {
-                                                            loading && <p>...Loading</p>
-                                                        }
-                                                        {
-                                                            error && <Error error={error} />
-                                                        }
-                                                        const { centerByNumber } = {
-                                                            ...data
-                                                        }
-                                                        centerByNumber && delete centerByNumber.__typename
-                                                        console.log(centerByNumber)
-                                                        return (
-                                                            <Query
-                                                                query={getSingleCenterExamSessionQuery}
-                                                                variables={{
-                                                                    examSession: reducedES && reducedES,
-                                                                    center: centerByNumber && centerByNumber
-                                                                }}>
-                                                                {({ data, error, loading }) => {
-                                                                    {
-                                                                        loading && <p>...Loading</p>
-                                                                    }
-                                                                    {
-                                                                        error && <Error error={error} />
-                                                                    }
-                                                                    console.log(data);
-                                                                    const { centerExamSessions } = {
-                                                                        ...data
-                                                                    };
-                                                                    console.log(centerExamSessions);
-                                                                    // remove typename from the object
-                                                                    const refinedCenterExamSessions = centerExamSessions && centerExamSessions.map(({
-                                                                        __typename,
-                                                                        ...others
-                                                                    }) => others);
-                                                                    // transform the array into a single object
-                                                                    const getObj = refinedCenterExamSessions && refinedCenterExamSessions.reduce((item) => item);
-                                                                    console.log(getObj);
-
-                                                                    return (
-                                                                        <Query query={getAllPhasesQuery}>
-                                                                            {({ data, loading, error }) => {
-                                                                                {
-                                                                                    loading && <p>loading...</p>;
-                                                                                }
-                                                                                {
-                                                                                    error && <Error error={error} />;
-                                                                                }
-                                                                                console.log(data);
-
-                                                                                const { phases } = data;
-                                                                                console.log(phases);
-                                                                                const refinedPhase = phases && phases.map(({
-                                                                                    __typename,
-                                                                                    phaseName,
-                                                                                    phaseCode,
-                                                                                    ...others
-                                                                                }) => others);
-
-                                                                                const phasesOptions = phases && phases.map(item => (
-                                                                                    <option key={item.id} value={item.id}>
-                                                                                        {item.phaseName}
-                                                                                    </option>
-                                                                                ));
-
-                                                                                return (
-                                                                                    <Query query={getAllRanksQuery}>
-                                                                                        {({ data, loading, error }) => {
-                                                                                            {
-                                                                                                loading && <p>loading...</p>;
-                                                                                            }
-                                                                                            {
-                                                                                                error && <Error error={error} />;
-                                                                                            }
-                                                                                            console.log(data);
-
-                                                                                            const { ranks } = data;
-
-                                                                                            const refinedRank = ranks && ranks.map(({
-                                                                                                __typename,
-                                                                                                rankName,
-                                                                                                rankCode,
-                                                                                                ...others
-                                                                                            }) => others);
-                                                                                            const rankOptions = ranks && ranks.map(item => (
-                                                                                                <option key={item.id} value={item.id}>
-                                                                                                    {item.rankName}
-                                                                                                </option>
-                                                                                            ));
-                                                                                            return (
-                                                                                                <Query
-                                                                                                    query={getASinglePhaseRankQuery}
-                                                                                                    variables={{
-                                                                                                        phase: refinedPhase && getSelectedObject(refinedPhase, phaseID),
-                                                                                                        rank: refinedRank && getSelectedObject(refinedRank, rankID)
-                                                                                                    }}>
-                                                                                                    {({ data, loading, error }) => {
-                                                                                                        {
-                                                                                                            loading && (
-                                                                                                                <p>
-                                                                                                                    loading...
-                                                                                                                </p>
-                                                                                                            );
-                                                                                                        }
-                                                                                                        {
-                                                                                                            error && (<Error error={error} />);
-                                                                                                        }
-                                                                                                        console.log(data);
-
-                                                                                                        const { phaseRank } = data;
-                                                                                                        const refinedPhaseRank = phaseRank && phaseRank.map(({
-                                                                                                            __typename,
-                                                                                                            ...others
-                                                                                                        }) => others);
-                                                                                                        // transform the array into a single object
-                                                                                                        const getPhaseRank = refinedPhaseRank && refinedPhaseRank.reduce((item) => item);
-                                                                                                        console.log(getPhaseRank);
-
-                                                                                                        return (
-                                                                                                            <Mutation
-                                                                                                                mutation={createCenterExamSessionExaminerMutation}
-                                                                                                                variables={{
-                                                                                                                    ...this.state,
-                                                                                                                    examiner: this.makeExaminerObject(examinerCode),
-                                                                                                                    centerExamSession: getObj && getObj,
-                                                                                                                    phaseRank: getPhaseRank && getPhaseRank
-                                                                                                                }}>
-                                                                                                                {(createCenterExamSessionExaminer, { loading, error }) => (
-                                                                                                                    <MiniStyledPage >
-                                                                                                                        <Form
-                                                                                                                            method="POST"
-                                                                                                                            onSubmit={async (e) => {
-                                                                                                                                e.preventDefault();
-                                                                                                                                const res = await createCenterExamSessionExaminer();
-                                                                                                                                console.log(res);
-                                                                                                                                this.resetForm();
-                                                                                                                            }}>
-                                                                                                                            <h4 >
-                                                                                                                                Inscription d'examinateur au centre d'Examen
-                                                                                                                            </h4>
-                                                                                                                            <Error error={error} />
-                                                                                                                            <fieldset disabled={loading} aria-busy={loading}>
-                                                                                                                                <StyledDivision >
-
-                                                                                                                                    <OtherSelect >
-                                                                                                                                        <input
-                                                                                                                                            type="textarea"
-                                                                                                                                            id="centerName"
-                                                                                                                                            name="centerName"
-                                                                                                                                            placeholder="Nom du centre"
-                                                                                                                                            value={centerByNumber && centerByNumber.centerCode}
-                                                                                                                                            rows="2"
-                                                                                                                                            wrap="soft"
-                                                                                                                                            readOnly />
-                                                                                                                                        <input
-                                                                                                                                            type="number"
-                                                                                                                                            id="centerNumber"
-                                                                                                                                            name="centerNumber"
-                                                                                                                                            placeholder="Numéro du centre"
-                                                                                                                                            value={centerNumber}
-                                                                                                                                            onChange={this.handleChange}
-                                                                                                                                            required />
-                                                                                                                                        <input
-                                                                                                                                            type="text"
-                                                                                                                                            id="examinerCode"
-                                                                                                                                            name="examinerCode"
-                                                                                                                                            value={examinerCode}
-                                                                                                                                            placeholder="Code Secret De l'examinateur"
-                                                                                                                                            onChange={this.handleChange}
-                                                                                                                                            required />
-
-                                                                                                                                        <select
-                                                                                                                                            type="select"
-                                                                                                                                            id="sessionID"
-                                                                                                                                            name="sessionID"
-                                                                                                                                            value={sessionID}
-                                                                                                                                            onChange={this.handleChange}
-                                                                                                                                            required>
-                                                                                                                                            <option >
-                                                                                                                                                La Session
-                                                                                                                                                        </option>
-                                                                                                                                            {sessions && sessions.map((item) => (
-                                                                                                                                                <option key={item.id} value={item.id}>
-                                                                                                                                                    {item.sessionName}
-                                                                                                                                                </option>
-                                                                                                                                            ))}
-                                                                                                                                        </select>
-
-                                                                                                                                        <select
-                                                                                                                                            type="select"
-                                                                                                                                            id="examID"
-                                                                                                                                            name="examID"
-                                                                                                                                            value={examID}
-                                                                                                                                            onChange={this.handleChange}
-                                                                                                                                            required>
-                                                                                                                                            <option > L'Examen</option>
-                                                                                                                                            {exams && exams.map((item) => (
-                                                                                                                                                <option key={item.id} value={item.id}>
-                                                                                                                                                    {item.examName}
-                                                                                                                                                </option>
-                                                                                                                                            ))}
-                                                                                                                                        </select>
-                                                                                                                                        <select
-                                                                                                                                            type="select"
-                                                                                                                                            id="phaseID"
-                                                                                                                                            name="phaseID"
-                                                                                                                                            value={phaseID}
-                                                                                                                                            onChange={this.handleChange}
-                                                                                                                                            required>
-                                                                                                                                            <option >
-                                                                                                                                                La Phase de l'Exxamen
-                                                                                                                                                        </option>
-                                                                                                                                            {phasesOptions && phasesOptions}
-                                                                                                                                        </select>
-
-                                                                                                                                        <select
-                                                                                                                                            type="select"
-                                                                                                                                            id="rankID"
-                                                                                                                                            name="rankID"
-                                                                                                                                            value={rankID}
-                                                                                                                                            onChange={this.handleChange}
-                                                                                                                                            required>
-                                                                                                                                            <option >
-                                                                                                                                                Le Poste
-                                                                                                                                                        </option>
-                                                                                                                                            {rankOptions && rankOptions}
-                                                                                                                                        </select>
-
-
-                                                                                                                                        <div className="submitButton">
-                                                                                                                                            <button type="submit">
-                                                                                                                                                Valid{loading ? 'ation en cours' : 'er'}
-                                                                                                                                            </button>
-                                                                                                                                        </div>
-                                                                                                                                    </OtherSelect>
-                                                                                                                                </StyledDivision>
-                                                                                                                            </fieldset>
-                                                                                                                        </Form>
-                                                                                                                    </MiniStyledPage>
-                                                                                                                )}</Mutation>
-
-                                                                                                        )
-                                                                                                    }}
-                                                                                                </Query>
-                                                                                            )
-                                                                                        }}
-                                                                                    </Query>
-                                                                                )
-                                                                            }}
-                                                                        </Query>
-                                                                    );
-                                                                }
-                                                                }
-                                                            </Query>
-                                                        );
-                                                    }
-                                                    }
-                                                </Query>
-                                            );
-                                        }
-                                        }
-                                    </Query>
-                                );
-                            }
-                            }
-                        </Query>
-                    );
-                }
-                }
-            </Query>
-
-
-        );
+  const { data: dataCenter, loading: loadingCenter, errorCenter } = useQuery(
+    getSingleCenterFromCenterSecretCodeQuery,
+    {
+      skip: !state.CESCode,
+      variables: {
+        CESCode: state.CESCode,
+      },  
     }
-}
+  );
+  
 
-export default CreateCESAuthority;
+  const getCenterBySecretCode = dataCenter && dataCenter.centerBySecretCode;
+  const newCenter = getCenterBySecretCode && removeTypename(getCenterBySecretCode);
+  console.log(newCenter);
+
+  const { data: dataCES, loading: loadingCES, errorCES } = useQuery(
+    getSingleCenterExamSessionBySecretCodeQuery,
+    {
+      skip: !newCenter,
+      variables: {CESCode: newCenter && newCenter,},
+    }
+  );
+ 
+
+  console.log(dataCES);
+  const getCenterExamSessionBySecretCode =
+    dataCES && dataCES.centerExamSessionBySecretCode;
+  console.log(getCenterExamSessionBySecretCode);
+  // remove typename from the object
+  const refinedCenterExamSessionByCode =
+    getCenterExamSessionBySecretCode && removeTypename(getCenterExamSessionBySecretCode);
+  // transform the array into a single object
+  const getCES =
+    refinedCenterExamSessionByCode && refinedCenterExamSessionByCode[0];
+  console.log(getCES);
+
+
+
+  const {
+    data: dataPhase,
+    loading: loadingPhase,
+    error: errorPhase,
+  } = useQuery(getAllPhasesQuery);
+
+  
+  console.log(dataPhase);
+
+  const getPhases = dataPhase && dataPhase.phases;
+  console.log(getPhases);
+  const refinedPhase = getPhases && removeTypename(getPhases);
+  console.log(refinedPhase);
+
+  const getPhaseOptions =
+    getPhases &&
+    getPhases.map((item) => ({
+      ...item,
+      value: item.id,
+      label: item.phaseName,
+    }));
+
+  const {
+    data: dataPhaseRank,
+    loading: loadingPhaseRank,
+    error: errorPhaseRank,
+  } = useQuery(getAllRanksOfAnExamPhaseQuery, {
+    variables: { id: state.phaseID },
+  });
+
+ 
+  console.log(dataPhaseRank);
+  const getThePhase = dataPhaseRank && dataPhaseRank.phase;
+  const { phaseRank } = { ...getThePhase };
+  const { phase, rank } = { ...phaseRank };
+  const refinedPhaseRanks = phaseRank && removeTypename(phaseRank);
+  const getPhaseRankOptions =
+    refinedPhaseRanks &&
+    refinedPhaseRanks.map((item) => ({
+      ...item,
+      value: item.id,
+      label: item.rank.rankName,
+    }));
+  console.log(phaseRank);
+
+  const [CreateCenterExamSessionExaminer, { loading, error }] = useMutation(
+    createCenterExamSessionExaminerMutation
+  );
+
+  return (
+    <Formik
+      method="POST"
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={async (values,  {setSubmitting, resetForm}) => {
+        const res = await CreateCenterExamSessionExaminer({
+          variables: {
+            ...values,
+            examiner: makeExaminerObject(values.examinerCode),
+            centerExamSession: getCES && getCES,
+            phaseRank: refinedPhaseRanks && { id: values.phaseRank.value },
+          },
+        });
+        res &&
+          Router.push({
+            pathname: "/show/examinerRegReceipt",
+            query: { id: res.data.createCenterExamSessionExaminer.id },
+          });
+        setTimeout(() => {
+          console.log(JSON.stringify(values, null, 2));
+          console.log(res);
+          resetForm(true);
+          setSubmitting(false);
+        }, 400);
+      }}
+    >
+      {({ values, setFieldValue, isSubmitting }) => (
+        <MinimStyledPage>
+          <h4> Inscription d'examinateur</h4>
+          <Error error={
+            error  || 
+              errorCenter ||
+              errorCES ||
+              errorPhase ||
+              errorPhaseRank} />
+          <StyledForm
+            disabled={
+              isSubmitting ||
+              loadingCenter ||
+              loadingCES ||
+              loadingPhase ||
+              loading ||
+              loadingPhaseRank 
+            }
+            aria-busy={
+              isSubmitting ||
+              loadingCenter ||
+              loadingCES ||
+              loadingPhase ||
+              loading ||
+              loadingPhaseRank 
+            }
+          >
+            <Form>
+              <AllControls>
+                <InputGroup>
+                  <SygexInput
+                    value={getCenterBySecretCode && getCenterBySecretCode.centerSecretCode}
+                    name="centerName"
+                    type="text"
+                    label=" Nom du centre"
+                    disabled={isSubmitting}
+                  />
+                  <SygexInput
+                    onChange={handleChange}
+                    name="CESCode"
+                    type="text"
+                    value={state.CESCode || ""}
+                    label="code secret du centre"
+                    disabled={isSubmitting}
+                  />
+                  <SygefexSelect
+                    onChange={handleReactSelectChange}
+                    name="phaseID"
+                    options={getPhaseOptions}
+                    placeholder={"La phase l'Examen"}
+                    disabled={isSubmitting}
+                  />
+                  <SygefexSelect
+                    onChange={(value) => setFieldValue("phaseRank", value)}
+                    name="phaseRank"
+                    options={getPhaseRankOptions}
+                    placeholder={"Le poste"}
+                    disabled={isSubmitting}
+                  />
+                  <SygexInput
+                    name="examinerCode"
+                    type="text"
+                    label="Code de l'Examinateur"
+                    disabled={isSubmitting}
+                  />
+                </InputGroup>
+                <ButtonStyled>
+                  <StyledButton type="submit">
+                    Valid{isSubmitting ? "ation en cours" : "er"}
+                  </StyledButton>
+                </ButtonStyled>
+              </AllControls>
+            </Form>
+          </StyledForm>
+        </MinimStyledPage>
+      )}
+    </Formik>
+  );
+};
+export default CreateCESExaminer;

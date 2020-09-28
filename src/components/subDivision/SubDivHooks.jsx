@@ -46,17 +46,12 @@ const SubDivHooks = () => {
   };
   const [state, setState, handleReactSelectChange] = useForm({ regionID: "" });
 
-  const { data: dataCountry, loadingCountry, errCountry } = useQuery(
+  const { data: dataRegions, loadingRegions, errRegions } = useQuery(
     getAllRegionsQuery
   );
-  {
-    loadingCountry && <p>loading...</p>;
-  }
-  {
-    errCountry && <Error error={errCountry} />;
-  }
-  console.log(dataCountry);
-  const getRegions = dataCountry && dataCountry.regions;
+ 
+  console.log(dataRegions);
+  const getRegions = dataRegions && dataRegions.regions;
   console.log(getRegions);
   const getRegionsOptions =
     getRegions &&
@@ -70,12 +65,7 @@ const SubDivHooks = () => {
       variables: { id: state.regionID },
     }
   );
-  {
-    loadingRegion && <p>loading...</p>;
-  }
-  {
-    errRegion && <Error error={errRegion} />;
-  }
+ 
   console.log(dataRegion);
   const getRegion = dataRegion && dataRegion.region;
   const { division } = { ...getRegion };
@@ -113,8 +103,8 @@ const SubDivHooks = () => {
       {({ values, setFieldValue, isSubmitting }) => (
         <MinimStyledPage>
           <h4>Nouvel arrondissement</h4>
-          <Error error={error} />
-          <StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
+          <Error error={error  ||errRegion || errRegions} />
+          <StyledForm disabled={isSubmitting ||loadingRegions||loadingRegions ||loading} aria-busy={isSubmitting  || loadingRegions ||loadingRegion ||loading}>
             <Form>
               <AllControls>
                 <InputGroup>

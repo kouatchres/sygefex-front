@@ -1,12 +1,12 @@
 import React from "react";
-import CreateNewExamHook from "../../src/components/exam/CreateNewExamHook";
+import CreateExam from "../../src/components/exam/CreateExam";
 import GatedSignin from "../../src/components/user/GatedSignin";
 
 const NewExam = () => {
   return (
     <div>
       <GatedSignin>
-        <CreateNewExamHook />
+        <CreateExam />
       </GatedSignin>
     </div>
   );

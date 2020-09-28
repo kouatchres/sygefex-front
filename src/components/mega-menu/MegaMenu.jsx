@@ -193,6 +193,15 @@ const MegaMenu = () => (
             <div className="menu-sub">
               <div className="menu-col-1">
                 <ul>
+                  <h3 className="menu-category">S'enregistrer</h3>
+                  <hr />
+                  <Link href="/signup">
+                  <a>Ouverture de compte</a>
+                  </Link>
+                  <hr />
+                  
+                </ul>
+                <ul>
                   <h3 className="menu-category">Region</h3>
                   <hr />
                   <Link href="/creates/newRegion">

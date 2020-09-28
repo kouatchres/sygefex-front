@@ -49,6 +49,7 @@ const UpdateCenter = ({ id }) => {
       query: singleCenterQuery,
       variables: { id }
     })
+    {error && <Error error={error}/>}
     const centerData = { ...data.center }
     const {
       centerCode,

@@ -64,12 +64,7 @@ const EnterNewMarks = () => {
     loading: loadingEducType,
     error: errEducType,
   } = useQuery(getAllEducationTypesQuery);
-  {
-    loadingEducType && <p>loading...</p>;
-  }
-  {
-    errEducType && <Error error={errEducType} />;
-  }
+  
   console.log(dataEducType);
 
   const getEducationTypes = dataEducType && dataEducType.educationTypes;
@@ -90,12 +85,6 @@ const EnterNewMarks = () => {
     variables: { id: state.educTypeID },
   });
 
-  {
-    loadingSpecialty && <p>loading...</p>;
-  }
-  {
-    errSpecialty && <Error error={errSpecialty} />;
-  }
   console.log(dataEducationType);
   const getEducationType = dataEducationType && dataEducationType.educationType;
   const { specialty } = { ...getEducationType };
@@ -158,7 +147,13 @@ const EnterNewMarks = () => {
         return (
           <MinimStyledPage>
             <h4>Notes des candidats</h4>
-            <Error error={error} />
+            <Error error={ 
+              error ||
+                errSubjSer ||
+                errSpecialty ||
+                errEducType 
+                } />
+           
             <StyledForm
               disabled={
                 isSubmitting ||
@@ -181,14 +176,14 @@ const EnterNewMarks = () => {
                     <SygefexSelect
                       onChange={handleReactSelectChange}
                       name="educTypeID"
-                      placeholder={"Le type d'enseignement"}
+                      placeholder="Le type d'enseignement"
                       options={getEducTypesOptions}
                       disabled={isSubmitting}
                     />
                     <SygefexSelect
                       onChange={handleReactSelectChange}
                       name="specialtyID"
-                      placeholder={"La Spécialité"}
+                      placeholder="La Spécialité"
                       options={getSpecialtyOptions}
                       disabled={isSubmitting}
                     />
@@ -197,7 +192,7 @@ const EnterNewMarks = () => {
                         setFieldValue("subjectSpecialty", value)
                       }
                       name="subjectSpecialty"
-                      placeholder={"matière"}
+                      placeholder="matière"
                       options={getSubjectsOptions}
                       disabled={isSubmitting}
                     />

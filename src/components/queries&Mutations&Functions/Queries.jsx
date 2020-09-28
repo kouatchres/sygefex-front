@@ -1038,6 +1038,17 @@ const getSingleCenterQuery = gql`
   }
 `;
 
+const getSingleCenterFromCenterSecretCodeQuery = gql`
+  query getSingleCenterFromCenterSecretCodeQuery($CESCode: String!) {
+    centerBySecretCode(CESCode: $CESCode) {
+      id
+      CESCode
+      centerName
+      centerCode
+    }
+  }
+`;
+
 const getSingleProfQuery = gql`
   query getSingleProfQuery($authCode: String!) {
     profByAuthCode(authCode: $authCode) {
@@ -1089,14 +1100,30 @@ const getSingleCenterExamSessionQuery = gql`
   }
 `;
 
+const getSingleCenterExamSessionBySecretCodeQuery = gql`
+  query getSingleCenterExamSessionBySecretCodeQuery($CESCode: String!) {
+    centerExamSessionBySecretCode(CESCode: $CESCode) {
+      id
+    }
+  }
+`;
+
 const getAllRanksOfAnExamPhaseQuery = gql`
   query getAllRanksOfAnExamPhaseQuery($id: ID!) {
     phase(id: $id) {
       id
-      phaseRank(orderBy: rankName_ASC) {
+      phaseRank {
         id
-        rankName
-        rankCode
+       rank{
+         id
+         rankName
+         rankCode
+       }
+       phase{
+         id
+         phaseName
+         phaseCode
+       }
       }
     }
   }
@@ -1232,6 +1259,7 @@ const singleExaminerQuery = gql`
       examinerOtherNames
       examinerCode
       examinerEmail
+      gender
       examinerImage
       examinerPhone
       examinerMatricule
@@ -1460,6 +1488,8 @@ export {
   getSingleProfQuery,
   getAllGroup1Query,
   getAllSubjectsQuery,
+  getSingleCenterFromCenterSecretCodeQuery,
+  getSingleCenterExamSessionBySecretCodeQuery,
   getAllGroup2Query,
   singleSubjectGroupQuery,
   getAllRegionsAndDivisionsQuery,

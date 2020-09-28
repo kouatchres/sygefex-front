@@ -21,8 +21,6 @@ import { FormikDatepicker, FormikRadio } from "@dccs/react-formik-mui";
 import {
   FormLabel,
   RadioGroup,
-  Typography,
-  Container,
 } from "@material-ui/core";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";

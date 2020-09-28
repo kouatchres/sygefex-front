@@ -41,7 +41,7 @@ const DisplayError = ({ error }) => {
         if (networkError) {
             <ErrorStyles key={i}>
                 <p data-test="networkError">
-                    <strong>Probleme Reseaux!</strong>
+                    <strong>Erreure Réseaux!</strong>
                     {`[Network error]: ${networkError}`}
                 </p>
             </ErrorStyles>

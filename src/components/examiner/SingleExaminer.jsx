@@ -2,24 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Error from '../ErrorMessage';
 import Link from 'next/link';
 import { StyledButton, ButtonStyled } from '../utils/FormInputs'
-import useForm from '../utils/useForm  '
+import useForm from '../utils/useForm'
 import Form from '../styles/Form';
 import { MiniStyledPage } from '../styles/StyledPage';
 import styled from 'styled-components';
 import { singleExaminerQuery } from '../queries&Mutations&Functions/Queries';
 import { useApolloClient } from '@apollo/react-hooks';
-
-const UpdateBtn = styled.button`
-
-	background-color: #379;
-	border-radius: 10px;
-	font-size: .3rem;
-	border: none;
-	outline: none;
-	a {
-		color: white;
-	}
-`;
 
 const DivBtn = styled.div`
 	display: grid;
@@ -65,14 +53,14 @@ const ExaminerImg = styled.div`
 	}
 `;
 
-const SingleExaminer = (props) => {
+const SingleExaminer = ({id}) => {
 	const [state, setState] = useForm({})
 	const client = useApolloClient()
 
 	const loadingExaminerData = async () => {
 		const { data, error, loading } = await client.query({
 			query: singleExaminerQuery,
-			variables: { id: props.id }
+			variables: { id }
 		})
 
 		const { examiner } = data;
@@ -154,9 +142,13 @@ const SingleExaminer = (props) => {
 									<strong>CNI:</strong>
 									<span> {examinerCNI}</span>
 								</p>
+								<p>
+									<strong>Sexe:</strong>
+									<span> {gender}</span>
+								</p>
 
 								<p>
-									<strong>Code:</strong> <span> {examinerCode}</span>
+									<strong>Code secret:</strong> <span> {examinerCode}</span>
 								</p>
 							</GenInfo>
 							<ExaminerImg>
@@ -169,7 +161,7 @@ const SingleExaminer = (props) => {
 									<Link
 										href={{
 											pathname: '../updates/updateExaminer',
-											query: { id: props.id }
+											query: { id}
 										}}
 									>
 										<a target="_blank" >Modifier </a>
@@ -179,9 +171,7 @@ const SingleExaminer = (props) => {
 							<ButtonStyled>
 								<StyledButton>
 									<Link
-										href={{
-											pathname: '../creates/newExaminer'
-										}}
+										href={{pathname: '../creates/newExaminer'}}
 									>
 										<a target="_blank" >Nouveau Examinateur</a>
 									</Link>

@@ -158,8 +158,7 @@ const CreateNewSubject = () => {
         return (
           <MiniStyledPage>
             <h4>Nouvelle Matière</h4>
-            <Error error={errorSubj} />
-            <Error error={errorEducType} />
+            <Error error={errorSubj  ||errorEducType || errorSubj} />
             <StyledForm
               disabled={isSubmitting || loadingEducType || loadingSubj}
               aria-busy={isSubmitting || loadingEducType || loadingSubj}

@@ -118,7 +118,7 @@ const Signup = () => {
                   </InputGroup>
                   <LoginStyled>
                     <ul>
-                      <h9>Acceder a votre un compte: </h9>
+                      <h9>Acceder a votre compte. </h9>
                       <Link href="/creates/login">
                         <a>Connectez-vous</a>
                       </Link>

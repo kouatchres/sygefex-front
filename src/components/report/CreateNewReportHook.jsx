@@ -86,13 +86,7 @@ const CreateNewReportHook = () => {
     return storedProf;
   };
 
-  const transformCenterExamSessionExaminer = (authCodeValue) => {
-    const centerAdminObj = {
-      authCode: `${authCodeValue}`,
-    };
-    console.log(centerAdminObj);
-    return centerAdminObj;
-  };
+
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     const val = type === "number" ? parseInt(value) : value;
@@ -116,15 +110,10 @@ const CreateNewReportHook = () => {
     setState({ ...state, reportImage: file.secure_url });
   };
 
-  const { data: dataExams, loading: loadingExams, errorExams } = useQuery(
+  const { data: dataExams, loading: loadingExams, errExams } = useQuery(
     getAllExamsQuery
   );
-  {
-    loadingExams && <p>loading...</p>;
-  }
-  {
-    errorExams && <Error error={errorExams} />;
-  }
+  
 
   const getExams = dataExams && dataExams.exams;
   console.log(getExams);
@@ -135,15 +124,10 @@ const CreateNewReportHook = () => {
     getExams &&
     getExams.map((item) => ({ value: item.id, label: item.examName }));
 
-  const { data: dataSession, loading: loadingSession, errorSession } = useQuery(
+  const { data: dataSession, loading: loadingSession, errSession } = useQuery(
     getAllSessionsQuery
   );
-  {
-    loadingSession && <p>loading...</p>;
-  }
-  {
-    errorSession && <Error error={errorSession} />;
-  }
+  
 
   const getSessions = dataSession && dataSession.sessions;
   const refinedSessions = removeTypename(getSessions);
@@ -158,7 +142,7 @@ const CreateNewReportHook = () => {
   const {
     data: dataExamSession,
     loading: loadingExamSession,
-    error: errorExamSession,
+    error: errExamSession,
   } = useQuery(getExamSessionQuery, {
     skip: !state.examID || !state.sessionID,
     variables: {
@@ -167,12 +151,7 @@ const CreateNewReportHook = () => {
         refinedSessions && getSelectedObject(refinedSessions, state.sessionID),
     },
   });
-  {
-    loadingExamSession && <p>loading...</p>;
-  }
-  {
-    errorExamSession && <Error error={errorExamSession} />;
-  }
+  
 
   console.log(dataExamSession);
   const getExamSessions = dataExamSession && dataExamSession.examSessions;
@@ -180,7 +159,7 @@ const CreateNewReportHook = () => {
   const reducedES = refinedES && refinedES[0];
   console.log(reducedES);
 
-  const { data: dataCenter, loading: loadingCenter, errorCenter } = useQuery(
+  const { data: dataCenter, loading: loadingCenter, errCenter } = useQuery(
     getSingleCenterQuery,
     {
       skip: !state.centerNumber,
@@ -189,13 +168,7 @@ const CreateNewReportHook = () => {
       },
     }
   );
-  {
-    loadingCenter && <p>loading...</p>;
-  }
-  {
-    errorCenter && <Error error={errorCenter} />;
-  }
-
+  
   const getCenterByNumber = dataCenter && dataCenter.centerByNumber;
   const newCenter = getCenterByNumber && removeTypename(getCenterByNumber);
   console.log(newCenter);
@@ -210,12 +183,7 @@ const CreateNewReportHook = () => {
       },
     }
   );
-  {
-    loadingCES && <p>loading...</p>;
-  }
-  {
-    errorCES && <Error error={errorCES} />;
-  }
+ 
 
   console.log(dataCES);
   const getCenterExamSessionsByCode =
@@ -240,12 +208,7 @@ const CreateNewReportHook = () => {
       examiner: state.examinerCode && makeExaminerObject(state.examinerCode),
     },
   });
-  {
-    loadingExaminer && <p>loading...</p>;
-  }
-  {
-    errExaminer && <Error error={errExaminer} />;
-  }
+  
 
   const getCESExaminers =
     dataExaminer && dataExaminer.getCenterExamSessionExaminers;
@@ -281,7 +244,15 @@ const CreateNewReportHook = () => {
         return (
           <MinimStyledPage>
             <h4>Nouveau Rapport</h4>
-            <Error error={error} />
+            <Error error={
+              error ||  
+               errExams ||
+                errSession ||
+                errExamSession ||
+                errCenter ||
+                errCES ||
+                errExaminer
+              } />
             <StyledForm
               disabled={
                 isSubmitting ||
@@ -347,7 +318,7 @@ const CreateNewReportHook = () => {
                     <SygexInput
                       name="reportName"
                       type="text"
-                      label="Nom du Rapport"
+                      label="Titre du Rapport"
                       disabled={isSubmitting}
                     />
                     <SygexInput

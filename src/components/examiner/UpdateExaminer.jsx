@@ -7,9 +7,8 @@ import { Formik, Form } from 'formik'
 import *  as Yup from 'yup'
 import useForm from '../utils/useForm'
 import { updateExaminerMutation } from '../queries&Mutations&Functions/Mutations';
-import { removeTypename } from '../queries&Mutations&Functions/Functions';
-import { singleExaminerQuery, getAllGendersQuery } from '../queries&Mutations&Functions/Queries';
-import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
+import { singleExaminerQuery } from '../queries&Mutations&Functions/Queries';
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
 
 const ExaminerForm = styled.div`
 	display: grid;
@@ -26,7 +25,6 @@ const ExaminerPic = styled.div`
 		margin: 1rem auto;
 
 	img {
-		/* margin-top: 1rem; */
 		height: 15rem;
 		width: 15rem;
 		border-radius: 15px;
@@ -44,7 +42,7 @@ const FirstDataFrame = styled.div`
 	flex-direction: column;
 `;
 
-const UpdateExaminer = (props) => {
+const UpdateExaminer = ({id}) => {
 	const client = useApolloClient()
 	const [photo, setPhoto] = useState({ examinerImage: "" })
 	const [state, setState] = useForm({
@@ -102,24 +100,13 @@ const UpdateExaminer = (props) => {
 
 
 
-	const getSelectedGender = (dataSource) => {
-		// 1 copy the data source
-		// if (dataSource.length > 0) {
-		const tempGender = [...dataSource];
-		// get the region object
-		const selectedGender = tempGender.find((item) => item.id === state.genderID);
-		console.log('getting selected gender');
-		console.log(selectedGender);
-		return selectedGender;
-		// }
-	};
-
-	const loadExaminerData = async () => {
+	const loadExaminerData = async ({id}) => {
 
 		const { data, error } = await client.query({
 			query: singleExaminerQuery,
-			variables: { id: props.id }
+			variables: { id }
 		})
+		{error && <Error error={error}/>}
 		const dataExaminer = data.examiner
 		const {
 			examiner1stName,
@@ -143,7 +130,7 @@ const UpdateExaminer = (props) => {
 			examinerCNI: examinerCNI,
 			examinerCode: examinerCode,
 			examinerMatricule: examinerMatricule,
-			gender: gender.genderName,
+			gender: gender,
 
 		})
 	}
@@ -152,16 +139,7 @@ const UpdateExaminer = (props) => {
 		loadExaminerData()
 	}, [])
 
-	const { data: dataGender, loading: loadingGender, error: errorGender } = useQuery(getAllGendersQuery)
-
-	{ loadingGender && <p>Loading...</p>; }
-	{ errorGender && <Error error={errorGender} />; }
-	const getGenders = dataGender && dataGender.genders
-	const refinedGenders = getGenders && removeTypename(getGenders)
-
-	const getGenderOptions = refinedGenders && refinedGenders.map((item) => ({ value: item.id, label: item.genderName }))
-
-
+	
 	const initialValues = {
 		examiner1stName: '',
 		examiner2ndName: '',
@@ -176,8 +154,8 @@ const UpdateExaminer = (props) => {
 
 	};
 
-	const [updateExaminer] = useMutation(updateExaminerMutation, {
-		variables: { id: props.id }
+	const [updateExaminer, {loading, error}] = useMutation(updateExaminerMutation, {
+		variables: { id}
 	})
 
 	return (
@@ -191,7 +169,7 @@ const UpdateExaminer = (props) => {
 					variables: {
 						...values,
 						examinerImage: photo.examinerImage,
-						id: props.id
+						id
 					},
 				});
 				Router.push({
@@ -211,9 +189,9 @@ const UpdateExaminer = (props) => {
 
 				<StyledPage>
 					<h4>Correction d'Info Examinateur</h4>
-					<Error error={errorGender} />
-					<StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
-						<Form>
+					<StyledForm disabled={isSubmitting  || loading} aria-busy={isSubmitting || loading}>
+					{error && <Error error={error}/>}	
+					<Form>
 							<ExaminerForm>
 								<PicFrame>
 									<SygexInput

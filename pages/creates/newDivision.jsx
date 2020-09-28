@@ -1,12 +1,12 @@
 import React from "react";
-import NewDivisionHooks from "../../src/components/division/NewDivisionHooks";
+import NewDivision from "../../src/components/division/NewDivision";
 import GatedSignin from "../../src/components/user/GatedSignin";
 
 const newDivision = (props) => {
   return (
     <div>
       <GatedSignin>
-        <NewDivisionHooks />
+        <NewDivision />
       </GatedSignin>
     </div>
   );

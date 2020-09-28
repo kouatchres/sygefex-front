@@ -88,8 +88,7 @@ const CreateNewSpecialtyHook = () => {
         return (
           <MiniStyledPage>
             <h4> Nouvelle Spécialité</h4>
-            <Error error={error} />
-            <Error error={errorEducType} />
+            <Error error={error || errorEducType} />
             <StyledForm
               disabled={isSubmitting || loading || loadingEducType}
               aria-busy={isSubmitting || loading || loadingEducType}
