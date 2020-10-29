@@ -186,7 +186,7 @@ const CreateExaminer = () => {
                     <SygexInput
                       name="examinerCNI"
                       type="text"
-                      label="Numéro de Carte d'Identité"
+                      label="Numéro de Carte d'Identité Nationale"
                       disabled={isSubmitting}
                     />
                     <SygexInput

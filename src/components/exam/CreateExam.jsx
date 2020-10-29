@@ -24,7 +24,7 @@ const AllControls = styled.div`
 `;
 
 const validationSchema = Yup.object().shape({
-  examName: Yup.string().required("Nom de l'examen obligatoire"),
+  examName: Yup.string().required("Libellé de l'examen obligatoire"),
   examCode: Yup.string().required("Code de l'examen obligatoire"),
 });
 
@@ -64,7 +64,7 @@ const CreateExam = () => {
                     <SygexInput
                       name="examName"
                       type="text"
-                      label="Nom Examen"
+                      label="Libellé Examen"
                     />
                     <SygexInput
                       name="examCode"

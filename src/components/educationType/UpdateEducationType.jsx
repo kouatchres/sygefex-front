@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyledPage } from '../styles/StyledPage';
-import Error from '../ErrorMessage.js';
+import { MiniStyledPage } from '../styles/StyledPage';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { SygexInput, StyledForm, ButtonStyled, StyledButton } from '../utils/FormInputs'
@@ -68,15 +67,9 @@ const UpdateEducationType = ({ id }) => {
 			validationSchema={validationSchema}
 			onSubmit={async (values, { resetForm, setSubmitting }) => {
 				const res = await updateEducationType({
-					variables: {
-						...values,
-						id: id
-					},
+					variables: {...values, id},
 				});
-				// Router.push({
-				// 	pathname: '/show/singleEducType',
-				// 	query: { id }
-				// });
+				
 				setTimeout(() => {
 					console.log(JSON.stringify(values, null, 2));
 					console.log(res);
@@ -87,7 +80,7 @@ const UpdateEducationType = ({ id }) => {
 		>
 			{({ values, isSubmitting }) => (
 
-				<StyledPage>
+				<MiniStyledPage>
 					<h4>Modification Type d'enseignement</h4>
 					<StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
 						<Form>
@@ -114,7 +107,7 @@ const UpdateEducationType = ({ id }) => {
 							</Controls>
 						</Form>
 					</StyledForm>
-				</StyledPage>
+				</MiniStyledPage>
 			)}
 		</Formik>
 	);

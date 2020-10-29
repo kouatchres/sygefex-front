@@ -10,6 +10,8 @@ const RegionRow = styled.div`
   align-items: left;
   justify-items: left;
   border-bottom: 0.05rem solid black;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   padding-left: 0.3rem;
 `;
 

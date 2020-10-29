@@ -341,7 +341,7 @@ function _templateObject45() {
 }
 
 function _templateObject44() {
-  var data = _taggedTemplateLiteral(["\n  mutation enterMarksMutation(\n    $subjectSpecialty: SubjectSpecialtyWhereUniqueInput!\n    $subjectAve: Float!\n    $candExamSecretCode: String!\n  ) {\n    enterMarks(\n      subjectSpecialty: $subjectSpecialty\n      subjectAve: $subjectAve\n      candExamSecretCode: $candExamSecretCode\n    ) {\n      subjectAve\n      coeff\n      id\n      subjectSpecialty {\n        id\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  mutation enterMarksMutation(\n    $subjectSpecialty: SubjectSpecialtyWhereUniqueInput!\n    $subjectAve: Float!\n    $subjectName: String!\n    $candExamSecretCode: String!\n  ) {\n    enterMarks(\n      subjectSpecialty: $subjectSpecialty\n      subjectAve: $subjectAve\n      subjectName: $subjectName\n      candExamSecretCode: $candExamSecretCode\n    ) {\n      subjectAve\n      coeff\n      subjectName\n      id\n      subjectSpecialty {\n        id\n      }\n    }\n  }\n"]);
 
   _templateObject44 = function _templateObject44() {
     return data;
@@ -641,7 +641,7 @@ function _templateObject15() {
 }
 
 function _templateObject14() {
-  var data = _taggedTemplateLiteral(["\n  mutation createPhaseRankMutation(\n    $phase: PhaseWhereUniqueInput!\n    $rank: RankWhereUniqueInput!\n   \n  ) {\n    createPhaseRank(phase: $phase, rank: $rank)  {\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  mutation createPhaseRankMutation(\n    $phase: PhaseWhereUniqueInput!\n    $rank: RankWhereUniqueInput!\n  ) {\n    createPhaseRank(phase: $phase, rank: $rank) {\n      id\n    }\n  }\n"]);
 
   _templateObject14 = function _templateObject14() {
     return data;
@@ -651,7 +651,7 @@ function _templateObject14() {
 }
 
 function _templateObject13() {
-  var data = _taggedTemplateLiteral(["\n  mutation createCenterExamSessionMutation(\n    $examSession: ExamSessionWhereUniqueInput!\n    $center: CenterWhereUniqueInput!\n    $CESCode: String!\n  ) {\n    createCenterExamSession(examSession: $examSession, center: $center, CESCode: $CESCode) {\n      id\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  mutation createCenterExamSessionMutation(\n    $examSession: ExamSessionWhereUniqueInput!\n    $center: CenterWhereUniqueInput!\n    $CESCode: String!\n  ) {\n    createCenterExamSession(\n      examSession: $examSession\n      center: $center\n      CESCode: $CESCode\n    ) {\n      id\n    }\n  }\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -800,32 +800,7 @@ var createRegistrationMutation = graphql_tag__WEBPACK_IMPORTED_MODULE_1___defaul
 var createCenterExamSessionMutation = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default()(_templateObject13());
 var createPhaseRankMutation = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default()(_templateObject14());
 var createCenterExamSessionExaminerMutation = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default()(_templateObject15());
-var createCenterExamSessionSpecialtyMutation = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default()(_templateObject16()); // const createCenterExamSessionexaminerorityMutation = gql`
-//   mutation createCenterExamSessionexaminerorityMutation(
-//     $rank: RankWhereUniqueInput!
-//     $centerExamSession: CenterExamSessionWhereUniqueInput!
-//     $examinerName: String!
-//     $examinerCode: String!
-//     $examinerCNI: String!
-//     $examinerPhone: Int!
-//     $examinerMatricule: String!
-//   ) {
-//     createCenterExamSessionexaminerority(
-//       rank: $rank
-//       centerExamSession: $centerExamSession
-//       examinerCNI: $examinerCNI
-//       examinerName: $examinerName
-//       examinerCode: $examinerCode
-//       examinerPhone: $examinerPhone
-//       examinerMatricule: $examinerMatricule
-//     ) {
-//       examinerName
-//       examinerCode
-//       examinerPhone
-//     }
-//   }
-// `
-
+var createCenterExamSessionSpecialtyMutation = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default()(_templateObject16());
 var createDivisionMutation = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default()(_templateObject17());
 var createCenterMutation = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default()(_templateObject18());
 var createSpecialtyMutation = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default()(_templateObject19());

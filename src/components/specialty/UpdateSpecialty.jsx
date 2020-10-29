@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { useApolloClient, useMutation } from '@apollo/react-hooks';
-
 import { MiniStyledPage } from '../styles/StyledPage';
 import Error from '../ErrorMessage.js';
 import { SygexInput, StyledForm, ButtonStyled, StyledButton } from '../utils/FormInputs'
-import { updateSeriesMutation } from '../queries&Mutations&Functions/Mutations';
-import { singleSeriesQuery } from '../queries&Mutations&Functions/Queries';
+import { updateSpecialtyMutation } from '../queries&Mutations&Functions/Mutations';
+import { singleSpecialtyQuery } from '../queries&Mutations&Functions/Queries';
 import useForm from '../utils/useForm';
 
 import styled from 'styled-components'
@@ -16,36 +15,37 @@ import styled from 'styled-components'
 const Controls = styled.div`
 padding:0 2rem;
 `;
-const UpdateSeries = ({ id }) => {
-	const [state, setState] = useForm({ seriesCode: '', seriesName: '' })
+const specialty = ({ id }) => {
+	const [state, setState] = useForm({ specialtyCode: '', specialtyName: '' })
 	const client = useApolloClient()
 
 
-	const loadSeriesData = async () => {
+	const specialtyData = async () => {
 		const { data } = await client.query({
-			query: singleSeriesQuery,
+			query: singleSpecialtyQuery,
 			variables: { id }
 
 		})
-		const getSeriesData = data.series
-		console.log(getSeriesData)
+		const specialtyData = data.specialty
+		console.log(specialtyData)
 		const {
-			seriesName,
-			seriesCode,
-		} = getSeriesData
+			specialtyName,
+			specialtyCode,
+		} = specialtyData
 
-		setState({ seriesCode: seriesCode, seriesName: seriesName })
+		setState({ specialtyCode: specialtyCode, specialtyName: specialtyName })
+		// return specialtyData
 	}
 	useEffect(() => {
-		loadSeriesData()
+		specialtyData()
 	}, [])
 
 
 	const validationSchema = Yup.object().shape({
-		seriesName: Yup.string().required("Nom de la série obligatoire"),
-		seriesCode: Yup.string().required("Code de la série  obligatoire"),
+		specialtyName: Yup.string().required("Libellé de la spécialté obligatoire"),
+		specialtyCode: Yup.string().required("Code de la spécialté  obligatoire"),
 	})
-	const [updateSeries] = useMutation(updateSeriesMutation, {
+	const [specialty] = useMutation(updateSpecialtyMutation, {
 		variables: { id }
 	})
 
@@ -56,10 +56,10 @@ const UpdateSeries = ({ id }) => {
 			enableReinitialize={true}
 			validationSchema={validationSchema}
 			onSubmit={async (values, { resetForm, setSubmitting }) => {
-				const res = await updateSeries({
+				const res = await specialty({
 					variables: {
 						...values,
-						id: id
+						 id
 					},
 				});
 				// Router.push({
@@ -77,22 +77,22 @@ const UpdateSeries = ({ id }) => {
 			{({ values, isSubmitting }) => (
 
 				<MiniStyledPage>
-					<h4>Modification d'info série</h4>
+					<h4>Modification d'info spécialté</h4>
 					<StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
 						<Form>
 							<Controls>
 								<SygexInput
 									type="text"
-									id="seriesName"
-									name="seriesName"
-									label="Nom de la série"
+									id="specialtyName"
+									name="specialtyName"
+									label="Libellé de la spécialté"
 									disabled={isSubmitting}
 								/>
 								<SygexInput
 									type="text"
-									id="seriesCode"
-									name="seriesCode"
-									label="Code de la série"
+									id="specialtyCode"
+									name="specialtyCode"
+									label="Code de la spécialté"
 									disabled={isSubmitting}
 								/>
 								<ButtonStyled className="submitButton">
@@ -109,4 +109,4 @@ const UpdateSeries = ({ id }) => {
 	);
 }
 
-export default UpdateSeries;
+export default specialty;

@@ -42,7 +42,7 @@ const UpdatePhaseHooks = ({ id }) => {
 
 
 	const validationSchema = Yup.object().shape({
-		phaseName: Yup.string().required("Nom de la phase de l'examen obligatoire"),
+		phaseName: Yup.string().required("Libellé de la phase de l'examen obligatoire"),
 		phaseCode: Yup.string().required("Code de la phase de l'examen obligatoire"),
 	})
 	const [updatePhase] = useMutation(updatePhaseMutation, {
@@ -85,7 +85,7 @@ const UpdatePhaseHooks = ({ id }) => {
 									type="text"
 									id="phaseName"
 									name="phaseName"
-									label="Nom de la phase"
+									label="Libellé de la phase"
 									disabled={isSubmitting}
 								/>
 								<SygexInput

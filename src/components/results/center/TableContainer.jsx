@@ -6,7 +6,7 @@ import {
   useExpanded,
   usePagination,
 } from "react-table";
-import { StyledButton, StyledForm } from "../../utils/FormInputs";
+import { StyledButton } from "../../utils/FormInputs";
 import { Filters, DefaultColumnFilter } from "../../utils/Filters";
 import styled from "styled-components";
 

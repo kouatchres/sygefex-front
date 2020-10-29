@@ -65,22 +65,13 @@ const TownToModifyHook = () => {
 
   const { data: dataReg, loading: loadingReg, error: errReg } = useQuery(
     getAllRegionsQuery,
-    {
-      variables: { id: id },
-    }
   );
-  {
-    loadingReg && <p>loading...</p>;
-  }
-  {
-    errReg && <Error error={errReg} />;
-  }
+ 
   console.log(dataReg);
   const getRegions = dataReg && dataReg.regions;
   console.log(getRegions);
-  const { region } = { ...getRegions };
   const getRegionsOptions =
-    region && region.map((item) => ({ value: item.id, label: item.regName }));
+    getRegions && getRegions.map((item) => ({ value: item.id, label: item.regName }));
   console.log(state.regionID);
 
   const { data: dataDiv, loading: loadingDiv, error: errDiv } = useQuery(
@@ -90,16 +81,10 @@ const TownToModifyHook = () => {
       variables: { id: state.regionID },
     }
   );
-  {
-    loadingDiv && <p>loading...</p>;
-  }
-  {
-    errDiv && <Error error={errDiv} />;
-  }
+ 
   console.log(dataDiv);
-  const getDivisions = dataDiv && dataDiv.region;
-  const { division } = { ...getDivisions };
-  console.log(division);
+  const theRegion = dataDiv && dataDiv.region
+  const {division} = {...theRegion}
   const getDivOptions =
     division &&
     division.map((item) => ({ value: item.id, label: item.divName }));
@@ -114,16 +99,11 @@ const TownToModifyHook = () => {
     skip: !state.divisionID,
     variables: { id: state.divisionID },
   });
-  {
-    loadingSubDiv && <p>loading...</p>;
-  }
-  {
-    errSubDiv && <Error error={errSubDiv} />;
-  }
+  
   console.log(dataSubDiv);
-  const getSubDiv = dataSubDiv && dataSubDiv.division;
-  const { subDivision } = { ...getSubDiv };
-  console.log(subDivision);
+  const theDiv = dataSubDiv && dataSubDiv.division;
+  const {subDivision} = {...theDiv};
+  // console.log(subDivision);
   const getSubDivOptions =
     subDivision &&
     subDivision.map((item) => ({ value: item.id, label: item.subDivName }));
@@ -135,16 +115,11 @@ const TownToModifyHook = () => {
       variables: { id: state.subDivID },
     }
   );
-  {
-    loadingTown && <p>loading...</p>;
-  }
-  {
-    errTown && <Error error={errTown} />;
-  }
+  
   console.log(dataTown);
   const getTown = dataTown && dataTown.subDivision;
   const { town } = { ...getTown };
-  console.log(town);
+  // console.log(town);
   const getTownOptions =
     town && town.map((item) => ({ value: item.id, label: item.townName }));
 
@@ -158,7 +133,7 @@ const TownToModifyHook = () => {
         return (
           <MinimStyledPage>
             <h4>Correction Info Ville</h4>
-            <Error error={errTown} />
+            <Error error={errTown || errSubDiv  || errDiv || errReg } />
             <StyledForm
               disabled={
                 isSubmitting ||
@@ -209,7 +184,7 @@ const TownToModifyHook = () => {
                   </InputGroup>
                   <Buttons>
                     <ButtonStyled>
-                      <StyledButton type="submit" id={id}>
+                      <StyledButton type="submit" >
                         Supprimer
                       </StyledButton>
                     </ButtonStyled>

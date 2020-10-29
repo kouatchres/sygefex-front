@@ -1,10 +1,10 @@
 import React from "react";
-import CenterCompleteResultsList from "../../../src/components/results/center/CenterCompleteResultsList";
+import CompleteResultsList from "../../../src/components/results/center/CompleteResultsList";
 
 const centerResults = ({ query }) => {
   return (
     <div>
-      <CenterCompleteResultsList id={query.id} />
+      <CompleteResultsList id={query.id} />
     </div>
   );
 };

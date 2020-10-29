@@ -6,7 +6,7 @@ import styled from "styled-components";
 import DeleteRegion from './DeleteRegion'
 import Error from "../ErrorMessage";
 import useForm from '../utils/useForm'
-import { getAllRegionsOfACountryQuery, getAllCountrysQuery } from "../queries&Mutations&Functions/Queries";
+import { getAllRegionsQuery } from "../queries&Mutations&Functions/Queries";
 import { MinimStyledPage } from "../styles/StyledPage";
 import { removeTypename } from '../queries&Mutations&Functions/Functions'
 import { deleteRegionMutation } from '../queries&Mutations&Functions/Mutations'
@@ -59,29 +59,13 @@ const RegionToModifyHook = () => {
     setState({ [name]: val });
   };
 
-  const { data, loading: loadingCount, error: errorCount } = useQuery(getAllCountrysQuery)
-  { loadingCount && <p>Loading Countries from DB...</p> }
-  { errorCount && <Error error={errorCount} /> }
-  const { countries } = { ...data }
-  console.log(countries);
-  const reducedCountries = countries && countries.reduce((item) => item)
-  const refinedCountry = removeTypename(reducedCountries)
-  console.log(refinedCountry);
-  const { id } = { ...refinedCountry }
-  console.log(id);
 
-
-
-  const { data: dataRegions, loading: loadingReg, error: errorReg } = useQuery(getAllRegionsOfACountryQuery, {
-    skip: !id,
-    variables: { id }
-  })
-  { loadingReg && <p>Loading regions from DB...</p> }
-  { errorReg && <Error error={errorReg} /> }
-  const getCountry = dataRegions && dataRegions.country
-  const { region } = { ...getCountry }
-  console.log(dataRegions);
-  const getRegionsOptions = region && region.map((item) => ({
+  const { data: dataRegions, loading, error: errorReg } = useQuery(getAllRegionsQuery)
+  
+  const getRegions = dataRegions && dataRegions.regions
+  const { region } = { ...getRegions }
+  console.log(getRegions);
+  const getRegionsOptions = getRegions && getRegions.map((item) => ({
     value: item.id, label: item.regName
   }))
   state.regionID && console.log(state.regionID);
@@ -91,18 +75,18 @@ const RegionToModifyHook = () => {
   })
 
   return (
-    <Formik method="POST"    >
+    <Formik method="POST">
       {({ values, isSubmitting }) => (
         <MinimStyledPage>
           <h4>Correction Info Region</h4>
           <Error error={errorReg} />
-          <StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
+          <StyledForm disabled={isSubmitting  || loading} aria-busy={isSubmitting  || loading} >
             <Form>
               <AllControls>
                 <TwoGroups>
 
                   <InputGroup>
-                    <SygefexSelect name="regionID" onChange={handleReactSelectChange} options={getRegionsOptions} placeholder={"La Region"} />
+                    <SygefexSelect name="regionID" onChange={handleReactSelectChange} options={getRegionsOptions} placeholder={"La région"} />
                   </InputGroup>
                   <Buttons>
                     <ButtonStyled>

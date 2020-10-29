@@ -79,17 +79,15 @@ margin-top: 2rem;
 
 const validationSchema = Yup.object().shape({
   collected: Yup.string().required(
-    "Le(a) candidat(e) a-t-il(elle) pris le materiel de composition Obligatoire"
+    "Indiquer si Le(a) candidat(e) a pris le materiel de composition, est Obligatoire"
   ),
   handin: Yup.string().required(
-    "Le(s) candidat(e) a-t-il(elle) remis sa feuille de comosition Obligatoire"
-  ),
-});
-
+    "Indiquer si Le(a) candidat(e) a remis sa feuille de composition, est Obligatoire"),
+  })
 const CreateAttendance = () => {
   const [state, setState, handleReactSelectChange] = useForm({
     centerExamSessionSpecialtyID: "",
-    centerNumber: "100000",
+    centerNumber: null,
     examID: "",
     sessionID: "",
     educTypeID: "",
@@ -98,7 +96,7 @@ const CreateAttendance = () => {
   });
 
   const initialValues = {
-    centerNumber: "100000",
+    centerNumber: null,
     collected: "",
     handin: "",
     subjectSpecialty: "",
@@ -106,7 +104,7 @@ const CreateAttendance = () => {
   };
   const handleChange = (e) => {
     const { name, value, type } = e.target;
-    const val = type === "number" ? parseInt(value) : value;
+    const val = (type === "number") ? parseInt(value) : value;
     setState({ [name]: val });
   };
 
@@ -141,7 +139,6 @@ const CreateAttendance = () => {
   const getExamsOptions =
     getExams &&
     getExams.map((item) => ({ value: item.id, label: item.examName }));
-  console.log(getExamName);
 
   const {
     data: dataSession,
@@ -175,11 +172,9 @@ const CreateAttendance = () => {
     },
   });
 
-  console.log(dataExamSessions);
   const getExamSessions = dataExamSessions && dataExamSessions.examSessions;
   const refinedES = getExamSessions && removeTypename(getExamSessions);
   const reducedES = refinedES && refinedES[0];
-  console.log(reducedES);
 
   const {
     data: dataCenter,
@@ -191,7 +186,6 @@ const CreateAttendance = () => {
 
   const { centerByNumber } = { ...dataCenter };
   const newCenterByNumber = removeTypename(centerByNumber);
-  console.log(newCenterByNumber);
 
   const { data: dataCES, error: errCES, loading: loadingCES } = useQuery(
     getSingleCenterExamSessionQuery,
@@ -204,15 +198,12 @@ const CreateAttendance = () => {
     }
   );
 
-  console.log(dataCES);
   const getCenterExamSessionsByCode =
     dataCES && dataCES.centerExamSessionsByCode;
-  console.log(getCenterExamSessionsByCode);
   const refinedCenterExamSessions =
     getCenterExamSessionsByCode && removeTypename(getCenterExamSessionsByCode);
   // transform the array into a single object
   const getCESID = refinedCenterExamSessions && refinedCenterExamSessions[0];
-  console.log(getCESID);
 
   const {
     data: dataSpecialtyCES,
@@ -222,40 +213,32 @@ const CreateAttendance = () => {
     variables: getCESID,
   });
 
-  console.log(dataSpecialtyCES);
   const getCenterExamSession =
     dataSpecialtyCES && dataSpecialtyCES.centerExamSession;
   const { centerExamSessionSpecialty } = { ...getCenterExamSession };
-  console.log({ centerExamSessionSpecialty });
 
   const newSpecialty =
     centerExamSessionSpecialty &&
     centerExamSessionSpecialty.map((item) => item);
   const refinedCESS = newSpecialty && removeTypename(newSpecialty);
-  console.log({ refinedCESS });
   const getCESSOptions =
     refinedCESS &&
     refinedCESS.map((item) => ({
       value: item.id.concat("/", item.specialty.id),
       label: item.specialty.specialtyName,
     }));
-  console.log({ state });
-  console.log({ getCESID });
-  console.log(state.centerExamSessionSpecialtyID);
 
-  const getCESSSubjIDs = state.centerExamSessionSpecialtyID.split("/");
-  console.log(getCESSSubjIDs);
+  const getCESSSubjIDs =state.centerExamSessionSpecialtyID && state.centerExamSessionSpecialtyID.split("/");
 
   const {
     data: dataRegistration,
     loading: loadingReg,
     error: errReg,
   } = useQuery(getRegisteredCandidatesPerSpecialty, {
-    skip: !getCESSSubjIDs[0],
-    variables: { id: getCESSSubjIDs[0] },
+    skip:getCESSSubjIDs  && !getCESSSubjIDs[0],
+    variables: { id: getCESSSubjIDs &&  getCESSSubjIDs[0] },
   });
 
-  console.log({ dataRegistration });
   const { centerExamSessionSpecialty: CESS } = { ...dataRegistration };
   const { registration } = { ...CESS };
   const getCandOptions =
@@ -263,28 +246,22 @@ const CreateAttendance = () => {
     registration.map((item) => ({
       value: item.candExamSecretCode,
       label: item.candidate.cand1stName.concat(
-        "",
         item.candidate.cand2ndName,
-        "",
         item.candRegistrationNumber
       ),
     }));
-  console.log({ registration });
-  console.log({ getCandOptions });
 
   const {
     data: dataSubjSpecialty,
     loading: loadingSubjSpecialty,
     error: errSubjSpecialty,
   } = useQuery(getAllSubjectSpecialtiesOfASpecialtyQuery, {
-    skip: !getCESSSubjIDs[1],
-    variables: { id: getCESSSubjIDs[1] },
+    skip: getCESSSubjIDs &&  !getCESSSubjIDs[1],
+    variables: { id: getCESSSubjIDs && getCESSSubjIDs[1] },
   });
 
-  console.log(dataSubjSpecialty);
   const getSubjSpecialty = dataSubjSpecialty && dataSubjSpecialty.specialty;
   const { subjectSpecialty } = { ...getSubjSpecialty };
-  console.log(subjectSpecialty);
 
   const refinedSubjectSpecialty =
     subjectSpecialty && removeTypename(subjectSpecialty);
@@ -309,7 +286,7 @@ const CreateAttendance = () => {
           variables: {
             ...values,
             candExamSecretCode: values.candExamSecretCode.value,
-            centerExamSessionSpecialty:getObjectFromID(getCESSSubjIDs[0]),
+            centerExamSessionSpecialty:getCESSSubjIDs && getObjectFromID(getCESSSubjIDs[0]),
             subjectSpecialty:
               refinedSubjectSpecialty &&
               getObjectFromID(values.subjectSpecialty.value),
@@ -317,8 +294,6 @@ const CreateAttendance = () => {
         });
 
         setTimeout(() => {
-          console.log(JSON.stringify(values, null, 2));
-          console.log(res);
           resetForm(true);
           setSubmitting(false);
         }, 400);
@@ -327,7 +302,7 @@ const CreateAttendance = () => {
       {({ setFieldValue, isSubmitting, isValid, dirty }) => {
         return (
           <MinimStyledPage>
-            <h4>Présence des candidats a l'Ecrit</h4>
+            <h4>Présence des candidats à l'Ecrit</h4>
             <Error
               error={
                 error ||
@@ -374,7 +349,7 @@ const CreateAttendance = () => {
                 <WholeControls>
                   <InputGroup>
                     <SygexInput
-                      value={centerByNumber && centerByNumber.centerCode}
+                      value={centerByNumber && centerByNumber.centerCode || "" }
                       name="centerName"
                       type="text"
                       label=" Nom du centre"
@@ -382,7 +357,7 @@ const CreateAttendance = () => {
                     <SygexInput
                       onChange={handleChange}
                       name="centerNumber"
-                      value={state.centerNumber || ""}
+                      value={state.centerNumber && state.centerNumber }
                       type="number"
                       label="Numéro du centre"
                       disabled={isSubmitting}
@@ -431,7 +406,7 @@ const CreateAttendance = () => {
                       }
                       name="candExamSecretCode"
                       options={getCandOptions}
-                      placeholder={"Les candidats par Spécialité"}
+                      placeholder={"Candidats par Spécialité"}
                       disabled={isSubmitting}
                     />
 

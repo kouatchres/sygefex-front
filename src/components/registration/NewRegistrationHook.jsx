@@ -340,7 +340,8 @@ const NewRegistrationHook = () => {
                 loadingExamSession ||
                 loading ||
                 loadingSpecialtyCES ||
-                loadingEducType
+                loadingEducType ||
+                loadingCenter
               }
               aria-busy={
                 isSubmitting ||
@@ -350,7 +351,8 @@ const NewRegistrationHook = () => {
                 loadingExamSession ||
                 loading ||
                 loadingSpecialtyCES ||
-                loadingEducType
+                loadingEducType ||
+                loadingCenter
               }
             >
               <Form>
@@ -358,10 +360,10 @@ const NewRegistrationHook = () => {
                   <TwoGroups>
                     <InputGroup>
                       <SygexInput
-                        value={centerByNumber && centerByNumber.centerCode}
+                        value={centerByNumber && centerByNumber.centerCode  || ""}
                         name="centerName"
                         type="text"
-                        label=" Nom du centre"
+                        label="Libellé du centre"
                       />
                       <SygexInput
                         onChange={handleChange}

@@ -196,7 +196,11 @@ const createCenterExamSessionMutation = gql`
     $center: CenterWhereUniqueInput!
     $CESCode: String!
   ) {
-    createCenterExamSession(examSession: $examSession, center: $center, CESCode: $CESCode) {
+    createCenterExamSession(
+      examSession: $examSession
+      center: $center
+      CESCode: $CESCode
+    ) {
       id
     }
   }
@@ -206,9 +210,8 @@ const createPhaseRankMutation = gql`
   mutation createPhaseRankMutation(
     $phase: PhaseWhereUniqueInput!
     $rank: RankWhereUniqueInput!
-   
   ) {
-    createPhaseRank(phase: $phase, rank: $rank)  {
+    createPhaseRank(phase: $phase, rank: $rank) {
       id
     }
   }
@@ -243,32 +246,6 @@ const createCenterExamSessionSpecialtyMutation = gql`
     }
   }
 `;
-
-// const createCenterExamSessionexaminerorityMutation = gql`
-//   mutation createCenterExamSessionexaminerorityMutation(
-//     $rank: RankWhereUniqueInput!
-//     $centerExamSession: CenterExamSessionWhereUniqueInput!
-//     $examinerName: String!
-//     $examinerCode: String!
-//     $examinerCNI: String!
-//     $examinerPhone: Int!
-//     $examinerMatricule: String!
-//   ) {
-//     createCenterExamSessionexaminerority(
-//       rank: $rank
-//       centerExamSession: $centerExamSession
-//       examinerCNI: $examinerCNI
-//       examinerName: $examinerName
-//       examinerCode: $examinerCode
-//       examinerPhone: $examinerPhone
-//       examinerMatricule: $examinerMatricule
-//     ) {
-//       examinerName
-//       examinerCode
-//       examinerPhone
-//     }
-//   }
-// `
 
 const createDivisionMutation = gql`
   mutation createDivisionMutation(
@@ -543,7 +520,7 @@ const registerSubjectSpecialtyMutation = gql`
   }
 `;
 
-const  registerNewSubjectSpecialtyMutation = gql`
+const registerNewSubjectSpecialtyMutation = gql`
   mutation registerNewSubjectSpecialtyMutation(
     $specialty: SpecialtyWhereUniqueInput!
     $subject: SubjectWhereUniqueInput!
@@ -781,15 +758,18 @@ const enterMarksMutation = gql`
   mutation enterMarksMutation(
     $subjectSpecialty: SubjectSpecialtyWhereUniqueInput!
     $subjectAve: Float!
+    $subjectName: String!
     $candExamSecretCode: String!
   ) {
     enterMarks(
       subjectSpecialty: $subjectSpecialty
       subjectAve: $subjectAve
+      subjectName: $subjectName
       candExamSecretCode: $candExamSecretCode
     ) {
       subjectAve
       coeff
+      subjectName
       id
       subjectSpecialty {
         id

@@ -12,8 +12,7 @@ import Error from "../ErrorMessage";
 import { Formik, Form } from "formik";
 import styled from "styled-components";
 import useForm from "../utils/useForm";
-import DeleteRegion from "../region/DeleteRegion";
-import { getAllSeriesQuery } from "../queries&Mutations&Functions/Queries";
+import { getAllSpecialtiesQuery } from "../queries&Mutations&Functions/Queries";
 import { removeTypename } from "../queries&Mutations&Functions/Functions";
 
 const Buttons = styled.div`
@@ -42,8 +41,8 @@ const AllControls = styled.div`
   min-width: 15rem;
 `;
 
-const SeriesToModifyHook = () => {
-  const [state, setState, handleReactSelectChange] = useForm({ seriesID: "" });
+const specialtyToModifyHook = () => {
+  const [state, setState, handleReactSelectChange] = useForm({ specialtyID: "" });
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -52,47 +51,42 @@ const SeriesToModifyHook = () => {
   };
 
   const {
-    data: dataSeries,
-    loading: loadingSeries,
-    error: errorSeries,
-  } = useQuery(getAllSeriesQuery);
-  {
-    loadingSeries && <p>Loading Series from DB...</p>;
-  }
-  {
-    errorSeries && <Error error={errorSeries} />;
-  }
-  const getSeries = dataSeries && dataSeries.serieses;
-  const seriesOptions =
-    getSeries &&
-    getSeries.map((item) => ({ value: item.id, label: item.seriesName }));
-  console.log(getSeries);
+    data: dataSpecialty,
+    loading: loadingSpecialty,
+    error: errorSpecialty,
+  } = useQuery(getAllSpecialtiesQuery);
+  
+  const getSpecialty = dataSpecialty && dataSpecialty.specialties;
+  const specialtyOptions =
+    getSpecialty &&
+    getSpecialty.map((item) => ({ value: item.id, label: item.specialtyName }));
+  console.log(getSpecialty);
 
-  state.seriesID && console.log(state.seriesID);
+  state.specialtyID && console.log(state.specialtyID);
   return (
     <Formik method="POST">
       {({ values, isSubmitting }) => (
         <MinimStyledPage>
-          <h4>Correction Info Séries</h4>
-          <Error error={errorSeries} />
+          <h4>Correction Info Spécialité</h4>
+          <Error error={errorSpecialty} />
           <StyledForm
-            disabled={isSubmitting || loading}
-            aria-busy={isSubmitting || loading}
+            disabled={isSubmitting || loadingSpecialty}
+            aria-busy={isSubmitting  || loadingSpecialty}
           >
             <Form>
               <AllControls>
                 <TwoGroups>
                   <InputGroup>
                     <SygefexSelect
-                      name="seriesID"
+                      name="specialtyID"
                       onChange={handleReactSelectChange}
-                      options={seriesOptions}
-                      placeholder={"La Séries "}
+                      options={specialtyOptions}
+                      placeholder={"La Spécialité "}
                     />
                   </InputGroup>
                   <Buttons>
                     <ButtonStyled>
-                      <StyledButton type="submit" id={state.seriesID}>
+                      <StyledButton type="submit" id={state.specialtyID}>
                         Supprimer
                       </StyledButton>
                     </ButtonStyled>
@@ -100,8 +94,8 @@ const SeriesToModifyHook = () => {
                       <StyledButton type="submit">
                         <Link
                           href={{
-                            pathname: "../updates/updateSeries",
-                            query: state.seriesID && { id: state.seriesID },
+                            pathname: "../updates/updateSpecialty",
+                            query: state.specialtyID && { id: state.specialtyID },
                           }}
                         >
                           <a target="_blank">Modifier</a>
@@ -119,4 +113,4 @@ const SeriesToModifyHook = () => {
   );
 };
 
-export default SeriesToModifyHook;
+export default specialtyToModifyHook;

@@ -53,7 +53,7 @@ const PicFrame = styled.div`
 `;
 
 const validationSchema = Yup.object().shape({
-  reportName: Yup.string().required("Nom de rapport obligatoire"),
+  reportName: Yup.string().required("Titre du rapport obligatoire"),
   examID: Yup.string().required("Choix De l'examen Obligatoire"),
   sessionID: Yup.string().required("Choix de la session Obligatoire"),
 
@@ -282,7 +282,7 @@ const CreateNewReportHook = () => {
                       value={newCenter && newCenter.centerCode}
                       name="centerName"
                       type="text"
-                      label=" Nom du centre"
+                      label=" Libellé du centre"
                       disabled
                     />
                     <SygexInput

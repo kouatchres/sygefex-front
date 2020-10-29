@@ -24,7 +24,7 @@ const AllControls = styled.div`
 `;
 
 const validationSchema = Yup.object().shape({
-  rankName: Yup.string().required("Nom du Poste obligatoire"),
+  rankName: Yup.string().required("Libellé du Poste obligatoire"),
   rankCode: Yup.string().required("Code du Poste obligatoire"),
 });
 
@@ -64,7 +64,7 @@ const CreateNewRankHook = () => {
                     <SygexInput
                       name="rankName"
                       type="text"
-                      label="Nom Poste"
+                      label="Libellé Poste"
                       disabled={isSubmitting}
                     />
                     <SygexInput

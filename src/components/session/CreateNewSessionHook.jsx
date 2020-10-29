@@ -68,13 +68,13 @@ const CreateNewSessionHook = () => {
                     <SygexInput
                       name="sessionName"
                       type="text"
-                      label="Nom Session"
+                      label="Libellé de la Session"
                       disabled={isSubmitting}
                     />
                     <SygexInput
                       name="sessionCode"
                       type="text"
-                      label="Code Session"
+                      label="Code de la Session"
                       disabled={isSubmitting}
                     />
                   </InputGroup>

@@ -18,46 +18,59 @@ import {
 
 const AveTotals = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  font-size: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  font-size: 1.7rem;
   grid-gap: 1rem;
-  color: white;
-  background: ${(props) => props.theme.goldenBrown};
+  background: ${(props) => props.theme.darkRed};
+  border-bottom: 0.2rem solid ${(props) => props.theme.black};
+  border-top: 0.2rem solid ${(props) => props.theme.black};
   align-items: center;
   justify-items: center;
-  border-bottom: 0.1rem solid black;
-  padding-left: 0.2rem;
+  border-bottom-right-radius: 0.6rem;
+  border-bottom-left-radius: 0.6rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: white;
 `;
 
 const SubjectTitles = styled.div`
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr 1fr;
-  grid-gap: 0.2rem;
+  grid-template-columns: 3fr repeat(3, 1fr);
   color: white;
-  font-size: 1.5rem;
-  justify-content: left;
-  background: ${(props) => props.theme.blues[2]};
+  border-top-right-radius: 0.6rem;
+  border-top-left-radius: 0.6rem;
+  font-size: 1.8rem;
+  justify-items: center;
+  border-bottom: 0.3rem solid ${(props) => props.theme.black};
+  background: ${(props) => props.theme.darkRed};
 `;
 
 const TitleItem = styled.div`
-  margin: 0 20px;
-  border-right: 1px solid black;
-  text-align: left;
+  padding-right: 2rem;
+  border-right: 0.2rem solid ${(props) => props.theme.pureWhite};
+  /* text-align: left; */
 `;
+
+const TitlesItem = styled.div`
+  padding-right: 2rem;
+  /* text-align: left; */
+`;
+
 const CandInfo = styled.div`
+  background: ${(props) => props.theme.pureWhite};
   display: grid;
+  padding: 0;
+  border-bottom-right-radius: 0.9rem;
+  border-bottom-left-radius: 0.9rem;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   grid-gap: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 0.009rem solid ${(props) => props.theme.darkRed};
+  border-left: 0.009rem solid ${(props) => props.theme.darkRed};
+  border-right: 0.009rem solid ${(props) => props.theme.darkRed};
 `;
 const StyledContainer = styled.div`
   padding: 1rem;
-`;
-
-const ResultsHeader = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  justify-items: center;
-  align-items: center;
 `;
 
 const SchoolInfo = styled.div`
@@ -65,8 +78,8 @@ const SchoolInfo = styled.div`
   grid-template-columns: 1fr;
   justify-items: center;
   align-items: center;
-  font-size: 1.5rem;
-  margin: 0 0.3rem;
+  font-size: 1.8rem;
+  margin: 0 auto;
 `;
 
 const SchoolInfo2 = styled.div`
@@ -82,12 +95,18 @@ const SchoolInfoBlock = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-flow: colums;
-  background: ${(props) => props.theme.blues[2]};
+  background: ${(props) => props.theme.lightGrey};
+  border-top: 1rem solid ${(props) => props.theme.darkRed};
+  border-bottom: 1rem solid ${(props) => props.theme.darkRed};
+  border-left: 0.009rem solid ${(props) => props.theme.darkRed};
+  border-right: 0.009rem solid ${(props) => props.theme.darkRed};
   justify-content: center;
   align-items: center;
+  color: ${(props) => props.theme.black};
   font-size: 1.5rem;
   padding: 0.2rem;
-  border-bottom: 0.1rem solid ${(props) => props.theme.black};
+  border-top-right-radius: 0.6rem;
+  border-top-left-radius: 0.6rem;
 `;
 const CandPic = styled.div`
   margin-top: 1rem;
@@ -96,7 +115,7 @@ const CandPic = styled.div`
 
   padding: 5rem 0;
   img {
-    height: 15rem;
+    height: 18rem;
     width: 15rem;
     border-radius: 0.5rem;
   }
@@ -108,6 +127,12 @@ const FirstInfo = styled.div`
   flex-direction: column;
   font-size: 1.5rem;
   line-height: 0.3rem;
+  margin: 0;
+`;
+
+const AveGen = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
 `;
 
 const CandDetailedResultsHook = ({ id }) => {
@@ -156,7 +181,6 @@ const CandDetailedResultsHook = ({ id }) => {
     momName,
     gender,
   } = { ...candidate };
-  const { genderName } = { ...gender };
 
   const initialValues = {
     candCode: "",
@@ -177,7 +201,7 @@ const CandDetailedResultsHook = ({ id }) => {
           <MiniStyledPage>
             <h4>
               Resultat Du: {exam && examName}, Session:
-              {session && sessionName}, de:-
+              {session && sessionName}, Pour:-
               {candidate && cand1stName}
               {candidate && cand2ndName}
             </h4>
@@ -263,7 +287,7 @@ const CandDetailedResultsHook = ({ id }) => {
                       <p>
                         <span>
                           <strong> Sexe: </strong>
-                          {candidate && gender.genderName}
+                          {candidate && gender}
                         </span>
                       </p>
                       <p>
@@ -271,7 +295,6 @@ const CandDetailedResultsHook = ({ id }) => {
                           <strong> Email: </strong>
                         </span>
                       </p>
-                      <hr />
                       <p>
                         <span>{candidate && email}</span>
                       </p>
@@ -285,59 +308,66 @@ const CandDetailedResultsHook = ({ id }) => {
                       <p>
                         <span>
                           <strong>Père: </strong>
-                          {candidate && dadName}
                         </span>
+                      </p>
+                      <p>
+                        <span>{candidate && dadName}</span>
                       </p>
                       <p>
                         <span>
                           <strong>Mère: </strong>
-                          {candidate && momName}
                         </span>
+                      </p>
+                      <p>
+                        <span>{candidate && momName}</span>
                       </p>
                     </FirstInfo>
                   </CandInfo>
-                  <ResultsHeader>
-                    <SubjectTitles>
-                      <TitleItem>
-                        <span>Matiere</span>
-                      </TitleItem>
-                      <TitleItem>
-                        <span>Coeff </span>
-                      </TitleItem>
-                      <TitleItem>
-                        <span>Moyenne </span>
-                      </TitleItem>
-                      <TitleItem>
-                        <span>Total </span>
-                      </TitleItem>
-                    </SubjectTitles>
-                  </ResultsHeader>
+                  <SubjectTitles>
+                    <TitleItem>Matiere</TitleItem>
+                    <TitleItem>Coeff</TitleItem>
+                    <TitleItem>Moyenne</TitleItem>
+                    <TitlesItem>Total</TitlesItem>
+                  </SubjectTitles>
 
                   {scores &&
                     scores.map((item) => (
                       <ResultDetails key={item.id} score={item} />
                     ))}
                   <AveTotals>
-                    <span>
-                      <strong>
-                        Total Matieres:
-                        {scores &&
-                          roundFloatNumber(calcCandTotalScore(scores), 4)}
-                      </strong>
-                    </span>
-                    <span>
-                      <strong>
-                        Somme Coefficients:
-                        {scores &&
-                          roundFloatNumber(calcCandTotalCoeff(scores), 4)}
-                      </strong>
-                    </span>
-                    <span>
-                      <strong>
-                        Moyenne:
-                        {scores && roundFloatNumber(calcCandAve(scores), 4)}
-                      </strong>
-                    </span>
+                    <AveGen>
+                      <span>
+                        <strong>Moyenne:</strong>
+                      </span>
+                      <span>
+                        <strong>
+                          {scores && roundFloatNumber(calcCandAve(scores), 4)}
+                        </strong>
+                      </span>
+                    </AveGen>
+
+                    <AveGen>
+                      <span>
+                        <strong>Coefficients:</strong>
+                      </span>
+                      <span>
+                        <strong>
+                          {scores &&
+                            roundFloatNumber(calcCandTotalCoeff(scores), 4)}
+                        </strong>
+                      </span>
+                    </AveGen>
+                    <AveGen>
+                      <span>
+                        <strong>Total Matieres:</strong>
+                      </span>
+                      <span>
+                        <strong>
+                          {scores &&
+                            roundFloatNumber(calcCandTotalScore(scores), 4)}
+                        </strong>
+                      </span>
+                    </AveGen>
                   </AveTotals>
                 </StyledContainer>
               </Form>

@@ -1,12 +1,12 @@
 import React from "react";
-import EnterMarksHook from "../../src/components/score/EnterMarksHook";
+import EnterMarks from "../../src/components/score/EnterMarks";
 import GatedSignin from "../../src/components/user/GatedSignin";
 
 const newMarks = () => {
   return (
     <div>
       <GatedSignin>
-        <EnterMarksHook />
+        <EnterMarks />
       </GatedSignin>
     </div>
   );

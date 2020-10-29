@@ -24,11 +24,6 @@ const AllControls = styled.div`
   flex-direction: column;
 `;
 
-const AllControlsComplete = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-`;
-
 const validationSchema = Yup.object().shape({
   regName: Yup.string().required("Nom Région Obligatoire"),
   regCode: Yup.string().required("Code Région Obligatoire"),

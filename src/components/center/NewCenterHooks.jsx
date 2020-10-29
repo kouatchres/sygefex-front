@@ -207,7 +207,7 @@ const NewCenterHooks = () => {
                     <SygexInput
                       name="centerCode"
                       type="text"
-                      label="Nom Abbregé du centre"
+                      label="Nom abrégé du centre"
                       disabled={isSubmitting}
                     />
                     <SygexInput

@@ -27,7 +27,7 @@ const theme = {
   specialBlue: "#e5f5f9",
 
   grey: "#aaabaa",
-  slightGrey: "rgb(243, 241, 241)",
+  slightGrey: "#fafafa",
   lightGrey: "#E1E1E1",
   darkGrey: "#EEEEEE",
   pureWhite: "#FFFFFF",

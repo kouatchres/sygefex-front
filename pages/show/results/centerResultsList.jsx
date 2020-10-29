@@ -1,11 +1,11 @@
 import React from "react";
-import CenterCompleteResultsList from "../../../src/components/results/center/CenterCompleteResultsList";
+import CompleteResultsList from "../../../src/components/results/center/CompleteResultsList";
 import GatedSignin from "../../../src/components/user/GatedSignin";
 
 function centerResults({ query }) {
   return (
     <GatedSignin>
-      <CenterCompleteResultsList id={query.id} />
+      <CompleteResultsList id={query.id} />
     </GatedSignin>
   );
 }

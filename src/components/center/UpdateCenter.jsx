@@ -18,7 +18,6 @@ const Controls = styled.div`
 padding:0 2rem;
 `;
 const UpdateCenter = ({ id }) => {
-  console.log(id)
   const client = useApolloClient()
   const [state, setState] = useForm({
     centerCode: "",
@@ -35,10 +34,7 @@ const UpdateCenter = ({ id }) => {
   const updateSingleCenter = async (e, updateMutation) => {
     e.preventDefault();
     const res = await updateMutation({
-      variables: {
-        id,
-        ...state
-      }
+      variables: { id,  ...state}
     });
   };
 
@@ -77,12 +73,11 @@ const UpdateCenter = ({ id }) => {
   }
 
   const validationSchema = Yup.object().shape({
-    centerName: Yup.string().required('Nom  du centre obligatoire'),
+    centerName: Yup.string().required('Libellé du centre obligatoire'),
     centerCode: Yup.string().required('Code du centre  obligatoire'),
     centerNumber: Yup.number().required('Numéro  du centre obligatoire'),
   });
 
-  const Create
   const [updateCenter, { loading: loadingMut, error: errorMut }] = useMutation(updateCenterMutation, {
     variables: { id }
   })
@@ -96,11 +91,7 @@ const UpdateCenter = ({ id }) => {
         const res = await updateCenter({
           variables: { ...values, id },
         });
-        // Router.push({
-        //   pathname: '/show/singleCand',
-        //   query: { id }
-        // });
-
+        
         setTimeout(() => {
           console.log(JSON.stringify(values, null, 2));
           console.log(res);
@@ -115,7 +106,7 @@ const UpdateCenter = ({ id }) => {
         <MiniStyledPage>
           <h4>Correction Info Centre</h4>
           <Error error={errorMut} />
-          <StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
+          <StyledForm disabled={isSubmitting  ||loadingMut} aria-busy={isSubmitting  ||loadingMut} >
             <Form>
               <Controls>
                 <SygexInput

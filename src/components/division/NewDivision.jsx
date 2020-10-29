@@ -36,7 +36,7 @@ const NewDivision = () => {
   const { data: dataRegions, loading: loadingReg, error: errorReg } = useQuery(
     getAllRegionsQuery
   );
-  
+
   const getRegions = dataRegions && dataRegions.regions;
   console.log(getRegions);
   const getRegionsOptions =
@@ -78,8 +78,8 @@ const NewDivision = () => {
             <h4>Nouveau Département</h4>
             <Error error={error || errorReg} />
             <StyledForm
-              disabled={isSubmitting ||loading || loadingReg}
-              aria-busy={isSubmitting ||loading || loadingReg}
+              disabled={isSubmitting || loading || loadingReg}
+              aria-busy={isSubmitting || loading || loadingReg}
             >
               <Form>
                 <AllControls>
@@ -93,7 +93,7 @@ const NewDivision = () => {
                     />
                     <SygexInput
                       name="divName"
-                      type="text"
+                      type="number"
                       label="Nom Département"
                     />
                     <SygexInput
@@ -104,7 +104,7 @@ const NewDivision = () => {
                   </InputGroup>
                   <ButtonStyled>
                     <StyledButton type="submit">
-                      Valid{ (loading || isSubmitting) ? "ation en cours" : "er"}
+                      Valid{loading || isSubmitting ? "ation en cours" : "er"}
                     </StyledButton>
                   </ButtonStyled>
                 </AllControls>

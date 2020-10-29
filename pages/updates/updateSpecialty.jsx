@@ -1,5 +1,5 @@
 import React from "react";
-import UpdateSeries from "../../src/components/series/UpdateSeries";
+import UpdateSpecialty from "../../src/components/specialty/UpdateSpecialty";
 import styled from "styled-components";
 
 const CenteredStyles = styled.div`
@@ -9,11 +9,11 @@ const CenteredStyles = styled.div`
     text-align: center;
   }
 `;
-const updateSeries = ({ query }) => {
+const updateSpecialty = ({ query }) => {
   return (
     <CenteredStyles>
-      <UpdateSeries id={query.id} />
+      <UpdateSpecialty id={query.id} />
     </CenteredStyles>
   );
 };
-export default updateSeries;
+export default updateSpecialty;

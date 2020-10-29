@@ -118,7 +118,7 @@ const SingleExaminer = ({id}) => {
 									<strong>Nom:</strong> <span>{examiner1stName}</span>
 								</p>
 								<p>
-									<strong>Prenoms: </strong>
+									<strong>Prénoms: </strong>
 									<span> {examiner2ndName}</span>
 								</p>
 								<p>

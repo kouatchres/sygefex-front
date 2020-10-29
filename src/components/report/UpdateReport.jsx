@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React  from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { MinimStyledPage } from "../styles/StyledPage";
 import { Formik, Form } from "formik";

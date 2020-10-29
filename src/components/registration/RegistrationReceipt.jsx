@@ -120,6 +120,7 @@ const RegistrationReceipt = ({ id }) => {
     console.log(data);
     const { registration } = data;
     setState({ registration });
+    return data
   };
 
   useEffect(() => {

@@ -159,9 +159,10 @@ const getCandidateResultsQuery = gql`
           specialtyName
         }
       }
-      scores {
+      scores(orderBy: subjectName_ASC) {
         id
         subjectAve
+        subjectName
         coeff
         subjectSpecialty {
           id
@@ -359,6 +360,18 @@ const getCandidateRegistrationIDsQuery = gql`
   query getCandidateRegistrationIDsQuery($candidate: RegistrationWhereInput!) {
     candidateRegistrationIDs(candidate: $candidate) {
       id
+    }
+  }
+`;
+
+const registrationIDFromSecretCodeQuery = gql`
+  query registrationIDFromSecretCodeQuery($candExamSecretCode: String!) {
+    getRegistration(candExamSecretCode: $candExamSecretCode) {
+      id
+      specialty {
+        id
+        specialtyName
+      }
     }
   }
 `;
@@ -799,7 +812,7 @@ const getAllSubjectSpecialtiesOfASpecialtyQuery = gql`
       id
       subjectSpecialty {
         id
-        subject{
+        subject {
           id
           subjectName
           subjectCode
@@ -1114,16 +1127,16 @@ const getAllRanksOfAnExamPhaseQuery = gql`
       id
       phaseRank {
         id
-       rank{
-         id
-         rankName
-         rankCode
-       }
-       phase{
-         id
-         phaseName
-         phaseCode
-       }
+        rank {
+          id
+          rankName
+          rankCode
+        }
+        phase {
+          id
+          phaseName
+          phaseCode
+        }
       }
     }
   }
@@ -1458,6 +1471,7 @@ export {
   getAllSpecialtiesOfACenterExamSessionQuery,
   getCenterResultsQuery,
   getCandidateRegistrationIDQuery,
+  registrationIDFromSecretCodeQuery,
   getCandidateRegistrationIDsQuery,
   centerExamSessionForResultsQuery,
   getCandidateIDQuery,

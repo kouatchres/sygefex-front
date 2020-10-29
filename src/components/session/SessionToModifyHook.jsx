@@ -49,12 +49,7 @@ const SessionToModifyHook = () => {
     loading: loadingSession,
     error: errorSession,
   } = useQuery(getAllSessionsQuery);
-  {
-    loadingSession && <p>Loading Session from DB...</p>;
-  }
-  {
-    errorSession && <Error error={errorSession} />;
-  }
+  
   const getSession = dataSession && dataSession.sessions;
   const sessionOptions =
     getSession &&
@@ -70,8 +65,8 @@ const SessionToModifyHook = () => {
           <h4>Correction Info Poste</h4>
           <Error error={errorSession} />
           <StyledForm
-            disabled={isSubmitting || loading}
-            aria-busy={isSubmitting || loading}
+            disabled={isSubmitting || loadingSession}
+            aria-busy={isSubmitting || loadingSession}
           >
             <Form>
               <AllControls>

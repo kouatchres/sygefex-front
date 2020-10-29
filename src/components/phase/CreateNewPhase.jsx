@@ -64,7 +64,7 @@ const CreateNewPhase = () => {
                   <SygexInput
                     name="phaseName"
                     type="text"
-                    label="Nom Phase de l'examen"
+                    label="Libellé Phase de l'examen"
                     disabled={isSubmitting}
                   />
                   <SygexInput

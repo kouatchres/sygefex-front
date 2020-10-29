@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useMutation, useApolloClient } from "@apollo/react-hooks";
 import { MiniStyledPage } from "../styles/StyledPage";
-import Error from "../ErrorMessage.js";
 import * as Yup from "yup";
 import useForm from "../utils/useForm";
 import { Form, Formik } from "formik";
@@ -18,16 +17,16 @@ const validationSchema = Yup.object().shape({
   regName: Yup.string().required("Nom Région Obligatoire"),
   regCode: Yup.string().required("Code Région Obligatoire"),
 });
-const NewUpdateRegionHook = (props) => {
+const NewUpdateRegionHook = ({ id }) => {
   const [state, setState] = useForm({ regCode: "", regName: "" });
   const client = useApolloClient();
 
-  console.log(props);
+  console.log(id);
 
   const loadRegionData = async () => {
     const { data, error } = await client.query({
       query: getSingleRegionQuery,
-      variables: { id: props.id },
+      variables: { id },
     });
     const getRegionData = data.region;
     const { regName, regCode } = getRegionData;
@@ -49,7 +48,7 @@ const NewUpdateRegionHook = (props) => {
   console.log(state);
 
   const [updateRegion] = useMutation(updateRegionMutation, {
-    variables: { id: props.id },
+    variables: { id },
   });
 
   return (

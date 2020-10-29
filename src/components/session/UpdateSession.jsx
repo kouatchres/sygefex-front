@@ -42,8 +42,8 @@ const UpdateSession = ({ id }) => {
 
 
 	const validationSchema = Yup.object().shape({
-		sessionCode: Yup.string().required("Nom de la session obligatoire"),
-		sessionName: Yup.string().required("Code de la session  obligatoire"),
+		sessionName: Yup.string().required("Libellé de la session obligatoire"),
+		sessionCode: Yup.string().required("Code de la session  obligatoire"),
 	})
 	const [updateSession] = useMutation(updateSessionMutation, {
 		variables: { id }
@@ -81,20 +81,20 @@ const UpdateSession = ({ id }) => {
 					<StyledForm disabled={isSubmitting} aria-busy={isSubmitting} >
 						<Form>
 							<Controls>
+							<SygexInput
+							type="text"
+							id="sessionName"
+							label="Libellé de la session"
+							name="sessionName"
+							disabled={isSubmitting}
+						/>
 								<SygexInput
 									type="text"
 									id="sessionCode"
 									name="sessionCode"
-									label="Nom de la session"
 									disabled={isSubmitting}
-								/>
-								<SygexInput
-									type="text"
-									id="sessionName"
-									name="sessionName"
 									label="Code de la session"
-									disabled={isSubmitting}
-								/>
+									/>
 								<ButtonStyled className="submitButton">
 									<StyledButton type="submit">
 										valid{isSubmitting ? 'ation en cours' : 'er'}

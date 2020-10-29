@@ -14,9 +14,11 @@ const SubjectTitles = styled.div`
   display: grid;
   grid-template-columns: 4fr 1fr 1fr 1fr;
   color: white;
-  font-size: 1.5rem;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  font-size: 1.8rem;
   justify-content: center;
-  background: ${(props) => props.theme.blues[2]};
+  background: ${(props) => props.theme.tableRed};
 `;
 
 const CandPic = styled.div`
@@ -26,28 +28,26 @@ const CandPic = styled.div`
   flex-direction: column;
 
   img {
-    height: 30vh;
-    width: 15vw;
+    height: 17rem;
+    width: 15rem;
     border-radius: 0.5rem;
   }
 `;
 
 const TitleItem = styled.div`
   margin: 0 20px;
-  border-right: 1px solid black;
+  border-right: 0.2rem solid ${(props) => props.theme.pureWhite};
   text-align: left;
 `;
 
-const CandInfo = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  grid-gap: 1rem;
-  justify-items: left;
+const TitlesItem = styled.div`
+  margin: 0 20px;
+  text-align: left;
 `;
 
 const ResultsHeader = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   justify-items: left;
   grid-gap: 1rem;
   align-items: center;
@@ -76,14 +76,14 @@ const CandidateResultsByRegisID = ({ id }) => {
       query: getAllCandidateRegistrationIDsQuery,
       variables: { id },
     });
-    console.log(data);
+    // console.log(data);
     setState(data.candidate);
   };
 
   useEffect(() => {
     loadCandResultsData();
   }, []);
-  console.log(state);
+  // console.log(state);
   const {
     image,
     cand1stName,
@@ -97,7 +97,6 @@ const CandidateResultsByRegisID = ({ id }) => {
     gender,
     registration,
   } = { ...state };
-  const { genderName } = { ...gender };
 
   const initialValues = {
     candCode: "",
@@ -122,80 +121,78 @@ const CandidateResultsByRegisID = ({ id }) => {
           <StyledForm disabled={isSubmitting} aria-busy={isSubmitting}>
             <Form>
               <StyledContainer>
-                <CandInfo>
-                  <ResultsHeader>
-                    <CandPic>
-                      <img src={image} alt={cand1stName} />
-                    </CandPic>
-                    <FirstInfo>
-                      <p>
-                        <span>
-                          <strong> Nom: </strong> {cand1stName}
-                        </span>
-                      </p>
+                <ResultsHeader>
+                  <CandPic>
+                    <img src={image} alt={cand1stName} />
+                  </CandPic>
+                  <FirstInfo>
+                    <p>
+                      <span>
+                        <strong> Nom: </strong> {cand1stName}
+                      </span>
+                    </p>
 
-                      <p>
-                        <span>
-                          <strong> Prenom: </strong> {cand2ndName}
-                        </span>
-                      </p>
+                    <p>
+                      <span>
+                        <strong> Prénom: </strong> {cand2ndName}
+                      </span>
+                    </p>
 
-                      <p>
-                        <span>
-                          <strong> Autres Noms: </strong>
-                          {cand3rdName}
-                        </span>
-                      </p>
-                      <p>
-                        <span>
-                          <strong>Naissance: </strong>
-                        </span>
-                      </p>
-                      <hr />
-                      <p>
-                        <span>
-                          <strong> Lieu: </strong> {placeOfBirth}
-                        </span>
-                      </p>
+                    <p>
+                      <span>
+                        <strong> Autres Noms: </strong>
+                        {cand3rdName}
+                      </span>
+                    </p>
+                    <p>
+                      <span>
+                        <strong>Naissance: </strong>
+                      </span>
+                    </p>
+                    <hr />
+                    <p>
+                      <span>
+                        <strong> Lieu: </strong> {placeOfBirth}
+                      </span>
+                    </p>
 
-                      <p>
-                        <span>
-                          <strong> Date: </strong>
-                          {format(dateOfBirth, "d MMM, YYYY ")}
-                        </span>
-                      </p>
-                      <p>
-                        <span>
-                          <strong> Sexe: </strong> {genderName}
-                        </span>
-                      </p>
+                    <p>
+                      <span>
+                        <strong> Date: </strong>
+                        {format(dateOfBirth, "d MMM, YYYY ")}
+                      </span>
+                    </p>
+                    <p>
+                      <span>
+                        <strong> Sexe: </strong> {gender}
+                      </span>
+                    </p>
 
-                      <p>
-                        <span>
-                          <strong> Email: </strong>
-                          {email}
-                        </span>
-                      </p>
+                    <p>
+                      <span>
+                        <strong> Email: </strong>
+                        {email}
+                      </span>
+                    </p>
+                    <hr />
 
-                      <p>
-                        <span>
-                          <strong> Noms des parents: </strong>
-                        </span>
-                      </p>
-                      <hr />
-                      <p>
-                        <span>
-                          <strong>Père: </strong> {dadName}
-                        </span>
-                      </p>
-                      <p>
-                        <span>
-                          <strong>Mère: </strong> {momName}
-                        </span>
-                      </p>
-                    </FirstInfo>
-                  </ResultsHeader>
-                </CandInfo>
+                    <p>
+                      <span>
+                        <strong> Noms des parents: </strong>
+                      </span>
+                    </p>
+                    <p>
+                      <span>
+                        <strong>Père: </strong> {dadName}
+                      </span>
+                    </p>
+                    <p>
+                      <span>
+                        <strong>Mère: </strong> {momName}
+                      </span>
+                    </p>
+                  </FirstInfo>
+                </ResultsHeader>
                 <SubjectTitles>
                   <TitleItem>
                     <span>Centre</span>
@@ -206,9 +203,9 @@ const CandidateResultsByRegisID = ({ id }) => {
                   <TitleItem>
                     <span>Examen </span>
                   </TitleItem>
-                  <TitleItem>
+                  <TitlesItem>
                     <span>Resultats</span>
-                  </TitleItem>
+                  </TitlesItem>
                 </SubjectTitles>
                 {registration &&
                   registration.map((item) => (
