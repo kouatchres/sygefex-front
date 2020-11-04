@@ -15,7 +15,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/show/results/centerResults": [
+    "/creates/newRegion": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/creates/newDivision": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
