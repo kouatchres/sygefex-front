@@ -42,7 +42,7 @@
     "graphql-tag": "^2.9.2",
     "jshint": "^2.10.3",
     "lodash.debounce": "^4.0.8",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "multiselect-react-dropdown": "^1.5.7",
     "namor": "^2.0.2",
     "next": "^7.0.0",
